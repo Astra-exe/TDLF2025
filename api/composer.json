@@ -1,0 +1,25 @@
+{
+    "name": "tdlf2025/api",
+    "description": "API RESTful del Torneo de las Fresas",
+    "type": "project",
+    "license": "AGPL-3.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ricardo García Jiménez",
+            "email": "ricardogj08@riseup.net"
+        }
+    ],
+    "require": {
+        "php": "8.1.*",
+        "flightphp/core": "^3.13",
+        "lulco/phoenix": "^2.6"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.20"
+    }
+}
