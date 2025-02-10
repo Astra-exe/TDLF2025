@@ -6,6 +6,8 @@ require_once __DIR__.'/vendor/autoload.php';
  * Opciones de configuración de las migraciones de la base de datos.
  */
 return (static function (): array {
+    \App\Helpers\Env::loadDotEnv();
+
     $options = \App\Helpers\Config::getFromFilename('database');
 
     return [
@@ -17,6 +19,7 @@ return (static function (): array {
         'environments' => [
             'production' => [
                 'adapter' => $options['driver'],
+                'host' => $options['host'],
                 'port' => $options['port'],
                 'username' => $options['username'],
                 'password' => $options['password'],

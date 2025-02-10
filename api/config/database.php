@@ -19,7 +19,7 @@ return (static function (): array {
     ];
 
     $options['options'] = [
-        PDO::MYSQL_ATTR_INIT_COMMAND => sprintf('SET NAMES %s COLLATE %s', $options['charset'], $options['collate']),
+        PDO::MYSQL_ATTR_INIT_COMMAND => sprintf('SET NAMES %s COLLATE %s', $options['charset'], $options['collation']),
     ];
 
     return $options;
