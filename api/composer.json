@@ -17,7 +17,8 @@
     "require": {
         "php": "8.1.*",
         "flightphp/core": "^3.13",
-        "lulco/phoenix": "^2.6"
+        "lulco/phoenix": "^2.6",
+        "phpdevcommunity/php-dotenv": "^3.0"
     },
     "require-dev": {
         "laravel/pint": "^1.20"

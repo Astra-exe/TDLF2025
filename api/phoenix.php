@@ -5,7 +5,6 @@ require_once __DIR__.'/vendor/autoload.php';
 /**
  * Opciones de configuración de las migraciones de la base de datos.
  */
-
 return (static function (): array {
     $options = \App\Helpers\Config::getFromFilename('database');
 

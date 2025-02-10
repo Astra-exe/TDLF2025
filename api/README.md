@@ -2,6 +2,22 @@
 
 API RESTful del evento "Torneo de las fresas Irapuato".
 
+## Instalación
+
+* Copia el archivo `env.example` a `.env` para configurar la aplicación:
+
+```
+cp env.example .env
+```
+
+* Crea la base de datos del proyecto:
+
+```
+CREATE DATABASE IF NOT EXISTS `torneo_fresas`
+  CHARACTER SET = 'utf8mb4'
+  COLLATE = 'utf8mb4_general_ci';
+```
+
 ## Ejecución
 
 ```
