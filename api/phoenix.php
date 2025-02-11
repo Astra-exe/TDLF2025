@@ -1,6 +1,8 @@
 <?php
 
-require_once __DIR__.'/vendor/autoload.php';
+declare(strict_types=1);
+
+require __DIR__.'/vendor/autoload.php';
 
 /**
  * Opciones de configuración de las migraciones de la base de datos.
