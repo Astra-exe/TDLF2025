@@ -31,3 +31,7 @@ php -S localhost:8080 -t public/
 ```
 
 * <http://localhost:8080>
+
+## Diagrama ER
+
+* <https://drive.google.com/file/d/1KSYBmgTIAHmyknSqEVY3gK33IfuuOeMP/view?usp=sharing>

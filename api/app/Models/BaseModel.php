@@ -7,4 +7,4 @@ namespace App\Models;
 /**
  * Clase base para todos los Modelos.
  */
-class BaseModel {}
+abstract class BaseModel {}
