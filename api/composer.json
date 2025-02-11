@@ -19,7 +19,8 @@
         "flightphp/core": "^3.13",
         "lulco/phoenix": "^2.6",
         "phpdevcommunity/php-dotenv": "^3.0",
-        "infocyph/uid": "^2.03"
+        "infocyph/uid": "^2.03",
+        "flightphp/active-record": "^0.6.0"
     },
     "require-dev": {
         "laravel/pint": "^1.20"

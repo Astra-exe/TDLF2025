@@ -16,6 +16,7 @@ $app = \Flight::app();
 $router = $app->router();
 
 // Carga rutas y middlewares de la aplicación.
+// Se pasa la variable "$router" al archivo.
 require __DIR__.'/routes.php';
 
 // Inicia la ejecución del framework.

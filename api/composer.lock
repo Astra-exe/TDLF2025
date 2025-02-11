@@ -4,8 +4,73 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "559967d2a08edc7d107693317834d413",
+    "content-hash": "50e90b286cec0d6b5381523a1559e15c",
     "packages": [
+        {
+            "name": "flightphp/active-record",
+            "version": "v0.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/flightphp/active-record.git",
+                "reference": "37d2989ef756c198eb2e8bf76b82b0e8b7d33712"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/flightphp/active-record/zipball/37d2989ef756c198eb2e8bf76b82b0e8b7d33712",
+                "reference": "37d2989ef756c198eb2e8bf76b82b0e8b7d33712",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "ext-pdo_sqlite": "*",
+                "flightphp/runway": "^0.2.4 || ^1.0",
+                "phpunit/phpunit": "^9.0",
+                "rregeer/phpunit-coverage-check": "^0.3.1",
+                "squizlabs/php_codesniffer": "^3.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "flight\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lloyd Zhou",
+                    "email": "lloydzhou@qq.com",
+                    "homepage": "https://lloydzhou.github.io/",
+                    "role": "Original Developer"
+                },
+                {
+                    "name": "n0nag0n",
+                    "email": "n0nag0n@sky-9.com",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Micro Active Record library in PHP, support chain calls, events, and relations.",
+            "homepage": "https://docs.flightphp.com",
+            "keywords": [
+                "Active Record",
+                "Simple",
+                "database",
+                "lite",
+                "micro",
+                "orm",
+                "pdo",
+                "relation"
+            ],
+            "support": {
+                "issues": "https://github.com/flightphp/active-record/issues",
+                "source": "https://github.com/flightphp/active-record/tree/v0.6.0"
+            },
+            "time": "2025-01-31T01:30:17+00:00"
+        },
         {
             "name": "flightphp/core",
             "version": "v3.13.1",

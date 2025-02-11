@@ -12,79 +12,49 @@ use PDO;
  */
 class Database
 {
-    private static self $instance;
-
     private const CONFIG_FILENAME = 'database';
 
-    private array $options;
-
-    private string $dsn;
-
-    private PDO $connection;
-
-    /**
-     * Constructor de la clase.
-     */
-    private function __construct()
-    {
-        $this->options = Config::getFromFilename(self::CONFIG_FILENAME);
-        $this->dsn = $this->generateDsn();
-        $this->connection = $this->generateConnection();
-    }
-
-    /**
-     * Crea una sola instancia de la clase.
-     */
-    public static function getInstance(): self
-    {
-        if (empty($instance)) {
-            self::$instance = new self;
-        }
-
-        return self::$instance;
-    }
-
-    /**
-     * Genera el DSN de origen de la conexión de la base de datos.
-     */
-    private function generateDsn(): string
-    {
-        return sprintf('%s:host=%s;port=%u;dbname=%s;charset=%s',
-            $this->options['driver'],
-            $this->options['host'],
-            $this->options['port'],
-            $this->options['database'],
-            $this->options['charset']);
-    }
+    private static PDO $connection;
 
     /**
      * Obtiene el DSN de origen de la conexión de la base de datos.
      */
-    public function getDsn(): string
+    private static function getDsn(array $options): string
     {
-        return $this->dsn;
+        return sprintf('%s:host=%s;port=%u;dbname=%s;charset=%s',
+            $options['driver'],
+            $options['host'],
+            $options['port'],
+            $options['database'],
+            $options['charset']);
     }
 
     /**
-     * Genera la conexión de la base de datos.
+     * Establece la conexión con la base de datos.
      */
-    private function generateConnection(): PDO
+    private static function setConnection(): void
     {
-        return new PDO($this->getDsn(), $this->options['username'], $this->options['password'], $this->options['options']);
+        $options = Config::getFromFilename(self::CONFIG_FILENAME);
+
+        self::$connection = new PDO(self::getDsn($options), $options['username'], $options['password'], $options['options']);
     }
 
     /**
-     * Obtiene la conexión de la base de datos.
+     * Obtiene una sola conexión de la base de datos.
      */
-    public function getConnection(): PDO
+    public static function getConnection(): PDO
     {
-        return $this->connection;
+        if (empty(self::$connection)) {
+            self::setConnection();
+        }
+
+        return self::$connection;
     }
 
     /**
      * Obtiene un UUID aleatorio.
      */
-    public static function generateUuid(): string
+    public static function getUuid(): string
     {
         return \Infocyph\UID\UUID::v4();
     }
