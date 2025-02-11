@@ -80,4 +80,12 @@ class Database
     {
         return $this->connection;
     }
+
+    /**
+     * Obtiene un UUID aleatorio.
+     */
+    public static function generateUuid(): string
+    {
+        return \Infocyph\UID\UUID::v4();
+    }
 }

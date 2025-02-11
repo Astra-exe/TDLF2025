@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5bbee286772449a7a31385ce6123b84c",
+    "content-hash": "559967d2a08edc7d107693317834d413",
     "packages": [
         {
             "name": "flightphp/core",
@@ -79,6 +79,71 @@
                 "source": "https://github.com/flightphp/core/tree/v3.13.1"
             },
             "time": "2025-01-14T05:58:50+00:00"
+        },
+        {
+            "name": "infocyph/uid",
+            "version": "2.03",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/infocyph/UID.git",
+                "reference": "1f4390ec82dc4ed4faabbb35eff39eec46fadd97"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/infocyph/UID/zipball/1f4390ec82dc4ed4faabbb35eff39eec46fadd97",
+                "reference": "1f4390ec82dc4ed4faabbb35eff39eec46fadd97",
+                "shasum": ""
+            },
+            "require": {
+                "ext-bcmath": "*",
+                "php": ">=8.0"
+            },
+            "replace": {
+                "abmmhasan/uuid": "*"
+            },
+            "require-dev": {
+                "captainhook/captainhook": "^5.23",
+                "laravel/pint": "^1.16",
+                "pestphp/pest": "^2.34",
+                "rector/rector": "^1.1",
+                "symfony/var-dumper": "^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "Infocyph\\UID\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "abmmhasan",
+                    "email": "abmmhasan@gmail.com"
+                }
+            ],
+            "description": "UUID (RFC 4122 + Unofficial/Draft), ULID, Snowflake ID, Sonyflake ID, TBSL (library exclusive) generator!",
+            "keywords": [
+                "id",
+                "key",
+                "rfc4122",
+                "snowflake",
+                "sonyflake",
+                "tbsl",
+                "ulid",
+                "unique",
+                "uuid"
+            ],
+            "support": {
+                "issues": "https://github.com/infocyph/UID/issues",
+                "source": "https://github.com/infocyph/UID/tree/2.03"
+            },
+            "time": "2024-06-29T07:07:56+00:00"
         },
         {
             "name": "lulco/phoenix",
