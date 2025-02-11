@@ -17,6 +17,7 @@ final class CreateGroupsTable extends AbstractMigration
         $this->table('groups', 'id')
             ->addColumn('id', 'uuid')
             ->addColumn('name', 'string', ['length' => 32])
+            ->addColumn('description', 'string', ['length' => 64])
             ->addColumn('is_eliminated', 'boolean', ['default' => false])
             ->addColumn('created_at', 'datetime', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
             ->addColumn('updated_at', 'datetime', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])

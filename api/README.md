@@ -18,6 +18,12 @@ CREATE DATABASE IF NOT EXISTS `torneo_fresas`
   COLLATE = 'utf8mb4_general_ci';
 ```
 
+* Crea las tablas de la base de datos:
+
+```
+vendor/bin/phoenix migrate
+```
+
 ## Ejecución
 
 ```

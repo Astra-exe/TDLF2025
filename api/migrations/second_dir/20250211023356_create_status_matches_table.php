@@ -8,7 +8,7 @@ use Phoenix\Database\Element\ColumnSettings;
 use Phoenix\Migration\AbstractMigration;
 
 /**
- * Migración que crea la tabla de "estatus de juego de los partidos".
+ * Migración que crea la tabla de los "estatus de juego de los partidos".
  */
 final class CreateStatusMatchesTable extends AbstractMigration
 {

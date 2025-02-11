@@ -8,7 +8,7 @@ use Phoenix\Database\Element\ColumnSettings;
 use Phoenix\Migration\AbstractMigration;
 
 /**
- * Migración que crea la tabla de "tipos de partidos".
+ * Migración que crea la tabla de los "tipos de partidos".
  */
 final class CreateTypesMatchesTable extends AbstractMigration
 {
