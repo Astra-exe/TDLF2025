@@ -1,6 +1,6 @@
 {
     "name": "tdlf2025/api",
-    "description": "API RESTful del Torneo de las Fresas",
+    "description": "API RESTful del Torneo de las Fresas Irapuato",
     "type": "project",
     "license": "AGPL-3.0-or-later",
     "autoload": {
@@ -20,7 +20,8 @@
         "lulco/phoenix": "^2.6",
         "phpdevcommunity/php-dotenv": "^3.0",
         "infocyph/uid": "^2.03",
-        "flightphp/active-record": "^0.6.0"
+        "flightphp/active-record": "^0.6.0",
+        "juststeveking/http-status-code": "^3.0"
     },
     "require-dev": {
         "laravel/pint": "^1.20"

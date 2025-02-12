@@ -8,6 +8,6 @@ class HomeController extends BaseController
 {
     public function welcome()
     {
-        echo 'Hola mundo!';
+        $this->respond(null, 'API RESTful del Torneo de las Fresas Irapuato');
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Helpers;
 
+use Infocyph\UID\UUID;
 use PDO;
 
 /**
@@ -56,6 +57,6 @@ class Database
      */
     public static function getUuid(): string
     {
-        return \Infocyph\UID\UUID::v4();
+        return UUID::v4();
     }
 }
