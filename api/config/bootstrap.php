@@ -12,6 +12,14 @@ require __DIR__.'/../vendor/autoload.php';
 // Crea una instancia del framework.
 $app = \Flight::app();
 
+// Carga opciones de configuración de la aplicación.
+foreach (\App\Helpers\Config::getFromFilename('app') as $key => $value) {
+    \App\Helpers\Env::set('APP_'.strtoupper($key), $value);
+}
+
+// Carga configuraciones del framework.
+require __DIR__.'/framework.php';
+
 // Crea una instancia del enrutador.
 $router = $app->router();
 
