@@ -17,12 +17,12 @@ abstract class BaseMiddleware
     private Engine $app;
 
     /**
-     * Método que se ejecuta antes de procesar una ruta.
+     * Método abstracto que se ejecuta antes de procesar una ruta.
      */
     abstract public function before(array $params): void;
 
     /**
-     * Método que se ejecuta después de procesar una ruta.
+     * Método abstracto que se ejecuta después de procesar una ruta.
      */
     abstract public function after(array $params): void;
 

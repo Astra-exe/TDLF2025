@@ -15,7 +15,7 @@ class Config
     private const PATH = __DIR__.'/../../config/';
 
     /**
-     * Obtiene opciones de configuración de un archivo
+     * Obtiene las opciones de configuración de un archivo
      * desde la carpeta "config/" de la raíz del proyecto.
      */
     public static function getFromFilename(string $filename): array

@@ -78,7 +78,7 @@ trait ResponseTrait
 
     /**
      * Genera una respuesta cuando se intenta
-     * crear un nuevo que ya existe.
+     * crear un nuevo recurso que ya existe.
      */
     protected function respondResourceExists(string $error, string $description): void
     {

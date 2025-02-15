@@ -15,7 +15,7 @@ abstract class BaseModel extends ActiveRecord
     /**
      * Método abstracto para obtener el nombre de la tabla.
      */
-    abstract public function getTableName();
+    abstract public function getTableName(): string;
 
     public function __construct()
     {
