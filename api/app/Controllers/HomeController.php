@@ -6,7 +6,7 @@ namespace App\Controllers;
 
 class HomeController extends BaseController
 {
-    public function welcome()
+    public function welcome(): void
     {
         $this->respond(null, 'API RESTful del Torneo de las Fresas Irapuato');
     }
