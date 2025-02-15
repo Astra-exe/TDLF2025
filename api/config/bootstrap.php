@@ -9,16 +9,19 @@ require __DIR__.'/../vendor/autoload.php';
 // Carga variables de entorno.
 \App\Helpers\Env::loadDotEnv();
 
-// Crea una instancia del framework.
-$app = \Flight::app();
-
 // Carga opciones de configuración de la aplicación.
 foreach (\App\Helpers\Config::getFromFilename('app') as $key => $value) {
     \App\Helpers\Env::set('APP_'.strtoupper($key), $value);
 }
 
+// Crea una instancia del framework.
+$app = \Flight::app();
+
 // Carga configuraciones del framework.
 require __DIR__.'/framework.php';
+
+// Habilita cors.
+$app->before('start', [new \App\Middlewares\CorsMiddleware($app), 'before']);
 
 // Crea una instancia del enrutador.
 $router = $app->router();

@@ -2,19 +2,29 @@
 
 declare(strict_types=1);
 
-namespace App\Controllers;
+namespace App\Middlewares;
 
 use App\Traits\ResponseTrait;
 use flight\Engine;
 
 /**
- * Clase base para todos los Controladores.
+ * Clase base para todos los Middlewares.
  */
-abstract class BaseController
+abstract class BaseMiddleware
 {
     use ResponseTrait;
 
     private Engine $app;
+
+    /**
+     * Método que se ejecuta antes de procesar una ruta.
+     */
+    abstract public function before(array $params): void;
+
+    /**
+     * Método que se ejecuta después de procesar una ruta.
+     */
+    abstract public function after(array $params): void;
 
     /**
      * Constructor de la clase.

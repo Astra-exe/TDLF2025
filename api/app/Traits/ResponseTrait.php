@@ -18,7 +18,7 @@ trait ResponseTrait
      * Método abstractor para obtener una instancia
      * existente de la aplicación.
      */
-    abstract protected function getApp(): Engine;
+    abstract protected function app(): Engine;
 
     /**
      * Genera una respuesta genérica.
@@ -35,7 +35,7 @@ trait ResponseTrait
 
         $this->body = [];
 
-        $this->getApp()->json($response, $status);
+        $this->app()->json($response, $status);
     }
 
     /**
