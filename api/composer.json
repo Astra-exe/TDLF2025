@@ -1,6 +1,6 @@
 {
     "name": "tdlf2025/api",
-    "description": "API RESTful del Torneo de las Fresas Irapuato",
+    "description": "API RESTful del evento Torneo de las Fresas Irapuato 2025",
     "type": "project",
     "license": "AGPL-3.0-or-later",
     "autoload": {
