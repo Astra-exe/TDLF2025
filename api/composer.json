@@ -21,7 +21,8 @@
         "phpdevcommunity/php-dotenv": "^3.0",
         "infocyph/uid": "^2.03",
         "flightphp/active-record": "^0.6.0",
-        "juststeveking/http-status-code": "^3.0"
+        "juststeveking/http-status-code": "^3.0",
+        "wixel/gump": "^2.2"
     },
     "require-dev": {
         "laravel/pint": "^1.20"
