@@ -8,13 +8,13 @@ use Phoenix\Database\Element\ColumnSettings;
 use Phoenix\Migration\AbstractMigration;
 
 /**
- * Migración que crea la tabla de los "tipos de partidos".
+ * Migración que crea la tabla de las "categorías de los partidos".
  */
 final class CreateTypesMatchesTable extends AbstractMigration
 {
     protected function up(): void
     {
-        $this->table('types_matches', 'id')
+        $this->table('categories_matches', 'id')
             ->addColumn('id', 'uuid')
             ->addColumn('name', 'string', ['length' => 32])
             ->addColumn('description', 'string', ['length' => 64])

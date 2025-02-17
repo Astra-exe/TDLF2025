@@ -17,11 +17,11 @@ final class CreateMatchesTable extends AbstractMigration
     {
         $this->table('matches', 'id')
             ->addColumn('id', 'uuid')
-            ->addColumn('type_match_id', 'uuid')
+            ->addColumn('category_match_id', 'uuid')
             ->addColumn('status_match_id', 'uuid')
             ->addColumn('created_at', 'datetime', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
             ->addColumn('updated_at', 'datetime', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
-            ->addForeignKey('type_match_id', 'types_matches', 'id', ForeignKey::RESTRICT, ForeignKey::RESTRICT)
+            ->addForeignKey('category_match_id', 'categories_matches', 'id', ForeignKey::RESTRICT, ForeignKey::RESTRICT)
             ->addForeignKey('status_match_id', 'status_matches', 'id', ForeignKey::RESTRICT, ForeignKey::RESTRICT)
             ->create();
     }
