@@ -35,7 +35,7 @@ trait ResponseTrait
 
         $this->body = [];
 
-        $this->app()->json($response, $status);
+        $this->app()->jsonHalt($response, $status);
     }
 
     /**
