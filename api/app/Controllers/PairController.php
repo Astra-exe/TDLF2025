@@ -12,11 +12,11 @@ use App\Validations\PairValidation;
 class PairController extends BaseController
 {
     /**
-     * Crea una pareja con la información de los jugadores.
+     * Crea una "pareja" con la información de los "jugadores".
      */
     public function createWithPlayers(): void
     {
-        // Establece los campos necesarios de la petición.
+        // Define los campos necesarios de la petición.
         $requestFields = ['category_registration_id', 'players'];
 
         $data = [];
@@ -26,10 +26,10 @@ class PairController extends BaseController
             $data[$field] = $this->app()->request()->data[$field] ?? null;
         }
 
-        // Establece los campos necesarios de la "pareja".
+        // Define los campos necesarios de la "pareja".
         $pairFields = ['category_registration_id'];
 
-        // Establece los campos necesarios de los "jugadores".
+        // Define los campos necesarios de los "jugadores".
         $playersFields = ['fullname', 'city', 'weight', 'height', 'experience'];
 
         // Obtiene las reglas de validación.
@@ -37,7 +37,7 @@ class PairController extends BaseController
             PairValidation::getRules($pairFields),
             PairValidation::getPlayersRules($playersFields));
 
-        // Establece todas las reglas de validación como obligatorias.
+        // Define todas las reglas de validación como obligatorias.
         foreach (array_keys($rules) as $rule) {
             array_unshift($rules[$rule], 'required');
         }
@@ -75,7 +75,7 @@ class PairController extends BaseController
             // Registra la información de los "jugadores".
             $player->insert();
 
-            // Establece los campos necesarios para
+            // Define los campos necesarios para
             // la relación de la "pareja" con el "jugador".
             $playerPairPivotFields = [
                 'player_id' => $player->id,
