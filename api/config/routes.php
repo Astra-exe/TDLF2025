@@ -15,6 +15,6 @@ return (static function () use ($app) {
     $router = $app->router();
 
     $router->get($base_route('/'), \App\Controllers\HomeController::class.'->welcome');
-    $router->get($base_route('/categories/pairs'), \App\Controllers\CategoryPairController::class.'->index');
+    $router->get($base_route('/categories/registrations'), \App\Controllers\CategoryRegistrationController::class.'->index');
     $router->post($base_route('/pairs/players'), \App\Controllers\PairController::class.'->createWithPlayers');
 })();

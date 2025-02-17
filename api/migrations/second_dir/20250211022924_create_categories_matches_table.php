@@ -20,12 +20,12 @@ final class CreateTypesMatchesTable extends AbstractMigration
             ->addColumn('description', 'string', ['length' => 64])
             ->addColumn('created_at', 'datetime', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
             ->addColumn('updated_at', 'datetime', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
-            ->addUniqueConstraint('name', 'types_matches_name_unique')
+            ->addUniqueConstraint('name', 'categories_matches_name_unique')
             ->create();
     }
 
     protected function down(): void
     {
-        $this->table('types_matches')->drop();
+        $this->table('categories_matches')->drop();
     }
 }

@@ -17,11 +17,11 @@ final class CreatePairsTable extends AbstractMigration
     {
         $this->table('pairs', 'id')
             ->addColumn('id', 'uuid')
-            ->addColumn('category_pair_id', 'uuid')
+            ->addColumn('category_registration_id', 'uuid')
             ->addColumn('is_eliminated', 'boolean', ['default' => false])
             ->addColumn('created_at', 'datetime', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
             ->addColumn('updated_at', 'datetime', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
-            ->addForeignKey('category_pair_id', 'categories_pairs', 'id', ForeignKey::RESTRICT, ForeignKey::RESTRICT)
+            ->addForeignKey('category_registration_id', 'categories_registrations', 'id', ForeignKey::RESTRICT, ForeignKey::RESTRICT)
             ->create();
     }
 
