@@ -41,7 +41,7 @@ trait ResponseTrait
     /**
      * Genera una respuesta genérica ante fallos.
      */
-    protected function respondFail(string $error, string $description, ?int $status = null): void
+    protected function respondFail(string $description, ?int $status, string $error): void
     {
         $status ??= Http::BAD_REQUEST();
 
@@ -53,19 +53,19 @@ trait ResponseTrait
     /**
      * Genera una respuesta de errores de servidor.
      */
-    protected function respondServerError(string $error, string $description): void
+    protected function respondServerError(string $description, string $error = 'Internal Server Error'): void
     {
-        $this->respondFail($error, $description, Http::INTERNAL_SERVER_ERROR());
+        $this->respondFail($description, Http::INTERNAL_SERVER_ERROR(), $error);
     }
 
     /**
      * Genera una respuesta de errores de validación.
      */
-    protected function respondValidationErrors(array $validations, string $error, string $description): void
+    protected function respondValidationErrors(array $validations, string $description, string $error = 'Validation error'): void
     {
-        $this->payload['validations'] = $validations;
+        $this->body['validations'] = $validations;
 
-        $this->respondFail($error, $description, Http::BAD_REQUEST());
+        $this->respondFail($description, Http::BAD_REQUEST(), $error);
     }
 
     /**
@@ -80,9 +80,9 @@ trait ResponseTrait
      * Genera una respuesta cuando se intenta
      * crear un nuevo recurso que ya existe.
      */
-    protected function respondResourceExists(string $error, string $description): void
+    protected function respondResourceExists(string $description, string $error = 'Conflict'): void
     {
-        $this->respondFail($error, $description, Http::CONFLICT());
+        $this->respondFail($description, Http::CONFLICT(), $error);
     }
 
     /**
@@ -104,27 +104,27 @@ trait ResponseTrait
     /**
      * Genera una respuesta al no encontrar un recurso.
      */
-    protected function respondNotFound(string $error, string $description): void
+    protected function respondNotFound(string $description, string $error = 'Not Found'): void
     {
-        $this->respondFail($error, $description, Http::NOT_FOUND());
+        $this->respondFail($description, Http::NOT_FOUND(), $error);
     }
 
     /**
      * Genera una respuesta cuando el cliente no tiene
      * credenciales de acceso o son incorrectas.
      */
-    protected function respondUnauthorized(string $error, string $description): void
+    protected function respondUnauthorized(string $description, string $error = 'Unauthorized'): void
     {
-        $this->respondFail($error, $description, Http::UNAUTHORIZED());
+        $this->respondFail($description, Http::UNAUTHORIZED(), $error);
     }
 
     /**
      * Genera una respuesta cuando el cliente no tiene
      * los permisos adecuados para acceder a un recurso.
      */
-    protected function respondForbidden(string $error, string $description): void
+    protected function respondForbidden(string $description, string $error = 'Forbidden'): void
     {
-        $this->respondFail($error, $description, Http::FORBIDDEN());
+        $this->respondFail($description, Http::FORBIDDEN(), $error);
     }
 
     /**

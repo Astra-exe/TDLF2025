@@ -31,6 +31,13 @@ foreach (\App\Helpers\Config::getFromFilename('framework') as $key => $value) {
 }
 
 /**
+ * Carga opciones de configuración de los servicios del framework.
+ */
+foreach (\App\Helpers\Config::getFromFilename('services') as $option) {
+    $app->register($option['name'], $option['class'], $option['params'] ?? null);
+}
+
+/**
  * Habilita CORS.
  */
 $app->before('start', [new \App\Middlewares\CorsMiddleware($app), 'before']);

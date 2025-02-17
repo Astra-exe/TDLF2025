@@ -6,6 +6,7 @@ namespace App\Controllers;
 
 use App\Traits\ResponseTrait;
 use flight\Engine;
+use GUMP;
 
 /**
  * Clase base para todos los Controladores.
@@ -30,5 +31,13 @@ abstract class BaseController
     protected function app(): Engine
     {
         return $this->app;
+    }
+
+    /**
+     * Obtiene la instancia de las validaciones.
+     */
+    protected function gump(): GUMP
+    {
+        return $this->app()->gump();
     }
 }

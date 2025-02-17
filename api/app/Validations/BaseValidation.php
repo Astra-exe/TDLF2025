@@ -15,18 +15,41 @@ abstract class BaseValidation
     abstract public static function getAllRules(): array;
 
     /**
-     * Obtiene todos los campos a validar.
+     * Método abstracto para obtener todos los filtros de validación.
      */
-    public static function getFields(): array
+    abstract public static function getAllFilters(): array;
+
+    /**
+     * Obtiene reglas de validación.
+     */
+    public static function getRules(array $fields): array
     {
-        return array_keys(self::getAllRules());
+        $result = [];
+        $rules = static::getAllRules();
+
+        foreach ($fields as $field) {
+            if (isset($rules[$field])) {
+                $result[$field] = $rules[$field];
+            }
+        }
+
+        return $result;
     }
 
     /**
-     * Obtiene una regla de validación.
+     * Obtiene filtros de validación.
      */
-    public static function getRule(string $field): ?string
+    public static function getFilters(array $fields): array
     {
-        return self::getAllRules()[$field] ?? null;
+        $result = [];
+        $filters = static::getAllFilters();
+
+        foreach ($fields as $field) {
+            if (isset($filters[$field])) {
+                $result[$field] = $filters[$field];
+            }
+        }
+
+        return $result;
     }
 }

@@ -21,4 +21,11 @@ class PlayerValidation extends BaseValidation
             'is_active' => ['boolean'],
         ];
     }
+
+    public static function getAllFilters(): array
+    {
+        return [
+            'is_active' => 'boolean',
+        ];
+    }
 }

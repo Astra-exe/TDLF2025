@@ -9,7 +9,7 @@ use App\Helpers\Date;
 use Phoenix\Migration\AbstractMigration;
 
 /**
- * Migración que inserta información en tabla
+ * Migración que inserta información en la tabla
  * de las "categorías de inscripción de las parejas de jugadores".
  */
 final class SeederCategoriesRegistrationsTable extends AbstractMigration
