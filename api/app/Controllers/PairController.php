@@ -19,6 +19,13 @@ class PairController extends BaseController
         // Establece los campos necesarios de la petición.
         $requestFields = ['category_registration_id', 'players'];
 
+        $data = [];
+
+        // Obtiene solo los campos necesarios.
+        foreach ($requestFields as $field) {
+            $data[$field] = $this->app()->request()->data[$field] ?? null;
+        }
+
         // Establece los campos necesarios de la "pareja".
         $pairFields = ['category_registration_id'];
 
@@ -33,13 +40,6 @@ class PairController extends BaseController
         // Establece todas las reglas de validación como obligatorias.
         foreach (array_keys($rules) as $rule) {
             array_unshift($rules[$rule], 'required');
-        }
-
-        $data = [];
-
-        // Obtiene solo los campos necesarios.
-        foreach ($requestFields as $field) {
-            $data[$field] = $this->app()->request()->data[$field] ?? null;
         }
 
         // Establece las reglas de validación.

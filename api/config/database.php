@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use App\Helpers\Env;
-use PDO;
 
 /**
  * Opciones de configuración de la base de datos.
