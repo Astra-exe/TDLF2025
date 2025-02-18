@@ -6,7 +6,7 @@ declare(strict_types=1);
  * Definición de rutas y middlewares de la aplicación.
  */
 return (static function () use ($app): void {
-    // Agrega un subdominio al path de la ruta.
+    // Agrega el subdominio al path de la ruta.
     $base_route = static function (string $path) use ($app): string {
         return rtrim($app->get('flight.base_url'), '/').$path;
     };
