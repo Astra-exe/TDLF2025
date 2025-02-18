@@ -9,8 +9,6 @@ namespace App\Models;
  */
 class PlayerModel extends BaseModel
 {
-    protected array $relations = [];
-
     public function getTableName(): string
     {
         return 'players';

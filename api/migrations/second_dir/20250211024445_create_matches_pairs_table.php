@@ -9,7 +9,8 @@ use Phoenix\Database\Element\ForeignKey;
 use Phoenix\Migration\AbstractMigration;
 
 /**
- * Migración que crea la tabla de los "partidos de las parejas de jugadores".
+ * Migración que crea la tabla pivote
+ * de los "partidos de las parejas de jugadores".
  */
 final class CreateMatchesPairsTable extends AbstractMigration
 {

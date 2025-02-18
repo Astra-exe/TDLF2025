@@ -8,7 +8,8 @@ use Phoenix\Database\Element\ColumnSettings;
 use Phoenix\Migration\AbstractMigration;
 
 /**
- * Migración que crea la tabla de "roles de los usuarios de acceso".
+ * Migración que crea la tabla
+ * de los "roles de los usuarios de acceso".
  */
 final class CreateRolesTable extends AbstractMigration
 {

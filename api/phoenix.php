@@ -8,8 +8,10 @@ require __DIR__.'/vendor/autoload.php';
  * Opciones de configuración de las migraciones de la base de datos.
  */
 return (static function (): array {
+    // Carga variables de entorno desde el archivo ".env".
     \App\Helpers\Env::loadDotEnv();
 
+    // Obtiene las opciones de configuración de la base de datos.
     $options = \App\Helpers\Config::getFromFilename('database');
 
     return [

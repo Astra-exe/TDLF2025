@@ -20,7 +20,7 @@ abstract class BaseValidation
     abstract public static function getAllFilters(): array;
 
     /**
-     * Obtiene reglas de validación.
+     * Obtiene las reglas de validación.
      */
     public static function getRules(array $fields): array
     {
@@ -37,7 +37,7 @@ abstract class BaseValidation
     }
 
     /**
-     * Obtiene filtros de validación.
+     * Obtiene los filtros de validación.
      */
     public static function getFilters(array $fields): array
     {

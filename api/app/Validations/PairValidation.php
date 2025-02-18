@@ -11,7 +11,7 @@ use App\Models\CategoryRegistrationModel;
  */
 class PairValidation extends BaseValidation
 {
-    private static array $categoriesRestrationsIDs;
+    private static array $categoriesRegistrationsIDs;
 
     public static function getAllRules(): array
     {
@@ -34,13 +34,13 @@ class PairValidation extends BaseValidation
      */
     private static function getCategoriesRegistrations(): array
     {
-        if (empty(self::$categoriesRestrationsIDs)) {
+        if (empty(self::$categoriesRegistrationsIDs)) {
             $categories = (new CategoryRegistrationModel)->select('id')->findAll();
 
-            self::$categoriesRestrationsIDs = array_column($categories, 'id');
+            self::$categoriesRegistrationsIDs = array_column($categories, 'id');
         }
 
-        return self::$categoriesRestrationsIDs;
+        return self::$categoriesRegistrationsIDs;
     }
 
     /**

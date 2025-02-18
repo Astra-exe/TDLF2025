@@ -75,18 +75,8 @@ class PairController extends BaseController
             // Registra la información de los "jugadores".
             $player->insert();
 
-            // Define los campos necesarios para
-            // la relación de la "pareja" con el "jugador".
-            $playerPairPivotFields = [
-                'player_id' => $player->id,
-                'pair_id' => $pair->id,
-            ];
-
-            foreach ($playerPairPivotFields as $field => $value) {
-                $playerPairPivot->{$field} = $value;
-            }
-
             // Registra la relación del "jugador" con la "pareja".
+            $playerPairPivot->copyFrom(['player_id' => $player->id, 'pair_id' => $pair->id]);
             $playerPairPivot->insert();
 
             $player->reset();

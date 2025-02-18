@@ -111,7 +111,7 @@ trait ResponseTrait
 
     /**
      * Genera una respuesta cuando el cliente no tiene
-     * credenciales de acceso o son incorrectas.
+     * las credenciales de acceso o son incorrectas.
      */
     protected function respondUnauthorized(string $description, string $error = 'Unauthorized'): void
     {

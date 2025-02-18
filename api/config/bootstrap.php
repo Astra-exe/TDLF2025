@@ -7,7 +7,7 @@ require __DIR__.'/../vendor/autoload.php';
  */
 
 /**
- * Carga variables de entorno desde un archivo ".env".
+ * Carga variables de entorno desde el archivo ".env".
  */
 \App\Helpers\Env::loadDotEnv();
 

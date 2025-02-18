@@ -15,7 +15,7 @@ class Env
     private const PATH = __DIR__.'/../../.env';
 
     /**
-     * Carga variables de entorno desde un archivo ".env".
+     * Carga variables de entorno desde el archivo ".env".
      */
     public static function loadDotEnv(): void
     {

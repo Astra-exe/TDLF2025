@@ -9,7 +9,8 @@ use Phoenix\Database\Element\ForeignKey;
 use Phoenix\Migration\AbstractMigration;
 
 /**
- * Migración que crea la tabla de "usuarios de acceso".
+ * Migración que crea la tabla
+ * de los "usuarios de acceso".
  */
 final class CreateUsersTable extends AbstractMigration
 {

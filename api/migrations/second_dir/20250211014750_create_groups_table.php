@@ -8,7 +8,8 @@ use Phoenix\Database\Element\ColumnSettings;
 use Phoenix\Migration\AbstractMigration;
 
 /**
- * Migración que crea la tabla de los "grupos de las parejas de los jugadores".
+ * Migración que crea la tabla
+ * de los "grupos de las parejas de los jugadores".
  */
 final class CreateGroupsTable extends AbstractMigration
 {
