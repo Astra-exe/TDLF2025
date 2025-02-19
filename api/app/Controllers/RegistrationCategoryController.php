@@ -9,7 +9,8 @@ use App\Models\RegistrationCategoryModel;
 class RegistrationCategoryController extends BaseController
 {
     /**
-     * Muestra la información de todas las "categorías de inscripción de las parejas de jugadores".
+     * Muestra la información de todas las
+     * "categorías de inscripción de las parejas de jugadores".
      */
     public function index(): void
     {
