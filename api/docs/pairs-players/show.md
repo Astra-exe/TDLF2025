@@ -12,7 +12,7 @@ Parámetros de la petición:
 
 Ejemplo:
 
-```console
+```bash
 curl -X GET \
   -H 'Content-Type: application/json' \
   http://localhost:8080/v1/pairs/@id/players

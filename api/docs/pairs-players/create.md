@@ -8,12 +8,12 @@ Cuerpo de la petición:
 
 | Propiedades | Tipo | Requerido | Rango | Descripción |
 | ----------- | ---- | --------- | ----- | ----------- |
-| `registration_category_id` | `string` | `true` | `exact_len: 36` | Identificador de la categoría de inscripción de la pareja. |
+| `registration_category_id` | `string` | `true` | `exact_len: 36` | Identificador de la categoría de inscripción de la pareja ([ver](../registration-categories/index.md)). |
 | `players` | `array[players]` |  `true` | `array_size_equal: 2` | Una lista con la información de los jugadores de la pareja ([ver](../players/create.md)).
 
 Ejemplo:
 
-```console
+```bash
 curl -X POST \
   -H 'Content-Type: application/json' \
   http://localhost:8080/v1/pairs/players \
