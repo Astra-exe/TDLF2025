@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use App\Models\PairModel;
+use App\Models\PairPlayerPivotModel;
 use App\Models\PlayerModel;
-use App\Models\PlayerPairPivotModel;
 use App\Validations\PairValidation;
 
 class PairPlayerController extends BaseController
@@ -17,7 +17,7 @@ class PairPlayerController extends BaseController
     public function create(): void
     {
         // Define los campos necesarios de la petición.
-        $requestFields = ['category_registration_id', 'players'];
+        $requestFields = ['registration_category_id', 'players'];
 
         $data = [];
 
@@ -27,7 +27,7 @@ class PairPlayerController extends BaseController
         }
 
         // Define los campos necesarios de la "pareja".
-        $pairFields = ['category_registration_id'];
+        $pairFields = ['registration_category_id'];
 
         // Define los campos necesarios de los "jugadores".
         $playersFields = ['fullname', 'city', 'weight', 'height', 'experience'];
@@ -66,7 +66,7 @@ class PairPlayerController extends BaseController
         $pair->insert();
 
         $player = new PlayerModel;
-        $playerPairPivot = new PlayerPairPivotModel;
+        $pairPlayerPivot = new PairPlayerPivotModel;
 
         foreach ($data['players'] as $dataPlayer) {
             foreach ($playersFields as $field) {
@@ -77,11 +77,11 @@ class PairPlayerController extends BaseController
             $player->insert();
 
             // Registra la relación del "jugador" con la "pareja".
-            $playerPairPivot->copyFrom(['player_id' => $player->id, 'pair_id' => $pair->id]);
-            $playerPairPivot->insert();
+            $pairPlayerPivot->copyFrom(['player_id' => $player->id, 'pair_id' => $pair->id]);
+            $pairPlayerPivot->insert();
 
             $player->reset();
-            $playerPairPivot->reset();
+            $pairPlayerPivot->reset();
         }
 
         $this->respondCreated($pair->find()->toArray(), 'The pair with the players was created correctly');
@@ -119,7 +119,7 @@ class PairPlayerController extends BaseController
 
         $data = [
             ...$pair->toArray(),
-            'players' => array_map(static fn (PlayerPairPivotModel $p) => $p->player, $pair->playerPairPivot),
+            'players' => array_map(static fn (PairPlayerPivotModel $p) => $p->player, $pair->pairPlayerPivot),
         ];
 
         $this->respond($data, "Information about the pair's players");

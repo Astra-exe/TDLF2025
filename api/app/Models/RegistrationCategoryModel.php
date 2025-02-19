@@ -8,14 +8,14 @@ namespace App\Models;
  * Modelo que representa la tabla
  * de las "categorías de inscripción de las parejas de jugadores".
  */
-class CategoryRegistrationModel extends BaseModel
+class RegistrationCategoryModel extends BaseModel
 {
     protected array $relations = [
-        'pairs' => [self::HAS_MANY, PairModel::class, 'category_registration_id'],
+        'pairs' => [self::HAS_MANY, PairModel::class, 'registration_category_id'],
     ];
 
     public function getTableName(): string
     {
-        return 'categories_registrations';
+        return 'registration_categories';
     }
 }

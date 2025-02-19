@@ -12,11 +12,11 @@ use Phoenix\Migration\AbstractMigration;
  * Migración que crea la tabla pivote
  * de los "jugadores de las parejas".
  */
-final class CreatePlayersPairsTable extends AbstractMigration
+final class CreatePairsPlayersTable extends AbstractMigration
 {
     protected function up(): void
     {
-        $this->table('players_pairs', 'id')
+        $this->table('pairs_players', 'id')
             ->addColumn('id', 'uuid')
             ->addColumn('player_id', 'uuid')
             ->addColumn('pair_id', 'uuid')
@@ -24,12 +24,12 @@ final class CreatePlayersPairsTable extends AbstractMigration
             ->addColumn('updated_at', 'datetime', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
             ->addForeignKey('player_id', 'players', 'id', ForeignKey::RESTRICT, ForeignKey::RESTRICT)
             ->addForeignKey('pair_id', 'pairs', 'id', ForeignKey::RESTRICT, ForeignKey::RESTRICT)
-            ->addUniqueConstraint('player_id', 'players_pairs_player_id_unique')
+            ->addUniqueConstraint('player_id', 'pairs_players_player_id_unique')
             ->create();
     }
 
     protected function down(): void
     {
-        $this->table('players_pairs')->drop();
+        $this->table('pairs_players')->drop();
     }
 }

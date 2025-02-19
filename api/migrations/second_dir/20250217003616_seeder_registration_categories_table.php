@@ -12,11 +12,11 @@ use Phoenix\Migration\AbstractMigration;
  * Migración que inserta información en la tabla
  * de las "categorías de inscripción de las parejas de jugadores".
  */
-final class SeederCategoriesRegistrationsTable extends AbstractMigration
+final class SeederRegistrationCategoriesTable extends AbstractMigration
 {
     protected function up(): void
     {
-        $this->insert('categories_registrations', [
+        $this->insert('registration_categories', [
             [
                 'id' => Database::getUuid(),
                 'name' => 'open',
@@ -36,6 +36,10 @@ final class SeederCategoriesRegistrationsTable extends AbstractMigration
 
     protected function down(): void
     {
-        $this->delete('categories_registrations');
+        $this->delete('matches_pairs');
+        $this->delete('groups_pairs');
+        $this->delete('pairs_players');
+        $this->delete('pairs');
+        $this->delete('registration_categories');
     }
 }

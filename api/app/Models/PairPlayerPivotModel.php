@@ -8,7 +8,7 @@ namespace App\Models;
  * Modelo que representa la tabla pivote
  * de los "jugadores de las parejas".
  */
-class PlayerPairPivotModel extends BaseModel
+class PairPlayerPivotModel extends BaseModel
 {
     protected array $relations = [
         'player' => [self::BELONGS_TO, PlayerModel::class, 'player_id'],
@@ -17,6 +17,6 @@ class PlayerPairPivotModel extends BaseModel
 
     public function getTableName(): string
     {
-        return 'players_pairs';
+        return 'pairs_players';
     }
 }
