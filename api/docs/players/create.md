@@ -1,4 +1,4 @@
-## Crear un jugador
+# Crear un jugador
 
 Cuerpo de la petición:
 

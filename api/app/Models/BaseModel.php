@@ -30,6 +30,7 @@ abstract class BaseModel extends ActiveRecord
     {
         $self->id = Database::getUuid();
         $self->created_at = Date::getCurrentDateTime();
+        $self->updated_at = Date::getCurrentDateTime();
     }
 
     /**
