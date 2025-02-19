@@ -9,6 +9,10 @@ namespace App\Models;
  */
 class PlayerModel extends BaseModel
 {
+    protected array $relations = [
+        'playerPairPivot' => [self::HAS_ONE, PlayerPairPivotModel::class, 'player_id'],
+    ];
+
     public function getTableName(): string
     {
         return 'players';

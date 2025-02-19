@@ -20,6 +20,6 @@ Cuerpo de la petición:
 | ----------- | ---- | ----------- |
 | `data` | `null` | Sin información o recursos de respuesta de la petición. |
 | `status` | `integer` | Código HTTP de respuesta de la petición. |
-| `error` | `string` | Tipo de error de respuesta de la petición. |
 | `validations` | `array[fields]` | Una lista de errores de validación de las propiedades del cuerpo de la petición. |
+| `error` | `string` | Tipo de error de respuesta de la petición. |
 | `description` | `string` | Descripción o motivo del error de respuesta de la petición. |

@@ -9,12 +9,12 @@ use App\Models\PlayerModel;
 use App\Models\PlayerPairPivotModel;
 use App\Validations\PairValidation;
 
-class PairController extends BaseController
+class PairPlayerController extends BaseController
 {
     /**
      * Crea una "pareja" con la información de los "jugadores".
      */
-    public function createWithPlayers(): void
+    public function create(): void
     {
         // Define los campos necesarios de la petición.
         $requestFields = ['category_registration_id', 'players'];
@@ -33,9 +33,10 @@ class PairController extends BaseController
         $playersFields = ['fullname', 'city', 'weight', 'height', 'experience'];
 
         // Obtiene las reglas de validación.
-        $rules = array_merge(
-            PairValidation::getRules($pairFields),
-            PairValidation::getPlayersRules($playersFields));
+        $rules = [
+            ...PairValidation::getRules($pairFields),
+            ...PairValidation::getPlayersRules($playersFields),
+        ];
 
         // Define todas las reglas de validación como obligatorias.
         foreach (array_keys($rules) as $rule) {
@@ -52,7 +53,7 @@ class PairController extends BaseController
         if ($this->gump()->errors()) {
             $this->respondValidationErrors(
                 $this->gump()->get_errors_array(),
-                'The information registration on pair with players is incorrect');
+                'The registration information of the pair with the players is incorrect');
         }
 
         $pair = new PairModel;
@@ -83,6 +84,44 @@ class PairController extends BaseController
             $playerPairPivot->reset();
         }
 
-        $this->respondCreated($pair->find()->toArray(), 'The pair with players was created correctly');
+        $this->respondCreated($pair->find()->toArray(), 'The pair with the players was created correctly');
+    }
+
+    /**
+     * Obtiene la información de los "jugadores" de una "pareja".
+     */
+    public function show(string $id): void
+    {
+        $rules = PairValidation::getRules(['id']);
+        array_unshift($rules['id'], 'required');
+
+        // Establece las reglas de validación.
+        $this->gump()->validation_rules($rules);
+
+        // Comprueba los parámetros de la petición.
+        $this->gump()->run(['id' => $id]);
+
+        // Comprueba si existen errores de validación.
+        if ($this->gump()->errors()) {
+            $this->respondValidationErrors(
+                $this->gump()->get_errors_array(),
+                "The player's identifier is incorrect");
+        }
+
+        // Consulta la información de la "pareja".
+        $pair = new PairModel;
+        $pair->find($id);
+
+        // Comprueba si existe la "pareja".
+        if (empty($pair->isHydrated())) {
+            $this->respondNotFound("The pair's information was not found");
+        }
+
+        $data = [
+            ...$pair->toArray(),
+            'players' => array_map(static fn (PlayerPairPivotModel $p) => $p->player, $pair->playerPairPivot),
+        ];
+
+        $this->respond($data, "Information about the pair's players");
     }
 }

@@ -27,11 +27,12 @@ trait ResponseTrait
     {
         $status ??= Http::OK();
 
-        $response = array_merge($this->body, [
+        $response = [
             'data' => $data,
             'status' => $status,
+            ...$this->body,
             'description' => $description,
-        ]);
+        ];
 
         $this->body = [];
 

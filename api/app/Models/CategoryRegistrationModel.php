@@ -10,6 +10,10 @@ namespace App\Models;
  */
 class CategoryRegistrationModel extends BaseModel
 {
+    protected array $relations = [
+        'pairs' => [self::HAS_MANY, PairModel::class, 'category_registration_id'],
+    ];
+
     public function getTableName(): string
     {
         return 'categories_registrations';
