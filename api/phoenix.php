@@ -12,6 +12,7 @@ return (static function (): array {
     \App\Helpers\Env::loadDotEnv();
 
     // Obtiene las opciones de configuración de la base de datos.
+    \App\Helpers\Config::getFromFilename('app');
     $options = \App\Helpers\Config::getFromFilename('database');
 
     return [

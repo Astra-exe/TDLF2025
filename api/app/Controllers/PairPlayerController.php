@@ -23,7 +23,7 @@ class PairPlayerController extends BaseController
 
         // Obtiene solo los campos necesarios.
         foreach ($requestFields as $field) {
-            $data[$field] = $this->app()->request()->data[$field] ?? null;
+            $data[$field] = $this->app()->request()->data->{$field} ?? null;
         }
 
         // Define los campos necesarios de la "pareja".
