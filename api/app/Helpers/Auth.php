@@ -8,7 +8,7 @@ namespace App\Helpers;
  * Colección de herramientas
  * para la API key de autenticación.
  */
-class ApiKey
+class Auth
 {
     private const LENGTH = 32;
 
@@ -48,5 +48,13 @@ class ApiKey
     public static function getExpiration(): string
     {
         return Date::strToDateTime(self::EXPIRATION);
+    }
+
+    /**
+     * Comprueba si el hash de una key es autentica.
+     */
+    public static function verity(string $hash, string $original): bool
+    {
+        return hash_equals($hash, $original);
     }
 }

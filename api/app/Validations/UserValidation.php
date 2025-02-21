@@ -19,7 +19,7 @@ class UserValidation extends BaseValidation
             'username' => ['alpha_numeric_dash', 'between_len' => [1, 64]],
             'role_id' => ['guidv4', 'contains_list' => self::getRoles()],
             'fullname' => ['alpha_space', 'between_len' => [1, 128]],
-            'password' => ['alpha_numeric_dash', 'between_len' => [8, 64]],
+            'password' => ['regex' => '/^\S+$/', 'between_len' => [8, 64]],
             'is_active' => ['boolean'],
         ];
     }

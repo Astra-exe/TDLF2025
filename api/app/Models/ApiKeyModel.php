@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Helpers\ApiKey;
+use App\Helpers\Auth;
 
 /**
  * Modelo que representa la tabla
@@ -26,6 +26,6 @@ class ApiKeyModel extends BaseModel
         parent::beforeInsert($self);
 
         $self->is_revoked = (int) false;
-        $self->expires_at = ApiKey::getExpiration();
+        $self->expires_at = Auth::getExpiration();
     }
 }

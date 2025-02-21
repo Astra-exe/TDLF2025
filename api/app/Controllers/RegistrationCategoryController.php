@@ -15,6 +15,6 @@ class RegistrationCategoryController extends BaseController
     public function index(): void
     {
         $categories = (new RegistrationCategoryModel)->orderBy('name ASC')->findAll();
-        $this->respond($categories, "Information about all the categories of pair's players registration");
+        $this->respond($categories, 'Information about all the categories of pair\'s players registration');
     }
 }

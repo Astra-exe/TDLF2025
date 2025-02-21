@@ -10,7 +10,7 @@ namespace App\Helpers;
  */
 class Date
 {
-    public const DATETIME_FORMAT = 'Y-m-d H:i:s';
+    private const DATETIME_FORMAT = 'Y-m-d H:i:s';
 
     /**
      * Obtiene el datetime del tiempo actual.

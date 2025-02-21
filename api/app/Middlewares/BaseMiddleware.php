@@ -6,6 +6,7 @@ namespace App\Middlewares;
 
 use App\Traits\ResponseTrait;
 use flight\Engine;
+use GUMP;
 
 /**
  * Clase base para todos los Middlewares.
@@ -40,5 +41,13 @@ abstract class BaseMiddleware
     protected function app(): Engine
     {
         return $this->app;
+    }
+
+    /**
+     * Obtiene la instancia de las validaciones.
+     */
+    protected function gump(): GUMP
+    {
+        return $this->app()->gump();
     }
 }
