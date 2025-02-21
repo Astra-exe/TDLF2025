@@ -20,6 +20,10 @@ return (static function () use ($app): void {
     $router->post($base_route('/v1/auth/login'), \App\Controllers\AuthController::class.'->login');
 
     $router->group('', static function (\flight\net\Router $router) use ($base_route) {
+        // Autenticación del usuario de acceso.
+        $router->get($base_route('/v1/auth/me'), \App\Controllers\AuthController::class.'->me');
+        $router->get($base_route('/v1/auth/check'), \App\Controllers\AuthController::class.'->check');
+
         // Categorías de registro de parejas.
         $router->get($base_route('/v1/categories/registrations'), \App\Controllers\RegistrationCategoryController::class.'->index');
 

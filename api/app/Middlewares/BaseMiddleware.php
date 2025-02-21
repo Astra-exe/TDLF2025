@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Middlewares;
 
+use App\Helpers\Auth;
+use App\Models\UserModel;
 use App\Traits\ResponseTrait;
 use flight\Engine;
 use GUMP;
@@ -49,5 +51,13 @@ abstract class BaseMiddleware
     protected function gump(): GUMP
     {
         return $this->app()->gump();
+    }
+
+    /**
+     * Obtiene la información del usuario autenticado.
+     */
+    protected function userAuth(): ?UserModel
+    {
+        return $this->app()->get(Auth::VARNAME);
     }
 }

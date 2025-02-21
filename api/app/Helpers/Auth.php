@@ -14,9 +14,11 @@ class Auth
 
     private const ALGORITHM = 'sha512';
 
-    private const VARNAME = 'APP_SECRET';
+    private const ENV_VARNAME = 'APP_SECRET';
 
     private const EXPIRATION = '+8 minute';
+
+    public const VARNAME = 'userAuth';
 
     /**
      * Genera una key de autenticación.
@@ -31,7 +33,7 @@ class Auth
      */
     private static function getSecret(): string
     {
-        return Env::get(self::VARNAME);
+        return Env::get(self::ENV_VARNAME);
     }
 
     /**

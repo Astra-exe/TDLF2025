@@ -52,6 +52,7 @@ class AuthMiddleware extends BaseMiddleware
         }
 
         $userAuth = $apiKey->user;
+        unset($userAuth->password);
 
         // Comprueba si el usuario está activo.
         if (empty($userAuth->is_active)) {
@@ -63,7 +64,7 @@ class AuthMiddleware extends BaseMiddleware
          * a todos los Middlewares y Controladores
          * con la información del usuario de acceso autenticado.
          */
-        $this->app()->set('userAuth', $userAuth);
+        $this->app()->set(Auth::VARNAME, $userAuth);
     }
 
     public function after(array $params): void {}

@@ -67,7 +67,10 @@ class AuthController extends BaseController
         }
 
         $user = new UserModel;
-        $user->eq($identifyBy, $data['nickname'])->eq('is_active', true)->find();
+        $user->select('id, password')
+            ->eq($identifyBy, $data['nickname'])
+            ->eq('is_active', true)
+            ->find();
 
         // Comprueba si el usuario que intenta autenticarse existe.
         if (! $user->isHydrated() || ! Password::verify($data['password'], $user->password)) {
@@ -87,9 +90,24 @@ class AuthController extends BaseController
         $this->respond(['api_key' => $key], 'API key authentication');
     }
 
-    public function me(): void {}
+    /**
+     * Muestra la información del usuario autenticado.
+     */
+    public function me(): void
+    {
+        $this->respond($this->userAuth()->toArray(), 'Information about the authenticated user');
+    }
 
-    public function check(): void {}
+    /**
+     * Muestra la información de la API key del usuario autenticado.
+     */
+    public function check(): void
+    {
+        $apiKey = $this->userAuth()->apiKey;
+        unset($apiKey->hash);
+
+        $this->respond($apiKey->toArray(), 'Information about the API key');
+    }
 
     public function refresh(): void {}
 
