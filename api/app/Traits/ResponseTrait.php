@@ -133,6 +133,7 @@ trait ResponseTrait
      */
     protected function respondNoContent(string $description): void
     {
-        $this->respond(null, $description, Http::NO_CONTENT());
+        // $this->respond(null, $description, Http::NO_CONTENT());
+        $this->respond(null, $description);
     }
 }

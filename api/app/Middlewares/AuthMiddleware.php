@@ -48,7 +48,7 @@ class AuthMiddleware extends BaseMiddleware
         // Comprueba si la key está expirada.
         if (strtotime(Date::getCurrentDateTime()) > strtotime($apiKey->expires_at)) {
             $apiKey->delete();
-            $this->respondUnauthorized('The api key has expired');
+            $this->respondUnauthorized('The API key is expired');
         }
 
         $userAuth = $apiKey->user;
@@ -56,7 +56,7 @@ class AuthMiddleware extends BaseMiddleware
 
         // Comprueba si el usuario está activo.
         if (empty($userAuth->is_active)) {
-            $this->respondForbidden('The access user is not active');
+            $this->respondForbidden('The authenticated user is not active');
         }
 
         /**

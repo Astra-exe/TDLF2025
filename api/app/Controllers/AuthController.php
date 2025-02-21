@@ -111,5 +111,12 @@ class AuthController extends BaseController
 
     public function refresh(): void {}
 
-    public function logout(): void {}
+    /**
+     * Elimina la API key del usuario autenticado.
+     */
+    public function logout(): void
+    {
+        $this->userAuth()->apiKey->delete();
+        $this->respondNoContent('API key has been successfully logged out');
+    }
 }
