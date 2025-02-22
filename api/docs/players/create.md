@@ -2,8 +2,8 @@
 
 Cuerpo de la petición:
 
-| Propiedades | Tipo | Requerido | Rango | Descripción |
-| ----------- | ---- | --------- | ----- | ----------- |
+| Campo | Tipo | Requerido | Rango | Descripción |
+| ----- | ---- | --------- | ----- | ----------- |
 | `fullname` | `string` | `true` | `between_len: [1, 128]` | Nombre completo del jugador. |
 | `city` | `string` | `true` | `between_len: [1, 128]` | Ciudad o localidad de origen del jugador. | 
 | `weight` | `float` | `true` | `between_numeric: [20, 600]` | Peso en kilos del jugador. |
