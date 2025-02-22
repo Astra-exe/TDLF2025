@@ -8,8 +8,8 @@ Cuerpo de la petición:
 
 | Campo | Tipo | Requerido | Rango | Descripción |
 | ----- | ---- | --------- | ----- | ----------- |
-| `nickname` | `string` | `true` | Nombre de usuario o correo eléctrico del usuario de acceso. |
-| `password` | `string` | `true` | Contraseña del usuario de acceso. |
+| `nickname` | `string` | `true` | `between_len: [1, 128]` | Nombre de usuario o correo eléctrico del usuario de acceso. |
+| `password` | `string` | `true` | `between_len: [8, 64]` | Contraseña del usuario de acceso. |
 
 Ejemplos:
 
