@@ -30,7 +30,7 @@ trait HelperTrait
     }
 
     /**
-     * Obtiene la información del usuario autenticado.
+     * Obtiene la información del usuario de acceso autenticado.
      */
     protected function userAuth(): ?UserModel
     {

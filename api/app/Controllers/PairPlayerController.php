@@ -84,7 +84,7 @@ class PairPlayerController extends BaseController
             $pairPlayerPivot->reset();
         }
 
-        $this->respondCreated($pair->find()->toArray(), 'The pair with the players was created correctly');
+        $this->respondCreated($pair->find()->toArray(), 'The pair with the players was created successfully');
     }
 
     /**
@@ -105,7 +105,7 @@ class PairPlayerController extends BaseController
         if ($this->gump()->errors()) {
             $this->respondValidationErrors(
                 $this->gump()->get_errors_array(),
-                'The player\'s identifier is incorrect');
+                'The player identifier is incorrect');
         }
 
         // Consulta la información de la "pareja".
@@ -114,7 +114,7 @@ class PairPlayerController extends BaseController
 
         // Comprueba si existe la "pareja".
         if (! $pair->isHydrated()) {
-            $this->respondNotFound('The pair\'s information was not found');
+            $this->respondNotFound('The pair information was not found');
         }
 
         $data = [
@@ -122,6 +122,6 @@ class PairPlayerController extends BaseController
             'players' => array_map(static fn (PairPlayerPivotModel $p) => $p->player, $pair->pairPlayerPivot),
         ];
 
-        $this->respond($data, 'Information about the pair\'s players');
+        $this->respond($data, 'Information about the pair players');
     }
 }

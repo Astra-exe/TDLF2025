@@ -10,8 +10,8 @@ use App\Models\ApiKeyModel;
 use App\Validations\AuthValidation;
 
 /**
- * Middleware que comprueba la API key de
- * autenticación del usuario de acceso.
+ * Middleware que comprueba la "API key" de
+ * autenticación del "usuario de acceso".
  */
 class AuthMiddleware extends BaseMiddleware
 {
@@ -19,13 +19,13 @@ class AuthMiddleware extends BaseMiddleware
 
     public function before(array $params): void
     {
-        // Obtiene el key del encabezado.
+        // Obtiene la key del encabezado.
         $key = $this->app()->request()->header(self::HEADER);
 
         // Obtiene y establece las reglas de validación.
         $this->gump()->validation_rules(AuthValidation::getRules(['api_key']));
 
-        // Valida el key del encabezado.
+        // Valida la key del encabezado.
         $this->gump()->run(['api_key' => $key]);
 
         // Comprueba si existen errores de validación.
@@ -54,7 +54,7 @@ class AuthMiddleware extends BaseMiddleware
         $userAuth = $apiKey->user;
         unset($userAuth->password);
 
-        // Comprueba si el usuario está activo.
+        // Comprueba si el "usuario de acceso" autenticado está activo.
         if (empty($userAuth->is_active)) {
             $this->respondForbidden('The authenticated user is not active');
         }
@@ -62,7 +62,7 @@ class AuthMiddleware extends BaseMiddleware
         /**
          * Se pasa la variable "$this->app()->get('userAuth')"
          * a todos los Middlewares y Controladores
-         * con la información del usuario de acceso autenticado.
+         * con la información del "usuario de acceso" autenticado.
          */
         $this->app()->set(Auth::VARNAME, $userAuth);
     }

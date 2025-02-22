@@ -13,7 +13,7 @@ use App\Validations\UserValidation;
 class AuthController extends BaseController
 {
     /**
-     * Genera la API key de inicio de sesión.
+     * Genera la "API key" de inicio de sesión.
      */
     public function login(): void
     {
@@ -67,31 +67,28 @@ class AuthController extends BaseController
         }
 
         $user = new UserModel;
-        $user->select('id, password')
-            ->eq($identifyBy, $data['nickname'])
-            ->eq('is_active', true)
-            ->find();
+        $user->select('id, password')->eq($identifyBy, $data['nickname'])->eq('is_active', (int) true)->find();
 
-        // Comprueba si el usuario que intenta autenticarse existe.
+        // Comprueba si el "usuario de acceso" que intenta autenticarse existe.
         if (! $user->isHydrated() || ! Password::verify($data['password'], $user->password)) {
             $this->respondUnauthorized('The access credentials are invalid');
         }
 
-        // Elimina la antigua API key del usuario si existe.
+        // Elimina la antigua "API key" del "usuario de acceso" si existe.
         $user->apiKey->delete();
 
         $key = Auth::generateKey();
 
-        // Registra la API key del usuario de acceso.
+        // Registra la "API key" del "usuario de acceso".
         $apiKey = new ApiKeyModel;
         $apiKey->copyFrom(['user_id' => $user->id, 'hash' => Auth::generateHash($key)]);
         $apiKey->insert();
 
-        $this->respond(['api_key' => $key], 'API key authentication');
+        $this->respondCreated(['api_key' => $key], 'The API key was created successfully');
     }
 
     /**
-     * Muestra la información del usuario autenticado.
+     * Muestra la información del "usuario de acceso" autenticado.
      */
     public function me(): void
     {
@@ -99,7 +96,7 @@ class AuthController extends BaseController
     }
 
     /**
-     * Muestra la información de la API key del usuario autenticado.
+     * Muestra la información de la "API key" del "usuario de acceso" autenticado.
      */
     public function check(): void
     {
@@ -109,14 +106,30 @@ class AuthController extends BaseController
         $this->respond($apiKey->toArray(), 'Information about the API key');
     }
 
-    public function refresh(): void {}
+    /**
+     * Regenera la "API key" del "usuario de acceso" autenticado.
+     */
+    public function refresh(): void
+    {
+        // Elimina la antigua API key del "usuario de acceso".
+        $this->userAuth()->apiKey->delete();
+
+        $key = Auth::generateKey();
+
+        // Regenera la API key del "usuario de acceso".
+        $apiKey = new ApiKeyModel;
+        $apiKey->copyFrom(['user_id' => $this->userAuth()->id, 'hash' => Auth::generateHash($key)]);
+        $apiKey->insert();
+
+        $this->respondCreated(['api_key' => $key], 'The API key was renewed successfully');
+    }
 
     /**
-     * Elimina la API key del usuario autenticado.
+     * Elimina la "API key" del "usuario de acceso" autenticado.
      */
     public function logout(): void
     {
         $this->userAuth()->apiKey->delete();
-        $this->respondNoContent('API key has been successfully logged out');
+        $this->respondNoContent('The API key was finalized successfully');
     }
 }

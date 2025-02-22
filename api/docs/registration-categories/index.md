@@ -35,6 +35,6 @@ Respuesta de la petición:
         }
     ],
     "status": 200,
-    "description": "Information about all the categories of pair's players registration"
+    "description": "Information about all the categories of pairs players registration"
 }
 ```

@@ -54,6 +54,6 @@ Respuesta de la petición:
         ]
     },
     "status": 200,
-    "description": "Information about the pair's players"
+    "description": "Information about the pair players"
 }
 ```

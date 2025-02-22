@@ -49,6 +49,6 @@ Respuesta de la petición:
         "updated_at": "2025-02-19 02:18:30"
     },
     "status": 201,
-    "description": "The pair with the players was created correctly"
+    "description": "The pair with the players was created successfully"
 }
 ```
