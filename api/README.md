@@ -32,6 +32,17 @@ php -S localhost:8080 -t public/
 
 * <http://localhost:8080>
 
+## Docker
+
+```
+docker build -t TDLF2025/api ./
+docker run --name TDLF2025-api -p 8080:80 TDLF2025/api
+```
+
 ## Diagrama ER
 
 * <https://drive.google.com/file/d/1KSYBmgTIAHmyknSqEVY3gK33IfuuOeMP/view?usp=sharing>
+
+## Referencias
+
+* [Easy installation of PHP extensions in official PHP Docker images.](https://github.com/mlocati/docker-php-extension-installer)
