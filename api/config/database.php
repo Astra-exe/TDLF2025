@@ -10,7 +10,7 @@ use App\Helpers\Env;
 return (static function (): array {
     $options = [
         'driver' => Env::get('DB_DRIVER', 'mysql'),
-        'host' => Env::get('DB_HOST', 'localhost'),
+        'host' => Env::get('DB_HOST', '127.0.0.1'),
         'port' => Env::get('DB_PORT', 3306),
         'database' => Env::get('DB_DATABASE', 'torneo_fresas'),
         'username' => Env::get('DB_USERNAME', 'root'),

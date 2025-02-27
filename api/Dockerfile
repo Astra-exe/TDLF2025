@@ -6,6 +6,7 @@ RUN \
   apt-get update \
   && apt-get install -y --no-install-recommends --autoremove --purge \
     libicu-dev \
+    mariadb-server \
   && apt-get clean \
   && docker-php-ext-install -j"$(nproc)" \
     pdo_mysql \
@@ -19,7 +20,13 @@ COPY --from=composer/composer:2-bin /composer /usr/local/bin/composer
 ENV \
   APACHE_DOCUMENT_ROOT=/var/www/html \
   APACHE_APP_ROOT=/var/www/html/public \
-  APACHE_PORT=80
+  APACHE_PORT=80/tcp \
+  DB_HOST=127.0.0.1 \
+  DB_USERNAME=root \
+  DB_PASSWORD=secret \
+  DB_DATABASE=torneo_fresas \
+  DB_CHARSET=utf8mb4 \
+  DB_COLLATE=utf8mb4_general_ci
 
 # Copia todos los archivos del proyecto a "/var/www/html/".
 COPY ./ "${APACHE_DOCUMENT_ROOT}"
@@ -35,7 +42,7 @@ RUN sed -ri -e "s!/var/www/!${APACHE_APP_ROOT}!g" /etc/apache2/apache2.conf /etc
 RUN a2enmod rewrite
 
 # Estable el puerto que escucha Apache.
-EXPOSE "${APACHE_PORT}/tcp"
+EXPOSE "${APACHE_PORT}"
 
 # Define el espacio de trabajo del contenedor.
 WORKDIR "${APACHE_DOCUMENT_ROOT}"
@@ -43,8 +50,14 @@ WORKDIR "${APACHE_DOCUMENT_ROOT}"
 # Instala las dependencias del proyecto con "composer".
 RUN composer install --no-dev -o
 
-# Ejecuta las migraciones de la base de datos.
-#RUN ./vendor/bin/phoenix migrate
+# Crea la base de datos del proyecto.
+RUN service mariadb start \
+  && mariadb -e "CREATE DATABASE IF NOT EXISTS ${DB_DATABASE} CHARACTER SET = '${DB_CHARSET}' COLLATE = '${DB_COLLATE}';" \
+  && mariadb -e "CREATE USER IF NOT EXISTS '${DB_USERNAME}'@'${DB_HOST}' IDENTIFIED BY '${DB_PASSWORD}';" \
+  && mariadb -e "GRANT ALL PRIVILEGES ON ${DB_DATABASE}.* TO '${DB_USERNAME}'@'${DB_HOST}';" \
+  && mariadb -e "FLUSH PRIVILEGES;"
 
-# Establece el comando a iniciar al ejecutar el contenedor.
-CMD ["apache2ctl", "-D", "FOREGROUND"]
+ENTRYPOINT \
+  service mariadb start \
+  ./vendor/bin/phoenix migrate \
+  && apache2ctl -D FOREGROUND
