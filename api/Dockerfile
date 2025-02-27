@@ -23,12 +23,12 @@ ENV \
   APACHE_DOCUMENT_ROOT=/var/www/html \
   APACHE_APP_ROOT=/var/www/html/public \
   APACHE_PORT=80/tcp \
-  DB_HOST=${DB_HOST:-127.0.0.1} \
-  DB_DATABASE=${DB_DATABASE:-torneo_fresas} \
-  DB_USERNAME=${DB_USERNAME:-TDLF2025} \
-  DB_PASSWORD=${DB_PASSWORD:-secret} \
-  DB_CHARSET=${DB_CHARSET:-utf8mb4} \
-  DB_COLLATE=${DB_COLLATE:-utf8mb4_general_ci}
+  DB_HOST="${DB_HOST:-127.0.0.1}" \
+  DB_DATABASE="${DB_DATABASE:-torneo_fresas}" \
+  DB_USERNAME="${DB_USERNAME:-TDLF2025}" \
+  DB_PASSWORD="${DB_PASSWORD:-secret}" \
+  DB_CHARSET="${DB_CHARSET:-utf8mb4}" \
+  DB_COLLATE="${DB_COLLATE:-utf8mb4_general_ci}"
 
 # Copia todos los archivos del proyecto a "/var/www/html/".
 COPY ./ "${APACHE_DOCUMENT_ROOT}"
