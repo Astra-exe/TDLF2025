@@ -10,6 +10,8 @@ API RESTful del evento "Torneo de las Fresas Irapuato 2025".
 cp env.example .env
 ```
 
+> Para `docker` también debes crear un archivo `.env`.
+
 * Crea la base de datos del proyecto:
 
 ```
@@ -36,8 +38,10 @@ php -S localhost:8080 -t public/
 
 ```
 docker build -t TDLF2025/api ./
-docker run --name TDLF2025-api -p 8080:80 TDLF2025/api
+docker run --name TDLF2025-api --env-file .env -p 8080:80 TDLF2025/api
 ```
+
+> Utiliza un usuario diferente a `root` en la configuración de la base de datos.
 
 ## Diagrama ER
 
