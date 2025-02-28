@@ -12,7 +12,7 @@ class PairController extends BaseController
     /**
      * Muestra la información de una "pareja".
      */
-    public function show(string $id)
+    public function show(string $id): void
     {
         // Obtiene las reglas de validación
         // y las establece como obligatorias.
@@ -41,6 +41,6 @@ class PairController extends BaseController
             $this->respondNotFound('The pair information was not found');
         }
 
-        $this->respond($pair->toArray(), 'Information about the pair');
+        $this->respond($pair, 'Information about the pair');
     }
 }

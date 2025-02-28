@@ -26,7 +26,7 @@ return (static function () use ($app): void {
         $router->post($base_route('/v1/auth/refresh'), \App\Controllers\AuthController::class.'->refresh');
         $router->post($base_route('/v1/auth/logout'), \App\Controllers\AuthController::class.'->logout');
 
-        // Categorías de registro de parejas.
+        // Categorías de inscripción de parejas.
         $router->get($base_route('/v1/categories/registrations'), \App\Controllers\RegistrationCategoryController::class.'->index');
         $router->get($base_route('/v1/categories/registrations/@id'), \App\Controllers\RegistrationCategoryController::class.'->show');
 
@@ -36,6 +36,7 @@ return (static function () use ($app): void {
         // Parejas y jugadores.
         $router->post($base_route('/v1/pairs/players'), \App\Controllers\PairPlayerController::class.'->create');
         $router->get($base_route('/v1/pairs/@id/players'), \App\Controllers\PairPlayerController::class.'->show');
+        $router->get($base_route('/v1/pairs/players/@id'), \App\Controllers\PairPlayerController::class.'->player');
 
         // Roles de los usuarios de acceso.
         $router->get($base_route('/v1/roles'), \App\Controllers\RoleController::class.'->index');

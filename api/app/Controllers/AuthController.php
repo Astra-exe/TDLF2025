@@ -93,7 +93,7 @@ class AuthController extends BaseController
     public function me(): void
     {
         unset($this->userAuth()->password);
-        $this->respond($this->userAuth()->toArray(), 'Information about the authenticated user');
+        $this->respond($this->userAuth(), 'Information about the authenticated user');
     }
 
     /**
@@ -104,7 +104,7 @@ class AuthController extends BaseController
         $apiKey = $this->userAuth()->apiKey;
         unset($apiKey->hash);
 
-        $this->respond($apiKey->toArray(), 'Information about the API key');
+        $this->respond($apiKey, 'Information about the API key');
     }
 
     /**

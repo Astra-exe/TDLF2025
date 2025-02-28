@@ -12,7 +12,7 @@ class PlayerValidation extends BaseValidation
     public static function getAllRules(): array
     {
         return [
-            'id' => 'guidv4',
+            'id' => ['guidv4'],
             'fullname' => ['alpha_space', 'between_len' => [1, 128]],
             'city' => ['alpha_space', 'between_len' => [1, 128]],
             'weight' => ['numeric', 'regex' => '/^\d+(\.\d{1,2})?$/', 'min_numeric' => 20, 'max_numeric' => 600],

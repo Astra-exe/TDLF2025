@@ -23,7 +23,7 @@ trait ResponseTrait
     /**
      * Genera una respuesta genérica.
      */
-    protected function respond(?array $data, string $description, ?int $status = null): void
+    protected function respond(mixed $data, string $description, ?int $status = null): void
     {
         $status ??= Http::OK();
 
@@ -72,7 +72,7 @@ trait ResponseTrait
     /**
      * Genera una respuesta al crear un nuevo recurso.
      */
-    protected function respondCreated(array $data, string $description): void
+    protected function respondCreated(mixed $data, string $description): void
     {
         $this->respond($data, $description, Http::CREATED());
     }
@@ -89,7 +89,7 @@ trait ResponseTrait
     /**
      * Genera una respuesta al modificar un recurso.
      */
-    protected function respondUpdated(array $data, string $description): void
+    protected function respondUpdated(mixed $data, string $description): void
     {
         $this->respond($data, $description, Http::OK());
     }
@@ -97,7 +97,7 @@ trait ResponseTrait
     /**
      * Genera una respuesta al eliminar un recurso.
      */
-    protected function respondDeleted(array $data, string $description): void
+    protected function respondDeleted(mixed $data, string $description): void
     {
         $this->respond($data, $description, Http::OK());
     }

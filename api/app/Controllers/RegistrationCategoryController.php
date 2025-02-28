@@ -43,14 +43,15 @@ class RegistrationCategoryController extends BaseController
                 'The registration category of pairs players identifier is incorrect');
         }
 
+        // Consulta la información de la "categoría de inscripción".
         $registrationCategory = new RegistrationCategoryModel;
         $registrationCategory->find($id);
 
-        // Comprueba si existe la "pareja".
+        // Comprueba si existe la "categoría de inscripción".
         if (! $registrationCategory->isHydrated()) {
             $this->respondNotFound('The registration category of pairs players information was not found');
         }
 
-        $this->respond($registrationCategory->toArray(), 'Information about the registration category of pairs players');
+        $this->respond($registrationCategory, 'Information about the registration category of pairs players');
     }
 }
