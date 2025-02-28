@@ -28,6 +28,10 @@ return (static function () use ($app): void {
 
         // Categorías de registro de parejas.
         $router->get($base_route('/v1/categories/registrations'), \App\Controllers\RegistrationCategoryController::class.'->index');
+        $router->get($base_route('/v1/categories/registrations/@id'), \App\Controllers\RegistrationCategoryController::class.'->show');
+
+        // Parejas.
+        $router->get($base_route('/v1/pairs/@id'), \App\Controllers\PairController::class.'->show');
 
         // Parejas y jugadores.
         $router->post($base_route('/v1/pairs/players'), \App\Controllers\PairPlayerController::class.'->create');

@@ -88,10 +88,12 @@ class PairPlayerController extends BaseController
     }
 
     /**
-     * Obtiene la información de los "jugadores de una pareja".
+     * Muestra la información de los "jugadores de una pareja".
      */
     public function show(string $id): void
     {
+        // Obtiene las reglas de validación
+        // y las establece como obligatorias.
         $rules = PairValidation::getRules(['id']);
         array_unshift($rules['id'], 'required');
 
@@ -105,7 +107,7 @@ class PairPlayerController extends BaseController
         if ($this->gump()->errors()) {
             $this->respondValidationErrors(
                 $this->gump()->get_errors_array(),
-                'The player identifier is incorrect');
+                'The pair identifier is incorrect');
         }
 
         // Consulta la información de la "pareja".

@@ -12,7 +12,7 @@ class AuthValidation extends BaseValidation
     public static function getAllRules(): array
     {
         return [
-            'api_key' => ['required', 'regex' => '/^\S+$/', 'between_len' => [1, 255]],
+            'api_key' => ['regex' => '/^\S+$/', 'between_len' => [1, 255]],
         ];
     }
 

@@ -22,8 +22,13 @@ class AuthMiddleware extends BaseMiddleware
         // Obtiene la key del encabezado.
         $key = $this->app()->request()->header(self::HEADER);
 
+        // Obtiene las reglas de validación
+        // y las establece como obligatorias.
+        $rules = AuthValidation::getRules(['api_key']);
+        array_unshift($rules['api_key'], 'required');
+
         // Obtiene y establece las reglas de validación.
-        $this->gump()->validation_rules(AuthValidation::getRules(['api_key']));
+        $this->gump()->validation_rules($rules);
 
         // Valida la key del encabezado.
         $this->gump()->run(['api_key' => $key]);
