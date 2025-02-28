@@ -92,14 +92,8 @@ class AuthController extends BaseController
      */
     public function me(): void
     {
-        $data = [
-            ...$this->userAuth()->toArray(),
-            'role' => $this->userAuth()->role,
-        ];
-
-        unset($data['role_id'], $data['password']);
-
-        $this->respond($data, 'Information about the authenticated user');
+        unset($this->userAuth()->password);
+        $this->respond($this->userAuth()->toArray(), 'Information about the authenticated user');
     }
 
     /**
@@ -107,10 +101,10 @@ class AuthController extends BaseController
      */
     public function check(): void
     {
-        $apiKey = $this->userAuth()->apiKey->toArray();
-        unset($apiKey['hash']);
+        $apiKey = $this->userAuth()->apiKey;
+        unset($apiKey->hash);
 
-        $this->respond($apiKey, 'Information about the API key');
+        $this->respond($apiKey->toArray(), 'Information about the API key');
     }
 
     /**

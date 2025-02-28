@@ -43,14 +43,14 @@ Respuesta de la petición:
 
 ```json
 {
-    "data": {
-        "id": "c453f7db-9606-4f2e-a335-619247389009",
-        "registration_category_id": "59b675bb-4559-4748-8974-0753e716e8af",
-        "is_eliminated": 0,
-        "created_at": "2025-02-19 02:18:30",
-        "updated_at": "2025-02-19 02:18:30"
-    },
-    "status": 201,
-    "description": "The pair with the players was created successfully"
+  "data": {
+    "id": "c453f7db-9606-4f2e-a335-619247389009",
+    "registration_category_id": "59b675bb-4559-4748-8974-0753e716e8af",
+    "is_eliminated": 0,
+    "created_at": "2025-02-19 02:18:30",
+    "updated_at": "2025-02-19 02:18:30"
+  },
+  "status": 201,
+  "description": "The pair with the players was created successfully"
 }
 ```

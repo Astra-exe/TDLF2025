@@ -17,8 +17,8 @@ Respuesta de la petición:
 
 ```json
 {
-    "data": null,
-    "status": 200,
-    "description": "The API key was finalized successfully"
+  "data": null,
+  "status": 200,
+  "description": "The API key was finalized successfully"
 }
 ```

@@ -35,10 +35,10 @@ Respuesta de la petición:
 
 ```json
 {
-    "data": {
-        "api_key": "516220f0beed3bb91d711932f280123a62246183e67bf2d4f434f7f913770b88"
-    },
-    "status": 201,
-    "description": "The API key was created successfully"
+  "data": {
+    "api_key": "516220f0beed3bb91d711932f280123a62246183e67bf2d4f434f7f913770b88"
+  },
+  "status": 201,
+  "description": "The API key was created successfully"
 }
 ```
