@@ -119,8 +119,11 @@ class PairPlayerController extends BaseController
 
         $data = [
             ...$pair->toArray(),
+            'category' => $pair->registrationCategory,
             'players' => array_map(static fn (PairPlayerPivotModel $p) => $p->player, $pair->pairPlayerPivot),
         ];
+
+        unset($data['registration_category_id']);
 
         $this->respond($data, 'Information about the pair players');
     }

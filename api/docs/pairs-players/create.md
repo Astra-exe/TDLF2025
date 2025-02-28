@@ -19,6 +19,7 @@ curl -X POST \
   -H 'X-API-KEY: API_KEY' \
   http://localhost:8080/v1/pairs/players \
   -d '{
+    "registration_category_id": "59b675bb-4559-4748-8974-0753e716e8af",
     "players": [
       {
         "fullname": "Ricardo García Jiménez",

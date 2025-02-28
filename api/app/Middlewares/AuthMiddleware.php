@@ -52,7 +52,6 @@ class AuthMiddleware extends BaseMiddleware
         }
 
         $userAuth = $apiKey->user;
-        unset($userAuth->password);
 
         // Comprueba si el "usuario de acceso" autenticado está activo.
         if (empty($userAuth->is_active)) {
