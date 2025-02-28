@@ -30,6 +30,9 @@ return (static function () use ($app): void {
         $router->get($base_route('/v1/categories/registrations'), \App\Controllers\RegistrationCategoryController::class.'->index');
         $router->get($base_route('/v1/categories/registrations/@id'), \App\Controllers\RegistrationCategoryController::class.'->show');
 
+        // Jugadores.
+        $router->get($base_route('/v1/players/@id'), \App\Controllers\PlayerController::class.'->show');
+
         // Parejas.
         $router->get($base_route('/v1/pairs/@id'), \App\Controllers\PairController::class.'->show');
 

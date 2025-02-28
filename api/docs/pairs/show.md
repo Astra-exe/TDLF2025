@@ -24,8 +24,8 @@ Respuesta de la petición:
 ```json
 {
   "data": {
-    "id": "c453f7db-9606-4f2e-a335-619247389009",
-    "registration_category_id": "59b675bb-4559-4748-8974-0753e716e8af",
+    "id": "8636016a-1242-470d-a34f-49534f5ec22c",
+    "registration_category_id": "ecaead17-4b03-4aac-9610-707f7a06bef3",
     "is_eliminated": 0,
     "created_at": "2025-02-28 13:09:49",
     "updated_at": "2025-02-28 13:09:49"

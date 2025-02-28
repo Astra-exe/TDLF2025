@@ -21,18 +21,18 @@ Respuesta de la petición:
 {
   "data": [
     {
-      "id": "59b675bb-4559-4748-8974-0753e716e8af",
+      "id": "ecaead17-4b03-4aac-9610-707f7a06bef3",
       "name": "open",
       "description": "Categoría libre",
-      "created_at": "2025-02-19 08:09:02",
-      "updated_at": "2025-02-19 08:09:02"
+      "created_at": "2025-02-19 19:26:13",
+      "updated_at": "2025-02-19 19:26:13"
     },
     {
-      "id": "ec2eeabb-3541-4151-9b01-f2876c74151c",
+      "id": "6b7c4097-73c2-4fb8-a4a1-b0c67f9ce27b",
       "name": "seniors",
       "description": "Categoría para 50 y más",
-      "created_at": "2025-02-19 08:09:02",
-      "updated_at": "2025-02-19 08:09:02"
+      "created_at": "2025-02-19 19:26:13",
+      "updated_at": "2025-02-19 19:26:13"
     }
   ],
   "status": 200,

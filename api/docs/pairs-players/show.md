@@ -25,26 +25,18 @@ Respuesta de la petición:
 {
   "data": [
     {
-      "id": "22b9045c-438f-4231-be3f-e5361eda1f0b",
-      "fullname": "Juan Ramírez López",
-      "city": "Irapuato",
-      "weight": "70.00",
-      "height": "1.65",
-      "experience": 0,
-      "is_active": 1,
-      "created_at": "2025-02-19 02:18:30",
-      "updated_at": "2025-02-19 02:18:30"
+      "id": "a5688d29-37cf-4f62-b79e-9615b2d191ca",
+      "player_id": "38241a34-a61f-44c0-97de-3ae297a6efa5",
+      "pair_id": "8636016a-1242-470d-a34f-49534f5ec22c",
+      "created_at": "2025-02-28 13:09:49",
+      "updated_at": "2025-02-28 13:09:49"
     },
     {
-      "id": "84677adb-7030-4b68-bc17-1397f2e11234",
-      "fullname": "Ricardo García Jiménez",
-      "city": "Salvatierra",
-      "weight": "120.00",
-      "height": "1.82",
-      "experience": 0,
-      "is_active": 1,
-      "created_at": "2025-02-19 02:18:30",
-      "updated_at": "2025-02-19 02:18:30"
+      "id": "f4dc6168-efad-4dcc-9413-29f03dd7ed65",
+      "player_id": "938dc11c-51e8-4261-ac4b-400fb54c5e18",
+      "pair_id": "8636016a-1242-470d-a34f-49534f5ec22c",
+      "created_at": "2025-02-28 13:09:49",
+      "updated_at": "2025-02-28 13:09:49"
     }
   ],
   "status": 200,

@@ -120,9 +120,7 @@ class PairPlayerController extends BaseController
             $this->respondNotFound('The pair information was not found');
         }
 
-        $players = array_map(static fn (PairPlayerPivotModel $p) => $p->player, $pair->pairPlayerPivot);
-
-        $this->respond($players, 'Information about the pair players');
+        $this->respond($pair->pairPlayerPivot, 'Information about the pair players');
     }
 
     /**
@@ -157,6 +155,6 @@ class PairPlayerController extends BaseController
             $this->respondNotFound('The player information was not found');
         }
 
-        $this->respond($player->pairPlayerPivot->pair, 'Information about the player pair');
+        $this->respond($player->pairPlayerPivot, 'Information about the player pair');
     }
 }
