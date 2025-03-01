@@ -24,7 +24,7 @@ Respuesta de la petición:
 ```json
 {
   "data": {
-    "id": "59b675bb-4559-4748-8974-0753e716e8af",
+    "id": "ecaead17-4b03-4aac-9610-707f7a06bef3",
     "name": "open",
     "description": "Categoría libre",
     "created_at": "2025-02-19 19:26:13",

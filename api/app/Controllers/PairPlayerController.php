@@ -47,6 +47,9 @@ class PairPlayerController extends BaseController
         // Establece las reglas de validación.
         $this->gump()->validation_rules($rules);
 
+        // Establece los filtros de validación.
+        $this->gump()->filter_rules(PairValidation::getPlayersFilters($playersFields));
+
         // Valida el cuerpo de la petición.
         $data = $this->gump()->run($data);
 

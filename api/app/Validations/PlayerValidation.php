@@ -25,6 +25,8 @@ class PlayerValidation extends BaseValidation
     public static function getAllFilters(): array
     {
         return [
+            'fullname' => 'trim',
+            'city' => 'trim',
             'is_active' => 'boolean',
         ];
     }

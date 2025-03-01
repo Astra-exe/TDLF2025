@@ -57,4 +57,20 @@ class PairValidation extends BaseValidation
 
         return $result;
     }
+
+    /**
+     * Obtiene los filtros de validación de los "jugadores".
+     */
+    public static function getPlayersFilters(array $fields): array
+    {
+        $filters = PlayerValidation::getFilters($fields);
+
+        $result = [];
+
+        foreach ($filters as $field => $value) {
+            $result['players.*.'.$field] = $value;
+        }
+
+        return $result;
+    }
 }
