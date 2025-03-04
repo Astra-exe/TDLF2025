@@ -26,13 +26,15 @@ curl -X POST \
         "city": "Salvatierra",
         "weight": 120,
         "height": 1.82,
+        "age": 26,
         "experience": 0
       },
       {
-        "fullname": "Juan Ramírez López",
+        "fullname": "Juan José Ramírez López",
         "city": "Irapuato",
         "weight": 70,
         "height": 1.65,
+        "age": 25,
         "experience": 5
       }
     ]

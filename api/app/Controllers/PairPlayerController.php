@@ -31,7 +31,7 @@ class PairPlayerController extends BaseController
         $pairFields = ['registration_category_id'];
 
         // Define los campos necesarios de los "jugadores".
-        $playersFields = ['fullname', 'city', 'weight', 'height', 'experience'];
+        $playersFields = ['fullname', 'city', 'weight', 'height', 'age', 'experience'];
 
         // Obtiene las reglas de validación.
         $rules = [

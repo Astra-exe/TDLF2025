@@ -27,6 +27,7 @@ curl -X GET \
     "city": "Salvatierra",
     "weight": "120.00",
     "height": "1.82",
+    "age": 26,
     "experience": 0,
     "is_active": 1,
     "created_at": "2025-02-28 13:09:49",
