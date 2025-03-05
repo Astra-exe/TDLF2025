@@ -15,7 +15,13 @@ class PlayerController extends BaseController
     public function index(): void
     {
         // Define los query params de la petición.
-        $queryFields = ['page' => 1, 'orderBy' => 'created_at', 'sortOrder' => 'desc'];
+        $queryFields = [
+            'page' => 1,
+            'search' => '',
+            'filterBy' => 'fullname',
+            'orderBy' => 'created_at',
+            'sortBy' => 'desc',
+        ];
 
         $queryParams = [];
 
@@ -28,11 +34,6 @@ class PlayerController extends BaseController
 
         // Obtiene las reglas de validación.
         $rules = PlayerValidation::getRules($queryNames);
-
-        // Define todas las reglas de validación como obligatorias.
-        foreach ($queryNames as $rule) {
-            array_unshift($rules[$rule], 'required');
-        }
 
         // Establece las reglas de validación.
         $this->gump()->validation_rules($rules);
@@ -53,7 +54,8 @@ class PlayerController extends BaseController
         // Consulta la información de todos los "jugadores" con paginación.
         $players = new PlayerModel;
         $players->paginate($queryParams['page'])
-            ->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortOrder']));
+            ->like($queryParams['filterBy'], sprintf('%%%s%%', $queryParams['search']))
+            ->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
 
         // Obtiene información sobre la paginación.
         $pagination = $players->pagination;

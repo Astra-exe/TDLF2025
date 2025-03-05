@@ -21,8 +21,10 @@ class PlayerValidation extends BaseValidation
             'experience' => ['integer', 'min_numeric' => 0, 'max_numeric' => 50],
             'is_active' => ['boolean'],
             'page' => ['integer', 'min_numeric' => 1],
+            'search' => ['max_len' => 255],
+            'filterBy' => ['contains' => ['fullname']],
             'orderBy' => ['contains' => ['fullname', 'weight', 'height', 'age', 'experience', 'created_at', 'updated_at']],
-            'sortOrder' => ['contains' => ['asc', 'desc']],
+            'sortBy' => ['contains' => ['asc', 'desc']],
         ];
     }
 
@@ -33,7 +35,8 @@ class PlayerValidation extends BaseValidation
             'city' => 'trim',
             'is_active' => 'boolean',
             'page' => 'whole_number',
-            'sortOrder' => 'upper_case',
+            'search' => 'trim',
+            'sortBy' => 'upper_case',
         ];
     }
 }
