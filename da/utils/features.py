@@ -1,3 +1,7 @@
+# Description: This file contains the functions to extract features from the data.
+
+# Function to create a recommendation profile for a player based on their height, weight and age.
+# The function returns a dictionary with recommendations for the player´s position, workout and phisical priority.
 def playerp(height, weight, age):
     recommendations = {
         'position':None,
@@ -51,3 +55,7 @@ def playerp(height, weight, age):
         
     return recommendations
 
+# Function to create a map to know how many players visit the tournament for each city.
+#the function returns a map with folium 
+def players_location(cities):
+    pass

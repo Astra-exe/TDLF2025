@@ -48,7 +48,7 @@ def make_profile():
     #get api key
     api_key = get_apikey()
     if api_key is None:
-        return jsonify({"error":"No se pudo obtener la Api Key"}), 400
+        return jsonify({"error":"No se pudo obtener la Api Key para la ruta /profile"}), 400
     headers = {
         'X-API-KEY': api_key
     }
@@ -75,7 +75,17 @@ def make_profile():
         print(str(e))
         return jsonify({'error':str(e)}), 400
     
-
+@app.route('/map', methods=['GET'])
+def make_map():
+    #get api key
+    api_key = get_apikey()
+    if api_key is None:
+        return jsonify({"error": "No se pudo obtener la Api Key para la ruta /map"}), 400
+    headers = {
+        'X-API-KEY': api_key
+    }
+    #Get the data
+    
 
 
 
