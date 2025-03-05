@@ -136,4 +136,14 @@ trait ResponseTrait
         // $this->respond(null, $description, Http::NO_CONTENT());
         $this->respond(null, $description);
     }
+
+    /**
+     * Genera una respuesta para paginación.
+     */
+    protected function respondPagination(mixed $data, mixed $pagination, string $description)
+    {
+        $this->body['pagination'] = $pagination;
+
+        $this->respond($data, $description, Http::OK());
+    }
 }

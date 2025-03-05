@@ -10,6 +10,58 @@ use App\Validations\PlayerValidation;
 class PlayerController extends BaseController
 {
     /**
+     * Muestra la información de todos los "jugadores".
+     */
+    public function index(): void
+    {
+        // Define los query params de la petición.
+        $queryFields = ['page' => 1, 'orderBy' => 'created_at', 'sortOrder' => 'desc'];
+
+        $queryParams = [];
+
+        // Obtiene solo los query params necesarios.
+        foreach ($queryFields as $query => $default) {
+            $queryParams[$query] = $this->app()->request()->query->{$query} ?? $default;
+        }
+
+        $queryNames = array_keys($queryFields);
+
+        // Obtiene las reglas de validación.
+        $rules = PlayerValidation::getRules($queryNames);
+
+        // Define todas las reglas de validación como obligatorias.
+        foreach ($queryNames as $rule) {
+            array_unshift($rules[$rule], 'required');
+        }
+
+        // Establece las reglas de validación.
+        $this->gump()->validation_rules($rules);
+
+        // Establece los filtros de validación.
+        $this->gump()->filter_rules(PlayerValidation::getFilters($queryNames));
+
+        // Comprueba los parámetros de la petición.
+        $queryParams = $this->gump()->run($queryParams);
+
+        // Comprueba si existen errores de validación.
+        if ($this->gump()->errors()) {
+            $this->respondValidationErrors(
+                $this->gump()->get_errors_array(),
+                'The page information is incorrect');
+        }
+
+        // Consulta la información de todos los "jugadores" con paginación.
+        $players = new PlayerModel;
+        $players->paginate($queryParams['page'])
+            ->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortOrder']));
+
+        // Obtiene información sobre la paginación.
+        $pagination = $players->pagination;
+
+        $this->respondPagination($players->findAll(), $pagination, 'Information about all the players with pagination');
+    }
+
+    /**
      * Muestra la información de un "jugador".
      */
     public function show(string $id): void

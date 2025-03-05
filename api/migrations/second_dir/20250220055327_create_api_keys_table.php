@@ -31,6 +31,6 @@ final class CreateApiKeysTable extends AbstractMigration
 
     protected function down(): void
     {
-        $this->delete('api_keys');
+        $this->table('api_keys')->drop();
     }
 }
