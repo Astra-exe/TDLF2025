@@ -48,8 +48,9 @@ class PairValidation extends BaseValidation
      */
     public static function getPlayersRules(array $fields): array
     {
-        $result = ['players' => ['valid_array_size_equal' => 2]];
         $rules = PlayerValidation::getRules($fields);
+
+        $result = ['players' => ['valid_array_size_equal' => 2]];
 
         foreach ($rules as $field => $value) {
             $result['players.*.'.$field] = $value;

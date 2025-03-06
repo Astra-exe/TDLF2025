@@ -33,7 +33,7 @@ class AuthController extends BaseController
         $identifyBy = 'username';
 
         // Comprueba el modo de autenticación.
-        if ($this->gump()->is_valid($data, ['nickname' => 'required|valid_email']) === true) {
+        if ($this->gump()->is_valid($data, ['nickname' => 'required|valid_email'])) {
             $identifyBy = 'email';
         }
 
@@ -46,8 +46,8 @@ class AuthController extends BaseController
         unset($rules[$identifyBy]);
 
         // Define todas las reglas de validación como obligatorias.
-        foreach (array_keys($rules) as $rule) {
-            array_unshift($rules[$rule], 'required');
+        foreach ($userFields as $field) {
+            array_unshift($rules[$field], 'required');
         }
 
         // Establece las reglas de validación.
@@ -66,6 +66,7 @@ class AuthController extends BaseController
                 'The access credentials information is incorrect');
         }
 
+        // Consulta la información del "usuario de acceso" que intenta autenticarse.
         $user = new UserModel;
         $user->select('id, password')->eq($identifyBy, $data['nickname'])->eq('is_active', (int) true)->find();
 

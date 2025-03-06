@@ -18,7 +18,7 @@ class Auth
 
     private const EXPIRATION = '+8 minute';
 
-    public const VARNAME = 'userAuth';
+    private const VARNAME = 'userAuth';
 
     /**
      * Genera una key de autenticación.
@@ -58,5 +58,13 @@ class Auth
     public static function verity(string $hash, string $original): bool
     {
         return hash_equals($hash, $original);
+    }
+
+    /**
+     * Obtiene el nombre de la variable de autenticación.
+     */
+    public static function getVarname(): string
+    {
+        return self::VARNAME;
     }
 }

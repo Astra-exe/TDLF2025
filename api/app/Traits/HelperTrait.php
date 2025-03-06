@@ -34,6 +34,6 @@ trait HelperTrait
      */
     protected function userAuth(): ?UserModel
     {
-        return $this->app()->get(Auth::VARNAME);
+        return $this->app()->get(Auth::getVarname());
     }
 }

@@ -68,7 +68,7 @@ class AuthMiddleware extends BaseMiddleware
          * a todos los Middlewares y Controladores
          * con la información del "usuario de acceso" autenticado.
          */
-        $this->app()->set(Auth::VARNAME, $userAuth);
+        $this->app()->set(Auth::getVarname(), $userAuth);
     }
 
     public function after(array $params): void {}

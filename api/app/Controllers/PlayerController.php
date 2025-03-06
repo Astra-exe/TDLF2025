@@ -32,11 +32,8 @@ class PlayerController extends BaseController
 
         $queryNames = array_keys($queryFields);
 
-        // Obtiene las reglas de validación.
-        $rules = PlayerValidation::getRules($queryNames);
-
-        // Establece las reglas de validación.
-        $this->gump()->validation_rules($rules);
+        // Obtiene y establece las reglas de validación.
+        $this->gump()->validation_rules(PlayerValidation::getRules($queryNames));
 
         // Establece los filtros de validación.
         $this->gump()->filter_rules(PlayerValidation::getFilters($queryNames));
@@ -48,7 +45,7 @@ class PlayerController extends BaseController
         if ($this->gump()->errors()) {
             $this->respondValidationErrors(
                 $this->gump()->get_errors_array(),
-                'The page information is incorrect');
+                'The players search information is incorrect');
         }
 
         // Consulta la información de todos los "jugadores" con paginación.
@@ -57,7 +54,7 @@ class PlayerController extends BaseController
             ->like($queryParams['filterBy'], sprintf('%%%s%%', $queryParams['search']))
             ->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
 
-        // Obtiene información sobre la paginación.
+        // Obtiene la información sobre la paginación.
         $pagination = $players->pagination;
 
         $this->respondPagination($players->findAll(), $pagination, 'Information about all the players with pagination');
