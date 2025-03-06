@@ -43,7 +43,7 @@ def get_apikey():
     
     return None
 #endpoints
-@app.route('/profile', methods=['GET'])
+@app.route('/profile', methods=['POST'])
 def make_profile():
     #get api key
     api_key = get_apikey()
@@ -52,9 +52,12 @@ def make_profile():
     headers = {
         'X-API-KEY': api_key
     }
+    #Get the player id (8cacaf56-20d0-4224-8220-92e236b7da0a)
+    player_id = request.get_json(force=True)
+
     #Get the data
     try:
-        response = requests.get('http://localhost:8080/v1/players/8cacaf56-20d0-4224-8220-92e236b7da0a', headers=headers)
+        response = requests.get(f'http://localhost:8080/v1/players/{player_id["player_id"]}', headers=headers)
         if response.status_code == 200:
             data = response.json()
         else:
