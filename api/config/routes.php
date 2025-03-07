@@ -33,14 +33,15 @@ return (static function () use ($app): void {
         // Jugadores.
         $router->get($base_route('/v1/players'), \App\Controllers\PlayerController::class.'->index');
         $router->get($base_route('/v1/players/@id'), \App\Controllers\PlayerController::class.'->show');
+        $router->get($base_route('/v1/players/@id/pairs'), \App\Controllers\PlayerController::class.'->pair');
+
+        // Parejas y jugadores.
+        $router->get($base_route('/v1/pairs/players'), \App\Controllers\PairPlayerController::class.'->index');
+        $router->get($base_route('/v1/pairs/@id/players'), \App\Controllers\PairPlayerController::class.'->show');
+        $router->post($base_route('/v1/pairs/players'), \App\Controllers\PairPlayerController::class.'->create');
 
         // Parejas.
         $router->get($base_route('/v1/pairs/@id'), \App\Controllers\PairController::class.'->show');
-
-        // Parejas y jugadores.
-        $router->post($base_route('/v1/pairs/players'), \App\Controllers\PairPlayerController::class.'->create');
-        $router->get($base_route('/v1/pairs/@id/players'), \App\Controllers\PairPlayerController::class.'->show');
-        $router->get($base_route('/v1/pairs/players/@id'), \App\Controllers\PairPlayerController::class.'->player');
 
         // Roles de los usuarios de acceso.
         $router->get($base_route('/v1/roles'), \App\Controllers\RoleController::class.'->index');

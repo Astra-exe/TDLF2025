@@ -1,7 +1,7 @@
 # Pareja de un jugador
 
 ```
-[GET] /v1/pairs/players/@id
+[GET] /v1/players/@id/pairs
 ```
 
 Parámetros de la petición:
@@ -16,7 +16,7 @@ Ejemplo:
 curl -X GET \
   -H 'Content-Type: application/json' \
   -H 'X-API-KEY: API_KEY' \
-  http://localhost:8080/v1/pairs/players/@id
+  http://localhost:8080/v1/players/@id/pairs
 ```
 
 Respuesta de la petición:

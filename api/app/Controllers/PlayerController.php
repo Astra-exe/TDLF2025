@@ -38,7 +38,7 @@ class PlayerController extends BaseController
         // Obtiene y establece los filtros de validación.
         $this->gump()->filter_rules(PlayerValidation::getFilters($queryNames));
 
-        // Comprueba los parámetros de la petición.
+        // Comprueba los query params de la petición.
         $queryParams = $this->gump()->run($queryParams);
 
         // Comprueba si existen errores de validación.
@@ -93,5 +93,49 @@ class PlayerController extends BaseController
         }
 
         $this->respond($player, 'Information about the player');
+    }
+
+    /**
+     * Muestra la información de la "pareja" de un "jugador".
+     */
+    public function pair(string $id): void
+    {
+        // Obtiene las reglas de validación
+        // y las establece como obligatorias.
+        $rules = PlayerValidation::getRules(['id']);
+        array_unshift($rules['id'], 'required');
+
+        // Establece las reglas de validación.
+        $this->gump()->validation_rules($rules);
+
+        // Comprueba los parámetros de la petición.
+        $this->gump()->run(['id' => $id]);
+
+        // Comprueba si existen errores de validación.
+        if ($this->gump()->errors()) {
+            $this->respondValidationErrors(
+                $this->gump()->get_errors_array(),
+                'The player identifier is incorrect');
+        }
+
+        // Consulta la información del "jugador".
+        $player = new PlayerModel;
+        $player->select('id')->find($id);
+
+        // Comprueba si existe el "jugador".
+        if (! $player->isHydrated()) {
+            $this->respondNotFound('The player information was not found');
+        }
+
+        // Consulta la relación de la "pareja" con el "jugador".
+        $relationship = $player->pairPlayerPivot;
+
+        // Consulta la "pareja" del "jugador".
+        $pair = $relationship->pair;
+        $pair->copyFrom(['registration_category' => $pair->registrationCategory]);
+
+        unset($pair->registration_category_id);
+
+        $this->respond(['pair' => $pair, 'relationship' => $relationship], 'Information about the player pair');
     }
 }

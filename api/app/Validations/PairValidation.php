@@ -19,6 +19,7 @@ class PairValidation extends BaseValidation
             'id' => ['guidv4'],
             'registration_category_id' => ['guidv4', 'contains_list' => self::getRegistrationCategories()],
             'is_eliminated' => ['boolean'],
+            'page' => ['integer', 'min_numeric' => 1],
         ];
     }
 
@@ -26,6 +27,7 @@ class PairValidation extends BaseValidation
     {
         return [
             'is_eliminated' => 'boolean',
+            'page' => 'whole_number',
         ];
     }
 

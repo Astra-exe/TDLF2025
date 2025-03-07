@@ -8,10 +8,64 @@ use App\Models\PairModel;
 use App\Models\PairPlayerPivotModel;
 use App\Models\PlayerModel;
 use App\Validations\PairValidation;
-use App\Validations\PlayerValidation;
 
 class PairPlayerController extends BaseController
 {
+    /**
+     * Muestra la información de todas las "parejas de jugadores".
+     */
+    public function index(): void
+    {
+        // Define los query params de la petición.
+        $queryFields = [
+            'page' => 1,
+        ];
+
+        $queryParams = [];
+
+        // Obtiene solo los query params necesarios.
+        foreach ($queryFields as $param => $default) {
+            $queryParams[$param] = $this->app()->request()->query->{$param} ?? $default;
+        }
+
+        $queryNames = array_keys($queryFields);
+
+        // Obtiene y establece las reglas de validación.
+        $this->gump()->validation_rules(PairValidation::getRules($queryNames));
+
+        // Obtiene y establece los filtros de validación.
+        $this->gump()->filter_rules(PairValidation::getFilters($queryNames));
+
+        // Comprueba los query params de la petición.
+        $queryParams = $this->gump()->run($queryParams);
+
+        // Comprueba si existen errores de validación.
+        if ($this->gump()->errors()) {
+            $this->respondValidationErrors(
+                $this->gump()->get_errors_array(),
+                'The pairs players search information is incorrect');
+        }
+
+        // Consulta la información de todas las "parejas" con paginación.
+        $pairs = new PairModel;
+        $pairs->paginate($queryParams['page'])->orderBy('created_at DESC');
+
+        // Obtiene la información sobre la paginación.
+        $pagination = $pairs->pagination;
+
+        $players = [];
+
+        // Consulta los "jugadores de todas las pareja".
+        foreach ($pairs->findAll() as $pair) {
+            $players[] = array_map(static fn (PairPlayerPivotModel $relationship) => [
+                'player' => $relationship->player,
+                'relationship' => $relationship,
+            ], $pair->pairPlayerPivot);
+        }
+
+        $this->respondPagination($players, $pagination, 'Information about all the pairs players with pagination');
+    }
+
     /**
      * Crea una "pareja" con la información de los "jugadores".
      */
@@ -95,7 +149,7 @@ class PairPlayerController extends BaseController
         unset($pair->registration_category_id);
 
         // Consulta los "jugadores" registrados de la "pareja".
-        $players = array_map(static fn ($relationship) => [
+        $players = array_map(static fn (PairPlayerPivotModel $relationship) => [
             'player' => $relationship->player,
             'relationship' => $relationship,
         ], $pair->pairPlayerPivot);
@@ -142,49 +196,5 @@ class PairPlayerController extends BaseController
         ], $pair->pairPlayerPivot);
 
         $this->respond($players, 'Information about the pair players');
-    }
-
-    /**
-     * Muestra la información de la "pareja" de un "jugador".
-     */
-    public function player(string $id): void
-    {
-        // Obtiene las reglas de validación
-        // y las establece como obligatorias.
-        $rules = PlayerValidation::getRules(['id']);
-        array_unshift($rules['id'], 'required');
-
-        // Establece las reglas de validación.
-        $this->gump()->validation_rules($rules);
-
-        // Comprueba los parámetros de la petición.
-        $this->gump()->run(['id' => $id]);
-
-        // Comprueba si existen errores de validación.
-        if ($this->gump()->errors()) {
-            $this->respondValidationErrors(
-                $this->gump()->get_errors_array(),
-                'The player identifier is incorrect');
-        }
-
-        // Consulta la información del "jugador".
-        $player = new PlayerModel;
-        $player->select('id')->find($id);
-
-        // Comprueba si existe el "jugador".
-        if (! $player->isHydrated()) {
-            $this->respondNotFound('The player information was not found');
-        }
-
-        // Consulta la relación de la "pareja" con el "jugador".
-        $relationship = $player->pairPlayerPivot;
-
-        // Consulta la "pareja" del "jugador".
-        $pair = $relationship->pair;
-        $pair->copyFrom(['registration_category' => $pair->registrationCategory]);
-
-        unset($pair->registration_category_id);
-
-        $this->respond(['pair' => $pair, 'relationship' => $relationship], 'Information about the player pair');
     }
 }
