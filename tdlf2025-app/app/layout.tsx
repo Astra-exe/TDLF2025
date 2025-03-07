@@ -14,8 +14,9 @@ const nosifer = Nosifer({
 });
 
 export const metadata: Metadata = {
-  title: "Torneo de las Fresas",
-  description: "Torneo de las Fresas - 2025",
+  title: "Torneo de las Fresas - 2025",
+  description:
+    "¡Participa en el Torneo de Frontenis de las Fresas 2025 en Irapuato! Promovemos el deporte y la competencia entre nuevas generaciones. ¡Descubre más sobre el evento y únete a la emoción!",
 };
 
 export default function RootLayout({
