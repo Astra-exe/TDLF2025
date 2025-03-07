@@ -53,5 +53,10 @@
     "name": "La China Banquetes",
     "image": "/lachina.webp",
     "href": "/"
+  },
+  {
+    "name": "IMJUVI",
+    "image": "/imjuvi.webp",
+    "href": "https://www.irapuato.gob.mx/transparencia/imjuvi/"
   }
 ]
