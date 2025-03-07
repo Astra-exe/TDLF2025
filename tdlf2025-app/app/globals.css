@@ -1,8 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-space: var(--font-space-grotesk);
+  --font-nosifer: var(--font-nosifer);
+  --color-primary: #E61357;
+  --color-accent: #810B31;
+  --color-dark: #212529;
+  --animate-scroll-header: scroll-header linear both;
+  --shadow-awards: inset 0 2px 8px #fff,0 0 17px rgba(255,255,255,.77),inset 0 1px 10px hsla(0,0%,100%,.55);
+
+  @keyframes scroll-header {
+    to {
+      top: 0;
+      backdrop-filter: blur(8px);
+      background: rgba(0,0,0,.5);
+    }
+  }
+
 }
 
 :root {
@@ -16,9 +30,57 @@
     --foreground: #ededed;
   }
 }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
+  min-height: 100vh;
+  min-height: 100dvh;
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-space-grotesk), Arial, Helvetica, sans-serif;
+}
+
+p, li {
+  text-wrap: pretty;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+.scroll__animate {
+  animation-timeline: scroll();
+  animation-range: 0 100px;
+}
+
+.animation__scroll-in {
+  view-timeline-name: --scroll-in;
+}
+
+.animation__scroll-in > li {
+  --index0: calc(var(--index-agenda) - 1);
+  --reverse-index: calc(var(--numItems) - var(--index0));
+  --reverse-index0: calc(var(--reverse-index) - 1);
+  --numcards: 6;
+  position: sticky;
+  top: 15vh;
+  padding-block-start: calc(var(--index-agenda) * 1rem);
+}
+
+.animation__scroll-in > li > div {
+  --start-range: calc(var(--index0) / var(--numcards) * 100%);
+  --end-range: calc(var(--index-agenda) / var(--numcards) * 100%);
+  animation: linear scale forwards;
+  animation-timeline: --scroll-in;
+  animation-range: exit-crossing var(--start-range) exit-crossing
+    var(--end-range);
+  will-change: transform;
+}
+
+@keyframes scale {
+  to {
+    transform: scale(calc(1.1 - calc(0.1 * var(--reverse-index))));
+  }
 }
