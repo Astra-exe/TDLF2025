@@ -88,7 +88,19 @@ class PairPlayerController extends BaseController
             $pairPlayerPivot->reset();
         }
 
-        $this->respondCreated($pair->find(), 'The pair with the players was created successfully');
+        // Consulta la información de la "pareja" registrada.
+        $pair->find();
+        $pair->copyFrom(['registration_category' => $pair->registrationCategory]);
+
+        unset($pair->registration_category_id);
+
+        // Consulta los "jugadores" registrados de la "pareja".
+        $players = array_map(static fn ($relationship) => [
+            'player' => $relationship->player,
+            'relationship' => $relationship,
+        ], $pair->pairPlayerPivot);
+
+        $this->respondCreated(['pair' => $pair, 'players' => $players], 'The pair with the players was created successfully');
     }
 
     /**
@@ -116,14 +128,20 @@ class PairPlayerController extends BaseController
 
         // Consulta la información de la "pareja".
         $pair = new PairModel;
-        $pair->find($id);
+        $pair->select('id')->find($id);
 
         // Comprueba si existe la "pareja".
         if (! $pair->isHydrated()) {
             $this->respondNotFound('The pair information was not found');
         }
 
-        $this->respond($pair->pairPlayerPivot, 'Information about the pair players');
+        // Consulta los "jugadores" de la "pareja".
+        $players = array_map(static fn ($relationship) => [
+            'player' => $relationship->player,
+            'relationship' => $relationship,
+        ], $pair->pairPlayerPivot);
+
+        $this->respond($players, 'Information about the pair players');
     }
 
     /**
@@ -151,13 +169,22 @@ class PairPlayerController extends BaseController
 
         // Consulta la información del "jugador".
         $player = new PlayerModel;
-        $player->find($id);
+        $player->select('id')->find($id);
 
         // Comprueba si existe el "jugador".
         if (! $player->isHydrated()) {
             $this->respondNotFound('The player information was not found');
         }
 
-        $this->respond($player->pairPlayerPivot, 'Information about the player pair');
+        // Consulta la relación de la "pareja" con el "jugador".
+        $relationship = $player->pairPlayerPivot;
+
+        // Consulta la "pareja" del "jugador".
+        $pair = $relationship->pair;
+        $pair->copyFrom(['registration_category' => $pair->registrationCategory]);
+
+        unset($pair->registration_category_id);
+
+        $this->respond(['pair' => $pair, 'relationship' => $relationship], 'Information about the player pair');
     }
 }

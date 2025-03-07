@@ -41,6 +41,11 @@ class PairController extends BaseController
             $this->respondNotFound('The pair information was not found');
         }
 
+        // Consulta la categoría de inscripción de la "pareja".
+        $pair->copyFrom(['registration_category' => $pair->registrationCategory]);
+
+        unset($pair->registration_category_id);
+
         $this->respond($pair, 'Information about the pair');
     }
 }

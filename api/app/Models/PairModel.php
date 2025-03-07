@@ -11,7 +11,11 @@ namespace App\Models;
 class PairModel extends BaseModel
 {
     protected array $relations = [
-        'registrationCategory' => [self::BELONGS_TO, RegistrationCategoryModel::class, 'registration_category_id'],
+        'registrationCategory' => [
+            self::BELONGS_TO, RegistrationCategoryModel::class,
+            'registration_category_id',
+            ['select' => 'id, name, description'],
+        ],
         'pairPlayerPivot' => [self::HAS_MANY, PairPlayerPivotModel::class, 'pair_id'],
     ];
 
