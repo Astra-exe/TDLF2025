@@ -24,11 +24,15 @@ Respuesta de la petición:
 ```json
 {
   "data": {
-    "id": "8636016a-1242-470d-a34f-49534f5ec22c",
-    "registration_category_id": "ecaead17-4b03-4aac-9610-707f7a06bef3",
+    "id": "98eaa36b-98e1-4842-80d3-771627af3458",
     "is_eliminated": 0,
-    "created_at": "2025-02-28 13:09:49",
-    "updated_at": "2025-02-28 13:09:49"
+    "created_at": "2025-03-07 14:44:28",
+    "updated_at": "2025-03-07 14:44:28",
+    "registration_category": {
+      "id": "15134933-1932-4df4-bb5a-b304774b229c",
+      "name": "open",
+      "description": "Categoría libre"
+    }
   },
   "status": 200,
   "description": "Information about the pair"

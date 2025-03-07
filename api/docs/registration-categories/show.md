@@ -24,11 +24,11 @@ Respuesta de la petición:
 ```json
 {
   "data": {
-    "id": "ecaead17-4b03-4aac-9610-707f7a06bef3",
+    "id": "15134933-1932-4df4-bb5a-b304774b229c",
     "name": "open",
     "description": "Categoría libre",
-    "created_at": "2025-02-19 19:26:13",
-    "updated_at": "2025-02-19 19:26:13"
+    "created_at": "2025-03-07 14:38:11",
+    "updated_at": "2025-03-07 14:38:11"
   },
   "status": 200,
   "description": "Information about the registration category of pairs players"

@@ -31,7 +31,7 @@ Respuesta de la petición:
 {
   "data": [
     {
-      "id": "0e7145c8-c149-418c-9d39-18f898723230",
+      "id": "07b80796-fd26-4b1b-9f5d-6330e96ed849",
       "fullname": "Ricardo García Jiménez",
       "city": "Salvatierra",
       "weight": "120.00",
@@ -39,11 +39,11 @@ Respuesta de la petición:
       "age": 26,
       "experience": 0,
       "is_active": 1,
-      "created_at": "2025-03-05 13:45:20",
-      "updated_at": "2025-03-05 13:45:20"
+      "created_at": "2025-03-07 14:44:28",
+      "updated_at": "2025-03-07 14:44:28"
     },
     {
-      "id": "2310ebf9-40ed-465a-9678-409433918f3e",
+      "id": "b7f22815-7082-41ac-9ba5-0e43022d7d5f",
       "fullname": "Juan José Ramírez López",
       "city": "Irapuato",
       "weight": "70.00",
@@ -51,8 +51,8 @@ Respuesta de la petición:
       "age": 25,
       "experience": 5,
       "is_active": 1,
-      "created_at": "2025-03-05 13:45:20",
-      "updated_at": "2025-03-05 13:45:20"
+      "created_at": "2025-03-07 14:44:28",
+      "updated_at": "2025-03-07 14:44:28"
     }
   ],
   "status": 200,

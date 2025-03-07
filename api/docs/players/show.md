@@ -22,7 +22,7 @@ curl -X GET \
 ```json
 {
   "data": {
-    "id": "38241a34-a61f-44c0-97de-3ae297a6efa5",
+    "id": "07b80796-fd26-4b1b-9f5d-6330e96ed849",
     "fullname": "Ricardo García Jiménez",
     "city": "Salvatierra",
     "weight": "120.00",
@@ -30,8 +30,8 @@ curl -X GET \
     "age": 26,
     "experience": 0,
     "is_active": 1,
-    "created_at": "2025-02-28 13:09:49",
-    "updated_at": "2025-02-28 13:09:49"
+    "created_at": "2025-03-07 14:44:28",
+    "updated_at": "2025-03-07 14:44:28"
   },
   "status": 200,
   "description": "Information about the player"
