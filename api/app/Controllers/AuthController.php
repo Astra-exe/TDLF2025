@@ -30,10 +30,11 @@ class AuthController extends BaseController
         // Define los campos necesarios del "usuario de acceso".
         $userFields = ['password'];
 
+        // Modo de autenticación por defecto.
         $identifyBy = 'username';
 
         // Comprueba el modo de autenticación.
-        if ($this->gump()->is_valid($data, ['nickname' => 'required|valid_email'])) {
+        if ($this->gump()->is_valid($data, ['nickname' => 'required|valid_email']) === true) {
             $identifyBy = 'email';
         }
 
@@ -46,8 +47,8 @@ class AuthController extends BaseController
         unset($rules[$identifyBy]);
 
         // Define todas las reglas de validación como obligatorias.
-        foreach ($userFields as $field) {
-            array_unshift($rules[$field], 'required');
+        foreach (array_keys($rules) as $rule) {
+            array_unshift($rules[$rule], 'required');
         }
 
         // Establece las reglas de validación.
@@ -68,7 +69,10 @@ class AuthController extends BaseController
 
         // Consulta la información del "usuario de acceso" que intenta autenticarse.
         $user = new UserModel;
-        $user->select('id, password')->eq($identifyBy, $data['nickname'])->eq('is_active', (int) true)->find();
+        $user->select('id, password')
+            ->eq($identifyBy, $data['nickname'])
+            ->eq('is_active', (int) true)
+            ->find();
 
         // Comprueba si el "usuario de acceso" que intenta autenticarse existe.
         if (! $user->isHydrated() || ! Password::verify($data['password'], $user->password)) {
@@ -78,6 +82,7 @@ class AuthController extends BaseController
         // Elimina la antigua "API key" del "usuario de acceso" si existe.
         $user->apiKey->delete();
 
+        // Genera la key de autenticación.
         $key = Auth::generateKey();
 
         // Registra la "API key" del "usuario de acceso".
@@ -93,7 +98,10 @@ class AuthController extends BaseController
      */
     public function me(): void
     {
-        unset($this->userAuth()->password);
+        $this->userAuth()->copyFrom(['role' => $this->userAuth()->role]);
+
+        unset($this->userAuth()->role_id);
+
         $this->respond($this->userAuth(), 'Information about the authenticated user');
     }
 
@@ -102,10 +110,7 @@ class AuthController extends BaseController
      */
     public function check(): void
     {
-        $apiKey = $this->userAuth()->apiKey;
-        unset($apiKey->hash);
-
-        $this->respond($apiKey, 'Information about the API key');
+        $this->respond($this->userAuth()->apiKey, 'Information about the API key');
     }
 
     /**
@@ -116,6 +121,7 @@ class AuthController extends BaseController
         // Elimina la antigua API key del "usuario de acceso".
         $this->userAuth()->apiKey->delete();
 
+        // Genera la nueva key de autenticación.
         $key = Auth::generateKey();
 
         // Regenera la API key del "usuario de acceso".

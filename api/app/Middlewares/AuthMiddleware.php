@@ -27,7 +27,7 @@ class AuthMiddleware extends BaseMiddleware
         $rules = AuthValidation::getRules(['api_key']);
         array_unshift($rules['api_key'], 'required');
 
-        // Obtiene y establece las reglas de validación.
+        // Establece las reglas de validación.
         $this->gump()->validation_rules($rules);
 
         // Valida la key del encabezado.
@@ -43,7 +43,10 @@ class AuthMiddleware extends BaseMiddleware
         $hash = Auth::generateHash($key);
 
         $apiKey = new ApiKeyModel;
-        $apiKey->eq('hash', $hash)->eq('is_revoked', (int) false)->find();
+        $apiKey->select('id, user_id, hash, expires_at')
+            ->eq('hash', $hash)
+            ->eq('is_revoked', (int) false)
+            ->find();
 
         // Comprueba si el hash de la key es autentica.
         if (! $apiKey->isHydrated() || ! Auth::verity($hash, $apiKey->hash)) {

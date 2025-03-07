@@ -26,8 +26,8 @@ class PlayerController extends BaseController
         $queryParams = [];
 
         // Obtiene solo los query params necesarios.
-        foreach ($queryFields as $query => $default) {
-            $queryParams[$query] = $this->app()->request()->query->{$query} ?? $default;
+        foreach ($queryFields as $param => $default) {
+            $queryParams[$param] = $this->app()->request()->query->{$param} ?? $default;
         }
 
         $queryNames = array_keys($queryFields);
@@ -35,7 +35,7 @@ class PlayerController extends BaseController
         // Obtiene y establece las reglas de validación.
         $this->gump()->validation_rules(PlayerValidation::getRules($queryNames));
 
-        // Establece los filtros de validación.
+        // Obtiene y establece los filtros de validación.
         $this->gump()->filter_rules(PlayerValidation::getFilters($queryNames));
 
         // Comprueba los parámetros de la petición.

@@ -13,7 +13,12 @@ use App\Helpers\Auth;
 class ApiKeyModel extends BaseModel
 {
     protected array $relations = [
-        'user' => [self::BELONGS_TO, UserModel::class, 'user_id'],
+        'user' => [
+            self::BELONGS_TO,
+            UserModel::class,
+            'user_id',
+            ['select' => 'id, email, username, role_id, fullname, is_active, created_at, updated_at'],
+        ],
     ];
 
     public function getTableName(): string

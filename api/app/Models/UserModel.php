@@ -11,8 +11,16 @@ namespace App\Models;
 class UserModel extends BaseModel
 {
     protected array $relations = [
-        'role' => [self::BELONGS_TO, RoleModel::class, 'role_id'],
-        'apiKey' => [self::HAS_ONE, ApiKeyModel::class, 'user_id'],
+        'role' => [
+            self::BELONGS_TO, RoleModel::class,
+            'role_id',
+            ['select' => 'id, name, description'],
+        ],
+        'apiKey' => [
+            self::HAS_ONE, ApiKeyModel::class,
+            'user_id',
+            ['select' => 'id, user_id, is_revoked, expires_at, created_at, updated_at'],
+        ],
     ];
 
     public function getTableName(): string
