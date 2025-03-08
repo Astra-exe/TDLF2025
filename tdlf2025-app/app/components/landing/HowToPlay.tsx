@@ -2,11 +2,13 @@ import { Container, PlayCards } from "@/app/components/landing";
 import Image from "next/image";
 export default function HowToPlay() {
   return (
-    <section className="mt-60" id="reglas">
+    <section className="mt-48 lg:mt-60" id="reglas">
       <Container>
         <hgroup className="text-center max-w-5xl mx-auto">
-          <h3 className="text-6xl font-bold">Así se jugará</h3>
-          <p className="mt-5 text-xl leading-8">
+          <h3 className=" font-bold text-4xl sm:text-5xl lg:text-6xl">
+            Así se jugará
+          </h3>
+          <p className="mt-5 text-base xs:text-lg sm:leading-8  sm:text-xl ">
             Prepárate para{" "}
             <strong className="text-primary">
               la tercera edición del Torneo de las Fresas
@@ -18,13 +20,13 @@ export default function HowToPlay() {
           </p>
         </hgroup>
         <div className="flex justify-center">
-          <picture className="my-10 inline-block p-6 bg-dark border border-dotted border-neutral-700/80">
+          <picture className="my-10 w-full inline-block p-6 bg-dark border border-dotted border-neutral-700/80 max-w-md lg:max-w-2xl">
             <Image
               src={"/como-jugar.png"}
               alt="Match de TDLF-2024"
               width={630}
               height={425}
-              className="max-w-[500px]"
+              className="w-full h-full object-cover"
             />
           </picture>
         </div>

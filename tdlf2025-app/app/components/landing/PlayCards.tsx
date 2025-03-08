@@ -22,11 +22,11 @@ export default function PlayCards() {
 
   return (
     <div
-      className="mt-10 grid grid-cols-3 gap-x-6 group/container"
+      className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-5 group/container"
       onMouseMove={handleMouseMove}
       ref={cardsContainerRef}
     >
-      <article className="relative px-8 py-10 bg-gradient-to-b from-dark/40 border border-dotted border-neutral-700/80 group/card">
+      <article className="sm:col-span-2 lg:col-span-1 relative px-8 py-10 bg-gradient-to-b from-dark/40 border border-dotted border-neutral-700/80 group/card">
         <div
           className="h-full w-full absolute top-0 left-0 transition-opacity z-20 opacity-0 group-hover/card:opacity-100"
           style={{
