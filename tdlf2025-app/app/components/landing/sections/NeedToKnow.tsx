@@ -5,7 +5,7 @@ export default function NeedToKnow() {
   return (
     <Container className="mt-32">
       <section className="text-white">
-        <h3 className="text-[40px] font-bold text-center sm:text-5xl lg:text-6xl">
+        <h3 className="text-4xl font-bold text-center sm:text-5xl lg:text-6xl">
           Lo que necesitas saber
         </h3>
         <div className="mt-12 grid grid-cols-10 md:grid-rows-[repeat(3,auto)] gap-2 lg:gap-3">
@@ -28,7 +28,7 @@ export default function NeedToKnow() {
               alt="Raqueta tomada por un jugador"
               width={263}
               height={263}
-              className="w-full h-full object-cover max-w-[180px] sm:max-w-[220px] absolute -left-10 top-0 xl:max-w-none xl:left-0"
+              className="max-w-[180px] sm:max-w-[220px] absolute -left-10 top-0 xl:max-w-none xl:left-0"
             />
             <div className="h-full flex flex-col justify-between items-end gap-y-4">
               <div className="relative flex items-center gap-x-2 justify-center">
@@ -75,9 +75,9 @@ export default function NeedToKnow() {
               alt="Jugadores jugando"
               width={240}
               height={315}
-              className="max-w-[180px] md:absolute md:bottom-0 md:right-0"
+              className="max-w-[120px] xs:max-w-[150px] md:absolute md:bottom-0 md:right-0"
             />
-            <div className="xs:w-[70%]">
+            <div className="xs:w-[65%]">
               <h4 className="font-bold relative text-4xl lg:text-5xl">
                 Inscripción
               </h4>

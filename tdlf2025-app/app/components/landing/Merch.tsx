@@ -48,7 +48,7 @@ export default function Merch() {
       <article className="flex flex-col lg:items-start lg:flex-row gap-y-10 gap-x-12">
         <div className="flex flex-col-reverse xs:flex-row gap-x-7 gap-y-3 justify-center lg:justify-start">
           {/* Options */}
-          <div className="flex xs:flex-col gap-y-2">
+          <div className="flex xs:flex-col gap-y-2 gap-x-2">
             {merchItem.images.map((imageUrl) => {
               return (
                 <button

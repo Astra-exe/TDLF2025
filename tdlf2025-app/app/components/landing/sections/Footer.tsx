@@ -31,7 +31,9 @@ export default function Footer() {
               462-288-3931
             </a>
           </p>
-          <p>Desarrollado con ❤️ by Ricardo, Francisco, Juan</p>
+          <p className="mt-2">
+            Desarrollado con ❤️ by Ricardo, Francisco, Juan
+          </p>
         </div>
       </Container>
     </footer>
