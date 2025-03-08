@@ -18,23 +18,23 @@ export default function Agenda() {
   }, []);
 
   return (
-    <section className="my-60" id="agenda">
+    <section className="mt-48 lg:my-60" id="agenda">
       <Container>
-        <div className="flex items-center justify-between">
-          <h3 className="text-5xl font-bold">Agenda</h3>
+        <div className="flex flex-col xs:flex-row gap-y-2.5 items-center justify-between">
+          <h3 className="font-bold text-4xl sm:text-5xl lg:text-6xl">Agenda</h3>
           <div className="space-x-5">
             <span>23 de Marzo de 2025</span>
-            <button className="cursor-pointer">Agenda tu Calendario</button>
+            {/* <button className="cursor-pointer">Agenda tu Calendario</button> */}
           </div>
         </div>
 
         <ul
-          className="animation__scroll-in mt-16 grid gap-y-8 justify-center px-5"
+          className="animation__scroll-in mt-8 sm:mt-16 grid gap-y-5 sm:gap-y-8 justify-center px-5"
           ref={agendaListRef}
         >
           {agendaData.map((item) => {
             return (
-              <li key={item.title}>
+              <li key={item.title} className="sm:top-[5vh] top-[15vh]">
                 <div className="backdrop-blur-sm">
                   <CardTime
                     title={item.title}
