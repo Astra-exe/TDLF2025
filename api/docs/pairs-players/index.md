@@ -3,7 +3,7 @@
 Parejas de jugadores.
 
 ```
-[GET] /v1/pairs/players/
+[GET] /v1/pairs/players
 ```
 
 Parámetros de consulta:
