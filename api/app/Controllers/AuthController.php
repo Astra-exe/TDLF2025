@@ -71,7 +71,7 @@ class AuthController extends BaseController
         $user = new UserModel;
         $user->select('id, password')
             ->eq($identifyBy, $data['nickname'])
-            ->eq('is_active', (int) true)
+            ->eq('is_active', 1)
             ->find();
 
         // Comprueba si el "usuario de acceso" que intenta autenticarse existe.
@@ -98,7 +98,7 @@ class AuthController extends BaseController
      */
     public function me(): void
     {
-        $this->userAuth()->copyFrom(['role' => $this->userAuth()->role]);
+        $this->userAuth()->setCustomData('role', $this->userAuth()->role);
 
         unset($this->userAuth()->role_id);
 

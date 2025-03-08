@@ -20,14 +20,17 @@ class PairValidation extends BaseValidation
             'registration_category_id' => ['guidv4', 'contains_list' => self::getRegistrationCategories()],
             'is_eliminated' => ['boolean'],
             'page' => ['integer', 'min_numeric' => 1],
+            'orderBy' => ['contains' => ['created_at', 'updated_at']],
+            'sortBy' => ['contains' => ['asc', 'desc']],
         ];
     }
 
     public static function getAllFilters(): array
     {
         return [
-            'is_eliminated' => 'boolean',
+            'is_eliminated' => 'boolean|whole_number',
             'page' => 'whole_number',
+            'sortBy' => 'upper_case',
         ];
     }
 

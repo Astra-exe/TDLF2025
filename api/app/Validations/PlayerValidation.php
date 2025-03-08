@@ -33,7 +33,7 @@ class PlayerValidation extends BaseValidation
         return [
             'fullname' => 'trim',
             'city' => 'trim',
-            'is_active' => 'boolean',
+            'is_active' => 'boolean|whole_number',
             'page' => 'whole_number',
             'search' => 'trim',
             'sortBy' => 'upper_case',

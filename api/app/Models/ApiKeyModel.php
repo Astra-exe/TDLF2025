@@ -30,7 +30,7 @@ class ApiKeyModel extends BaseModel
     {
         parent::beforeInsert($self);
 
-        $self->is_revoked = (int) false;
+        $self->is_revoked = 0;
         $self->expires_at = Auth::getExpiration();
     }
 }

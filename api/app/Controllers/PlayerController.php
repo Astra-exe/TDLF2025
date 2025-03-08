@@ -21,6 +21,7 @@ class PlayerController extends BaseController
             'filterBy' => 'fullname',
             'orderBy' => 'created_at',
             'sortBy' => 'desc',
+            'is_active' => null,
         ];
 
         $queryParams = [];
@@ -28,6 +29,10 @@ class PlayerController extends BaseController
         // Obtiene solo los query params necesarios.
         foreach ($queryFields as $param => $default) {
             $queryParams[$param] = $this->app()->request()->query->{$param} ?? $default;
+
+            if (is_null($queryParams[$param])) {
+                unset($queryParams[$param]);
+            }
         }
 
         $queryNames = array_keys($queryFields);
@@ -53,6 +58,11 @@ class PlayerController extends BaseController
         $players->paginate($queryParams['page'])
             ->like($queryParams['filterBy'], sprintf('%%%s%%', $queryParams['search']))
             ->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
+
+        // Filtra los "jugadores" por estatus de actividad.
+        if (isset($queryParams['is_active'])) {
+            $players->eq('is_active', $queryParams['is_active']);
+        }
 
         // Obtiene la información sobre la paginación.
         $pagination = $players->pagination;
@@ -132,7 +142,7 @@ class PlayerController extends BaseController
 
         // Consulta la "pareja" del "jugador".
         $pair = $relationship->pair;
-        $pair->copyFrom(['registration_category' => $pair->registrationCategory]);
+        $pair->setCustomData('registration_category', $pair->registrationCategory);
 
         unset($pair->registration_category_id);
 

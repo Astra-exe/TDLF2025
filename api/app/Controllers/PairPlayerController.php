@@ -19,6 +19,9 @@ class PairPlayerController extends BaseController
         // Define los query params de la petición.
         $queryFields = [
             'page' => 1,
+            'orderBy' => 'created_at',
+            'sortBy' => 'desc',
+            'is_eliminated' => null,
         ];
 
         $queryParams = [];
@@ -26,6 +29,10 @@ class PairPlayerController extends BaseController
         // Obtiene solo los query params necesarios.
         foreach ($queryFields as $param => $default) {
             $queryParams[$param] = $this->app()->request()->query->{$param} ?? $default;
+
+            if (is_null($queryParams[$param])) {
+                unset($queryParams[$param]);
+            }
         }
 
         $queryNames = array_keys($queryFields);
@@ -48,7 +55,13 @@ class PairPlayerController extends BaseController
 
         // Consulta la información de todas las "parejas" con paginación.
         $pairs = new PairModel;
-        $pairs->paginate($queryParams['page'])->orderBy('created_at DESC');
+        $pairs->select('id')->paginate($queryParams['page'])
+            ->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
+
+        // Filtra las "parejas" por estatus de eliminación.
+        if (isset($queryParams['is_eliminated'])) {
+            $pairs->eq('is_eliminated', $queryParams['is_eliminated']);
+        }
 
         // Obtiene la información sobre la paginación.
         $pagination = $pairs->pagination;
@@ -144,7 +157,7 @@ class PairPlayerController extends BaseController
 
         // Consulta la información de la "pareja" registrada.
         $pair->find();
-        $pair->copyFrom(['registration_category' => $pair->registrationCategory]);
+        $pair->setCustomData('registration_category', $pair->registrationCategory);
 
         unset($pair->registration_category_id);
 

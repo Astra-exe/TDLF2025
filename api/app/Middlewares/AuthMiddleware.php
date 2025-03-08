@@ -45,7 +45,7 @@ class AuthMiddleware extends BaseMiddleware
         $apiKey = new ApiKeyModel;
         $apiKey->select('id, user_id, hash, expires_at')
             ->eq('hash', $hash)
-            ->eq('is_revoked', (int) false)
+            ->eq('is_revoked', 0)
             ->find();
 
         // Comprueba si el hash de la key es autentica.

@@ -42,7 +42,7 @@ class PairController extends BaseController
         }
 
         // Consulta la categoría de inscripción de la "pareja".
-        $pair->copyFrom(['registration_category' => $pair->registrationCategory]);
+        $pair->setCustomData('registration_category', $pair->registrationCategory);
 
         unset($pair->registration_category_id);
 

@@ -23,6 +23,6 @@ class PlayerModel extends BaseModel
         parent::beforeInsert($self);
 
         $self->experience ??= 0;
-        $self->is_active = (int) true;
+        $self->is_active = 1;
     }
 }

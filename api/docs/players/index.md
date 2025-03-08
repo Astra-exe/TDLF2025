@@ -15,6 +15,7 @@ Parámetros de consulta:
 | `filterBy` | `string` | `contains: [fullname]` | `fullname` | Campo de búsqueda de los jugadores. |
 | `orderBy` | `string` | `contains: [fullname, weight, height, age, experience, created_at, updated_at]` | `created_at` | Campo de ordenamiento de los jugadores. |
 | `sortBy` | `string` | `contains: [asc, desc]` | `desc` | Modo de ordenamiento de los jugadores. |
+| `is_active` | `boolean` | `contains: [yes/no, on/off, 1/0, true/false]` | `null` | Filtrar los jugadores por estatus de actividad. |
 
 Ejemplo:
 
@@ -22,7 +23,7 @@ Ejemplo:
 curl -X GET \
   -H 'Content-Type: application/json' \
   -H 'X-API-KEY: API_KEY' \
-  http://localhost:8080/v1/players?page=2&search=Ricardo&filterBy=fullname&orderBy=age&sortBy=asc
+  http://localhost:8080/v1/players?page=2&search=Ricardo&filterBy=fullname&orderBy=age&sortBy=asc&is_active=true
 ```
 
 Respuesta de la petición:

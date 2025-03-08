@@ -28,6 +28,6 @@ class PairModel extends BaseModel
     {
         parent::beforeInsert($self);
 
-        $self->is_eliminated = (int) false;
+        $self->is_eliminated = 0;
     }
 }
