@@ -1,13 +1,21 @@
 @import "tailwindcss";
 
 @theme {
+  /* Brakpoints */
+  --breakpoint-xs: 28rem;
+  /* Fonts */
   --font-space: var(--font-space-grotesk);
   --font-nosifer: var(--font-nosifer);
+  /* Colors */
   --color-primary: #E61357;
   --color-accent: #810B31;
   --color-dark: #212529;
+  /* Animations */
   --animate-scroll-header: scroll-header linear both;
   --shadow-awards: inset 0 2px 8px #fff,0 0 17px rgba(255,255,255,.77),inset 0 1px 10px hsla(0,0%,100%,.55);
+
+
+
 
   @keyframes scroll-header {
     to {
