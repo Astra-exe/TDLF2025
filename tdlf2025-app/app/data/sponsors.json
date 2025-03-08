@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Cryspura",
+    "image": "/cryspura.webp",
+    "href": "https://www.cryspuraice.com.mx/"
+  },
+  {
+    "name": "Servicom",
+    "image": "/servicom.webp",
+    "href": "/"
+  },
+  {
+    "name": "DeepEco",
+    "image": "/deepeco.svg",
+    "href": "https://www.instagram.com/deepeco_/"
+  },
+  {
+    "name": "Helados Irapuato",
+    "image": "/helados-irapuato.webp",
+    "href": "/"
+  },
+  {
+    "name": "Dimatec",
+    "image": "/dimatec.webp",
+    "href": "https://dimatec.mx/"
+  },
+  {
+    "name": "Comudaj",
+    "image": "/comudaj.webp",
+    "href": "https://www.irapuato.gob.mx/comudaj/"
+  },
+  {
+    "name": "Helados El rey",
+    "image": "/helados-rey.webp",
+    "href": "/"
+  },
+  {
+    "name": "Asociación de Pelota Vasca",
+    "image": "/vasca.webp",
+    "href": ""
+  },
+  {
+    "name": "BBS Consultoria fiscal contable",
+    "image": "/bbs.webp",
+    "href": "/"
+  },
+  {
+    "name": "Ayuntamiento de Irapuato",
+    "image": "/ayuntamiento.webp",
+    "href": "https://www.irapuato.gob.mx/"
+  },
+  {
+    "name": "La China Banquetes",
+    "image": "/lachina.webp",
+    "href": "/"
+  },
+  {
+    "name": "IMJUVI",
+    "image": "/imjuvi.webp",
+    "href": "https://www.irapuato.gob.mx/transparencia/imjuvi/"
+  }
+]

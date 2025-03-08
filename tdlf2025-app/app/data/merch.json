@@ -1,0 +1,12 @@
+[
+  {
+    "title": "Playera TDLF-2025",
+    "description": "¡Lleva el espíritu urbano de Irapuato en cada golpe! La playera conmemorativa del Torneo de las Fresas 2025 es un tributo vibrante a la cultura callejera o urbana de la ciudad. Con una tipografía inspirada en el estilo de graffiti y grietas que recuerdan las calles dfe la ciudad, esta playera combina autenticidad urbana con un diseño exclusivo. Hecha con material suave y resistente, es perfecta para prtarla en un juego o para lucirla en cualquier ocasión. ¡Un recuerdo único de la emoción del torneo!",
+    "images": ["/playera-negra.png", "/playera-white.png"]
+  },
+  {
+    "title": "Gorra TDLF-2025",
+    "description": "¡Lleva el orgullo del Torneo de las Fresas 2025 en tu cabeza! La gorra conmemorativa destaca el escudo oficial del torneo, un emblemático diseño que combina la fresa, símbolo de la ciudad, con el frontenis, representando la pasión por el deporte. Las sombras de fondo evocan los edificios icónicos de Irapuato, creando un tributo visual a la ciudad y su espíritu deportivo. Hecha para ser un recuerdo duradero, esta gorra es perfecta para mostrar tu apoyo durante y después del torneo.",
+    "images": ["/gorra-white.png", "/gorra-red.png"]
+  }
+]
