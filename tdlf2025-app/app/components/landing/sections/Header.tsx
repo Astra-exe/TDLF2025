@@ -1,3 +1,5 @@
+import styles from "@/app/styles/landing.module.css";
+
 const navLinks = [
   {
     text: "Reglas",
@@ -19,7 +21,9 @@ const navLinks = [
 
 export default function Header() {
   return (
-    <header className="sticky z-50 py-5 top-4 scroll__animate animate-scroll-header">
+    <header
+      className={`${styles.scroll__animate} sticky z-50 py-5 top-4 animate-scroll-header`}
+    >
       <nav className="w-fit mx-auto hidden sm:block">
         <ul className="px-10 py-5 flex justify-center gap-x-12 border border-white rounded-full">
           {navLinks.map((navLink) => {

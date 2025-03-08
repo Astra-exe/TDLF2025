@@ -1,4 +1,4 @@
-import Container from "./Container";
+import Container from "../Container";
 import Image from "next/image";
 import sponsorsData from "@/app/data/sponsors.json";
 

@@ -57,38 +57,3 @@ p, li {
 h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
 }
-
-.scroll__animate {
-  animation-timeline: scroll();
-  animation-range: 0 100px;
-}
-
-.animation__scroll-in {
-  view-timeline-name: --scroll-in;
-}
-
-.animation__scroll-in > li {
-  --index0: calc(var(--index-agenda) - 1);
-  --reverse-index: calc(var(--numItems) - var(--index0));
-  --reverse-index0: calc(var(--reverse-index) - 1);
-  --numcards: 6;
-  position: sticky;
-  top: 15vh;
-  padding-block-start: calc(var(--index-agenda) * 1rem);
-}
-
-.animation__scroll-in > li > div {
-  --start-range: calc(var(--index0) / var(--numcards) * 100%);
-  --end-range: calc(var(--index-agenda) / var(--numcards) * 100%);
-  animation: linear scale forwards;
-  animation-timeline: --scroll-in;
-  animation-range: exit-crossing var(--start-range) exit-crossing
-    var(--end-range);
-  will-change: transform;
-}
-
-@keyframes scale {
-  to {
-    transform: scale(calc(1.1 - calc(0.1 * var(--reverse-index))));
-  }
-}

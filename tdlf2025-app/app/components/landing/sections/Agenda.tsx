@@ -2,6 +2,7 @@
 import { Container, CardTime } from "@/app/components/landing";
 import agendaData from "@/app/data/agenda.json";
 import { useEffect, useRef } from "react";
+import styles from "@/app/styles/landing.module.css";
 
 export default function Agenda() {
   const agendaListRef = useRef<HTMLUListElement | null>(null);
@@ -29,7 +30,7 @@ export default function Agenda() {
         </div>
 
         <ul
-          className="animation__scroll-in mt-8 sm:mt-16 grid gap-y-5 sm:gap-y-8 justify-center px-5"
+          className={`${styles.animation__scrollin} mt-8 sm:mt-16 grid gap-y-5 sm:gap-y-8 justify-center px-5`}
           ref={agendaListRef}
         >
           {agendaData.map((item) => {

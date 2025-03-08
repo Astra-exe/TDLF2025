@@ -1,14 +1,14 @@
 // Sections components
-export { default as Header } from "./Header";
-export { default as Hero } from "./Hero";
+export { default as Header } from "./sections/Header";
+export { default as Hero } from "./sections/Hero";
 export { default as Info } from "./Info";
-export { default as NeedToKnow } from "./NeedToKnow";
-export { default as Agenda } from "./Agenda";
-export { default as HowToPlay } from "./HowToPlay";
-export { default as Sponsors } from "./Sponsors";
-export { default as Awards } from "./Awards";
-export { default as PreFooter } from "./PreFooter";
-export { default as Footer } from "./Footer";
+export { default as NeedToKnow } from "./sections/NeedToKnow";
+export { default as Agenda } from "./sections/Agenda";
+export { default as HowToPlay } from "./sections/HowToPlay";
+export { default as Sponsors } from "./sections/Sponsors";
+export { default as Awards } from "./sections/Awards";
+export { default as PreFooter } from "./sections/PreFooter";
+export { default as Footer } from "./sections/Footer";
 // Components
 export { default as Container } from "./Container";
 export { default as BentoCard } from "./BentoCard";
