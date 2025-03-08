@@ -4,16 +4,18 @@ import sponsorsData from "@/app/data/sponsors.json";
 
 export default function Sponsors() {
   return (
-    <section className="mt-60" id="patrocinadores">
+    <section className="mt-48 lg:mt-60" id="patrocinadores">
       <Container>
         <hgroup className="text-center max-w-4xl mx-auto">
-          <h3 className="text-6xl font-bold">Patrocinadores</h3>
-          <p className="mt-5 text-xl leading-8">
+          <h3 className="font-bold text-4xl sm:text-5xl lg:text-6xl">
+            Patrocinadores
+          </h3>
+          <p className="mt-5 text-base xs:text-lg sm:leading-8  sm:text-xl">
             Agradecemos la confianza de los que hacen que este proyecto se lleve
             a cabo.
           </p>
         </hgroup>
-        <ul className="mt-16 grid gap-4 md:flex md:flex-wrap md:justify-center md:grid-cols-2 lg:grid-cols-2">
+        <ul className="mt-8 md:mt-16 grid xs:grid-cols-2 justify-center gap-x-4 gap-y-3 sm:gap-y-5 md:flex md:flex-wrap md:justify-center">
           {sponsorsData.map((sponsor) => {
             return (
               <li key={sponsor.name}>
