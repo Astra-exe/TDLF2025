@@ -27,9 +27,9 @@ export default function Merch() {
 
   return (
     <section className="mt-20">
-      <div className="mb-12 flex justify-center gap-x-7">
+      <div className="mb-12 flex flex-col xs:flex-row justify-center gap-y-6 gap-x-7">
         <button
-          className={`px-6 py-3 border cursor-pointer min-w-[150px] hover:bg-accent hover:text-white transition-colors ${
+          className={`px-4 xs:px-6 py-3 border cursor-pointer xs:min-w-[150px] hover:bg-accent hover:text-white transition-colors ${
             indexMerchItem === 0 && "bg-accent text-white"
           }`}
           onClick={handleChangeShirtMerch}
@@ -37,7 +37,7 @@ export default function Merch() {
           Ver Playera
         </button>
         <button
-          className={`px-6 py-3 border cursor-pointer min-w-[150px] hover:bg-accent hover:text-white transition-colors ${
+          className={`px-6 py-3 border cursor-pointer xs:min-w-[150px] hover:bg-accent hover:text-white transition-colors ${
             indexMerchItem === 1 && "bg-accent text-white"
           }`}
           onClick={handleChangeCapMerch}
@@ -45,10 +45,10 @@ export default function Merch() {
           Ver Gorra
         </button>
       </div>
-      <article className="flex gap-x-12">
-        <div className="flex gap-x-7">
+      <article className="flex flex-col lg:items-start lg:flex-row gap-y-10 gap-x-12">
+        <div className="flex flex-col-reverse xs:flex-row gap-x-7 gap-y-3 justify-center lg:justify-start">
           {/* Options */}
-          <div className="flex flex-col gap-y-2">
+          <div className="flex xs:flex-col gap-y-2">
             {merchItem.images.map((imageUrl) => {
               return (
                 <button
@@ -71,13 +71,13 @@ export default function Merch() {
           </div>
           {/* Principal Img */}
           {principalImg && (
-            <picture className="inline-block p-8 bg-gray-300">
+            <picture className="lg:w-[340px] inline-block p-8 bg-gray-300">
               <Image
                 src={principalImg}
                 alt="Merch TDLF-2025"
                 width={340}
                 height={340}
-                className="max-w-[300px] aspect-square object-cover"
+                className="sm:max-w-[300px] w-full h-full aspect-square object-cover"
               />
             </picture>
           )}
@@ -85,7 +85,7 @@ export default function Merch() {
         {/* Merch Info */}
         <div>
           <h4 className="text-xl font-bold">{merchItem.title}</h4>
-          <p className="leading-8">{merchItem.description}</p>
+          <p className="leading-6 md:leading-7">{merchItem.description}</p>
           <a
             href="https://heyzine.com/flip-book/b882556d0c.html"
             target="_blank"
