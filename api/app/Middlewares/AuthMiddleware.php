@@ -43,7 +43,7 @@ class AuthMiddleware extends BaseMiddleware
         $hash = Auth::generateHash($key);
 
         $apiKey = new ApiKeyModel;
-        $apiKey->select('id, user_id, hash, expires_at')
+        $apiKey->select('id', 'user_id', 'hash', 'expires_at')
             ->eq('hash', $hash)
             ->eq('is_revoked', 0)
             ->find();

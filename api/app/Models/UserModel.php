@@ -14,12 +14,12 @@ class UserModel extends BaseModel
         'role' => [
             self::BELONGS_TO, RoleModel::class,
             'role_id',
-            ['select' => 'id, name, description'],
+            ['select' => ['id', 'name', 'description']],
         ],
         'apiKey' => [
             self::HAS_ONE, ApiKeyModel::class,
             'user_id',
-            ['select' => 'id, user_id, is_revoked, expires_at, created_at, updated_at'],
+            ['select' => ['id', 'user_id', 'is_revoked', 'expires_at', 'created_at', 'updated_at']],
         ],
     ];
 

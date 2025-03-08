@@ -17,7 +17,7 @@ class ApiKeyModel extends BaseModel
             self::BELONGS_TO,
             UserModel::class,
             'user_id',
-            ['select' => 'id, email, username, role_id, fullname, is_active, created_at, updated_at'],
+            ['select' => ['id', 'email', 'username', 'role_id', 'fullname', 'is_active', 'created_at', 'updated_at']],
         ],
     ];
 

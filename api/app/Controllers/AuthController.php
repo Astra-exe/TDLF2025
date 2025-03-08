@@ -69,7 +69,7 @@ class AuthController extends BaseController
 
         // Consulta la información del "usuario de acceso" que intenta autenticarse.
         $user = new UserModel;
-        $user->select('id, password')
+        $user->select('id', 'password')
             ->eq($identifyBy, $data['nickname'])
             ->eq('is_active', 1)
             ->find();
