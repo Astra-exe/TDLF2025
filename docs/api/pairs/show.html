@@ -11,6 +11,9 @@
   margin: 0;
   background-color: #fff;
   color: #000;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .navbar {
@@ -36,6 +39,18 @@
 .navbar a,
 .sidebar a {
   text-decoration: none;
+}
+
+.left {
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+
+.right {
+  float: right;
+  margin: 0;
+  padding: 0;
 }
 
 a {
@@ -79,12 +94,24 @@ a {
   clear: both;
   margin: 0;
   padding: 0;
+  flex: 1;
 }
 
 .main {
   margin: 0 0 0 200px;
   max-width: 50em;
   padding: 1.5em;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.7ex;
+  text-align: center;
+}
+
+.footer p {
+  margin: 0.5ex 0;
 }
 
 h1,
@@ -132,6 +159,10 @@ code {
 
 pre {
   padding: 1ch;
+}
+
+pre,
+table {
   overflow-x: auto;
 }
 
@@ -156,6 +187,10 @@ img {
 
   .main {
     margin: 0;
+  }
+
+  .footer {
+    flex-direction: column;
   }
 }
 
@@ -190,7 +225,8 @@ img {
 }</style>
 </head>
 <body>
-  <nav class="navbar"><a href="https://Astra-exe.github.io/TDLF2025/api/index.html"><b>Home</b></a></nav>
+  <nav class="navbar"><a href="https://Astra-exe.github.io/TDLF2025/api/index.html"><b>Home</b></a>
+<span class="right"></span></nav>
   <div class="content">
     <aside class="sidebar"><ul>
 <li>
@@ -258,6 +294,13 @@ img {
   &quot;description&quot;: &quot;Information about the pair&quot;
 }
 </code></pre></main>
+  </div>
+  <div>
+    <hr>
+    <footer class="footer">
+      <p>Generated with <a href="https://notabug.org/ricardogj08/swiki" target="_blank">swiki</a>, a simple wiki generator written in POSIX <code>sh</code>.</p>
+      <p>CC-BY-4.0</p>
+    </footer>
   </div>
 </body>
 </html>
