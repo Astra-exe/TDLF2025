@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autenticación</title>
+  <style>body {
+  font-family: sans-serif;
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+  color: #000;
+}
+
+.navbar {
+  clear: both;
+  color: #069;
+  overflow: hidden;
+  background-color: #17a;
+  padding: 0.7ex;
+  border-top: 1px solid;
+  border-top-color: #ccc;
+  border-bottom: 1px solid #069;
+}
+
+.navbar a {
+  padding: 0.5ex 1ex;
+  color: #fff;
+}
+
+.navbar a:hover {
+  background-color: #069;
+}
+
+.navbar a,
+.sidebar a {
+  text-decoration: none;
+}
+
+a {
+  color: #069;
+}
+
+.sidebar {
+  float: left;
+  margin: 0 1px 0 0;
+  padding: 1em 0;
+  border-right: 1px dotted #ccc;
+  width: 200px;
+}
+
+.sidebar ul {
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li ul {
+  padding-left: 0.6em;
+}
+
+.sidebar li a {
+  display: block;
+  margin: 0;
+  padding: 0.8ex 2em 0.8ex 1em;
+}
+
+.sidebar a:hover {
+  background-color: #ddd;
+}
+
+.content {
+  clear: both;
+  margin: 0;
+  padding: 0;
+}
+
+.main {
+  margin: 0 0 0 200px;
+  max-width: 50em;
+  padding: 1.5em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 1em 1ex 0.5ex 0;
+}
+
+h2~*:not(h2) {
+  margin-left: 1ch;
+}
+
+h1 {
+  font-size: 2.0em;
+}
+
+h2 {
+  font-size: 1.9em;
+}
+
+h3 {
+  font-size: 1.6em;
+}
+
+h4 {
+  font-size: 1.5em;
+}
+
+h5 {
+  font-size: 1.2em;
+}
+
+h6 {
+  font-size: 1.1em;
+}
+
+pre,
+code {
+  margin: 0;
+  font-size: 100%;
+}
+
+pre {
+  padding: 1ch;
+  overflow-x: auto;
+}
+
+blockquote::before {
+  float: left;
+  width: 1ch;
+  margin-right: 1ch;
+  content: ">";
+}
+
+img {
+  max-width: 100%;
+}
+
+@media (max-width: 999px) {
+  .sidebar {
+    float: none;
+    margin: 0;
+    width: 100%;
+    border: none;
+  }
+
+  .main {
+    margin: 0;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #000;
+    color: #fff;
+  }
+
+  .navbar {
+    border-top-color: #222;
+  }
+
+  .sidebar a:hover {
+    background-color: #222;
+  }
+
+  a {
+    color: #6cf;
+  }
+
+  .main img[src$=svg] {
+    filter: invert(1);
+  }
+
+  blockquote,
+  pre,
+  code {
+    background-color: #111;
+    border-color: #aaa;
+  }
+}</style>
+</head>
+<body>
+  <nav class="navbar"><a href="https://Astra-exe.github.io/TDLF2025/api/index.html"><b>Home</b></a></nav>
+  <div class="content">
+    <aside class="sidebar"><ul>
+<li>
+<a href="https://Astra-exe.github.io/TDLF2025/api/auth/index.html">Autenticación/</a>
+<ul>
+<li>
+<a href="https://Astra-exe.github.io/TDLF2025/api/auth/check.html">Comprobar API key/</a>
+</li>
+<li>
+<a href="https://Astra-exe.github.io/TDLF2025/api/auth/login.html">Inicio de sesión/</a>
+</li>
+<li>
+<a href="https://Astra-exe.github.io/TDLF2025/api/auth/logout.html">Cerrar sesión/</a>
+</li>
+<li>
+<a href="https://Astra-exe.github.io/TDLF2025/api/auth/me.html">Usuario autenticado/</a>
+</li>
+<li>
+<a href="https://Astra-exe.github.io/TDLF2025/api/auth/refresh.html">Renovar API key/</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://Astra-exe.github.io/TDLF2025/api/pairs/index.html">Parejas/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://Astra-exe.github.io/TDLF2025/api/pairs-players/index.html">Jugadores de las parejas/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://Astra-exe.github.io/TDLF2025/api/players/index.html">Jugadores/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://Astra-exe.github.io/TDLF2025/api/registration-categories/index.html">Categorías de inscripción/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://Astra-exe.github.io/TDLF2025/api/roles/index.html">Roles/</a>
+<ul>
+</ul>
+</li>
+</ul></aside>
+    <main class="main"><h1>Autenticación</h1>
+<p>Autenticación de los usuarios de acceso.</p></main>
+  </div>
+</body>
+</html>

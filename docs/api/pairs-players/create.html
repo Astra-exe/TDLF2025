@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear una pareja con jugadores</title>
+  <style>body {
+  font-family: sans-serif;
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+  color: #000;
+}
+
+.navbar {
+  clear: both;
+  color: #069;
+  overflow: hidden;
+  background-color: #17a;
+  padding: 0.7ex;
+  border-top: 1px solid;
+  border-top-color: #ccc;
+  border-bottom: 1px solid #069;
+}
+
+.navbar a {
+  padding: 0.5ex 1ex;
+  color: #fff;
+}
+
+.navbar a:hover {
+  background-color: #069;
+}
+
+.navbar a,
+.sidebar a {
+  text-decoration: none;
+}
+
+a {
+  color: #069;
+}
+
+.sidebar {
+  float: left;
+  margin: 0 1px 0 0;
+  padding: 1em 0;
+  border-right: 1px dotted #ccc;
+  width: 200px;
+}
+
+.sidebar ul {
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li ul {
+  padding-left: 0.6em;
+}
+
+.sidebar li a {
+  display: block;
+  margin: 0;
+  padding: 0.8ex 2em 0.8ex 1em;
+}
+
+.sidebar a:hover {
+  background-color: #ddd;
+}
+
+.content {
+  clear: both;
+  margin: 0;
+  padding: 0;
+}
+
+.main {
+  margin: 0 0 0 200px;
+  max-width: 50em;
+  padding: 1.5em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 1em 1ex 0.5ex 0;
+}
+
+h2~*:not(h2) {
+  margin-left: 1ch;
+}
+
+h1 {
+  font-size: 2.0em;
+}
+
+h2 {
+  font-size: 1.9em;
+}
+
+h3 {
+  font-size: 1.6em;
+}
+
+h4 {
+  font-size: 1.5em;
+}
+
+h5 {
+  font-size: 1.2em;
+}
+
+h6 {
+  font-size: 1.1em;
+}
+
+pre,
+code {
+  margin: 0;
+  font-size: 100%;
+}
+
+pre {
+  padding: 1ch;
+  overflow-x: auto;
+}
+
+blockquote::before {
+  float: left;
+  width: 1ch;
+  margin-right: 1ch;
+  content: ">";
+}
+
+img {
+  max-width: 100%;
+}
+
+@media (max-width: 999px) {
+  .sidebar {
+    float: none;
+    margin: 0;
+    width: 100%;
+    border: none;
+  }
+
+  .main {
+    margin: 0;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #000;
+    color: #fff;
+  }
+
+  .navbar {
+    border-top-color: #222;
+  }
+
+  .sidebar a:hover {
+    background-color: #222;
+  }
+
+  a {
+    color: #6cf;
+  }
+
+  .main img[src$=svg] {
+    filter: invert(1);
+  }
+
+  blockquote,
+  pre,
+  code {
+    background-color: #111;
+    border-color: #aaa;
+  }
+}</style>
+</head>
+<body>
+  <nav class="navbar"><a href="https://Astra-exe.github.io/TDLF2025/api/index.html"><b>Home</b></a></nav>
+  <div class="content">
+    <aside class="sidebar"><ul>
+<li>
+<a href="https://Astra-exe.github.io/TDLF2025/api/auth/index.html">Autenticación/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://Astra-exe.github.io/TDLF2025/api/pairs/index.html">Parejas/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://Astra-exe.github.io/TDLF2025/api/pairs-players/index.html">Jugadores de las parejas/</a>
+<ul>
+<li>
+<a href="https://Astra-exe.github.io/TDLF2025/api/pairs-players/create.html">Crear una pareja con jugadores/</a>
+</li>
+<li>
+<a href="https://Astra-exe.github.io/TDLF2025/api/pairs-players/show.html">Jugadores de una pareja/</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://Astra-exe.github.io/TDLF2025/api/players/index.html">Jugadores/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://Astra-exe.github.io/TDLF2025/api/registration-categories/index.html">Categorías de inscripción/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://Astra-exe.github.io/TDLF2025/api/roles/index.html">Roles/</a>
+<ul>
+</ul>
+</li>
+</ul></aside>
+    <main class="main"><h1>Crear una pareja con jugadores</h1>
+<pre><code>[POST] /v1/players/pairs
+</code></pre>
+<p>Cuerpo de la petición:</p>
+<table>
+<tr><th>Propiedades </th><th>Tipo </th><th>Requerido </th><th>Rango </th><th>Descripción </th></tr>
+<tr><td><code>registration_category_id</code> </td><td><code>string</code> </td><td><code>true</code> </td><td><code>exact_len: 36</code> </td><td>Identificador de la categoría de inscripción de la pareja (<a href="../registration-categories/index.md">ver</a>). </td></tr>
+<tr><td><code>players</code> </td><td><code>array[players]</code> </td><td><code>true</code> </td><td><code>array_size_equal: 2</code> </td><td>Una lista con la información de los jugadores de la pareja (<a href="../players/create.md">ver</a>).<p>Ejemplo:</p>
+<pre><code class="language-bash">curl -X POST \
+  -H 'Content-Type: application/json' \
+  -H 'X-API-KEY: API_KEY' \
+  http://localhost:8080/v1/pairs/players \
+  -d '{
+    &quot;registration_category_id&quot;: &quot;59b675bb-4559-4748-8974-0753e716e8af&quot;,
+    &quot;players&quot;: [
+      {
+        &quot;fullname&quot;: &quot;Ricardo García Jiménez&quot;,
+        &quot;city&quot;: &quot;Salvatierra&quot;,
+        &quot;weight&quot;: 120,
+        &quot;height&quot;: 1.82,
+        &quot;age&quot;: 26,
+        &quot;experience&quot;: 0
+      },
+      {
+        &quot;fullname&quot;: &quot;Juan José Ramírez López&quot;,
+        &quot;city&quot;: &quot;Irapuato&quot;,
+        &quot;weight&quot;: 70,
+        &quot;height&quot;: 1.65,
+        &quot;age&quot;: 25,
+        &quot;experience&quot;: 5
+      }
+    ]
+  }'
+</code></pre>
+<p>Respuesta de la petición:</p>
+<pre><code class="language-json">{
+  &quot;data&quot;: {
+    &quot;pair&quot;: {
+      &quot;id&quot;: &quot;98eaa36b-98e1-4842-80d3-771627af3458&quot;,
+      &quot;is_eliminated&quot;: 0,
+      &quot;created_at&quot;: &quot;2025-03-07 14:44:28&quot;,
+      &quot;updated_at&quot;: &quot;2025-03-07 14:44:28&quot;,
+      &quot;registration_category&quot;: {
+        &quot;id&quot;: &quot;15134933-1932-4df4-bb5a-b304774b229c&quot;,
+        &quot;name&quot;: &quot;open&quot;,
+        &quot;description&quot;: &quot;Categoría libre&quot;
+      }
+    },
+    &quot;players&quot;: [
+      {
+        &quot;player&quot;: {
+          &quot;id&quot;: &quot;b7f22815-7082-41ac-9ba5-0e43022d7d5f&quot;,
+          &quot;fullname&quot;: &quot;Juan José Ramírez López&quot;,
+          &quot;city&quot;: &quot;Irapuato&quot;,
+          &quot;weight&quot;: &quot;70.00&quot;,
+          &quot;height&quot;: &quot;1.65&quot;,
+          &quot;age&quot;: 25,
+          &quot;experience&quot;: 5,
+          &quot;is_active&quot;: 1,
+          &quot;created_at&quot;: &quot;2025-03-07 14:44:28&quot;,
+          &quot;updated_at&quot;: &quot;2025-03-07 14:44:28&quot;
+        },
+        &quot;relationship&quot;: {
+          &quot;id&quot;: &quot;1decc97f-29a4-4b5f-abcb-4427aeeaf7d0&quot;,
+          &quot;player_id&quot;: &quot;b7f22815-7082-41ac-9ba5-0e43022d7d5f&quot;,
+          &quot;pair_id&quot;: &quot;98eaa36b-98e1-4842-80d3-771627af3458&quot;,
+          &quot;created_at&quot;: &quot;2025-03-07 14:44:28&quot;,
+          &quot;updated_at&quot;: &quot;2025-03-07 14:44:28&quot;
+        }
+      },
+      {
+        &quot;player&quot;: {
+          &quot;id&quot;: &quot;07b80796-fd26-4b1b-9f5d-6330e96ed849&quot;,
+          &quot;fullname&quot;: &quot;Ricardo García Jiménez&quot;,
+          &quot;city&quot;: &quot;Salvatierra&quot;,
+          &quot;weight&quot;: &quot;120.00&quot;,
+          &quot;height&quot;: &quot;1.82&quot;,
+          &quot;age&quot;: 26,
+          &quot;experience&quot;: 0,
+          &quot;is_active&quot;: 1,
+          &quot;created_at&quot;: &quot;2025-03-07 14:44:28&quot;,
+          &quot;updated_at&quot;: &quot;2025-03-07 14:44:28&quot;
+        },
+        &quot;relationship&quot;: {
+          &quot;id&quot;: &quot;64c27726-0281-45fe-9d79-9cdf9f32c2eb&quot;,
+          &quot;player_id&quot;: &quot;07b80796-fd26-4b1b-9f5d-6330e96ed849&quot;,
+          &quot;pair_id&quot;: &quot;98eaa36b-98e1-4842-80d3-771627af3458&quot;,
+          &quot;created_at&quot;: &quot;2025-03-07 14:44:28&quot;,
+          &quot;updated_at&quot;: &quot;2025-03-07 14:44:28&quot;
+        }
+      }
+    ]
+  },
+  &quot;status&quot;: 201,
+  &quot;description&quot;: &quot;The pair with the players was created successfully&quot;
+}
+</code></pre></main>
+  </div>
+</body>
+</html>
