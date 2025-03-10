@@ -52,7 +52,7 @@ def make_profile():
     headers = {
         'X-API-KEY': api_key
     }
-    #Get the player id (8cacaf56-20d0-4224-8220-92e236b7da0a)
+    #Get the player id (a14c3843-495d-4b93-bddb-b12763ad9e89)
     player_id = request.get_json(force=True)
 
     #Get the data
@@ -80,16 +80,34 @@ def make_profile():
     
 @app.route('/map', methods=['GET'])
 def make_map():
-    #get api key
+    # Obtener la API key
     api_key = get_apikey()
     if api_key is None:
         return jsonify({"error": "No se pudo obtener la Api Key para la ruta /map"}), 400
+
     headers = {
         'X-API-KEY': api_key
     }
-    #Get the data
-    
 
+    # Obtener los jugadores de la API PHP
+    try:
+        response = requests.get('http://localhost:8080/v1/players', headers=headers)
+
+        # Verificar el código de estado de la respuesta
+        if response.status_code == 200:
+            # Verificar si la respuesta tiene contenido
+            if response.text.strip():
+                players = response.json()
+                return jsonify(players), 200
+            else:
+                return jsonify({"error": "Respuesta vacía de la API"}), 500
+        else:
+            print("Error:", response.text, response.status_code)
+            return jsonify({"error": response.text, "status_code": response.status_code}), response.status_code
+
+    except requests.exceptions.RequestException as e:
+        print(str(e))
+        return jsonify({'error': str(e)}), 400
 
 
 if __name__ == "__main__":
