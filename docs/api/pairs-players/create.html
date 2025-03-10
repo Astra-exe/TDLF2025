@@ -106,6 +106,7 @@ a {
 .footer {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 0.7ex;
   text-align: center;
 }
@@ -163,7 +164,9 @@ pre {
 
 pre,
 table {
-  overflow-x: auto;
+  display: block;
+  max-width: 100%;
+  overflow: auto;
 }
 
 blockquote::before {
@@ -225,43 +228,43 @@ img {
 }</style>
 </head>
 <body>
-  <nav class="navbar"><a href="https://Astra-exe.github.io/TDLF2025/api/index.html"><b>Home</b></a>
+  <nav class="navbar"><a href="https://astra-exe.github.io/TDLF2025/api/index.html"><b>Home</b></a>
 <span class="right"></span></nav>
   <div class="content">
     <aside class="sidebar"><ul>
 <li>
-<a href="https://Astra-exe.github.io/TDLF2025/api/auth/index.html">Autenticación/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/auth/index.html">Autenticación/</a>
 <ul>
 </ul>
 </li>
 <li>
-<a href="https://Astra-exe.github.io/TDLF2025/api/pairs/index.html">Parejas/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs/index.html">Parejas/</a>
 <ul>
 </ul>
 </li>
 <li>
-<a href="https://Astra-exe.github.io/TDLF2025/api/pairs-players/index.html">Jugadores de las parejas/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs-players/index.html">Jugadores de las parejas/</a>
 <ul>
 <li>
-<a href="https://Astra-exe.github.io/TDLF2025/api/pairs-players/create.html">Crear una pareja con jugadores/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs-players/create.html">Crear una pareja con jugadores/</a>
 </li>
 <li>
-<a href="https://Astra-exe.github.io/TDLF2025/api/pairs-players/show.html">Jugadores de una pareja/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs-players/show.html">Jugadores de una pareja/</a>
 </li>
 </ul>
 </li>
 <li>
-<a href="https://Astra-exe.github.io/TDLF2025/api/players/index.html">Jugadores/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/players/index.html">Jugadores/</a>
 <ul>
 </ul>
 </li>
 <li>
-<a href="https://Astra-exe.github.io/TDLF2025/api/registration-categories/index.html">Categorías de inscripción/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/registration-categories/index.html">Categorías de inscripción/</a>
 <ul>
 </ul>
 </li>
 <li>
-<a href="https://Astra-exe.github.io/TDLF2025/api/roles/index.html">Roles/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/roles/index.html">Roles/</a>
 <ul>
 </ul>
 </li>
@@ -272,8 +275,10 @@ img {
 <p>Cuerpo de la petición:</p>
 <table>
 <tr><th>Propiedades </th><th>Tipo </th><th>Requerido </th><th>Rango </th><th>Descripción </th></tr>
-<tr><td><code>registration_category_id</code> </td><td><code>string</code> </td><td><code>true</code> </td><td><code>exact_len: 36</code> </td><td>Identificador de la categoría de inscripción de la pareja (<a href="../registration-categories/index.md">ver</a>). </td></tr>
-<tr><td><code>players</code> </td><td><code>array[players]</code> </td><td><code>true</code> </td><td><code>array_size_equal: 2</code> </td><td>Una lista con la información de los jugadores de la pareja (<a href="../players/create.md">ver</a>).<p>Ejemplo:</p>
+<tr><td><code>registration_category_id</code> </td><td><code>string</code> </td><td><code>true</code> </td><td><code>exact_len: 36</code> </td><td>Identificador de la categoría de inscripción de la pareja (<a href="../registration-categories/index.html">ver</a>). </td></tr>
+<tr><td><code>players</code> </td><td><code>array[players]</code> </td><td><code>true</code> </td><td><code>array_size_equal: 2</code> </td><td>Una lista con la información de los jugadores de la pareja (<a href="../players/create.html">ver</a>). </td></tr>
+</table>
+<p>Ejemplo:</p>
 <pre><code class="language-bash">curl -X POST \
   -H 'Content-Type: application/json' \
   -H 'X-API-KEY: API_KEY' \
