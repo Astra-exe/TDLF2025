@@ -1,6 +1,6 @@
 # API
 
-API RESTful del evento "Torneo de las Fresas Irapuato 2025".
+API RESTful del evento de frontenis *"Torneo de las Fresas Irapuato 2025"*.
 
 ## Instalación
 
