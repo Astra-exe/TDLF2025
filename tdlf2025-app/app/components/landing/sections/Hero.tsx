@@ -1,40 +1,10 @@
 import Image from "next/image";
+import SquareBackground from "@/app/components/SquareBackground";
 
 export default function Hero() {
   return (
     <main className="px-8 sm:px-0 relative -mt-[100px] flex flex-col items-center overflow-hidden pt-[20vh] pb-[18vh] sm:pt-[23vh] sm:pb-[25vh]">
-      <div className="-z-10 absolute  inset-0 grid grid-cols-[repeat(auto-fit,minmax(100px,1fr))] sm:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-2 bg-linear-180 from-black via-accent to-primary [&>div]:w-full [&>div]:aspect-square [&>div]:rounded-md [&>div]:bg-primary/10">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
+      <SquareBackground />
       <div className="relative">
         <Image
           src={"/logo.png"}
