@@ -42,6 +42,7 @@ return (static function () use ($app): void {
         $router->post($base_route('/v1/pairs/players'), \App\Controllers\PairPlayerController::class.'->create');
 
         // Parejas.
+        $router->post($base_route('/v1/pairs'), \App\Controllers\PairController::class.'->create');
         $router->get($base_route('/v1/pairs/@id'), \App\Controllers\PairController::class.'->show');
 
         // Roles de los usuarios de acceso.

@@ -109,7 +109,7 @@ class PlayerController extends BaseController
                 'The player information is incorrect');
         }
 
-        // Registra la información del jugador.
+        // Registra la información del "jugador".
         $player = new PlayerModel;
         $player->copyFrom($data);
         $player->insert();
