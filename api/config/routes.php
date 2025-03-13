@@ -32,6 +32,7 @@ return (static function () use ($app): void {
 
         // Jugadores.
         $router->get($base_route('/v1/players'), \App\Controllers\PlayerController::class.'->index');
+        $router->post($base_route('/v1/players'), \App\Controllers\PlayerController::class.'->create');
         $router->get($base_route('/v1/players/@id'), \App\Controllers\PlayerController::class.'->show');
         $router->get($base_route('/v1/players/@id/pairs'), \App\Controllers\PlayerController::class.'->pair');
 

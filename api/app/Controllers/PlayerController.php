@@ -71,6 +71,54 @@ class PlayerController extends BaseController
     }
 
     /**
+     * Registra la información de un "jugador".
+     */
+    public function create(): void
+    {
+        // Define los campos necesarios de la petición.
+        $fields = ['fullname', 'city', 'weight', 'height', 'age', 'experience'];
+
+        // Obtiene solo los campos necesarios.
+        foreach ($fields as $field) {
+            $data[$field] = $this->app()->request()->data->{$field} ?? null;
+        }
+
+        $data = [];
+
+        // Obtiene las reglas de validación.
+        $rules = PlayerValidation::getRules($fields);
+
+        // Define todas las reglas de validación como obligatorias.
+        foreach (array_keys($rules) as $rule) {
+            array_unshift($rules[$rule], 'required');
+        }
+
+        // Establece las reglas de validación.
+        $this->gump()->validation_rules($rules);
+
+        // Establece los filtros de validación.
+        $this->gump()->filter_rules(PlayerValidation::getFilters($fields));
+
+        // Valida el cuerpo de la petición.
+        $data = $this->gump()->run($data);
+
+        // Comprueba si existen errores de validación.
+        if ($this->gump()->errors()) {
+            $this->respondValidationErrors(
+                $this->gump()->get_errors_array(),
+                'The player information is incorrect');
+        }
+
+        // Registra la información del jugador.
+        $player = new PlayerModel;
+        $player->copyFrom($data);
+        $player->insert();
+        $player->find();
+
+        $this->respondCreated($player, 'The player was created successfully');
+    }
+
+    /**
      * Muestra la información de un "jugador".
      */
     public function show(string $id): void

@@ -290,6 +290,7 @@ img {
 <p>Ejemplos:</p>
 <pre><code class="language-bash">curl -X POST \
   -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
   http://localhost:8080/v1/auth/login \
   -d '{
     &quot;nickname&quot;: &quot;ricardogj08&quot;,
@@ -298,6 +299,7 @@ img {
 
 curl -X POST \
   -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
   http://localhost:8080/v1/auth/login \
   -d '{
     &quot;nickname&quot;: &quot;ricardogj08@riseup.net&quot;,
