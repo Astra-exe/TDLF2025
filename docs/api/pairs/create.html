@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>📘</text></svg>">
-  <title>Información de una categoría de inscripción</title>
+  <title>Crear una pareja</title>
   <style>body {
   font-family: sans-serif;
   font-size: 16px;
@@ -238,8 +238,14 @@ img {
 </ul>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/pairs/index.html">Parejas/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs/index.html"><b>Parejas</b>/</a>
 <ul>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs/create.html"><b>Crear una pareja</b>/</a>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs/show.html">Información de una pareja/</a>
+</li>
 </ul>
 </li>
 <li>
@@ -253,11 +259,8 @@ img {
 </ul>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/registration-categories/index.html"><b>Categorías de inscripción</b>/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/registration-categories/index.html">Categorías de inscripción/</a>
 <ul>
-<li>
-<a href="https://astra-exe.github.io/TDLF2025/api/registration-categories/show.html"><b>Información de una categoría de inscripción</b>/</a>
-</li>
 </ul>
 </li>
 <li>
@@ -266,32 +269,90 @@ img {
 </ul>
 </li>
 </ul></aside>
-    <main class="main"><h1>Información de una categoría de inscripción</h1>
-<pre><code>[GET] /v1/categories/registrations/@id
+    <main class="main"><h1>Crear una pareja</h1>
+<pre><code>[POST] /v1/pairs
 </code></pre>
-<p>Parámetros de la petición:</p>
+<p>Cuerpo de la petición:</p>
 <table>
-<tr><th>Parámetros </th><th>Tipo </th><th>Requerido </th><th>Descripción </th></tr>
-<tr><td><code>id</code> </td><td><code>string</code> </td><td><code>true</code> </td><td>Identificador de la categoría de inscripción. </td></tr>
+<tr><th>Propiedades </th><th>Tipo </th><th>Requerido </th><th>Rango </th><th>Descripción </th></tr>
+<tr><td><code>registration_category_id</code> </td><td><code>string</code> </td><td><code>true</code> </td><td><code>exact_len: 36</code> </td><td>Identificador de la categoría de inscripción de la pareja (<a href="../registration-categories/index.html">ver</a>). </td></tr>
+<tr><td><code>players</code> </td><td><code>array[players]</code> </td><td><code>true</code> </td><td><code>array_size_equal: 2</code> </td><td>Una lista con los identificadores de los jugadores de la pareja (<a href="../players/index.html">ver</a>). </td></tr>
 </table>
 <p>Ejemplo:</p>
-<pre><code class="language-bash">curl -X GET \
+<pre><code class="language-bash">curl -X POST \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'X-API-KEY: API_KEY' \
-  http://localhost:8080/v1/categories/registrations/@id
+  http://localhost:8080/v1/pairs \
+  -d '{
+    &quot;registration_category_id&quot;:&quot;15134933-1932-4df4-bb5a-b304774b229c&quot;,
+    &quot;players&quot;:[
+      &quot;07b80796-fd26-4b1b-9f5d-6330e96ed849&quot;,
+      &quot;b7f22815-7082-41ac-9ba5-0e43022d7d5f&quot;
+    ]
+  }'
 </code></pre>
 <p>Respuesta de la petición:</p>
 <pre><code class="language-json">{
   &quot;data&quot;: {
-    &quot;id&quot;: &quot;15134933-1932-4df4-bb5a-b304774b229c&quot;,
-    &quot;name&quot;: &quot;open&quot;,
-    &quot;description&quot;: &quot;Libre&quot;,
-    &quot;created_at&quot;: &quot;2025-03-07 14:38:11&quot;,
-    &quot;updated_at&quot;: &quot;2025-03-07 14:38:11&quot;
+    &quot;pair&quot;: {
+      &quot;id&quot;: &quot;e29a4226-cf35-48c8-b976-561ca79931f0&quot;,
+      &quot;is_eliminated&quot;: 0,
+      &quot;created_at&quot;: &quot;2025-03-13 22:14:25&quot;,
+      &quot;updated_at&quot;: &quot;2025-03-13 22:14:25&quot;,
+      &quot;registration_category&quot;: {
+        &quot;id&quot;: &quot;15134933-1932-4df4-bb5a-b304774b229c&quot;,
+        &quot;name&quot;: &quot;open&quot;,
+        &quot;description&quot;: &quot;Libre&quot;
+      }
+    },
+    &quot;players&quot;: [
+      {
+        &quot;player&quot;: {
+          &quot;id&quot;: &quot;b7f22815-7082-41ac-9ba5-0e43022d7d5f&quot;,
+          &quot;fullname&quot;: &quot;Juan José Ramírez López&quot;,
+          &quot;city&quot;: &quot;Irapuato&quot;,
+          &quot;weight&quot;: &quot;70.00&quot;,
+          &quot;height&quot;: &quot;1.65&quot;,
+          &quot;age&quot;: 25,
+          &quot;experience&quot;: 5,
+          &quot;is_active&quot;: 1,
+          &quot;created_at&quot;: &quot;2025-03-07 14:44:28&quot;,
+          &quot;updated_at&quot;: &quot;2025-03-07 14:44:28&quot;
+        },
+        &quot;relationship&quot;: {
+          &quot;id&quot;: &quot;d1c0b3d6-4fe4-4047-b922-4b272cef4f4a&quot;,
+          &quot;player_id&quot;: &quot;b7f22815-7082-41ac-9ba5-0e43022d7d5f&quot;,
+          &quot;pair_id&quot;: &quot;e29a4226-cf35-48c8-b976-561ca79931f0&quot;,
+          &quot;created_at&quot;: &quot;2025-03-13 22:14:25&quot;,
+          &quot;updated_at&quot;: &quot;2025-03-13 22:14:25&quot;
+        }
+      },
+      {
+        &quot;player&quot;: {
+          &quot;id&quot;: &quot;07b80796-fd26-4b1b-9f5d-6330e96ed849&quot;,
+          &quot;fullname&quot;: &quot;Ricardo García Jiménez&quot;,
+          &quot;city&quot;: &quot;Salvatierra&quot;,
+          &quot;weight&quot;: &quot;120.00&quot;,
+          &quot;height&quot;: &quot;1.82&quot;,
+          &quot;age&quot;: 26,
+          &quot;experience&quot;: 0,
+          &quot;is_active&quot;: 1,
+          &quot;created_at&quot;: &quot;2025-03-07 14:44:28&quot;,
+          &quot;updated_at&quot;: &quot;2025-03-07 14:44:28&quot;
+        },
+        &quot;relationship&quot;: {
+          &quot;id&quot;: &quot;fc14c42a-49ea-416c-a99c-a6eea0a040ea&quot;,
+          &quot;player_id&quot;: &quot;07b80796-fd26-4b1b-9f5d-6330e96ed849&quot;,
+          &quot;pair_id&quot;: &quot;e29a4226-cf35-48c8-b976-561ca79931f0&quot;,
+          &quot;created_at&quot;: &quot;2025-03-13 22:14:25&quot;,
+          &quot;updated_at&quot;: &quot;2025-03-13 22:14:25&quot;
+        }
+      }
+    ]
   },
-  &quot;status&quot;: 200,
-  &quot;description&quot;: &quot;Information about the registration category of pairs players&quot;
+  &quot;status&quot;: 201,
+  &quot;description&quot;: &quot;The pair was created successfully&quot;
 }
 </code></pre></main>
   </div>

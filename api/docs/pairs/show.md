@@ -32,7 +32,7 @@ Respuesta de la petición:
     "registration_category": {
       "id": "15134933-1932-4df4-bb5a-b304774b229c",
       "name": "open",
-      "description": "Categoría libre"
+      "description": "Libre"
     }
   },
   "status": 200,

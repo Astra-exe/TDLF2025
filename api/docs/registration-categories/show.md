@@ -27,7 +27,7 @@ Respuesta de la petición:
   "data": {
     "id": "15134933-1932-4df4-bb5a-b304774b229c",
     "name": "open",
-    "description": "Categoría libre",
+    "description": "Libre",
     "created_at": "2025-03-07 14:38:11",
     "updated_at": "2025-03-07 14:38:11"
   },

@@ -273,6 +273,8 @@ img {
 </li>
 </ul></aside>
     <main class="main"><h1>Crear un jugador</h1>
+<pre><code>[POST] /v1/players
+</code></pre>
 <p>Cuerpo de la petición:</p>
 <table>
 <tr><th>Campo </th><th>Tipo </th><th>Requerido </th><th>Rango </th><th>Descripción </th></tr>
@@ -282,7 +284,40 @@ img {
 <tr><td><code>height</code> </td><td><code>float</code> </td><td><code>true</code> </td><td><code>between_numeric: [0.5, 2.5]</code> </td><td>Estatura en metros del jugador. </td></tr>
 <tr><td><code>age</code> </td><td><code>integer</code> </td><td><code>true</code> </td><td><code>between_numeric: [14, 122]</code> </td><td>Edad del jugador. </td></tr>
 <tr><td><code>experience</code> </td><td><code>integer</code> </td><td><code>true</code> </td><td><code>between_numeric: [0, 50]</code> </td><td>Tiempo en años que el jugador ha practicado el deporte. </td></tr>
-</table></main>
+</table>
+<p>Ejemplo:</p>
+<pre><code class="language-bash">curl -X POST \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY' \
+  http://localhost:8080/v1/players \
+  -d '{
+    &quot;fullname&quot;: &quot;Francisco Javier Solís Martínez&quot;,
+    &quot;city&quot;: &quot;Irapuato&quot;,
+    &quot;weight&quot;: &quot;70&quot;,
+    &quot;height&quot;: &quot;1.70&quot;,
+    &quot;age&quot;: &quot;25&quot;,
+    &quot;experience&quot;: &quot;5&quot;
+  }'
+</code></pre>
+<p>Respuesta de la petición:</p>
+<pre><code class="language-json">{
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;cbfee9f9-0d0a-4b0c-9ede-0628fc2a3387&quot;,
+    &quot;fullname&quot;: &quot;Francisco Javier Solís Martínez&quot;,
+    &quot;city&quot;: &quot;Irapuato&quot;,
+    &quot;weight&quot;: &quot;70.00&quot;,
+    &quot;height&quot;: &quot;1.70&quot;,
+    &quot;age&quot;: 25,
+    &quot;experience&quot;: 5,
+    &quot;is_active&quot;: 1,
+    &quot;created_at&quot;: &quot;2025-03-13 22:37:14&quot;,
+    &quot;updated_at&quot;: &quot;2025-03-13 22:37:14&quot;
+  },
+  &quot;status&quot;: 201,
+  &quot;description&quot;: &quot;The player was created successfully&quot;
+}
+</code></pre></main>
   </div>
   <div>
     <hr>
