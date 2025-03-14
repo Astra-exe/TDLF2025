@@ -113,7 +113,7 @@ class PlayerController extends BaseController
         $player = new PlayerModel;
         $player->copyFrom($data);
         $player->insert();
-        $player->find();
+        $player->find($player->id);
 
         $this->respondCreated($player, 'The player was created successfully');
     }

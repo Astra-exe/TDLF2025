@@ -57,7 +57,7 @@ class PairController extends BaseController
         $player = new PlayerModel;
 
         // Comprueba que los "jugadores" existan
-        // y no se encuentren dentro de una pareja.
+        // y no se encuentren dentro de una "pareja".
         foreach ($data['players'] as $id) {
             $player->select('id')->find($id);
 
@@ -67,7 +67,7 @@ class PairController extends BaseController
                     'The pair players information is incorrect');
             }
 
-            if (isset($player->pairPlayerPivot)) {
+            if ($player->pairPlayerPivot->isHydrated()) {
                 $this->respondValidationErrors(
                     ['players' => 'The players are already in a pair'],
                     'The pair players information is incorrect');
@@ -95,7 +95,7 @@ class PairController extends BaseController
         }
 
         // Consulta la información de la "pareja" registrada.
-        $pair->find();
+        $pair->find($pair->id);
         $pair->setCustomData('registration_category', $pair->registrationCategory);
 
         unset($pair->registration_category_id);
