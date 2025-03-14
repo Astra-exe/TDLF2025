@@ -54,16 +54,26 @@ class PairController extends BaseController
                 'The pair information is incorrect');
         }
 
-        // Comprueba que los "jugadores" existan.
-        $players = new PlayerModel;
-        $players->select('id')
-            ->in('id', $data['players'])
-            ->findAll();
+        $player = new PlayerModel;
 
-        if (array_diff($data['players'], array_column($players->toArray(), 'id'))) {
-            $this->respondValidationErrors(
-                ['players' => 'The players were not found'],
-                'The pair players information is incorrect');
+        // Comprueba que los "jugadores" existan
+        // y no se encuentren dentro de una pareja.
+        foreach ($data['players'] as $id) {
+            $player->select('id')->find($id);
+
+            if (! $player->isHydrated()) {
+                $this->respondValidationErrors(
+                    ['players' => 'The players were not found'],
+                    'The pair players information is incorrect');
+            }
+
+            if (isset($player->pairPlayerPivot)) {
+                $this->respondValidationErrors(
+                    ['players' => 'The players are already in a pair'],
+                    'The pair players information is incorrect');
+            }
+
+            $player->reset();
         }
 
         $pair = new PairModel;
@@ -78,8 +88,8 @@ class PairController extends BaseController
         $pairPlayerPivot = new PairPlayerPivotModel;
 
         // Registra la relación del "jugador" con la "pareja".
-        foreach ($players as $player) {
-            $pairPlayerPivot->copyFrom(['player_id' => $player->id, 'pair_id' => $pair->id]);
+        foreach ($data['players'] as $id) {
+            $pairPlayerPivot->copyFrom(['player_id' => $id, 'pair_id' => $pair->id]);
             $pairPlayerPivot->insert();
             $pairPlayerPivot->reset();
         }
