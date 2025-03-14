@@ -78,12 +78,12 @@ class PlayerController extends BaseController
         // Define los campos necesarios de la petición.
         $fields = ['fullname', 'city', 'weight', 'height', 'age', 'experience'];
 
+        $data = [];
+
         // Obtiene solo los campos necesarios.
         foreach ($fields as $field) {
             $data[$field] = $this->app()->request()->data->{$field} ?? null;
         }
-
-        $data = [];
 
         // Obtiene las reglas de validación.
         $rules = PlayerValidation::getRules($fields);

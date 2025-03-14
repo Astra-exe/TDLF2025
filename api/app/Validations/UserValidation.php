@@ -9,7 +9,7 @@ use App\Models\RoleModel;
  */
 class UserValidation extends BaseValidation
 {
-    private static array $rolesIDs;
+    private static array $rolesIDs = [];
 
     public static function getAllRules(): array
     {

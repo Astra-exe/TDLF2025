@@ -133,7 +133,7 @@ class PairPlayerController extends BaseController
             $pair->{$field} = $data[$field];
         }
 
-        // Registra la información de la pareja.
+        // Registra la información de la "pareja".
         $pair->insert();
 
         $player = new PlayerModel;

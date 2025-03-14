@@ -11,7 +11,9 @@ use App\Models\RegistrationCategoryModel;
  */
 class PairValidation extends BaseValidation
 {
-    private static array $categoriesRegistrationsIDs;
+    private const NUM_PLAYERS = 2;
+
+    private static array $categoriesRegistrationsIDs = [];
 
     public static function getAllRules(): array
     {
@@ -53,11 +55,9 @@ class PairValidation extends BaseValidation
      */
     public static function getPlayersRules(array $fields): array
     {
-        $rules = PlayerValidation::getRules($fields);
+        $result = ['players' => ['valid_array_size_equal' => self::NUM_PLAYERS]];
 
-        $result = ['players' => ['valid_array_size_equal' => 2]];
-
-        foreach ($rules as $field => $value) {
+        foreach (PlayerValidation::getRules($fields) as $field => $value) {
             $result['players.*.'.$field] = $value;
         }
 
@@ -69,11 +69,9 @@ class PairValidation extends BaseValidation
      */
     public static function getPlayersFilters(array $fields): array
     {
-        $filters = PlayerValidation::getFilters($fields);
-
         $result = [];
 
-        foreach ($filters as $field => $value) {
+        foreach (PlayerValidation::getFilters($fields) as $field => $value) {
             $result['players.*.'.$field] = $value;
         }
 
