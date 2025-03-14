@@ -47,5 +47,6 @@ return (static function () use ($app): void {
 
         // Roles de los usuarios de acceso.
         $router->get($base_route('/v1/roles'), \App\Controllers\RoleController::class.'->index');
+        $router->get($base_route('/v1/roles/@id'), \App\Controllers\RoleController::class.'->show');
     }, [\App\Middlewares\AuthMiddleware::class]);
 })();
