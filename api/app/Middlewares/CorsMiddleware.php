@@ -18,7 +18,7 @@ class CorsMiddleware extends BaseMiddleware
 
         if ($request->method === 'OPTIONS') {
             // Define los métodos HTTP permitidos.
-            if (empty($request->getVar('HTTP_ACCESS_CONTROL_REQUEST_METHOD'))) {
+            if ($request->getVar('HTTP_ACCESS_CONTROL_REQUEST_METHOD')) {
                 $response->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS, HEAD');
             }
 
