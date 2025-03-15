@@ -58,10 +58,15 @@ export default function LoginForm() {
     },
   });
 
+  async function onSubmit(values: z.infer<typeof formLoginSchema>) {
+    console.log(values);
+    formAction(values);
+  }
+
   return (
     <div className="bg-white rounded-2xl text-dark px-8 py-3 sm:p-14 border-2 border-dark/50 shadow-2xl backdrop-blur-2xl">
       <Form {...form}>
-        <form action={formAction} className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
             name="username"
