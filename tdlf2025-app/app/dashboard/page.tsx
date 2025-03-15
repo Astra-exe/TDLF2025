@@ -1,15 +1,15 @@
-import { logOut } from "@/app/lib/actions";
+import CardsDashboard from "@/app/components/CardsDashboard";
 
 export default function DashboardPage() {
   return (
-    <div>
-      <div>
-        <h1>Dashboard</h1>
-        <form action={logOut}>
-          <button className="flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 text-dark p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3">
-            <div className="hidden md:block">Sign Out</div>
-          </button>
-        </form>
+    <div className="w-full pt-8">
+      <div className="w-[80%] mx-auto">
+        <h1 className="text-3xl md:text-4xl font-bold text-center mb-10">
+          Dashboard
+        </h1>
+        <section className="grid grid-cols-2 gap-4">
+          <CardsDashboard />
+        </section>
       </div>
     </div>
   );
