@@ -15,6 +15,7 @@ Ejemplo:
 ```bash
 curl -X GET \
   -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
   -H 'X-API-KEY: API_KEY' \
   http://localhost:8080/v1/pairs/@id
 ```
@@ -31,7 +32,7 @@ Respuesta de la petición:
     "registration_category": {
       "id": "15134933-1932-4df4-bb5a-b304774b229c",
       "name": "open",
-      "description": "Categoría libre"
+      "description": "Libre"
     }
   },
   "status": 200,

@@ -32,6 +32,7 @@ return (static function () use ($app): void {
 
         // Jugadores.
         $router->get($base_route('/v1/players'), \App\Controllers\PlayerController::class.'->index');
+        $router->post($base_route('/v1/players'), \App\Controllers\PlayerController::class.'->create');
         $router->get($base_route('/v1/players/@id'), \App\Controllers\PlayerController::class.'->show');
         $router->get($base_route('/v1/players/@id/pairs'), \App\Controllers\PlayerController::class.'->pair');
 
@@ -41,9 +42,11 @@ return (static function () use ($app): void {
         $router->post($base_route('/v1/pairs/players'), \App\Controllers\PairPlayerController::class.'->create');
 
         // Parejas.
+        $router->post($base_route('/v1/pairs'), \App\Controllers\PairController::class.'->create');
         $router->get($base_route('/v1/pairs/@id'), \App\Controllers\PairController::class.'->show');
 
         // Roles de los usuarios de acceso.
         $router->get($base_route('/v1/roles'), \App\Controllers\RoleController::class.'->index');
+        $router->get($base_route('/v1/roles/@id'), \App\Controllers\RoleController::class.'->show');
     }, [\App\Middlewares\AuthMiddleware::class]);
 })();

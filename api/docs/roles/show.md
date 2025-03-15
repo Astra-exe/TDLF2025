@@ -1,14 +1,14 @@
-# Información de una categoría de inscripción
+# Información de un rol
 
 ```
-[GET] /v1/categories/registrations/@id
+[GET] /v1/roles/@id
 ```
 
 Parámetros de la petición:
 
 | Parámetros | Tipo | Requerido | Descripción |
 | ---------- | ---- | --------- | ----------- |
-| `id` | `string` | `true` | Identificador de la categoría de inscripción. |
+| `id` | `string` | `true` | Identificador del rol. |
 
 Ejemplo:
 
@@ -17,7 +17,7 @@ curl -X GET \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'X-API-KEY: API_KEY' \
-  http://localhost:8080/v1/categories/registrations/@id
+  http://localhost:8080/v1/roles/@id
 ```
 
 Respuesta de la petición:
@@ -25,13 +25,13 @@ Respuesta de la petición:
 ```json
 {
   "data": {
-    "id": "15134933-1932-4df4-bb5a-b304774b229c",
-    "name": "open",
-    "description": "Libre",
+    "id": "ff23a6f7-0862-4431-b3b3-015beae0cb9f",
+    "name": "admin",
+    "description": "Administrador",
     "created_at": "2025-03-07 14:38:11",
     "updated_at": "2025-03-07 14:38:11"
   },
   "status": 200,
-  "description": "Information about the registration category of pairs players"
+  "description": "Information about the access user role"
 }
 ```

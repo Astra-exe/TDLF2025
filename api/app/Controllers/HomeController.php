@@ -8,6 +8,9 @@ class HomeController extends BaseController
 {
     public function welcome(): void
     {
-        $this->respond(null, 'API RESTful del evento Torneo de las Fresas Irapuato 2025');
+        $this->respond([
+            'title' => 'API RESTful del evento de frontenis "Torneo de las Fresas Irapuato 2025"',
+            'documentation' => 'https://astra-exe.github.io/TDLF2025/api/',
+        ], 'Information about the API RESTful');
     }
 }

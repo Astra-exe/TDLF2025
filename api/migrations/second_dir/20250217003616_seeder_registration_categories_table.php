@@ -20,14 +20,14 @@ final class SeederRegistrationCategoriesTable extends AbstractMigration
             [
                 'id' => Database::getUuid(),
                 'name' => 'open',
-                'description' => 'Categoría libre',
+                'description' => 'Libre',
                 'created_at' => Date::getCurrentDateTime(),
                 'updated_at' => Date::getCurrentDateTime(),
             ],
             [
                 'id' => Database::getUuid(),
                 'name' => 'seniors',
-                'description' => 'Categoría para 50 y más',
+                'description' => '50 y más',
                 'created_at' => Date::getCurrentDateTime(),
                 'updated_at' => Date::getCurrentDateTime(),
             ],

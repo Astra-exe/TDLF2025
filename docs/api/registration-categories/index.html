@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>📘</text></svg>">
   <title>Categorías de inscripción</title>
   <style>body {
   font-family: sans-serif;
@@ -111,7 +112,7 @@ a {
 }
 
 .footer p {
-  margin: 0.5ex 0;
+  margin: 0.5ex 1ex;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -208,8 +209,7 @@ img {
     border-top-color: #222;
   }
 
-  .sidebar a:hover,
-  th {
+  .sidebar a:hover, th {
     background-color: #222;
   }
 
@@ -228,12 +228,17 @@ img {
 }</style>
 </head>
 <body>
-  <nav class="navbar"><a href="https://astra-exe.github.io/TDLF2025/api/index.html"><b>Home</b></a>
-<span class="right"></span></nav>
+  <nav class="navbar"><a href="https://astra-exe.github.io/TDLF2025/api/index.html"><b>Inicio</b></a>
+<span class="right"><a href="https://github.com/Astra-exe/TDLF2025/tree/main/api">Repositorio</a> <a href="mailto:ricardogj08@riseup.net">Contacto</a></span></nav>
   <div class="content">
     <aside class="sidebar"><ul>
 <li>
 <a href="https://astra-exe.github.io/TDLF2025/api/auth/index.html">Autenticación/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups-pairs/index.html">Parejas de los grupos/</a>
 <ul>
 </ul>
 </li>
@@ -273,6 +278,7 @@ img {
 <p>Ejemplo:</p>
 <pre><code class="language-bash">curl -X GET \
   -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
   -H 'X-API-KEY: API_KEY' \
   http://localhost:8080/v1/categories/registrations
 </code></pre>
@@ -282,14 +288,14 @@ img {
     {
       &quot;id&quot;: &quot;15134933-1932-4df4-bb5a-b304774b229c&quot;,
       &quot;name&quot;: &quot;open&quot;,
-      &quot;description&quot;: &quot;Categoría libre&quot;,
+      &quot;description&quot;: &quot;Libre&quot;,
       &quot;created_at&quot;: &quot;2025-03-07 14:38:11&quot;,
       &quot;updated_at&quot;: &quot;2025-03-07 14:38:11&quot;
     },
     {
       &quot;id&quot;: &quot;810f3713-ca58-4f11-99c1-db40edb58ab7&quot;,
       &quot;name&quot;: &quot;seniors&quot;,
-      &quot;description&quot;: &quot;Categoría para 50 y más&quot;,
+      &quot;description&quot;: &quot;50 y más&quot;,
       &quot;created_at&quot;: &quot;2025-03-07 14:38:11&quot;,
       &quot;updated_at&quot;: &quot;2025-03-07 14:38:11&quot;
     }
@@ -303,7 +309,7 @@ img {
     <hr>
     <footer class="footer">
       <p>Generated with <a href="https://notabug.org/ricardogj08/swiki" target="_blank">swiki</a>, a simple wiki generator written in POSIX <code>sh</code>.</p>
-      <p>CC-BY-4.0</p>
+      <p>© CC-BY-4.0</p>
     </footer>
   </div>
 </body>

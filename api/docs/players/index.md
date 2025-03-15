@@ -22,6 +22,7 @@ Ejemplo:
 ```bash
 curl -X GET \
   -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
   -H 'X-API-KEY: API_KEY' \
   http://localhost:8080/v1/players?page=2&search=Ricardo&filterBy=fullname&orderBy=age&sortBy=asc&is_active=true
 ```

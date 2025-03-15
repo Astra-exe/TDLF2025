@@ -6,6 +6,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import requests
 import numpy as np
+import pandas as pd
 
 import os
 from dotenv import load_dotenv
@@ -89,7 +90,7 @@ def make_map():
         'X-API-KEY': api_key
     }
 
-    # Obtener los jugadores de la API PHP
+    # get the first call
     try:
         response = requests.get('http://localhost:8080/v1/players', headers=headers)
 
@@ -97,13 +98,48 @@ def make_map():
         if response.status_code == 200:
             # Verificar si la respuesta tiene contenido
             if response.text.strip():
-                players = response.json()
-                return jsonify(players), 200
+                first_call = response.json()
             else:
                 return jsonify({"error": "Respuesta vacía de la API"}), 500
         else:
             print("Error:", response.text, response.status_code)
             return jsonify({"error": response.text, "status_code": response.status_code}), response.status_code
+        
+        # get players info from all pages
+        pages = first_call["pagination"]["total"]
+        players = []
+
+        for i in range(1, pages + 1):
+            params = {
+                "page": i
+            }
+            response = requests.get("http://localhost:8080/v1/players", headers=headers, params=params)
+            if response.status_code == 200:
+                data = response.json()
+                players.extend(data["data"])
+            else:
+                return jsonify({"error": response.text, "status_code": response.status_code}), response.status_code
+        print(len(players))
+        
+        #count the number of players by city
+        cities = {}
+        for player in players:
+            if player["city"] in cities:
+                cities[player["city"]] += 1
+            else:
+                cities[player["city"]] = 1
+        
+        #make a df with two columns city and number of players
+        cities_df = []
+        for city, count in cities.items():
+            cities_df.append({
+                "city": city,
+                "players": count
+            })
+        #make a df with pandas
+        df = pd.DataFrame(cities_df)
+        print(df)
+        return jsonify({"Succes": "The df has benn created succesfully"}), 200
 
     except requests.exceptions.RequestException as e:
         print(str(e))

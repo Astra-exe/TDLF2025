@@ -42,6 +42,7 @@ class AuthMiddleware extends BaseMiddleware
 
         $hash = Auth::generateHash($key);
 
+        // Consula la información de la API key del usuario.
         $apiKey = new ApiKeyModel;
         $apiKey->select('id', 'user_id', 'hash', 'expires_at')
             ->eq('hash', $hash)

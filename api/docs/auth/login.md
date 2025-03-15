@@ -16,6 +16,7 @@ Ejemplos:
 ```bash
 curl -X POST \
   -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
   http://localhost:8080/v1/auth/login \
   -d '{
     "nickname": "ricardogj08",
@@ -24,6 +25,7 @@ curl -X POST \
 
 curl -X POST \
   -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
   http://localhost:8080/v1/auth/login \
   -d '{
     "nickname": "ricardogj08@riseup.net",

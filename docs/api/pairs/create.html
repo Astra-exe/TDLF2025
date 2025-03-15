@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>📘</text></svg>">
-  <title>Crear una pareja con jugadores</title>
+  <title>Crear una pareja</title>
   <style>body {
   font-family: sans-serif;
   font-size: 16px;
@@ -243,19 +243,19 @@ img {
 </ul>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/pairs/index.html">Parejas/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs/index.html"><b>Parejas</b>/</a>
 <ul>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs/create.html"><b>Crear una pareja</b>/</a>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs/show.html">Información de una pareja/</a>
+</li>
 </ul>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/pairs-players/index.html"><b>Jugadores de las parejas</b>/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs-players/index.html">Jugadores de las parejas/</a>
 <ul>
-<li>
-<a href="https://astra-exe.github.io/TDLF2025/api/pairs-players/create.html"><b>Crear una pareja con jugadores</b>/</a>
-</li>
-<li>
-<a href="https://astra-exe.github.io/TDLF2025/api/pairs-players/show.html">Jugadores de una pareja/</a>
-</li>
 </ul>
 </li>
 <li>
@@ -274,40 +274,26 @@ img {
 </ul>
 </li>
 </ul></aside>
-    <main class="main"><h1>Crear una pareja con jugadores</h1>
-<pre><code>[POST] /v1/players/pairs
+    <main class="main"><h1>Crear una pareja</h1>
+<pre><code>[POST] /v1/pairs
 </code></pre>
 <p>Cuerpo de la petición:</p>
 <table>
 <tr><th>Propiedades </th><th>Tipo </th><th>Requerido </th><th>Rango </th><th>Descripción </th></tr>
 <tr><td><code>registration_category_id</code> </td><td><code>string</code> </td><td><code>true</code> </td><td><code>exact_len: 36</code> </td><td>Identificador de la categoría de inscripción de la pareja (<a href="../registration-categories/index.html">ver</a>). </td></tr>
-<tr><td><code>players</code> </td><td><code>array[players]</code> </td><td><code>true</code> </td><td><code>array_size_equal: 2</code> </td><td>Una lista con la información de los jugadores de la pareja (<a href="../players/create.html">ver</a>). </td></tr>
+<tr><td><code>players</code> </td><td><code>array[players]</code> </td><td><code>true</code> </td><td><code>array_size_equal: 2</code> </td><td>Una lista con los identificadores de los jugadores de la pareja (<a href="../players/index.html">ver</a>). </td></tr>
 </table>
 <p>Ejemplo:</p>
 <pre><code class="language-bash">curl -X POST \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'X-API-KEY: API_KEY' \
-  http://localhost:8080/v1/pairs/players \
+  http://localhost:8080/v1/pairs \
   -d '{
-    &quot;registration_category_id&quot;: &quot;59b675bb-4559-4748-8974-0753e716e8af&quot;,
-    &quot;players&quot;: [
-      {
-        &quot;fullname&quot;: &quot;Ricardo García Jiménez&quot;,
-        &quot;city&quot;: &quot;Salvatierra&quot;,
-        &quot;weight&quot;: 120,
-        &quot;height&quot;: 1.82,
-        &quot;age&quot;: 26,
-        &quot;experience&quot;: 0
-      },
-      {
-        &quot;fullname&quot;: &quot;Juan José Ramírez López&quot;,
-        &quot;city&quot;: &quot;Irapuato&quot;,
-        &quot;weight&quot;: 70,
-        &quot;height&quot;: 1.65,
-        &quot;age&quot;: 25,
-        &quot;experience&quot;: 5
-      }
+    &quot;registration_category_id&quot;:&quot;15134933-1932-4df4-bb5a-b304774b229c&quot;,
+    &quot;players&quot;:[
+      &quot;07b80796-fd26-4b1b-9f5d-6330e96ed849&quot;,
+      &quot;b7f22815-7082-41ac-9ba5-0e43022d7d5f&quot;
     ]
   }'
 </code></pre>
@@ -315,10 +301,10 @@ img {
 <pre><code class="language-json">{
   &quot;data&quot;: {
     &quot;pair&quot;: {
-      &quot;id&quot;: &quot;98eaa36b-98e1-4842-80d3-771627af3458&quot;,
+      &quot;id&quot;: &quot;e29a4226-cf35-48c8-b976-561ca79931f0&quot;,
       &quot;is_eliminated&quot;: 0,
-      &quot;created_at&quot;: &quot;2025-03-07 14:44:28&quot;,
-      &quot;updated_at&quot;: &quot;2025-03-07 14:44:28&quot;,
+      &quot;created_at&quot;: &quot;2025-03-13 22:14:25&quot;,
+      &quot;updated_at&quot;: &quot;2025-03-13 22:14:25&quot;,
       &quot;registration_category&quot;: {
         &quot;id&quot;: &quot;15134933-1932-4df4-bb5a-b304774b229c&quot;,
         &quot;name&quot;: &quot;open&quot;,
@@ -340,11 +326,11 @@ img {
           &quot;updated_at&quot;: &quot;2025-03-07 14:44:28&quot;
         },
         &quot;relationship&quot;: {
-          &quot;id&quot;: &quot;1decc97f-29a4-4b5f-abcb-4427aeeaf7d0&quot;,
+          &quot;id&quot;: &quot;d1c0b3d6-4fe4-4047-b922-4b272cef4f4a&quot;,
           &quot;player_id&quot;: &quot;b7f22815-7082-41ac-9ba5-0e43022d7d5f&quot;,
-          &quot;pair_id&quot;: &quot;98eaa36b-98e1-4842-80d3-771627af3458&quot;,
-          &quot;created_at&quot;: &quot;2025-03-07 14:44:28&quot;,
-          &quot;updated_at&quot;: &quot;2025-03-07 14:44:28&quot;
+          &quot;pair_id&quot;: &quot;e29a4226-cf35-48c8-b976-561ca79931f0&quot;,
+          &quot;created_at&quot;: &quot;2025-03-13 22:14:25&quot;,
+          &quot;updated_at&quot;: &quot;2025-03-13 22:14:25&quot;
         }
       },
       {
@@ -361,17 +347,17 @@ img {
           &quot;updated_at&quot;: &quot;2025-03-07 14:44:28&quot;
         },
         &quot;relationship&quot;: {
-          &quot;id&quot;: &quot;64c27726-0281-45fe-9d79-9cdf9f32c2eb&quot;,
+          &quot;id&quot;: &quot;fc14c42a-49ea-416c-a99c-a6eea0a040ea&quot;,
           &quot;player_id&quot;: &quot;07b80796-fd26-4b1b-9f5d-6330e96ed849&quot;,
-          &quot;pair_id&quot;: &quot;98eaa36b-98e1-4842-80d3-771627af3458&quot;,
-          &quot;created_at&quot;: &quot;2025-03-07 14:44:28&quot;,
-          &quot;updated_at&quot;: &quot;2025-03-07 14:44:28&quot;
+          &quot;pair_id&quot;: &quot;e29a4226-cf35-48c8-b976-561ca79931f0&quot;,
+          &quot;created_at&quot;: &quot;2025-03-13 22:14:25&quot;,
+          &quot;updated_at&quot;: &quot;2025-03-13 22:14:25&quot;
         }
       }
     ]
   },
   &quot;status&quot;: 201,
-  &quot;description&quot;: &quot;The pair with the players was created successfully&quot;
+  &quot;description&quot;: &quot;The pair was created successfully&quot;
 }
 </code></pre></main>
   </div>

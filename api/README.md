@@ -1,6 +1,8 @@
 # API
 
-API RESTful del evento "Torneo de las Fresas Irapuato 2025".
+API RESTful del evento de frontenis *"Torneo de las Fresas Irapuato 2025"*.
+
+* [Documentación.](https://astra-exe.github.io/TDLF2025/api/)
 
 ## Instalación
 
