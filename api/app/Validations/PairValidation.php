@@ -51,11 +51,19 @@ class PairValidation extends BaseValidation
     }
 
     /**
+     * Obtiene el número de "jugadores" permitidos en una "pareja".
+     */
+    public static function getNumPlayers(): int
+    {
+        return self::NUM_PLAYERS;
+    }
+
+    /**
      * Obtiene las reglas de validación de los "jugadores".
      */
     public static function getPlayersRules(array $fields): array
     {
-        $result = ['players' => ['valid_array_size_equal' => self::NUM_PLAYERS]];
+        $result = ['players' => ['valid_array_size_equal' => self::getNumPlayers()]];
 
         foreach (PlayerValidation::getRules($fields) as $field => $value) {
             $result['players.*.'.$field] = $value;

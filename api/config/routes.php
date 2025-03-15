@@ -29,6 +29,7 @@ return (static function () use ($app): void {
         // Categorías de inscripción de parejas.
         $router->get($base_route('/v1/categories/registrations'), \App\Controllers\RegistrationCategoryController::class.'->index');
         $router->get($base_route('/v1/categories/registrations/@id'), \App\Controllers\RegistrationCategoryController::class.'->show');
+        $router->get($base_route('/v1/categories/registrations/@id/groups'), \App\Controllers\RegistrationCategoryController::class.'->groups');
 
         // Jugadores.
         $router->get($base_route('/v1/players'), \App\Controllers\PlayerController::class.'->index');
@@ -48,5 +49,8 @@ return (static function () use ($app): void {
         // Roles de los usuarios de acceso.
         $router->get($base_route('/v1/roles'), \App\Controllers\RoleController::class.'->index');
         $router->get($base_route('/v1/roles/@id'), \App\Controllers\RoleController::class.'->show');
+
+        // Acciones especiales.
+        $router->post($base_route('/v1/actions/randomize/groups/pairs/matches'), \App\Controllers\ActionsController::class.'->randomizeGroupsPairsMatches');
     }, [\App\Middlewares\AuthMiddleware::class]);
 })();
