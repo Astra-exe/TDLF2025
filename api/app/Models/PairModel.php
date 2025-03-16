@@ -29,5 +29,6 @@ class PairModel extends BaseModel
         parent::beforeInsert($self);
 
         $self->is_eliminated = 0;
+        $self->is_active = 1;
     }
 }

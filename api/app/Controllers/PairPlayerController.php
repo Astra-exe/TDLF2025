@@ -22,6 +22,7 @@ class PairPlayerController extends BaseController
             'orderBy' => 'created_at',
             'sortBy' => 'desc',
             'is_eliminated' => null,
+            'is_active' => null,
         ];
 
         $queryParams = [];
@@ -58,9 +59,11 @@ class PairPlayerController extends BaseController
         $pairs->select('id')->paginate($queryParams['page'])
             ->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
 
-        // Filtra las "parejas" por estatus de eliminación.
-        if (isset($queryParams['is_eliminated'])) {
-            $pairs->eq('is_eliminated', $queryParams['is_eliminated']);
+        // Filtra las "parejas" por estatus de eliminación y estatus de actividad.
+        foreach (['is_eliminated', 'is_active'] as $param) {
+            if (isset($queryParams[$param])) {
+                $pairs->eq($param, $queryParams[$param]);
+            }
         }
 
         // Obtiene la información sobre la paginación.

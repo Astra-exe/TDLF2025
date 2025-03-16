@@ -13,4 +13,11 @@ class GroupModel extends BaseModel
     {
         return 'groups';
     }
+
+    protected function beforeInsert(BaseModel $self): void
+    {
+        parent::beforeInsert($self);
+
+        $self->is_active = 1;
+    }
 }

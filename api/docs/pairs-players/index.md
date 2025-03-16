@@ -14,6 +14,7 @@ Parámetros de consulta:
 | `orderBy` | `string` | `contains: [created_at, updated_at]` | `created_at` | Campo de ordenamiento de las parejas de jugadores. |
 | `sortBy` | `string` | `contains: [asc, desc]` | `desc` | Modo de ordenamiento de las parejas de jugadores. |
 | `is_eliminated` | `boolean` | `contains: [yes/no, on/off, 1/0, true/false]` | `null` | Filtrar las parejas de jugadores por estatus de eliminación. |
+| `is_active` | `boolean` | `contains: [yes/no, on/off, 1/0, true/false]` | `null` | Filtrar las parejas por estatus de actividad. |
 
 Ejemplo:
 
@@ -22,7 +23,7 @@ curl -X GET \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'X-API-KEY: API_KEY' \
-  http://localhost:8080/v1/pairs/players?page=2&orderBy=created_at&sortBy=desc&is_eliminated=true
+  http://localhost:8080/v1/pairs/players?page=2&orderBy=created_at&sortBy=desc&is_eliminated=true&is_active=true
 ```
 
 Respuesta de la petición:

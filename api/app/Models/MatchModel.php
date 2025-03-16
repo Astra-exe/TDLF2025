@@ -13,4 +13,11 @@ class MatchModel extends BaseModel
     {
         return 'matches';
     }
+
+    protected function beforeInsert(BaseModel $self): void
+    {
+        parent::beforeInsert($self);
+
+        $self->is_active = 1;
+    }
 }

@@ -285,13 +285,14 @@ img {
 <tr><td><code>orderBy</code> </td><td><code>string</code> </td><td><code>contains: [created_at, updated_at]</code> </td><td><code>created_at</code> </td><td>Campo de ordenamiento de las parejas de jugadores. </td></tr>
 <tr><td><code>sortBy</code> </td><td><code>string</code> </td><td><code>contains: [asc, desc]</code> </td><td><code>desc</code> </td><td>Modo de ordenamiento de las parejas de jugadores. </td></tr>
 <tr><td><code>is_eliminated</code> </td><td><code>boolean</code> </td><td><code>contains: [yes/no, on/off, 1/0, true/false]</code> </td><td><code>null</code> </td><td>Filtrar las parejas de jugadores por estatus de eliminación. </td></tr>
+<tr><td><code>is_active</code> </td><td><code>boolean</code> </td><td><code>contains: [yes/no, on/off, 1/0, true/false]</code> </td><td><code>null</code> </td><td>Filtrar las parejas por estatus de actividad. </td></tr>
 </table>
 <p>Ejemplo:</p>
 <pre><code class="language-bash">curl -X GET \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'X-API-KEY: API_KEY' \
-  http://localhost:8080/v1/pairs/players?page=2&amp;orderBy=created_at&amp;sortBy=desc&amp;is_eliminated=true
+  http://localhost:8080/v1/pairs/players?page=2&amp;orderBy=created_at&amp;sortBy=desc&amp;is_eliminated=true&amp;is_active=true
 </code></pre>
 <p>Respuesta de la petición:</p>
 <pre><code class="language-json">{

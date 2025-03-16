@@ -36,6 +36,7 @@ Respuesta de la petición:
     "pair": {
       "id": "e29a4226-cf35-48c8-b976-561ca79931f0",
       "is_eliminated": 0,
+      "is_active": 1,
       "created_at": "2025-03-13 22:14:25",
       "updated_at": "2025-03-13 22:14:25",
       "registration_category": {
