@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Models\PairModel;
 use App\Models\RegistrationCategoryModel;
 use App\Validations\RegistrationCategoryValidation;
 
@@ -89,14 +88,6 @@ class RegistrationCategoryController extends BaseController
             $this->respondNotFound('The registration category of pairs players information was not found');
         }
 
-        // Obtiene la información de los "grupos".
-        $groups = (new PairModel)->select('groups.*', 'COUNT(pairs.id) AS num_pairs')
-            ->join('groups_pairs', 'pairs.id = groups_pairs.pair_id', 'INNER')
-            ->join('groups', 'groups_pairs.group_id = groups.id', 'INNER')
-            ->eq('registration_category_id', $id)
-            ->group('groups.id')
-            ->findAll();
-
-        $this->respond($groups, 'Information about the groups of the registration category of pairs players');
+        $this->respond($registrationCategory->groups, 'Information about the groups of the registration category of pairs players');
     }
 }
