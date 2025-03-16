@@ -140,10 +140,15 @@ trait ResponseTrait
     /**
      * Genera una respuesta para paginación.
      */
-    protected function respondPagination(mixed $data, mixed $pagination, string $description)
+    protected function respondPagination(mixed $data, mixed $pagination, string $description): void
     {
         $this->body['pagination'] = $pagination;
 
         $this->respond($data, $description, Http::OK());
+    }
+
+    public function respondDependecyError(string $description, string $error = 'Failed Dependency'): void
+    {
+        $this->respondFail($description, Http::FAILED_DEPENDENCY(), $error);
     }
 }

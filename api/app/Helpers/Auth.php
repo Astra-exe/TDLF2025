@@ -49,7 +49,7 @@ class Auth
      */
     public static function getExpiration(): string
     {
-        return Date::strToDateTime(self::EXPIRATION);
+        return Date::strtodatetime(self::EXPIRATION);
     }
 
     /**

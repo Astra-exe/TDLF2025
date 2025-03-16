@@ -13,7 +13,7 @@ class PairValidation extends BaseValidation
 {
     private const NUM_PLAYERS = 2;
 
-    private static array $categoriesRegistrationsIDs = [];
+    private static array $registrationCategoriesIDs = [];
 
     public static function getAllRules(): array
     {
@@ -43,13 +43,13 @@ class PairValidation extends BaseValidation
      */
     private static function getRegistrationCategories(): array
     {
-        if (empty(self::$categoriesRegistrationsIDs)) {
+        if (empty(self::$registrationCategoriesIDs)) {
             $categories = (new RegistrationCategoryModel)->select('id')->findAll();
 
-            self::$categoriesRegistrationsIDs = array_column($categories, 'id');
+            self::$registrationCategoriesIDs = array_column($categories, 'id');
         }
 
-        return self::$categoriesRegistrationsIDs;
+        return self::$registrationCategoriesIDs;
     }
 
     /**
