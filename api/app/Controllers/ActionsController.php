@@ -104,7 +104,7 @@ class ActionsController extends BaseController
             shuffle($pairs);
 
             // Segmenta las "parejas" en el número total de "grupos".
-            foreach (array_chunk($pairs, $numGroups) as $key => $segment) {
+            foreach (array_chunk($pairs, $maxPairs) as $key => $segment) {
                 // Registra la información del "grupo".
                 $group->copyFrom([
                     $column => $category->id,

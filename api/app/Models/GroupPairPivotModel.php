@@ -11,7 +11,7 @@ namespace App\Models;
 class GroupPairPivotModel extends BaseModel
 {
     protected array $relations = [
-        'group' => [self::BELONGS_TO, GroupModel::class, 'group_id'],
+        '_group' => [self::BELONGS_TO, GroupModel::class, 'group_id'],
         'pair' => [self::BELONGS_TO, PairModel::class, 'pair_id'],
     ];
 

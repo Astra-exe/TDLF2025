@@ -1,7 +1,7 @@
 # Crear una pareja con jugadores
 
 ```
-[POST] /v1/players/pairs
+[POST] /v1/pairs/players
 ```
 
 Cuerpo de la petición:
