@@ -15,7 +15,12 @@ class GroupModel extends BaseModel
             'registration_category_id',
             ['select' => ['id', 'name', 'description']],
         ],
-        'groupPairPivot' => [self::HAS_MANY, GroupPairPivotModel::class, 'group_id'],
+        'groupPairPivot' => [
+            self::HAS_MANY,
+            GroupPairPivotModel::class,
+            'group_id',
+            ['orderBy' => 'created_at DESC'],
+        ],
     ];
 
     public function getTableName(): string

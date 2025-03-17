@@ -16,8 +16,17 @@ class PairModel extends BaseModel
             'registration_category_id',
             ['select' => ['id', 'name', 'description']],
         ],
-        'pairPlayerPivot' => [self::HAS_MANY, PairPlayerPivotModel::class, 'pair_id'],
-        'matchPairPivot' => [self::HAS_MANY, MatchPairPivotModel::class, 'pair_id'],
+        'pairPlayerPivot' => [
+            self::HAS_MANY,
+            PairPlayerPivotModel::class,
+            'pair_id',
+            ['orderBy' => 'created_at DESC'],
+        ],
+        'matchPairPivot' => [
+            self::HAS_MANY,
+            MatchPairPivotModel::class, 'pair_id',
+            ['orderBy' => 'created_at DESC'],
+        ],
         'groupPairPivot' => [self::HAS_ONE, GroupPairPivotModel::class, 'pair_id'],
     ];
 

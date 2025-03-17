@@ -11,7 +11,12 @@ namespace App\Models;
 class MatchCategoryModel extends BaseModel
 {
     protected array $relations = [
-        'matches' => [self::HAS_MANY, MatchModel::class, 'match_category_id'],
+        'matches' => [
+            self::HAS_MANY,
+            MatchModel::class,
+            'match_category_id',
+            ['orderBy' => 'created_at DESC'],
+        ],
     ];
 
     public function getTableName(): string

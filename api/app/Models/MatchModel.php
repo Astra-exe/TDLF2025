@@ -25,7 +25,12 @@ class MatchModel extends BaseModel
             'match_status_id',
             ['select' => ['id', 'name', 'description']],
         ],
-        'matchPairPivot' => [self::HAS_MANY, MatchPairPivotModel::class, 'match_id'],
+        'matchPairPivot' => [
+            self::HAS_MANY,
+            MatchPairPivotModel::class,
+            'match_id',
+            ['orderBy' => 'created_at DESC'],
+        ],
     ];
 
     public function getTableName(): string

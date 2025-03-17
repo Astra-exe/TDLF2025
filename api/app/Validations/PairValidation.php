@@ -41,7 +41,7 @@ class PairValidation extends BaseValidation
     /**
      * Obtiene los IDs de las "categorías de inscripción de las parejas de jugadores".
      */
-    private static function getRegistrationCategories(): array
+    public static function getRegistrationCategories(): array
     {
         if (empty(self::$registrationCategoriesIDs)) {
             $categories = (new RegistrationCategoryModel)->select('id')->findAll();

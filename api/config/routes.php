@@ -46,6 +46,9 @@ return (static function () use ($app): void {
         $router->post($base_route('/v1/pairs'), \App\Controllers\PairController::class.'->create');
         $router->get($base_route('/v1/pairs/@id'), \App\Controllers\PairController::class.'->show');
 
+        // Grupos y parejas.
+        $router->get($base_route('/v1/groups/@id/pairs/players'), \App\Controllers\GroupPairController::class.'->players');
+
         // Roles de los usuarios de acceso.
         $router->get($base_route('/v1/roles'), \App\Controllers\RoleController::class.'->index');
         $router->get($base_route('/v1/roles/@id'), \App\Controllers\RoleController::class.'->show');
