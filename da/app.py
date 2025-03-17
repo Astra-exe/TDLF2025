@@ -1,5 +1,6 @@
 from utils.features import (
-    playerp
+    playerp,
+    players_location
 )
 
 from flask import Flask, request, jsonify
@@ -119,7 +120,6 @@ def make_map():
                 players.extend(data["data"])
             else:
                 return jsonify({"error": response.text, "status_code": response.status_code}), response.status_code
-        print(len(players))
         
         #count the number of players by city
         cities = {}
@@ -138,8 +138,10 @@ def make_map():
             })
         #make a df with pandas
         df = pd.DataFrame(cities_df)
-        print(df)
-        return jsonify({"Succes": "The df has benn created succesfully"}), 200
+
+        #create the map
+        map = players_location(df)
+        return jsonify({"map_html": map}), 200
 
     except requests.exceptions.RequestException as e:
         print(str(e))

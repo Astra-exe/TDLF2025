@@ -1,5 +1,16 @@
 # Description: This file contains the functions to extract features from the data.
 
+# Required Libraries
+import pandas as pd
+
+import folium
+from folium.plugins import HeatMap
+import time
+import requests
+
+import json
+from pathlib import Path
+
 # Function to create a recommendation profile for a player based on their height, weight and age.
 # The function returns a dictionary with recommendations for the player´s position, workout and phisical priority.
 def playerp(height, weight, age):
@@ -55,7 +66,75 @@ def playerp(height, weight, age):
         
     return recommendations
 
-# Function to create a map to know how many players visit the tournament for each city.
+# Functions to create a map to know how many players visit the tournament for each city.
+
+#Functions to make a cache of the coordinates of the cities
+def load_cache(path="coords_cache.json"):
+    if Path(path).exists():
+        with open(path, "r") as f:
+            return json.load(f)
+    return {}
+
+def save_cache(cache, path="coords_cache.json"):
+    with open(path, "w") as f:
+        return json.dump(cache, f)
+
+#Function to get the coordinates of the cities from the cache
+def get_coords_nominatim(city, cache):
+    if city in cache:
+        #print("Usando caché")
+        return cache[city]
+    
+    coords = get_coords_nominatim_no_cache(city)
+    if coords:
+        cache[city] = coords
+        save_cache(cache)
+    return coords
+
+#function to get the coordinates of the cities from nominatim api
+def get_coords_nominatim_no_cache(city):
+    url = "https://nominatim.openstreetmap.org/search"
+    params = {"q": f"{city}, México", "format": "json", "limit": 1}
+    headers = {"User-Agent": "torneo_gobierno_irapuato_frontenis_v1.0 (contacto@irapuato.gob.mx)"}
+
+    try:
+        #print("No se esta usando cache")
+        response = requests.get(url, params=params, headers=headers, timeout=15)
+        response.raise_for_status()  # launch an exception if the request was unsuccesful
+        data = response.json()
+        return [float(data[0]["lat"]), float(data[0]["lon"])] if data else None
+    except requests.exceptions.RequestException as e:
+        print(f"Error en {city}: {str(e)}")
+        return None
+
 #the function returns a map with folium 
-def players_location(cities):
-    pass
+def players_location(df):
+    # load cache
+    cache = load_cache()
+
+    # get coords (using cache)
+    df["coords"] = df["city"].apply(
+        lambda x: (time.sleep(1), get_coords_nominatim(x, cache))[1]
+    )
+
+    # Save updated cache
+    save_cache(cache)
+
+    # Create map
+    mapa = folium.Map(
+        location=[20.6736, -101.325],
+        zoom_start=7,
+        tiles="CartoDB dark_matter",
+        attr='© CARTO'
+    )
+
+    # Prepare data for heatmap
+    heat_data = [
+        [row["coords"][0], row["coords"][1], row["players"]]
+        for _, row in df.iterrows()
+    ]
+
+    HeatMap(heat_data, radius=25, blur=15).add_to(mapa)
+    return mapa._repr_html_()
+
+

@@ -5,3 +5,4 @@ __pycache__
 #Files
 .env*
 players2.json
+coords_cache.json
