@@ -9,6 +9,15 @@ namespace App\Models;
  */
 class GroupModel extends BaseModel
 {
+    protected array $relations = [
+        'registrationCategory' => [
+            self::BELONGS_TO, RegistrationCategoryModel::class,
+            'registration_category_id',
+            ['select' => ['id', 'name', 'description']],
+        ],
+        'groupPairPivot' => [self::HAS_MANY, GroupPairPivotModel::class, 'group_id'],
+    ];
+
     public function getTableName(): string
     {
         return 'groups';
@@ -18,6 +27,7 @@ class GroupModel extends BaseModel
     {
         parent::beforeInsert($self);
 
+        $self->is_eliminated = 0;
         $self->is_active = 1;
     }
 }

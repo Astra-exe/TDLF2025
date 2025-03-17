@@ -11,8 +11,8 @@ namespace App\Models;
 class PairPlayerPivotModel extends BaseModel
 {
     protected array $relations = [
-        'player' => [self::BELONGS_TO, PlayerModel::class, 'player_id'],
         'pair' => [self::BELONGS_TO, PairModel::class, 'pair_id'],
+        'player' => [self::BELONGS_TO, PlayerModel::class, 'player_id'],
     ];
 
     public function getTableName(): string

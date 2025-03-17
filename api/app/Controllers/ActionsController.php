@@ -7,6 +7,10 @@ namespace App\Controllers;
 use App\Helpers\Date;
 use App\Models\GroupModel;
 use App\Models\GroupPairPivotModel;
+use App\Models\MatchCategoryModel;
+use App\Models\MatchModel;
+use App\Models\MatchPairPivotModel;
+use App\Models\MatchStatusModel;
 use App\Models\PairModel;
 use App\Models\RegistrationCategoryModel;
 
@@ -30,10 +34,22 @@ class ActionsController extends BaseController
             ->in('name', array_keys($settings))
             ->findAll();
 
+        // Obtiene la información de la "categoría de los partidos".
+        $matchCategory = (new MatchCategoryModel)->select('id')
+            ->eq('name', 'qualifier')
+            ->find();
+
+        // Obtiene la información del "estatus de juego de los partidos".
+        $matchStatus = (new MatchStatusModel)->select('id')
+            ->eq('name', 'scheduled')
+            ->find();
+
         // Modelos.
         $pair = new PairModel;
         $group = new GroupModel;
         $groupPairPivot = new GroupPairPivotModel;
+        $match = new MatchModel;
+        $matchPairPivot = new MatchPairPivotModel;
 
         $column = 'registration_category_id';
 
@@ -78,7 +94,8 @@ class ActionsController extends BaseController
                 array_pop($groupsNames);
             }
 
-            // Obtiene las "parejas" de la "categoría" y lo ordena de manera aleatoria.
+            // Obtiene la información de las "parejas" de la "categoría"
+            // y lo ordena de manera aleatoria.
             $pairs = $pair->reset()->select('id')
                 ->eq($column, $category->id)
                 ->eq('is_active', 1)
@@ -105,6 +122,47 @@ class ActionsController extends BaseController
                     $groupPairPivot->copyFrom(['group_id' => $group->id, 'pair_id' => $_pair->id]);
                     $groupPairPivot->insert();
                     $groupPairPivot->reset();
+                }
+
+                // Consulta la información de las "parejas" del grupo.
+                $groupsPairs = $group->groupPairPivot;
+
+                // Registra la combinación de los "partidos"
+                // de las "parejas" del "grupo".
+                for ($i = 0; $i < $maxPairs; $i++) {
+                    for ($j = $i + 1; $j < $maxPairs; $j++) {
+                        // Registra la información del "partido".
+                        $match->copyFrom([
+                            $column => $category->id,
+                            'match_category_id' => $matchCategory->id,
+                            'match_status_id' => $matchStatus->id,
+                        ]);
+
+                        $match->insert();
+
+                        // Consulta la información del "partido" registrado.
+                        $match->select('id')->find($match->id);
+
+                        // Registra la información del "partido" de la "pareja combinada".
+                        $matchPairPivot->copyFrom([
+                            'match_id' => $match->id,
+                            'pair_id' => $groupsPairs[$i]->pair_id,
+                        ]);
+
+                        $matchPairPivot->insert();
+                        $matchPairPivot->reset();
+
+                        // Registra la información del "partido" de la "otra pareja".
+                        $matchPairPivot->copyFrom([
+                            'match_id' => $match->id,
+                            'pair_id' => $groupsPairs[$j]->pair_id,
+                        ]);
+
+                        $matchPairPivot->insert();
+                        $matchPairPivot->reset();
+
+                        $match->reset();
+                    }
                 }
 
                 $group->reset();

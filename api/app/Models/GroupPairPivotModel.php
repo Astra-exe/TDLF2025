@@ -10,6 +10,11 @@ namespace App\Models;
  */
 class GroupPairPivotModel extends BaseModel
 {
+    protected array $relations = [
+        'group' => [self::BELONGS_TO, GroupModel::class, 'group_id'],
+        'pair' => [self::BELONGS_TO, PairModel::class, 'pair_id'],
+    ];
+
     public function getTableName(): string
     {
         return 'groups_pairs';

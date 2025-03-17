@@ -17,6 +17,8 @@ class PairModel extends BaseModel
             ['select' => ['id', 'name', 'description']],
         ],
         'pairPlayerPivot' => [self::HAS_MANY, PairPlayerPivotModel::class, 'pair_id'],
+        'matchPairPivot' => [self::HAS_MANY, MatchPairPivotModel::class, 'pair_id'],
+        'groupPairPivot' => [self::HAS_ONE, GroupPairPivotModel::class, 'pair_id'],
     ];
 
     public function getTableName(): string

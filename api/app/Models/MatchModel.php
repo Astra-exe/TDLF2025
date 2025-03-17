@@ -9,6 +9,25 @@ namespace App\Models;
  */
 class MatchModel extends BaseModel
 {
+    protected array $relations = [
+        'registrationCategory' => [
+            self::BELONGS_TO, RegistrationCategoryModel::class,
+            'registration_category_id',
+            ['select' => ['id', 'name', 'description']],
+        ],
+        'matchCategory' => [
+            self::BELONGS_TO, MatchCategoryModel::class,
+            'match_category_id',
+            ['select' => ['id', 'name', 'description']],
+        ],
+        'matchStatus' => [
+            self::BELONGS_TO, MatchStatusModel::class,
+            'match_status_id',
+            ['select' => ['id', 'name', 'description']],
+        ],
+        'matchPairPivot' => [self::HAS_MANY, MatchPairPivotModel::class, 'match_id'],
+    ];
+
     public function getTableName(): string
     {
         return 'matches';
