@@ -4,7 +4,13 @@
 [GET] /v1/groups/@id/pairs
 ```
 
- Ejemplo:
+Parámetros de la petición:
+
+| Parámetros | Tipo | Requerido | Descripción |
+| ---------- | ---- | --------- | ----------- |
+| `id` | `string` | `true` | Identificador del grupo. |
+
+Ejemplo:
 
  ```bash
  curl -X GET \

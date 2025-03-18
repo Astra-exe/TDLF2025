@@ -4,6 +4,12 @@
 [GET] /v1/groups/@id/matches
 ```
 
+Parámetros de la petición:
+
+| Parámetros | Tipo | Requerido | Descripción |
+| ---------- | ---- | --------- | ----------- |
+| `id` | `string` | `true` | Identificador del grupo. |
+
 Ejemplo:
 
  ```bash

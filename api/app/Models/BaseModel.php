@@ -49,10 +49,11 @@ abstract class BaseModel extends ActiveRecord
     public function paginate(int $page): self
     {
         // Obtiene el número total de registros.
-        $this->select('COUNT(*) AS _count')->find();
+        $copy = clone $this;
+        $copy = $copy->select('COUNT(*) AS _count')->find();
 
         // Calcula el número total de páginas.
-        $total = ceil($this->_count / self::LIMIT);
+        $total = ceil($copy->_count / self::LIMIT);
 
         // Calcula la posición del registro donde inicia la paginación.
         $offset = ($page - 1) * self::LIMIT;
@@ -65,7 +66,7 @@ abstract class BaseModel extends ActiveRecord
             'page' => $page,
             'limit' => self::LIMIT,
             'total' => $total,
-            'count' => $this->_count,
+            'count' => $copy->_count,
             'offset' => $offset,
         ]);
 

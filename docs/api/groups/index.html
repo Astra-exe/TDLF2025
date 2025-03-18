@@ -289,7 +289,67 @@ img {
 <pre><code>[GET] /v1/groups
 </code></pre>
 <p>Parámetros de consulta:</p>
-<p>Respuesta de la petición:</p></main>
+<table>
+<tr><th>Parámetro </th><th>Tipo </th><th>Rango </th><th>Por defecto </th><th>Descripción </th></tr>
+<tr><td><code>page</code> </td><td><code>integer</code> </td><td><code>min_numeric: 1</code> </td><td><code>1</code> </td><td>Número de la página de resultados de los grupos. </td></tr>
+<tr><td><code>filterBy</code> </td><td><code>string</code> </td><td><code>contains: [name, description]</code> </td><td><code>name</code> </td><td>Campo de búsqueda de los grupos. </td></tr>
+<tr><td><code>orderBy</code> </td><td><code>string</code> </td><td><code>contains: [name, description, created_at, updated_at]</code> </td><td><code>name</code> </td><td>Campo de ordenamiento de los grupos. </td></tr>
+<tr><td><code>sortBy</code> </td><td><code>string</code> </td><td><code>contains: [asc, desc]</code> </td><td><code>asc</code> </td><td>Modo de ordenamiento de los grupos. </td></tr>
+<tr><td><code>registration_category_id</code> </td><td><code>string</code> </td><td><code>exact_len: 36</code> </td><td><code>null</code> </td><td>Identificador de la categoría de inscripción de los grupos (<a href="../registration-categories/index.html">ver</a>). </td></tr>
+<tr><td><code>is_eliminated</code> </td><td><code>boolean</code> </td><td><code>contains: [yes/no, on/off, 1/0, true/false]</code> </td><td><code>null</code> </td><td>Filtrar los grupos por estatus de eliminación. </td></tr>
+<tr><td><code>is_active</code> </td><td><code>boolean</code> </td><td><code>contains: [yes/no, on/off, 1/0, true/false]</code> </td><td><code>null</code> </td><td>Filtrar los grupos por estatus de actividad. </td></tr>
+</table>
+<p>Ejemplo:</p>
+<pre><code class="language-bash">curl -X GET \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY' \
+  http://localhost:8080/v1/groups?page=2&amp;filterBy=name&amp;orderBy=name&amp;sortBy=asc&amp;is_eliminated=false&amp;is_active=true
+</code></pre>
+<p>Respuesta de la petición:</p>
+<pre><code class="language-json">{
+  &quot;data&quot;: [
+    {
+      &quot;id&quot;: &quot;55d0ace0-ecb9-4060-b294-d71a1c102c71&quot;,
+      &quot;name&quot;: &quot;A_2025&quot;,
+      &quot;description&quot;: &quot;A&quot;,
+      &quot;is_eliminated&quot;: 0,
+      &quot;is_active&quot;: 1,
+      &quot;created_at&quot;: &quot;2025-03-18 01:59:29&quot;,
+      &quot;updated_at&quot;: &quot;2025-03-18 01:59:29&quot;,
+      &quot;registration_category&quot;: {
+        &quot;id&quot;: &quot;cba89529-0ba9-49e4-85ad-83e63c8e9d7e&quot;,
+        &quot;name&quot;: &quot;seniors&quot;,
+        &quot;description&quot;: &quot;50 y más&quot;
+      }
+    },
+    {
+      &quot;id&quot;: &quot;b77966a1-42b4-478c-b145-4ff0e4a248ed&quot;,
+      &quot;name&quot;: &quot;A_2025&quot;,
+      &quot;description&quot;: &quot;A&quot;,
+      &quot;is_eliminated&quot;: 0,
+      &quot;is_active&quot;: 1,
+      &quot;created_at&quot;: &quot;2025-03-18 01:59:28&quot;,
+      &quot;updated_at&quot;: &quot;2025-03-18 01:59:28&quot;,
+      &quot;registration_category&quot;: {
+        &quot;id&quot;: &quot;4291ffa3-0b5c-4c3c-bd29-31cfddb130be&quot;,
+        &quot;name&quot;: &quot;open&quot;,
+        &quot;description&quot;: &quot;Libre&quot;
+      }
+    },
+    ...
+  ],
+  &quot;status&quot;: 200,
+  &quot;pagination&quot;: {
+    &quot;page&quot;: 1,
+    &quot;limit&quot;: 8,
+    &quot;total&quot;: 2,
+    &quot;count&quot;: 10,
+    &quot;offset&quot;: 0
+  },
+  &quot;description&quot;: &quot;Information about all the groups with pagination&quot;
+}
+</code></pre></main>
   </div>
   <div>
     <hr>

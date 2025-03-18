@@ -4,6 +4,12 @@
 [GET] /v1/categories/registrations/@id/groups
 ```
 
+Parámetros de la petición:
+
+| Parámetros | Tipo | Requerido | Descripción |
+| ---------- | ---- | --------- | ----------- |
+| `id` | `string` | `true` | Identificador de la categoría de inscripción. |
+
 Ejemplo:
 
 ```bash
@@ -39,46 +45,7 @@ Respuesta de la petición:
       "created_at": "2025-03-17 16:07:14",
       "updated_at": "2025-03-17 16:07:14"
     },
-    {
-      "id": "b72294f3-7155-4749-abb4-e820369ebc26",
-      "registration_category_id": "c98fb1f7-837b-4301-947f-8367f6fb29b8",
-      "name": "C_2025",
-      "description": "C",
-      "is_eliminated": 0,
-      "is_active": 1,
-      "created_at": "2025-03-17 16:07:14",
-      "updated_at": "2025-03-17 16:07:14"
-    },
-    {
-      "id": "8cb2c28b-cb7b-4435-8350-ad3e20fb44c4",
-      "registration_category_id": "c98fb1f7-837b-4301-947f-8367f6fb29b8",
-      "name": "D_2025",
-      "description": "D",
-      "is_eliminated": 0,
-      "is_active": 1,
-      "created_at": "2025-03-17 16:07:14",
-      "updated_at": "2025-03-17 16:07:14"
-    },
-    {
-      "id": "2faa75eb-2b40-4e2b-b513-c030f9ea7fca",
-      "registration_category_id": "c98fb1f7-837b-4301-947f-8367f6fb29b8",
-      "name": "E_2025",
-      "description": "E",
-      "is_eliminated": 0,
-      "is_active": 1,
-      "created_at": "2025-03-17 16:07:14",
-      "updated_at": "2025-03-17 16:07:14"
-    },
-    {
-      "id": "597e7d22-44c1-4a0e-bd4f-93687dddb788",
-      "registration_category_id": "c98fb1f7-837b-4301-947f-8367f6fb29b8",
-      "name": "F_2025",
-      "description": "F",
-      "is_eliminated": 0,
-      "is_active": 1,
-      "created_at": "2025-03-17 16:07:14",
-      "updated_at": "2025-03-17 16:07:14"
-    }
+    ...
   ],
   "status": 200,
   "description": "Information about the groups of the registration category of pairs players"

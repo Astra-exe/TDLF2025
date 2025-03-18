@@ -56,7 +56,9 @@ class GroupPairController extends BaseController
         $this->respond($pairs, 'Information about the group pairs');
     }
 
-    // Muestra la información de todas las "parejas" y "jugadores" del "grupo".
+    /**
+     * Muestra la información de todas las "parejas" y "jugadores" del "grupo".
+     */
     public function players(string $id): void
     {
         // Obtiene las reglas de validación

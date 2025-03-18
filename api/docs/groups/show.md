@@ -4,9 +4,15 @@
 [GET] /v1/groups/@id
 ```
 
+Parámetros de la petición:
+
+| Parámetros | Tipo | Requerido | Descripción |
+| ---------- | ---- | --------- | ----------- |
+| `id` | `string` | `true` | Identificador del grupo. |
+
 Ejemplo:
 
- ```bash
+```bash
  curl -X GET \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \

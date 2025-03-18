@@ -12,7 +12,82 @@ use App\Validations\GroupValidation;
 
 class GroupController extends BaseController
 {
-    // Muestra la información de un "grupo".
+    /**
+     * Muestra la información de todos los "grupos".
+     */
+    public function index(): void
+    {
+        // Define los query params de la petición.
+        $queryFields = [
+            'page' => 1,
+            'search' => '',
+            'filterBy' => 'name',
+            'orderBy' => 'name',
+            'sortBy' => 'asc',
+            'registration_category_id' => null,
+            'is_eliminated' => null,
+            'is_active' => null,
+        ];
+
+        $queryParams = [];
+
+        // Obtiene solo los query params necesarios.
+        foreach ($queryFields as $param => $default) {
+            $queryParams[$param] = $this->app()->request()->query->{$param} ?? $default;
+
+            if (is_null($queryParams[$param])) {
+                unset($queryParams[$param]);
+            }
+        }
+
+        $queryNames = array_keys($queryFields);
+
+        // Obtiene y establece las reglas de validación.
+        $this->gump()->validation_rules(GroupValidation::getRules($queryNames));
+
+        $this->gump()->filter_rules(GroupValidation::getFilters($queryNames));
+
+        // Comprueba los query params de la petición.
+        $queryParams = $this->gump()->run($queryParams);
+
+        // Comprueba si existen errores de validación.
+        if ($this->gump()->errors()) {
+            $this->respondValidationErrors(
+                $this->gump()->get_errors_array(),
+                'The groups search information is incorrect');
+        }
+
+        // Consulta la información de todos los "grupos" con paginación.
+        $group = new GroupModel;
+        $group->like($queryParams['filterBy'], sprintf('%%%s%%', $queryParams['search']))
+            ->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
+
+        // Filtra los "grupos" por estatus de eliminación y estatus de actividad.
+        foreach (['registration_category_id', 'is_eliminated', 'is_active'] as $param) {
+            if (isset($queryParams[$param])) {
+                $group->eq($param, $queryParams[$param]);
+            }
+        }
+
+        // Obtiene la información sobre la paginación.
+        $group->paginate($queryParams['page']);
+        $pagination = $group->pagination;
+
+        // Consulta la "categoría de inscripción" de cada "grupo".
+        $groups = array_map(static function (GroupModel $_group): GroupModel {
+            $_group->setCustomData('registration_category', $_group->registrationCategory);
+
+            unset($_group->registration_category_id);
+
+            return $_group;
+        }, $group->findAll());
+
+        $this->respondPagination($groups, $pagination, 'Information about all the groups with pagination');
+    }
+
+    /**
+     * Muestra la información de un "grupo".
+     */
     public function show(string $id): void
     {
         // Obtiene las reglas de validación
@@ -44,7 +119,9 @@ class GroupController extends BaseController
         $this->respond($group, 'Information about the group');
     }
 
-    // Muestra la información de los "partidos" del "grupo".
+    /**
+     * Muestra la información de los "partidos" del "grupo".
+     */
     public function matches(string $id): void
     {
         // Obtiene las reglas de validación
