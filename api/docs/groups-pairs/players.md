@@ -1,4 +1,4 @@
-# Jugadores de las parejas del grupo
+# Parejas y jugadores de un grupo
 
 ```
 [GET] /v1/groups/@id/pairs/players
