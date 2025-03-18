@@ -12,7 +12,7 @@
   -H 'Accept: application/json' \
   -H 'X-API-KEY: API_KEY' \
   http://localhost:8080/v1/groups/@id/pairs/players
- ```
+```
 
 Respuesta de la petición:
 

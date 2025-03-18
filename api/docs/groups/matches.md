@@ -12,7 +12,7 @@ Ejemplo:
   -H 'Accept: application/json' \
   -H 'X-API-KEY: API_KEY' \
   http://localhost:8080/v1/groups/@id/matches
- ```
+```
 
 Respuesta de la petición:
 

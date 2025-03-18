@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>📘</text></svg>">
-  <title>Parejas de los grupos</title>
+  <title>Información de un grupo</title>
   <style>body {
   font-family: sans-serif;
   font-size: 16px;
@@ -243,19 +243,19 @@ img {
 </ul>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/groups/index.html">Grupos/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups/index.html"><b>Grupos</b>/</a>
 <ul>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups/matches.html">Partidos de las parejas del grupo/</a>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups/show.html"><b>Información de un grupo</b>/</a>
+</li>
 </ul>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/groups-pairs/index.html"><b>Parejas de los grupos</b>/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups-pairs/index.html">Parejas de los grupos/</a>
 <ul>
-<li>
-<a href="https://astra-exe.github.io/TDLF2025/api/groups-pairs/players.html">Parejas y jugadores de un grupo/</a>
-</li>
-<li>
-<a href="https://astra-exe.github.io/TDLF2025/api/groups-pairs/show.html">Parejas de un grupo/</a>
-</li>
 </ul>
 </li>
 <li>
@@ -284,8 +284,37 @@ img {
 </ul>
 </li>
 </ul></aside>
-    <main class="main"><h1>Parejas de los grupos</h1>
-<p>Grupos de parejas asignados.</p></main>
+    <main class="main"><h1>Información de un grupo</h1>
+<pre><code>[GET] /v1/groups/@id
+</code></pre>
+<p>Ejemplo:</p>
+<p> </p>
+<pre><code class="language-bash"> curl -X GET \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY' \
+  http://localhost:8080/v1/groups/@id
+</code></pre>
+<p>Respuesta de la petición:</p>
+<pre><code class="language-json">{
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;b77966a1-42b4-478c-b145-4ff0e4a248ed&quot;,
+    &quot;name&quot;: &quot;A_2025&quot;,
+    &quot;description&quot;: &quot;A&quot;,
+    &quot;is_eliminated&quot;: 0,
+    &quot;is_active&quot;: 1,
+    &quot;created_at&quot;: &quot;2025-03-18 01:59:28&quot;,
+    &quot;updated_at&quot;: &quot;2025-03-18 01:59:28&quot;,
+    &quot;registration_category&quot;: {
+      &quot;id&quot;: &quot;4291ffa3-0b5c-4c3c-bd29-31cfddb130be&quot;,
+      &quot;name&quot;: &quot;open&quot;,
+      &quot;description&quot;: &quot;Libre&quot;
+    }
+  },
+  &quot;status&quot;: 200,
+  &quot;description&quot;: &quot;Information about the group&quot;
+}
+</code></pre></main>
   </div>
   <div>
     <hr>

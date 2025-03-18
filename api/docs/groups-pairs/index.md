@@ -1,3 +1,3 @@
 # Parejas de los grupos
 
-Grupos de parejas.
+Grupos de parejas asignados.
