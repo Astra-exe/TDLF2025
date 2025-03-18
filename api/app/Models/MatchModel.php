@@ -11,17 +11,25 @@ class MatchModel extends BaseModel
 {
     protected array $relations = [
         'registrationCategory' => [
-            self::BELONGS_TO, RegistrationCategoryModel::class,
+            self::BELONGS_TO,
+            RegistrationCategoryModel::class,
             'registration_category_id',
             ['select' => ['id', 'name', 'description']],
         ],
+        '_group' => [
+            self::BELONGS_TO,
+            GroupModel::class,
+            'group_id',
+        ],
         'matchCategory' => [
-            self::BELONGS_TO, MatchCategoryModel::class,
+            self::BELONGS_TO,
+            MatchCategoryModel::class,
             'match_category_id',
             ['select' => ['id', 'name', 'description']],
         ],
         'matchStatus' => [
-            self::BELONGS_TO, MatchStatusModel::class,
+            self::BELONGS_TO,
+            MatchStatusModel::class,
             'match_status_id',
             ['select' => ['id', 'name', 'description']],
         ],

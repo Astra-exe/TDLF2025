@@ -134,6 +134,7 @@ class ActionsController extends BaseController
                         // Registra la información del "partido".
                         $match->copyFrom([
                             $column => $category->id,
+                            'group_id' => $group->id,
                             'match_category_id' => $matchCategory->id,
                             'match_status_id' => $matchStatus->id,
                         ]);

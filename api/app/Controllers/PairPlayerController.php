@@ -73,7 +73,7 @@ class PairPlayerController extends BaseController
 
         // Consulta los "jugadores de todas las pareja".
         foreach ($pairs->findAll() as $pair) {
-            $players[] = array_map(static fn (PairPlayerPivotModel $relationship) => [
+            $players[] = array_map(static fn (PairPlayerPivotModel $relationship): array => [
                 'player' => $relationship->player,
                 'relationship' => $relationship,
             ], $pair->pairPlayerPivot);
@@ -165,7 +165,7 @@ class PairPlayerController extends BaseController
         unset($pair->registration_category_id);
 
         // Consulta los "jugadores" registrados de la "pareja".
-        $players = array_map(static fn (PairPlayerPivotModel $relationship) => [
+        $players = array_map(static fn (PairPlayerPivotModel $relationship): array => [
             'player' => $relationship->player,
             'relationship' => $relationship,
         ], $pair->pairPlayerPivot);
@@ -206,7 +206,7 @@ class PairPlayerController extends BaseController
         }
 
         // Consulta los "jugadores" de la "pareja".
-        $players = array_map(static fn ($relationship) => [
+        $players = array_map(static fn (PairPlayerPivotModel $relationship): array => [
             'player' => $relationship->player,
             'relationship' => $relationship,
         ], $pair->pairPlayerPivot);
