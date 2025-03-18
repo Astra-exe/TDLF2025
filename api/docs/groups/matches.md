@@ -1,4 +1,4 @@
-# Partidos de las parejas del grupo
+# Partidos de las parejas de un grupo
 
 ```
 [GET] /v1/groups/@id/matches

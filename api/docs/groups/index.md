@@ -25,7 +25,7 @@ curl -X GET \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'X-API-KEY: API_KEY' \
-  http://localhost:8080/v1/groups?page=2&filterBy=name&orderBy=name&sortBy=asc&is_eliminated=false&is_active=true
+  http://localhost:8080/v1/groups?page=2&filterBy=name&orderBy=name&sortBy=asc&registration_category_id=cba89529-0ba9-49e4-85ad-83e63c8e9d7e&is_eliminated=false&is_active=true
 ```
 
 Respuesta de la petición:
