@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use App\Models\GroupModel;
+use App\Models\GroupPairPivotModel;
+use App\Models\PairPlayerPivotModel;
 use App\Validations\GroupValidation;
 
 class GroupPairController extends BaseController
@@ -39,23 +41,20 @@ class GroupPairController extends BaseController
             $this->respondNotFound('The group information was not found');
         }
 
-        // Consulta las "parejas" del "grupo".
-        $pairs = array_map(static function ($groupPairRel) {
+        // Consulta la información de las "parejas" del "grupo".
+        $pairs = array_map(static function (GroupPairPivotModel $groupPairRel): array {
             $pair = $groupPairRel->pair;
             $pair->setCustomData('registration_category', $pair->registrationCategory);
 
-            // Obtiene los "jugadores" de la "pareja".
-            $pair->setCustomData('players', array_map(fn ($pairPlayerRel) => [
+            unset($pair->registration_category_id);
+
+            // Consulta la información de los "jugadores" de la "pareja".
+            $pair->setCustomData('players', array_map(static fn (PairPlayerPivotModel $pairPlayerRel): array => [
                 'player' => $pairPlayerRel->player,
                 'relationship' => $pairPlayerRel,
             ], $pair->pairPlayerPivot));
 
-            unset($pair->registration_category_id);
-
-            return [
-                'pair' => $pair,
-                'relationship' => $groupPairRel,
-            ];
+            return ['pair' => $pair, 'relationship' => $groupPairRel];
         }, $group->groupPairPivot);
 
         $this->respond($pairs, 'Information about the players of the group pairs');

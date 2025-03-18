@@ -21,6 +21,12 @@ class GroupModel extends BaseModel
             'group_id',
             ['orderBy' => 'created_at DESC'],
         ],
+        'matches' => [
+            self::HAS_MANY,
+            MatchModel::class,
+            'group_id',
+            ['orderBy' => 'created_at DESC'],
+        ],
     ];
 
     public function getTableName(): string

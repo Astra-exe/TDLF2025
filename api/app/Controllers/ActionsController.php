@@ -29,9 +29,12 @@ class ActionsController extends BaseController
             'seniors' => ['max_pairs' => 3, 'max_groups' => 27],
         ];
 
+        $registrationCategory = new RegistrationCategoryModel;
+        $categoriesNames = array_keys($settings);
+
         // Obtiene la información de todas las "categorías de inscripción".
-        $categories = (new RegistrationCategoryModel)->select('id', 'name')
-            ->in('name', array_keys($settings))
+        $categories = $registrationCategory->select('id', 'name')
+            ->in('name', $categoriesNames)
             ->findAll();
 
         // Obtiene la información de la "categoría de los partidos".

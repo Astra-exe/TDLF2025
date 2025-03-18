@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>📘</text></svg>">
+  <title>Partidos de las parejas del grupo</title>
+  <style>body {
+  font-family: sans-serif;
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.navbar {
+  clear: both;
+  color: #069;
+  overflow: hidden;
+  background-color: #17a;
+  padding: 0.7ex;
+  border-top: 1px solid;
+  border-top-color: #ccc;
+  border-bottom: 1px solid #069;
+}
+
+.navbar a {
+  padding: 0.5ex 1ex;
+  color: #fff;
+}
+
+.navbar a:hover {
+  background-color: #069;
+}
+
+.navbar a, .sidebar a {
+  text-decoration: none;
+}
+
+.left {
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+
+.right {
+  float: right;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #069;
+}
+
+.sidebar {
+  float: left;
+  margin: 0 1px 0 0;
+  padding: 1em 0;
+  border-right: 1px dotted #ccc;
+  width: 200px;
+}
+
+.sidebar ul {
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li ul {
+  padding-left: 0.6em;
+}
+
+.sidebar li a {
+  display: block;
+  margin: 0;
+  padding: 0.8ex 2em 0.8ex 1em;
+}
+
+.sidebar a:hover, th, blockquote, pre, code {
+  background-color: #ddd;
+}
+
+.content {
+  clear: both;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+}
+
+.main {
+  margin: 0 0 0 200px;
+  max-width: 50em;
+  padding: 1.5em;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7ex;
+  text-align: center;
+}
+
+.footer p {
+  margin: 0.5ex 1ex;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 1em 1ex 0.5ex 0;
+}
+
+h2~*:not(h2) {
+  margin-left: 1ch;
+}
+
+h1 {
+  font-size: 2.0em;
+}
+
+h2 {
+  font-size: 1.9em;
+}
+
+h3 {
+  font-size: 1.6em;
+}
+
+h4 {
+  font-size: 1.5em;
+}
+
+h5 {
+  font-size: 1.2em;
+}
+
+h6 {
+  font-size: 1.1em;
+}
+
+pre, code {
+  margin: 0;
+  font-size: 100%;
+}
+
+pre {
+  padding: 1ch;
+}
+
+pre, table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 0.7ex;
+}
+
+blockquote::before {
+  float: left;
+  width: 1ch;
+  margin-right: 1ch;
+  content: ">";
+}
+
+img {
+  max-width: 100%;
+}
+
+@media (max-width: 999px) {
+  .sidebar {
+    float: none;
+    margin: 0;
+    width: 100%;
+    border: none;
+  }
+
+  .main {
+    margin: 0;
+  }
+
+  .footer {
+    flex-direction: column;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #000;
+    color: #fff;
+  }
+
+  .navbar {
+    border-top-color: #222;
+  }
+
+  .sidebar a:hover, th {
+    background-color: #222;
+  }
+
+  a {
+    color: #6cf;
+  }
+
+  .main img[src$=svg] {
+    filter: invert(1);
+  }
+
+  blockquote, pre, code {
+    background-color: #111;
+    border-color: #aaa;
+  }
+}</style>
+</head>
+<body>
+  <nav class="navbar"><a href="https://astra-exe.github.io/TDLF2025/api/index.html"><b>Inicio</b></a>
+<span class="right"><a href="https://github.com/Astra-exe/TDLF2025/tree/main/api">Repositorio</a> <a href="mailto:ricardogj08@riseup.net">Contacto</a></span></nav>
+  <div class="content">
+    <aside class="sidebar"><ul>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/auth/index.html">Autenticación/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups/index.html"><b>Grupos</b>/</a>
+<ul>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups/matches.html"><b>Partidos de las parejas del grupo</b>/</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups-pairs/index.html">Parejas de los grupos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs/index.html">Parejas/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs-players/index.html">Jugadores de las parejas/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/players/index.html">Jugadores/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/registration-categories/index.html">Categorías de inscripción/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/roles/index.html">Roles/</a>
+<ul>
+</ul>
+</li>
+</ul></aside>
+    <main class="main"><h1>Partidos de las parejas del grupo</h1>
+<pre><code>[GET] /v1/groups/@id/matches
+</code></pre>
+<p>Ejemplo:</p>
+<p> </p>
+<pre><code class="language-bash"> curl -X GET \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY' \
+  http://localhost:8080/v1/groups/@id/matches
+ </code></pre>
+<p>Respuesta de la petición:</p>
+<pre><code class="language-json">{
+  &quot;data&quot;: [
+    {
+      &quot;match&quot;: {
+        &quot;id&quot;: &quot;2c7578c6-38d9-4e97-bc29-3c9332ff809f&quot;,
+        &quot;group_id&quot;: &quot;6fa6b6d5-eca2-4f70-a004-df7535b9ec8f&quot;,
+        &quot;is_active&quot;: 1,
+        &quot;created_at&quot;: &quot;2025-03-17 21:54:06&quot;,
+        &quot;updated_at&quot;: &quot;2025-03-17 21:54:06&quot;,
+        &quot;registration_category&quot;: {
+          &quot;id&quot;: &quot;4291ffa3-0b5c-4c3c-bd29-31cfddb130be&quot;,
+          &quot;name&quot;: &quot;open&quot;,
+          &quot;description&quot;: &quot;Libre&quot;
+        },
+        &quot;match_status&quot;: {
+          &quot;id&quot;: &quot;02ee09c2-34bc-4f27-84ff-6ceca7c50882&quot;,
+          &quot;name&quot;: &quot;scheduled&quot;,
+          &quot;description&quot;: &quot;Programado&quot;
+        },
+        &quot;pairs&quot;: [
+          {
+            &quot;pair&quot;: {
+              &quot;id&quot;: &quot;0dee717e-4b9f-4565-b0b5-8c3906cb8093&quot;,
+              &quot;is_eliminated&quot;: 0,
+              &quot;is_active&quot;: 1,
+              &quot;created_at&quot;: &quot;2025-03-17 21:53:30&quot;,
+              &quot;updated_at&quot;: &quot;2025-03-17 21:53:30&quot;,
+              &quot;registration_category&quot;: {
+                &quot;id&quot;: &quot;4291ffa3-0b5c-4c3c-bd29-31cfddb130be&quot;,
+                &quot;name&quot;: &quot;open&quot;,
+                &quot;description&quot;: &quot;Libre&quot;
+              },
+              &quot;players&quot;: [
+                {
+                  &quot;player&quot;: {
+                    &quot;id&quot;: &quot;79e9cb8a-5862-4721-aa98-cae0171fa98a&quot;,
+                    &quot;fullname&quot;: &quot;Miguel Ángel&quot;,
+                    &quot;city&quot;: &quot;Apaseo el Grande&quot;,
+                    &quot;weight&quot;: &quot;79.50&quot;,
+                    &quot;height&quot;: &quot;1.84&quot;,
+                    &quot;age&quot;: 33,
+                    &quot;experience&quot;: 13,
+                    &quot;is_active&quot;: 1,
+                    &quot;created_at&quot;: &quot;2025-03-17 21:53:30&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-17 21:53:30&quot;
+                  },
+                  &quot;relationship&quot;: {
+                    &quot;id&quot;: &quot;913ce1a1-7930-40db-8543-8d1983af6ced&quot;,
+                    &quot;player_id&quot;: &quot;79e9cb8a-5862-4721-aa98-cae0171fa98a&quot;,
+                    &quot;pair_id&quot;: &quot;0dee717e-4b9f-4565-b0b5-8c3906cb8093&quot;,
+                    &quot;created_at&quot;: &quot;2025-03-17 21:53:30&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-17 21:53:30&quot;
+                  }
+                },
+                {
+                  &quot;player&quot;: {
+                    &quot;id&quot;: &quot;17077e5a-92d3-42c6-ab61-fbc3bb94df75&quot;,
+                    &quot;fullname&quot;: &quot;Gabriela Jiménez&quot;,
+                    &quot;city&quot;: &quot;Uriangato&quot;,
+                    &quot;weight&quot;: &quot;66.20&quot;,
+                    &quot;height&quot;: &quot;1.72&quot;,
+                    &quot;age&quot;: 28,
+                    &quot;experience&quot;: 10,
+                    &quot;is_active&quot;: 1,
+                    &quot;created_at&quot;: &quot;2025-03-17 21:53:30&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-17 21:53:30&quot;
+                  },
+                  &quot;relationship&quot;: {
+                    &quot;id&quot;: &quot;eb365188-683c-459e-9ef6-ccebbe13cc88&quot;,
+                    &quot;player_id&quot;: &quot;17077e5a-92d3-42c6-ab61-fbc3bb94df75&quot;,
+                    &quot;pair_id&quot;: &quot;0dee717e-4b9f-4565-b0b5-8c3906cb8093&quot;,
+                    &quot;created_at&quot;: &quot;2025-03-17 21:53:30&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-17 21:53:30&quot;
+                  }
+                }
+              ]
+            },
+            &quot;relationship&quot;: {
+              &quot;id&quot;: &quot;0d82b971-7f9c-4b47-9ac8-c300bfe95822&quot;,
+              &quot;pair_id&quot;: &quot;0dee717e-4b9f-4565-b0b5-8c3906cb8093&quot;,
+              &quot;match_id&quot;: &quot;2c7578c6-38d9-4e97-bc29-3c9332ff809f&quot;,
+              &quot;score&quot;: 0,
+              &quot;is_winner&quot;: 0,
+              &quot;created_at&quot;: &quot;2025-03-17 21:54:06&quot;,
+              &quot;updated_at&quot;: &quot;2025-03-17 21:54:06&quot;
+            }
+          },
+          {
+            &quot;pair&quot;: {
+              &quot;id&quot;: &quot;ca87508b-afcf-4b1e-a378-abc0fcc0769c&quot;,
+              &quot;is_eliminated&quot;: 0,
+              &quot;is_active&quot;: 1,
+              &quot;created_at&quot;: &quot;2025-03-17 21:53:30&quot;,
+              &quot;updated_at&quot;: &quot;2025-03-17 21:53:30&quot;,
+              &quot;registration_category&quot;: {
+                &quot;id&quot;: &quot;4291ffa3-0b5c-4c3c-bd29-31cfddb130be&quot;,
+                &quot;name&quot;: &quot;open&quot;,
+                &quot;description&quot;: &quot;Libre&quot;
+              },
+              &quot;players&quot;: [
+                {
+                  &quot;player&quot;: {
+                    &quot;id&quot;: &quot;7d62bb8f-09cd-4937-bbc8-a4e8f80de3c3&quot;,
+                    &quot;fullname&quot;: &quot;Sofía López&quot;,
+                    &quot;city&quot;: &quot;San Miguel de Allende&quot;,
+                    &quot;weight&quot;: &quot;65.00&quot;,
+                    &quot;height&quot;: &quot;1.70&quot;,
+                    &quot;age&quot;: 29,
+                    &quot;experience&quot;: 9,
+                    &quot;is_active&quot;: 1,
+                    &quot;created_at&quot;: &quot;2025-03-17 21:53:30&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-17 21:53:30&quot;
+                  },
+                  &quot;relationship&quot;: {
+                    &quot;id&quot;: &quot;7ad7ea8d-e2d4-4424-acaa-3768b7fd8012&quot;,
+                    &quot;player_id&quot;: &quot;7d62bb8f-09cd-4937-bbc8-a4e8f80de3c3&quot;,
+                    &quot;pair_id&quot;: &quot;ca87508b-afcf-4b1e-a378-abc0fcc0769c&quot;,
+                    &quot;created_at&quot;: &quot;2025-03-17 21:53:30&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-17 21:53:30&quot;
+                  }
+                },
+                {
+                  &quot;player&quot;: {
+                    &quot;id&quot;: &quot;570ebc25-907b-428a-974f-463030b7db21&quot;,
+                    &quot;fullname&quot;: &quot;Javier Torres&quot;,
+                    &quot;city&quot;: &quot;Salamanca&quot;,
+                    &quot;weight&quot;: &quot;80.00&quot;,
+                    &quot;height&quot;: &quot;1.85&quot;,
+                    &quot;age&quot;: 35,
+                    &quot;experience&quot;: 15,
+                    &quot;is_active&quot;: 1,
+                    &quot;created_at&quot;: &quot;2025-03-17 21:53:30&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-17 21:53:30&quot;
+                  },
+                  &quot;relationship&quot;: {
+                    &quot;id&quot;: &quot;8eb22cbe-2496-484e-9c18-4d13cd059bee&quot;,
+                    &quot;player_id&quot;: &quot;570ebc25-907b-428a-974f-463030b7db21&quot;,
+                    &quot;pair_id&quot;: &quot;ca87508b-afcf-4b1e-a378-abc0fcc0769c&quot;,
+                    &quot;created_at&quot;: &quot;2025-03-17 21:53:30&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-17 21:53:30&quot;
+                  }
+                }
+              ]
+            },
+            &quot;relationship&quot;: {
+              &quot;id&quot;: &quot;d4c11946-3d0c-40bb-aa14-399b15628778&quot;,
+              &quot;pair_id&quot;: &quot;ca87508b-afcf-4b1e-a378-abc0fcc0769c&quot;,
+              &quot;match_id&quot;: &quot;2c7578c6-38d9-4e97-bc29-3c9332ff809f&quot;,
+              &quot;score&quot;: 0,
+              &quot;is_winner&quot;: 0,
+              &quot;created_at&quot;: &quot;2025-03-17 21:54:06&quot;,
+              &quot;updated_at&quot;: &quot;2025-03-17 21:54:06&quot;
+            }
+          }
+        ]
+      }
+    },
+    {
+      &quot;match&quot;: {
+        &quot;id&quot;: &quot;89ee7e96-958a-4e7a-930d-8f75d834f86e&quot;,
+        &quot;group_id&quot;: &quot;6fa6b6d5-eca2-4f70-a004-df7535b9ec8f&quot;,
+        &quot;is_active&quot;: 1,
+        &quot;created_at&quot;: &quot;2025-03-17 21:54:06&quot;,
+        &quot;updated_at&quot;: &quot;2025-03-17 21:54:06&quot;,
+        &quot;registration_category&quot;: {
+          &quot;id&quot;: &quot;4291ffa3-0b5c-4c3c-bd29-31cfddb130be&quot;,
+          &quot;name&quot;: &quot;open&quot;,
+          &quot;description&quot;: &quot;Libre&quot;
+        },
+        &quot;match_status&quot;: {
+          &quot;id&quot;: &quot;02ee09c2-34bc-4f27-84ff-6ceca7c50882&quot;,
+          &quot;name&quot;: &quot;scheduled&quot;,
+          &quot;description&quot;: &quot;Programado&quot;
+        },
+        &quot;pairs&quot;: [
+          {
+            &quot;pair&quot;: {
+              &quot;id&quot;: &quot;210fca16-c98c-4182-a14f-823fde1d6210&quot;,
+              &quot;is_eliminated&quot;: 0,
+              &quot;is_active&quot;: 1,
+              &quot;created_at&quot;: &quot;2025-03-17 21:53:30&quot;,
+              &quot;updated_at&quot;: &quot;2025-03-17 21:53:30&quot;,
+              &quot;registration_category&quot;: {
+                &quot;id&quot;: &quot;4291ffa3-0b5c-4c3c-bd29-31cfddb130be&quot;,
+                &quot;name&quot;: &quot;open&quot;,
+                &quot;description&quot;: &quot;Libre&quot;
+              },
+              &quot;players&quot;: [
+                {
+                  &quot;player&quot;: {
+                    &quot;id&quot;: &quot;dc908c32-7951-423d-831b-29007f5cf98c&quot;,
+                    &quot;fullname&quot;: &quot;Ana Ramírez&quot;,
+                    &quot;city&quot;: &quot;Irapuato&quot;,
+                    &quot;weight&quot;: &quot;63.10&quot;,
+                    &quot;height&quot;: &quot;1.65&quot;,
+                    &quot;age&quot;: 26,
+                    &quot;experience&quot;: 7,
+                    &quot;is_active&quot;: 1,
+                    &quot;created_at&quot;: &quot;2025-03-17 21:53:30&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-17 21:53:30&quot;
+                  },
+                  &quot;relationship&quot;: {
+                    &quot;id&quot;: &quot;c5c263a9-601e-4a5b-b827-85d55523b7af&quot;,
+                    &quot;player_id&quot;: &quot;dc908c32-7951-423d-831b-29007f5cf98c&quot;,
+                    &quot;pair_id&quot;: &quot;210fca16-c98c-4182-a14f-823fde1d6210&quot;,
+                    &quot;created_at&quot;: &quot;2025-03-17 21:53:30&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-17 21:53:30&quot;
+                  }
+                },
+                {
+                  &quot;player&quot;: {
+                    &quot;id&quot;: &quot;2d9b9633-cac7-4e48-a969-a4f1e0603a28&quot;,
+                    &quot;fullname&quot;: &quot;Carlos Martínez&quot;,
+                    &quot;city&quot;: &quot;Celaya&quot;,
+                    &quot;weight&quot;: &quot;78.40&quot;,
+                    &quot;height&quot;: &quot;1.80&quot;,
+                    &quot;age&quot;: 32,
+                    &quot;experience&quot;: 10,
+                    &quot;is_active&quot;: 1,
+                    &quot;created_at&quot;: &quot;2025-03-17 21:53:30&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-17 21:53:30&quot;
+                  },
+                  &quot;relationship&quot;: {
+                    &quot;id&quot;: &quot;d32b9729-ccb6-46fa-b9ce-c62f217bd132&quot;,
+                    &quot;player_id&quot;: &quot;2d9b9633-cac7-4e48-a969-a4f1e0603a28&quot;,
+                    &quot;pair_id&quot;: &quot;210fca16-c98c-4182-a14f-823fde1d6210&quot;,
+                    &quot;created_at&quot;: &quot;2025-03-17 21:53:30&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-17 21:53:30&quot;
+                  }
+                }
+              ]
+            },
+            &quot;relationship&quot;: {
+              &quot;id&quot;: &quot;455d786a-8df9-4b11-b50f-5d6d35a5f118&quot;,
+              &quot;pair_id&quot;: &quot;210fca16-c98c-4182-a14f-823fde1d6210&quot;,
+              &quot;match_id&quot;: &quot;89ee7e96-958a-4e7a-930d-8f75d834f86e&quot;,
+              &quot;score&quot;: 0,
+              &quot;is_winner&quot;: 0,
+              &quot;created_at&quot;: &quot;2025-03-17 21:54:06&quot;,
+              &quot;updated_at&quot;: &quot;2025-03-17 21:54:06&quot;
+            }
+          },
+          {
+            &quot;pair&quot;: {
+              &quot;id&quot;: &quot;da671096-f0ff-4b6a-b63a-4ad68d5d187b&quot;,
+              &quot;is_eliminated&quot;: 0,
+              &quot;is_active&quot;: 1,
+              &quot;created_at&quot;: &quot;2025-03-17 21:53:30&quot;,
+              &quot;updated_at&quot;: &quot;2025-03-17 21:53:30&quot;,
+              &quot;registration_category&quot;: {
+                &quot;id&quot;: &quot;4291ffa3-0b5c-4c3c-bd29-31cfddb130be&quot;,
+                &quot;name&quot;: &quot;open&quot;,
+                &quot;description&quot;: &quot;Libre&quot;
+              },
+              &quot;players&quot;: [
+                {
+                  &quot;player&quot;: {
+                    &quot;id&quot;: &quot;656adb45-241c-449e-90d8-9481e2e7a001&quot;,
+                    &quot;fullname&quot;: &quot;Elena Morales&quot;,
+                    &quot;city&quot;: &quot;Purísima del Rincón&quot;,
+                    &quot;weight&quot;: &quot;64.00&quot;,
+                    &quot;height&quot;: &quot;1.69&quot;,
+                    &quot;age&quot;: 23,
+                    &quot;experience&quot;: 5,
+                    &quot;is_active&quot;: 1,
+                    &quot;created_at&quot;: &quot;2025-03-17 21:53:30&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-17 21:53:30&quot;
+                  },
+                  &quot;relationship&quot;: {
+                    &quot;id&quot;: &quot;35b8eda9-da72-488f-85fa-6260fd4cb2fd&quot;,
+                    &quot;player_id&quot;: &quot;656adb45-241c-449e-90d8-9481e2e7a001&quot;,
+                    &quot;pair_id&quot;: &quot;da671096-f0ff-4b6a-b63a-4ad68d5d187b&quot;,
+                    &quot;created_at&quot;: &quot;2025-03-17 21:53:30&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-17 21:53:30&quot;
+                  }
+                },
+                {
+                  &quot;player&quot;: {
+                    &quot;id&quot;: &quot;c1a91924-9fd6-4c75-9ee9-a8bd00b1e4c4&quot;,
+                    &quot;fullname&quot;: &quot;Diego Fernández&quot;,
+                    &quot;city&quot;: &quot;Moroleón&quot;,
+                    &quot;weight&quot;: &quot;77.00&quot;,
+                    &quot;height&quot;: &quot;1.82&quot;,
+                    &quot;age&quot;: 27,
+                    &quot;experience&quot;: 8,
+                    &quot;is_active&quot;: 1,
+                    &quot;created_at&quot;: &quot;2025-03-17 21:53:30&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-17 21:53:30&quot;
+                  },
+                  &quot;relationship&quot;: {
+                    &quot;id&quot;: &quot;d7e4b75f-d0e2-4594-a554-043abc92eeec&quot;,
+                    &quot;player_id&quot;: &quot;c1a91924-9fd6-4c75-9ee9-a8bd00b1e4c4&quot;,
+                    &quot;pair_id&quot;: &quot;da671096-f0ff-4b6a-b63a-4ad68d5d187b&quot;,
+                    &quot;created_at&quot;: &quot;2025-03-17 21:53:30&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-17 21:53:30&quot;
+                  }
+                }
+              ]
+            },
+            &quot;relationship&quot;: {
+              &quot;id&quot;: &quot;7fd9bcff-9419-4957-bb53-db4b5efff6cd&quot;,
+              &quot;pair_id&quot;: &quot;da671096-f0ff-4b6a-b63a-4ad68d5d187b&quot;,
+              &quot;match_id&quot;: &quot;89ee7e96-958a-4e7a-930d-8f75d834f86e&quot;,
+              &quot;score&quot;: 0,
+              &quot;is_winner&quot;: 0,
+              &quot;created_at&quot;: &quot;2025-03-17 21:54:06&quot;,
+              &quot;updated_at&quot;: &quot;2025-03-17 21:54:06&quot;
+            }
+          }
+        ]
+      }
+    },
+    ...,
+  ],
+  &quot;status&quot;: 200,
+  &quot;description&quot;: &quot;Information about the group matches&quot;
+}
+</code></pre></main>
+  </div>
+  <div>
+    <hr>
+    <footer class="footer">
+      <p>Generated with <a href="https://notabug.org/ricardogj08/swiki" target="_blank">swiki</a>, a simple wiki generator written in POSIX <code>sh</code>.</p>
+      <p>© CC-BY-4.0</p>
+    </footer>
+  </div>
+</body>
+</html>

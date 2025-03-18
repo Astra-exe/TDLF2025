@@ -238,11 +238,13 @@ img {
 </ul>
 </li>
 <li>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups/index.html">Grupos/</a>
+<ul>
+</ul>
+</li>
+<li>
 <a href="https://astra-exe.github.io/TDLF2025/api/groups-pairs/index.html"><b>Parejas de los grupos</b>/</a>
 <ul>
-<li>
-<a href="https://astra-exe.github.io/TDLF2025/api/groups-pairs/matches.html">Partidos de las parejas del grupo/</a>
-</li>
 <li>
 <a href="https://astra-exe.github.io/TDLF2025/api/groups-pairs/players.html"><b>Jugadores de las parejas del grupo</b>/</a>
 </li>
@@ -283,7 +285,7 @@ img {
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'X-API-KEY: API_KEY' \
-  http://localhost:8080/v1/group/@id/pairs/players
+  http://localhost:8080/v1/groups/@id/pairs/players
  </code></pre>
 <p>Respuesta de la petición:</p>
 <pre><code class="language-json">{
@@ -418,136 +420,7 @@ img {
         &quot;updated_at&quot;: &quot;2025-03-17 16:07:14&quot;
       }
     },
-    {
-      &quot;pair&quot;: {
-        &quot;id&quot;: &quot;1bc9a02b-282b-48b2-a653-a3f818532ace&quot;,
-        &quot;is_eliminated&quot;: 0,
-        &quot;is_active&quot;: 1,
-        &quot;created_at&quot;: &quot;2025-03-17 14:34:44&quot;,
-        &quot;updated_at&quot;: &quot;2025-03-17 14:34:44&quot;,
-        &quot;registration_category&quot;: {
-          &quot;id&quot;: &quot;c98fb1f7-837b-4301-947f-8367f6fb29b8&quot;,
-          &quot;name&quot;: &quot;open&quot;,
-          &quot;description&quot;: &quot;Libre&quot;
-        },
-        &quot;players&quot;: [
-          {
-            &quot;player&quot;: {
-              &quot;id&quot;: &quot;df941af4-b93e-46d6-99d6-f7c455e1a39d&quot;,
-              &quot;fullname&quot;: &quot;Gabriela Jiménez&quot;,
-              &quot;city&quot;: &quot;Uriangato&quot;,
-              &quot;weight&quot;: &quot;66.20&quot;,
-              &quot;height&quot;: &quot;1.72&quot;,
-              &quot;age&quot;: 28,
-              &quot;experience&quot;: 10,
-              &quot;is_active&quot;: 1,
-              &quot;created_at&quot;: &quot;2025-03-17 14:34:44&quot;,
-              &quot;updated_at&quot;: &quot;2025-03-17 14:34:44&quot;
-            },
-            &quot;relationship&quot;: {
-              &quot;id&quot;: &quot;9d3f2e18-dace-4d67-85e4-bc874efd13c8&quot;,
-              &quot;player_id&quot;: &quot;df941af4-b93e-46d6-99d6-f7c455e1a39d&quot;,
-              &quot;pair_id&quot;: &quot;1bc9a02b-282b-48b2-a653-a3f818532ace&quot;,
-              &quot;created_at&quot;: &quot;2025-03-17 14:34:44&quot;,
-              &quot;updated_at&quot;: &quot;2025-03-17 14:34:44&quot;
-            }
-          },
-          {
-            &quot;player&quot;: {
-              &quot;id&quot;: &quot;e53f311d-cbc7-45ed-8f3e-c8ad4a0b380d&quot;,
-              &quot;fullname&quot;: &quot;Miguel Ángel&quot;,
-              &quot;city&quot;: &quot;Apaseo el Grande&quot;,
-              &quot;weight&quot;: &quot;79.50&quot;,
-              &quot;height&quot;: &quot;1.84&quot;,
-              &quot;age&quot;: 33,
-              &quot;experience&quot;: 13,
-              &quot;is_active&quot;: 1,
-              &quot;created_at&quot;: &quot;2025-03-17 14:34:44&quot;,
-              &quot;updated_at&quot;: &quot;2025-03-17 14:34:44&quot;
-            },
-            &quot;relationship&quot;: {
-              &quot;id&quot;: &quot;e0389999-7227-4602-8b55-f39c5492e155&quot;,
-              &quot;player_id&quot;: &quot;e53f311d-cbc7-45ed-8f3e-c8ad4a0b380d&quot;,
-              &quot;pair_id&quot;: &quot;1bc9a02b-282b-48b2-a653-a3f818532ace&quot;,
-              &quot;created_at&quot;: &quot;2025-03-17 14:34:44&quot;,
-              &quot;updated_at&quot;: &quot;2025-03-17 14:34:44&quot;
-            }
-          }
-        ]
-      },
-      &quot;relationship&quot;: {
-        &quot;id&quot;: &quot;b4ecb894-d389-499b-966a-6dc078aea51b&quot;,
-        &quot;pair_id&quot;: &quot;1bc9a02b-282b-48b2-a653-a3f818532ace&quot;,
-        &quot;group_id&quot;: &quot;3a8b9ca2-09e6-47b8-8c8b-edbf506bd8fe&quot;,
-        &quot;created_at&quot;: &quot;2025-03-17 16:07:14&quot;,
-        &quot;updated_at&quot;: &quot;2025-03-17 16:07:14&quot;
-      }
-    },
-    {
-      &quot;pair&quot;: {
-        &quot;id&quot;: &quot;69a2e880-ad02-4b01-9f9d-601d6ad5024b&quot;,
-        &quot;is_eliminated&quot;: 0,
-        &quot;is_active&quot;: 1,
-        &quot;created_at&quot;: &quot;2025-03-17 14:34:45&quot;,
-        &quot;updated_at&quot;: &quot;2025-03-17 14:34:45&quot;,
-        &quot;registration_category&quot;: {
-          &quot;id&quot;: &quot;c98fb1f7-837b-4301-947f-8367f6fb29b8&quot;,
-          &quot;name&quot;: &quot;open&quot;,
-          &quot;description&quot;: &quot;Libre&quot;
-        },
-        &quot;players&quot;: [
-          {
-            &quot;player&quot;: {
-              &quot;id&quot;: &quot;c1c147df-f42f-4e58-b86b-2f696acefc09&quot;,
-              &quot;fullname&quot;: &quot;Daniel Guerra&quot;,
-              &quot;city&quot;: &quot;Pénjamo&quot;,
-              &quot;weight&quot;: &quot;78.00&quot;,
-              &quot;height&quot;: &quot;1.83&quot;,
-              &quot;age&quot;: 33,
-              &quot;experience&quot;: 12,
-              &quot;is_active&quot;: 1,
-              &quot;created_at&quot;: &quot;2025-03-17 14:34:45&quot;,
-              &quot;updated_at&quot;: &quot;2025-03-17 14:34:45&quot;
-            },
-            &quot;relationship&quot;: {
-              &quot;id&quot;: &quot;79d9bab6-d86d-49b1-a94f-a76e07ab666e&quot;,
-              &quot;player_id&quot;: &quot;c1c147df-f42f-4e58-b86b-2f696acefc09&quot;,
-              &quot;pair_id&quot;: &quot;69a2e880-ad02-4b01-9f9d-601d6ad5024b&quot;,
-              &quot;created_at&quot;: &quot;2025-03-17 14:34:45&quot;,
-              &quot;updated_at&quot;: &quot;2025-03-17 14:34:45&quot;
-            }
-          },
-          {
-            &quot;player&quot;: {
-              &quot;id&quot;: &quot;d91bebe5-fb67-44c3-ae88-3618d70a8090&quot;,
-              &quot;fullname&quot;: &quot;Leticia Ortega&quot;,
-              &quot;city&quot;: &quot;Comonfort&quot;,
-              &quot;weight&quot;: &quot;63.50&quot;,
-              &quot;height&quot;: &quot;1.68&quot;,
-              &quot;age&quot;: 25,
-              &quot;experience&quot;: 7,
-              &quot;is_active&quot;: 1,
-              &quot;created_at&quot;: &quot;2025-03-17 14:34:45&quot;,
-              &quot;updated_at&quot;: &quot;2025-03-17 14:34:45&quot;
-            },
-            &quot;relationship&quot;: {
-              &quot;id&quot;: &quot;f605872c-747f-457b-9d06-2ff1ffff9f55&quot;,
-              &quot;player_id&quot;: &quot;d91bebe5-fb67-44c3-ae88-3618d70a8090&quot;,
-              &quot;pair_id&quot;: &quot;69a2e880-ad02-4b01-9f9d-601d6ad5024b&quot;,
-              &quot;created_at&quot;: &quot;2025-03-17 14:34:45&quot;,
-              &quot;updated_at&quot;: &quot;2025-03-17 14:34:45&quot;
-            }
-          }
-        ]
-      },
-      &quot;relationship&quot;: {
-        &quot;id&quot;: &quot;cdb1dea2-1bd0-4368-8e55-e0c299c253a5&quot;,
-        &quot;pair_id&quot;: &quot;69a2e880-ad02-4b01-9f9d-601d6ad5024b&quot;,
-        &quot;group_id&quot;: &quot;3a8b9ca2-09e6-47b8-8c8b-edbf506bd8fe&quot;,
-        &quot;created_at&quot;: &quot;2025-03-17 16:07:14&quot;,
-        &quot;updated_at&quot;: &quot;2025-03-17 16:07:14&quot;
-      }
-    }
+    ...,
   ],
   &quot;status&quot;: 200,
   &quot;description&quot;: &quot;Information about the players of the group pairs&quot;
