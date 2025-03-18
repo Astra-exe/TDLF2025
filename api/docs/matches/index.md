@@ -1,0 +1,4 @@
+# Partidos
+
+Partidos asignados.
+

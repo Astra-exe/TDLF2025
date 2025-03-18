@@ -57,6 +57,9 @@ return (static function () use ($app): void {
         $router->get($base_route('/v1/groups/@id/pairs'), \App\Controllers\GroupPairController::class.'->show');
         $router->get($base_route('/v1/groups/@id/pairs/players'), \App\Controllers\GroupPairController::class.'->players');
 
+        // Partidos.
+        $router->delete($base_route('/v1/matches/@id'), \App\Controllers\MatchController::class.'->delete');
+
         // Roles de los usuarios de acceso.
         $router->get($base_route('/v1/roles'), \App\Controllers\RoleController::class.'->index');
         $router->get($base_route('/v1/roles/@id'), \App\Controllers\RoleController::class.'->show');
