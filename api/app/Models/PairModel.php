@@ -12,7 +12,8 @@ class PairModel extends BaseModel
 {
     protected array $relations = [
         'registrationCategory' => [
-            self::BELONGS_TO, RegistrationCategoryModel::class,
+            self::BELONGS_TO,
+            RegistrationCategoryModel::class,
             'registration_category_id',
             ['select' => ['id', 'name', 'description']],
         ],

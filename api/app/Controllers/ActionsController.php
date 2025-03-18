@@ -74,6 +74,8 @@ class ActionsController extends BaseController
                 continue;
             }
 
+            $group->reset();
+
             // Obtiene los parámetro de configuración de la "categoría".
             $params = $settings[$category->name];
 
@@ -178,8 +180,6 @@ class ActionsController extends BaseController
                         $match->reset();
                     }
                 }
-
-                $group->reset();
             }
         }
     }

@@ -1,3 +1,3 @@
 # Grupos
 
-Grupos de jugadores generados.
+Grupos generados.

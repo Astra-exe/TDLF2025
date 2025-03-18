@@ -50,6 +50,7 @@ return (static function () use ($app): void {
         $router->get($base_route('/v1/groups/@id/matches'), \App\Controllers\GroupController::class.'->matches');
 
         // Grupos y parejas.
+        $router->get($base_route('/v1/groups/@id/pairs'), \App\Controllers\GroupPairController::class.'->show');
         $router->get($base_route('/v1/groups/@id/pairs/players'), \App\Controllers\GroupPairController::class.'->players');
 
         // Roles de los usuarios de acceso.

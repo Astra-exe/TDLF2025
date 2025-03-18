@@ -45,6 +45,7 @@ class GroupController extends BaseController
         // Consulta la información de los "partidos" del "grupo".
         $matches = array_map(static function (MatchModel $match): array {
             $match->setCustomData('registration_category', $match->registrationCategory);
+            $match->setCustomData('match_category', $match->matchCategory);
             $match->setCustomData('match_status', $match->matchStatus);
 
             // Consulta la información de los "jugadores" del "partido".
