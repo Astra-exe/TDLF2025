@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>📘</text></svg>">
-  <title>Información de un jugador</title>
+  <title>Eliminar un jugador</title>
   <style>body {
   font-family: sans-serif;
   font-size: 16px;
@@ -269,13 +269,13 @@ img {
 <a href="https://astra-exe.github.io/TDLF2025/api/players/create.html">Crear un jugador/</a>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/players/delete.html">Eliminar un jugador/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/players/delete.html"><b>Eliminar un jugador</b>/</a>
 </li>
 <li>
 <a href="https://astra-exe.github.io/TDLF2025/api/players/pair.html">Pareja de un jugador/</a>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/players/show.html"><b>Información de un jugador</b>/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/players/show.html">Información de un jugador/</a>
 </li>
 </ul>
 </li>
@@ -290,16 +290,18 @@ img {
 </ul>
 </li>
 </ul></aside>
-    <main class="main"><h1>Información de un jugador</h1>
-<pre><code>[GET] /v1/players/@id
+    <main class="main"><h1>Eliminar un jugador</h1>
+<pre><code>[DELETE] /v1/players/@id
 </code></pre>
+<blockquote><p>El jugador no debe contener información asociada a una pareja.</p>
+</blockquote>
 <p>Parámetros de la petición:</p>
 <table>
 <tr><th>Parámetros </th><th>Tipo </th><th>Requerido </th><th>Descripción </th></tr>
 <tr><td><code>id</code> </td><td><code>string</code> </td><td><code>true</code> </td><td>Identificador del jugador. </td></tr>
 </table>
 <p>Ejemplo:</p>
-<pre><code class="language-bash">curl -X GET \
+<pre><code class="language-bash">curl -X DELETE \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'X-API-KEY: API_KEY' \
@@ -308,19 +310,19 @@ img {
 <p>Respuesta de la petición:</p>
 <pre><code class="language-json">{
   &quot;data&quot;: {
-    &quot;id&quot;: &quot;07b80796-fd26-4b1b-9f5d-6330e96ed849&quot;,
+    &quot;id&quot;: &quot;004b7a08-6bf0-4852-b0dd-4783058e2d2a&quot;,
     &quot;fullname&quot;: &quot;Ricardo García Jiménez&quot;,
     &quot;city&quot;: &quot;Salvatierra&quot;,
-    &quot;weight&quot;: &quot;120.00&quot;,
-    &quot;height&quot;: &quot;1.82&quot;,
+    &quot;weight&quot;: &quot;135.00&quot;,
+    &quot;height&quot;: &quot;1.86&quot;,
     &quot;age&quot;: 26,
     &quot;experience&quot;: 0,
     &quot;is_active&quot;: 1,
-    &quot;created_at&quot;: &quot;2025-03-07 14:44:28&quot;,
-    &quot;updated_at&quot;: &quot;2025-03-07 14:44:28&quot;
+    &quot;created_at&quot;: &quot;2025-03-18 15:01:33&quot;,
+    &quot;updated_at&quot;: &quot;2025-03-18 15:01:33&quot;
   },
   &quot;status&quot;: 200,
-  &quot;description&quot;: &quot;Information about the player&quot;
+  &quot;description&quot;: &quot;The player was deleted successfully&quot;
 }
 </code></pre></main>
   </div>

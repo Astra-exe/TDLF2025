@@ -6,6 +6,7 @@ namespace App\Controllers;
 
 use App\Models\PlayerModel;
 use App\Validations\PlayerValidation;
+use PDOException;
 
 class PlayerController extends BaseController
 {
@@ -199,5 +200,47 @@ class PlayerController extends BaseController
         unset($pair->registration_category_id);
 
         $this->respond(['pair' => $pair, 'relationship' => $relationship], 'Information about the player pair');
+    }
+
+    /**
+     * Elimina la información de un "jugador".
+     */
+    public function delete(string $id): void
+    {
+        // Obtiene las reglas de validación
+        // y las establece como obligatorias.
+        $rules = PlayerValidation::getRules(['id']);
+        array_unshift($rules['id'], 'required');
+
+        // Establece las reglas de validación.
+        $this->gump()->validation_rules($rules);
+
+        // Comprueba los parámetros de la petición.
+        $this->gump()->run(['id' => $id]);
+
+        // Comprueba si existen errores de validación.
+        if ($this->gump()->errors()) {
+            $this->respondValidationErrors(
+                $this->gump()->get_errors_array(),
+                'The player identifier is incorrect');
+        }
+
+        // Consulta la información del "jugador".
+        $player = new PlayerModel;
+        $player->find($id);
+
+        // Comprueba si existe el "jugador".
+        if (! $player->isHydrated()) {
+            $this->respondNotFound('The player information was not found');
+        }
+
+        // Elimina la información del "jugador".
+        try {
+            $player->delete();
+        } catch (PDOException) {
+            $this->respondConflict('The player contains related information');
+        }
+
+        $this->respondDeleted($player, 'The player was deleted successfully');
     }
 }

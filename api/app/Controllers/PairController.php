@@ -175,7 +175,7 @@ class PairController extends BaseController
 
         // Consulta la información de la "pareja".
         $pair = new PairModel;
-        $backup = $pair->find($id);
+        $pair->find($id);
 
         // Comprueba si existe la "pareja".
         if (! $pair->isHydrated()) {
@@ -183,9 +183,9 @@ class PairController extends BaseController
         }
 
         // Consulta la categoría de inscripción de la "pareja".
-        $backup->setCustomData('registration_category', $backup->registrationCategory);
+        $pair->setCustomData('registration_category', $pair->registrationCategory);
 
-        unset($backup->registration_category_id);
+        unset($pair->registration_category_id);
 
         // Elimina la información de la "pareja".
         try {
@@ -194,6 +194,6 @@ class PairController extends BaseController
             $this->respondConflict('The pair contains related information');
         }
 
-        $this->respondDeleted($backup, 'The pair was deleted successfully');
+        $this->respondDeleted($pair, 'The pair was deleted successfully');
     }
 }

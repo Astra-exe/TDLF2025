@@ -77,7 +77,6 @@ trait ResponseTrait
         $this->respond($data, $description, Http::CREATED());
     }
 
-
     /**
      * Genera una respuesta de conflicto.
      */

@@ -36,6 +36,7 @@ return (static function () use ($app): void {
         $router->post($base_route('/v1/players'), \App\Controllers\PlayerController::class.'->create');
         $router->get($base_route('/v1/players/@id'), \App\Controllers\PlayerController::class.'->show');
         $router->get($base_route('/v1/players/@id/pairs'), \App\Controllers\PlayerController::class.'->pair');
+        $router->delete($base_route('/v1/players/@id'), \App\Controllers\PlayerController::class.'->delete');
 
         // Parejas y jugadores.
         $router->get($base_route('/v1/pairs/players'), \App\Controllers\PairPlayerController::class.'->index');
