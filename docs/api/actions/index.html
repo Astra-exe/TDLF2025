@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>📘</text></svg>">
-  <title>Grupos de una categoría de inscripción</title>
+  <title>Acciones</title>
   <style>body {
   font-family: sans-serif;
   font-size: 16px;
@@ -233,8 +233,11 @@ img {
   <div class="content">
     <aside class="sidebar"><ul>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/actions/index.html">Acciones/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/actions/index.html"><b>Acciones</b>/</a>
 <ul>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/actions/randomizeGroupsPairsMatches.html">Asignar grupos, parejas y partidos de manera aleatoria/</a>
+</li>
 </ul>
 </li>
 <li>
@@ -268,14 +271,8 @@ img {
 </ul>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/registration-categories/index.html"><b>Categorías de inscripción</b>/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/registration-categories/index.html">Categorías de inscripción/</a>
 <ul>
-<li>
-<a href="https://astra-exe.github.io/TDLF2025/api/registration-categories/groups.html"><b>Grupos de una categoría de inscripción</b>/</a>
-</li>
-<li>
-<a href="https://astra-exe.github.io/TDLF2025/api/registration-categories/show.html">Información de una categoría de inscripción/</a>
-</li>
 </ul>
 </li>
 <li>
@@ -284,84 +281,8 @@ img {
 </ul>
 </li>
 </ul></aside>
-    <main class="main"><h1>Grupos de una categoría de inscripción</h1>
-<pre><code>[GET] /v1/categories/registrations/@id/groups
-</code></pre>
-<p>Ejemplo:</p>
-<pre><code class="language-bash">curl -X GET \
-  -H 'Content-Type: application/json' \
-  -H 'Accept: application/json' \
-  -H 'X-API-KEY: API_KEY' \
-  http://localhost:8080/v1/categories/registrations/@id/groups
-</code></pre>
-<p>Respuesta de la petición:</p>
-<pre><code class="language-json">{
-  &quot;data&quot;: [
-    {
-      &quot;id&quot;: &quot;3a8b9ca2-09e6-47b8-8c8b-edbf506bd8fe&quot;,
-      &quot;registration_category_id&quot;: &quot;c98fb1f7-837b-4301-947f-8367f6fb29b8&quot;,
-      &quot;name&quot;: &quot;A_2025&quot;,
-      &quot;description&quot;: &quot;A&quot;,
-      &quot;is_eliminated&quot;: 0,
-      &quot;is_active&quot;: 1,
-      &quot;created_at&quot;: &quot;2025-03-17 16:07:14&quot;,
-      &quot;updated_at&quot;: &quot;2025-03-17 16:07:14&quot;
-    },
-    {
-      &quot;id&quot;: &quot;85544ec6-4021-4ebe-9eff-2569ae9e02d2&quot;,
-      &quot;registration_category_id&quot;: &quot;c98fb1f7-837b-4301-947f-8367f6fb29b8&quot;,
-      &quot;name&quot;: &quot;B_2025&quot;,
-      &quot;description&quot;: &quot;B&quot;,
-      &quot;is_eliminated&quot;: 0,
-      &quot;is_active&quot;: 1,
-      &quot;created_at&quot;: &quot;2025-03-17 16:07:14&quot;,
-      &quot;updated_at&quot;: &quot;2025-03-17 16:07:14&quot;
-    },
-    {
-      &quot;id&quot;: &quot;b72294f3-7155-4749-abb4-e820369ebc26&quot;,
-      &quot;registration_category_id&quot;: &quot;c98fb1f7-837b-4301-947f-8367f6fb29b8&quot;,
-      &quot;name&quot;: &quot;C_2025&quot;,
-      &quot;description&quot;: &quot;C&quot;,
-      &quot;is_eliminated&quot;: 0,
-      &quot;is_active&quot;: 1,
-      &quot;created_at&quot;: &quot;2025-03-17 16:07:14&quot;,
-      &quot;updated_at&quot;: &quot;2025-03-17 16:07:14&quot;
-    },
-    {
-      &quot;id&quot;: &quot;8cb2c28b-cb7b-4435-8350-ad3e20fb44c4&quot;,
-      &quot;registration_category_id&quot;: &quot;c98fb1f7-837b-4301-947f-8367f6fb29b8&quot;,
-      &quot;name&quot;: &quot;D_2025&quot;,
-      &quot;description&quot;: &quot;D&quot;,
-      &quot;is_eliminated&quot;: 0,
-      &quot;is_active&quot;: 1,
-      &quot;created_at&quot;: &quot;2025-03-17 16:07:14&quot;,
-      &quot;updated_at&quot;: &quot;2025-03-17 16:07:14&quot;
-    },
-    {
-      &quot;id&quot;: &quot;2faa75eb-2b40-4e2b-b513-c030f9ea7fca&quot;,
-      &quot;registration_category_id&quot;: &quot;c98fb1f7-837b-4301-947f-8367f6fb29b8&quot;,
-      &quot;name&quot;: &quot;E_2025&quot;,
-      &quot;description&quot;: &quot;E&quot;,
-      &quot;is_eliminated&quot;: 0,
-      &quot;is_active&quot;: 1,
-      &quot;created_at&quot;: &quot;2025-03-17 16:07:14&quot;,
-      &quot;updated_at&quot;: &quot;2025-03-17 16:07:14&quot;
-    },
-    {
-      &quot;id&quot;: &quot;597e7d22-44c1-4a0e-bd4f-93687dddb788&quot;,
-      &quot;registration_category_id&quot;: &quot;c98fb1f7-837b-4301-947f-8367f6fb29b8&quot;,
-      &quot;name&quot;: &quot;F_2025&quot;,
-      &quot;description&quot;: &quot;F&quot;,
-      &quot;is_eliminated&quot;: 0,
-      &quot;is_active&quot;: 1,
-      &quot;created_at&quot;: &quot;2025-03-17 16:07:14&quot;,
-      &quot;updated_at&quot;: &quot;2025-03-17 16:07:14&quot;
-    }
-  ],
-  &quot;status&quot;: 200,
-  &quot;description&quot;: &quot;Information about the groups of the registration category of pairs players&quot;
-}
-</code></pre></main>
+    <main class="main"><h1>Acciones</h1>
+<p>Ejecuta acciones o comandos específicos desde un endpoint.</p></main>
   </div>
   <div>
     <hr>

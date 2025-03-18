@@ -133,9 +133,6 @@ class ActionsController extends BaseController
 
                 $group->insert();
 
-                // Consulta la información del "grupo" registrado.
-                $group->select('id')->find($group->id);
-
                 // Registra la relación de la "pareja" con el "grupo".
                 foreach ($segment as $_pair) {
                     $groupPairPivot->copyFrom(['group_id' => $group->id, 'pair_id' => $_pair->id]);
@@ -164,9 +161,6 @@ class ActionsController extends BaseController
 
                         $match->insert();
 
-                        // Consulta la información del "partido" registrado.
-                        $match->select('id')->find($match->id);
-
                         // Registra la información del "partido" de la "pareja combinada".
                         $matchPairPivot->copyFrom([
                             'match_id' => $match->id,
@@ -190,5 +184,7 @@ class ActionsController extends BaseController
                 }
             }
         }
+
+        $this->respondNoContent('The action that randomly sets groups, pairs and matches was executed successfully');
     }
 }

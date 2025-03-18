@@ -48,7 +48,9 @@ class GroupController extends BaseController
             $match->setCustomData('match_category', $match->matchCategory);
             $match->setCustomData('match_status', $match->matchStatus);
 
-            // Consulta la información de los "jugadores" del "partido".
+            unset($match->registration_category_id, $match->match_status_id, $match->match_category_id);
+
+            // Consulta la información de las "parejas" del "partido".
             $match->setCustomData('pairs', array_map(static function (MatchPairPivotModel $matchPairRel): array {
                 $pair = $matchPairRel->pair;
                 $pair->setCustomData('registration_category', $pair->registrationCategory);
@@ -63,8 +65,6 @@ class GroupController extends BaseController
 
                 return ['pair' => $pair, 'relationship' => $matchPairRel];
             }, $match->matchPairPivot));
-
-            unset($match->registration_category_id, $match->match_status_id, $match->match_category_id);
 
             return ['match' => $match];
         }, $group->matches);
