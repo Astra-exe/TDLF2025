@@ -36,11 +36,9 @@ final class SeederRegistrationCategoriesTable extends AbstractMigration
 
     protected function down(): void
     {
-        $this->delete('matches_pairs');
         $this->delete('matches');
         $this->delete('groups_pairs');
         $this->delete('groups');
-        $this->delete('pairs_players');
         $this->delete('pairs');
         $this->delete('registration_categories');
     }

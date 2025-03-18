@@ -45,6 +45,7 @@ return (static function () use ($app): void {
         // Parejas.
         $router->post($base_route('/v1/pairs'), \App\Controllers\PairController::class.'->create');
         $router->get($base_route('/v1/pairs/@id'), \App\Controllers\PairController::class.'->show');
+        $router->delete($base_route('/v1/pairs/@id'), \App\Controllers\PairController::class.'->delete');
 
         // Grupos.
         $router->get($base_route('/v1/groups'), \App\Controllers\GroupController::class.'->index');

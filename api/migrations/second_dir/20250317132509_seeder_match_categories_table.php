@@ -57,7 +57,6 @@ final class SeederMatchCategoriesTable extends AbstractMigration
 
     protected function down(): void
     {
-        $this->delete('matches_pairs');
         $this->delete('matches');
         $this->delete('match_categories');
     }

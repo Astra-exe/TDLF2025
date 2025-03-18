@@ -67,7 +67,6 @@ final class SeederUsersTable extends AbstractMigration
 
     protected function down(): void
     {
-        $this->delete('api_keys');
         $this->delete('users');
     }
 }

@@ -77,13 +77,22 @@ trait ResponseTrait
         $this->respond($data, $description, Http::CREATED());
     }
 
+
+    /**
+     * Genera una respuesta de conflicto.
+     */
+    protected function respondConflict(string $description, string $error = 'Conflict'): void
+    {
+        $this->respondFail($description, Http::CONFLICT(), $error);
+    }
+
     /**
      * Genera una respuesta cuando se intenta
      * crear un nuevo recurso que ya existe.
      */
-    protected function respondResourceExists(string $description, string $error = 'Conflict'): void
+    protected function respondResourceExists(string $description, string $error = 'Resource exists'): void
     {
-        $this->respondFail($description, Http::CONFLICT(), $error);
+        $this->respondConflict($description, $error);
     }
 
     /**

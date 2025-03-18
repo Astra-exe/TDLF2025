@@ -8,6 +8,7 @@ use App\Models\PairModel;
 use App\Models\PairPlayerPivotModel;
 use App\Models\PlayerModel;
 use App\Validations\PairValidation;
+use PDOException;
 
 class PairController extends BaseController
 {
@@ -147,5 +148,52 @@ class PairController extends BaseController
         unset($pair->registration_category_id);
 
         $this->respond($pair, 'Information about the pair');
+    }
+
+    /**
+     * Elimina la información de una "pareja".
+     */
+    public function delete(string $id): void
+    {
+        // Obtiene las reglas de validación
+        // y las establece como obligatorias.
+        $rules = PairValidation::getRules(['id']);
+        array_unshift($rules['id'], 'required');
+
+        // Establece las reglas de validación.
+        $this->gump()->validation_rules($rules);
+
+        // Comprueba los parámetros de la petición.
+        $this->gump()->run(['id' => $id]);
+
+        // Comprueba si existen errores de validación.
+        if ($this->gump()->errors()) {
+            $this->respondValidationErrors(
+                $this->gump()->get_errors_array(),
+                'The pair identifier is incorrect');
+        }
+
+        // Consulta la información de la "pareja".
+        $pair = new PairModel;
+        $backup = $pair->find($id);
+
+        // Comprueba si existe la "pareja".
+        if (! $pair->isHydrated()) {
+            $this->respondNotFound('The pair information was not found');
+        }
+
+        // Consulta la categoría de inscripción de la "pareja".
+        $backup->setCustomData('registration_category', $backup->registrationCategory);
+
+        unset($backup->registration_category_id);
+
+        // Elimina la información de la "pareja".
+        try {
+            $pair->delete();
+        } catch (PDOException) {
+            $this->respondConflict('The pair contains related information');
+        }
+
+        $this->respondDeleted($backup, 'The pair was deleted successfully');
     }
 }
