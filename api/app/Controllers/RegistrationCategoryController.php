@@ -88,15 +88,6 @@ class RegistrationCategoryController extends BaseController
             $this->respondNotFound('The registration category of pairs players information was not found');
         }
 
-        // Consulta la información de los "grupos" de la "categoría de inscripción".
-        $groups = $registrationCategory->groups;
-
-        foreach ($groups as $group) {
-            $group->setCustomData('registration_category', $group->registrationCategory);
-
-            unset($group->registration_category_id);
-        }
-
-        $this->respond($groups, 'Information about the groups of the registration category of pairs players');
+        $this->respond($registrationCategory->groups, 'Information about the groups of the registration category of pairs players');
     }
 }
