@@ -60,28 +60,36 @@ class ActionsController extends BaseController
         // Nombre: A_2025, B_2025, C_2025, ...
         // Descripción: A, B, C, ...
         foreach ($categories as $category) {
+            // Obtiene el número de "grupos" de la "categoría".
+            $group->reset()->select('COUNT(*) AS _count')
+                ->eq($column, $category->id)
+                ->eq('is_active', 1)
+                ->find();
+
+            // Ignora las "categorías" que contengan "grupos".
+            if ($group->_count > 0) {
+                continue;
+            }
+
+            // Obtiene los parámetro de configuración de la "categoría".
+            $params = $settings[$category->name];
+
             // Obtiene el número de "parejas" de la "categoría".
             $pair->select('COUNT(*) AS _count')
                 ->eq($column, $category->id)
                 ->eq('is_active', 1)
                 ->find();
 
-            // Obtiene el número máximo de "parejas" por "grupo".
-            $maxPairs = $settings[$category->name]['max_pairs'];
-
             // Calcula el número total de "grupos" de la "categoría".
-            $numGroups = $pair->_count / $maxPairs;
+            $numGroups = $pair->_count / $params['max_pairs'];
 
             // Comprueba si la "categoría" completa los "grupos" de las "parejas de jugadores".
             if ($numGroups < 1 || is_float($numGroups)) {
                 $this->respondDependecyError('The registration category of pairs players does not complete the groups');
             }
 
-            // Obtiene el número máximo de "grupos" permitidos.
-            $maxGroups = $settings[$category->name]['max_groups'];
-
             // Comprueba el número máximo de "grupos" permitidos.
-            if ($numGroups > $maxGroups) {
+            if ($numGroups > $params['max_groups']) {
                 $this->respondDependecyError('The registration category of pairs players exceeds the number of allowed groups');
             }
 
@@ -103,8 +111,10 @@ class ActionsController extends BaseController
 
             shuffle($pairs);
 
+            $pair->reset();
+
             // Segmenta las "parejas" en el número total de "grupos".
-            foreach (array_chunk($pairs, $maxPairs) as $key => $segment) {
+            foreach (array_chunk($pairs, $params['max_pairs']) as $key => $segment) {
                 // Registra la información del "grupo".
                 $group->copyFrom([
                     $column => $category->id,
@@ -129,8 +139,8 @@ class ActionsController extends BaseController
 
                 // Registra la combinación de los "partidos"
                 // de las "parejas" del "grupo".
-                for ($i = 0; $i < $maxPairs; $i++) {
-                    for ($j = $i + 1; $j < $maxPairs; $j++) {
+                for ($i = 0; $i < $params['max_pairs']; $i++) {
+                    for ($j = $i + 1; $j < $params['max_pairs']; $j++) {
                         // Registra la información del "partido".
                         $match->copyFrom([
                             $column => $category->id,
@@ -169,7 +179,5 @@ class ActionsController extends BaseController
                 $group->reset();
             }
         }
-
-        $pair->reset();
     }
 }
