@@ -35,6 +35,10 @@ class GroupController extends BaseController
         foreach ($queryFields as $param => $default) {
             $queryParams[$param] = $this->app()->request()->query->{$param} ?? $default;
 
+            if (is_string($queryParams[$param]) && empty($queryParams[$param])) {
+                $queryParams[$param] = $default;
+            }
+
             if (is_null($queryParams[$param])) {
                 unset($queryParams[$param]);
             }
