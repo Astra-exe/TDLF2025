@@ -21,15 +21,20 @@ Respuesta de la petición:
   "data": [
     {
       "match": {
-        "id": "2c7578c6-38d9-4e97-bc29-3c9332ff809f",
-        "group_id": "6fa6b6d5-eca2-4f70-a004-df7535b9ec8f",
+        "id": "0858b8ee-0ccb-4764-94a7-1deb9d956c23",
+        "group_id": "19dcf711-ac20-4be5-8bc9-daa27582c6c2",
         "is_active": 1,
-        "created_at": "2025-03-17 21:54:06",
-        "updated_at": "2025-03-17 21:54:06",
+        "created_at": "2025-03-18 01:21:28",
+        "updated_at": "2025-03-18 01:21:28",
         "registration_category": {
           "id": "4291ffa3-0b5c-4c3c-bd29-31cfddb130be",
           "name": "open",
           "description": "Libre"
+        },
+        "match_category": {
+          "id": "75173798-35ea-4415-8ac4-89a8a2918600",
+          "name": "qualifier",
+          "description": "Clasificación"
         },
         "match_status": {
           "id": "02ee09c2-34bc-4f27-84ff-6ceca7c50882",
@@ -39,11 +44,11 @@ Respuesta de la petición:
         "pairs": [
           {
             "pair": {
-              "id": "0dee717e-4b9f-4565-b0b5-8c3906cb8093",
+              "id": "4aeacf96-38c9-4400-859c-461ae9a6024d",
               "is_eliminated": 0,
               "is_active": 1,
-              "created_at": "2025-03-17 21:53:30",
-              "updated_at": "2025-03-17 21:53:30",
+              "created_at": "2025-03-17 23:51:48",
+              "updated_at": "2025-03-17 23:51:48",
               "registration_category": {
                 "id": "4291ffa3-0b5c-4c3c-bd29-31cfddb130be",
                 "name": "open",
@@ -52,65 +57,65 @@ Respuesta de la petición:
               "players": [
                 {
                   "player": {
-                    "id": "79e9cb8a-5862-4721-aa98-cae0171fa98a",
-                    "fullname": "Miguel Ángel",
-                    "city": "Apaseo el Grande",
-                    "weight": "79.50",
-                    "height": "1.84",
-                    "age": 33,
+                    "id": "39e1f248-7c69-40ce-9406-0b226c7207a5",
+                    "fullname": "Jorge Medina",
+                    "city": "Pueblo Nuevo",
+                    "weight": "76.50",
+                    "height": "1.82",
+                    "age": 32,
                     "experience": 13,
                     "is_active": 1,
-                    "created_at": "2025-03-17 21:53:30",
-                    "updated_at": "2025-03-17 21:53:30"
+                    "created_at": "2025-03-17 23:51:48",
+                    "updated_at": "2025-03-17 23:51:48"
                   },
                   "relationship": {
-                    "id": "913ce1a1-7930-40db-8543-8d1983af6ced",
-                    "player_id": "79e9cb8a-5862-4721-aa98-cae0171fa98a",
-                    "pair_id": "0dee717e-4b9f-4565-b0b5-8c3906cb8093",
-                    "created_at": "2025-03-17 21:53:30",
-                    "updated_at": "2025-03-17 21:53:30"
+                    "id": "61197d8f-0a14-4d3b-8ab4-fb3ed23db98a",
+                    "player_id": "39e1f248-7c69-40ce-9406-0b226c7207a5",
+                    "pair_id": "4aeacf96-38c9-4400-859c-461ae9a6024d",
+                    "created_at": "2025-03-17 23:51:48",
+                    "updated_at": "2025-03-17 23:51:48"
                   }
                 },
                 {
                   "player": {
-                    "id": "17077e5a-92d3-42c6-ab61-fbc3bb94df75",
-                    "fullname": "Gabriela Jiménez",
-                    "city": "Uriangato",
-                    "weight": "66.20",
-                    "height": "1.72",
-                    "age": 28,
-                    "experience": 10,
+                    "id": "ba7c13e5-7b86-436f-a9cd-e454eb0dbe6f",
+                    "fullname": "Maricela Sánchez",
+                    "city": "Moroleón",
+                    "weight": "65.20",
+                    "height": "1.70",
+                    "age": 29,
+                    "experience": 8,
                     "is_active": 1,
-                    "created_at": "2025-03-17 21:53:30",
-                    "updated_at": "2025-03-17 21:53:30"
+                    "created_at": "2025-03-17 23:51:48",
+                    "updated_at": "2025-03-17 23:51:48"
                   },
                   "relationship": {
-                    "id": "eb365188-683c-459e-9ef6-ccebbe13cc88",
-                    "player_id": "17077e5a-92d3-42c6-ab61-fbc3bb94df75",
-                    "pair_id": "0dee717e-4b9f-4565-b0b5-8c3906cb8093",
-                    "created_at": "2025-03-17 21:53:30",
-                    "updated_at": "2025-03-17 21:53:30"
+                    "id": "e36c443e-ef6d-45d6-895b-421549034889",
+                    "player_id": "ba7c13e5-7b86-436f-a9cd-e454eb0dbe6f",
+                    "pair_id": "4aeacf96-38c9-4400-859c-461ae9a6024d",
+                    "created_at": "2025-03-17 23:51:48",
+                    "updated_at": "2025-03-17 23:51:48"
                   }
                 }
               ]
             },
             "relationship": {
-              "id": "0d82b971-7f9c-4b47-9ac8-c300bfe95822",
-              "pair_id": "0dee717e-4b9f-4565-b0b5-8c3906cb8093",
-              "match_id": "2c7578c6-38d9-4e97-bc29-3c9332ff809f",
+              "id": "e04a06f3-f1e3-4eb9-b543-ae82c46346c4",
+              "pair_id": "4aeacf96-38c9-4400-859c-461ae9a6024d",
+              "match_id": "0858b8ee-0ccb-4764-94a7-1deb9d956c23",
               "score": 0,
               "is_winner": 0,
-              "created_at": "2025-03-17 21:54:06",
-              "updated_at": "2025-03-17 21:54:06"
+              "created_at": "2025-03-18 01:21:28",
+              "updated_at": "2025-03-18 01:21:28"
             }
           },
           {
             "pair": {
-              "id": "ca87508b-afcf-4b1e-a378-abc0fcc0769c",
+              "id": "5dfbfd5c-26e2-4dbe-8bd6-1040a6cf1e10",
               "is_eliminated": 0,
               "is_active": 1,
-              "created_at": "2025-03-17 21:53:30",
-              "updated_at": "2025-03-17 21:53:30",
+              "created_at": "2025-03-17 23:51:47",
+              "updated_at": "2025-03-17 23:51:47",
               "registration_category": {
                 "id": "4291ffa3-0b5c-4c3c-bd29-31cfddb130be",
                 "name": "open",
@@ -119,56 +124,56 @@ Respuesta de la petición:
               "players": [
                 {
                   "player": {
-                    "id": "7d62bb8f-09cd-4937-bbc8-a4e8f80de3c3",
-                    "fullname": "Sofía López",
-                    "city": "San Miguel de Allende",
-                    "weight": "65.00",
-                    "height": "1.70",
-                    "age": 29,
-                    "experience": 9,
+                    "id": "85640d17-888b-4894-b7ea-8ac695c32533",
+                    "fullname": "Luis Hernández",
+                    "city": "León",
+                    "weight": "75.20",
+                    "height": "1.78",
+                    "age": 28,
+                    "experience": 12,
                     "is_active": 1,
-                    "created_at": "2025-03-17 21:53:30",
-                    "updated_at": "2025-03-17 21:53:30"
+                    "created_at": "2025-03-17 23:51:47",
+                    "updated_at": "2025-03-17 23:51:47"
                   },
                   "relationship": {
-                    "id": "7ad7ea8d-e2d4-4424-acaa-3768b7fd8012",
-                    "player_id": "7d62bb8f-09cd-4937-bbc8-a4e8f80de3c3",
-                    "pair_id": "ca87508b-afcf-4b1e-a378-abc0fcc0769c",
-                    "created_at": "2025-03-17 21:53:30",
-                    "updated_at": "2025-03-17 21:53:30"
+                    "id": "d40eeadd-7ec0-4e77-a8ea-4ea51407857c",
+                    "player_id": "85640d17-888b-4894-b7ea-8ac695c32533",
+                    "pair_id": "5dfbfd5c-26e2-4dbe-8bd6-1040a6cf1e10",
+                    "created_at": "2025-03-17 23:51:47",
+                    "updated_at": "2025-03-17 23:51:47"
                   }
                 },
                 {
                   "player": {
-                    "id": "570ebc25-907b-428a-974f-463030b7db21",
-                    "fullname": "Javier Torres",
-                    "city": "Salamanca",
-                    "weight": "80.00",
-                    "height": "1.85",
-                    "age": 35,
-                    "experience": 15,
+                    "id": "7649a11c-e9ed-4011-9e04-4cbd7e370907",
+                    "fullname": "María Guzmán",
+                    "city": "Guanajuato",
+                    "weight": "62.50",
+                    "height": "1.68",
+                    "age": 24,
+                    "experience": 8,
                     "is_active": 1,
-                    "created_at": "2025-03-17 21:53:30",
-                    "updated_at": "2025-03-17 21:53:30"
+                    "created_at": "2025-03-17 23:51:47",
+                    "updated_at": "2025-03-17 23:51:47"
                   },
                   "relationship": {
-                    "id": "8eb22cbe-2496-484e-9c18-4d13cd059bee",
-                    "player_id": "570ebc25-907b-428a-974f-463030b7db21",
-                    "pair_id": "ca87508b-afcf-4b1e-a378-abc0fcc0769c",
-                    "created_at": "2025-03-17 21:53:30",
-                    "updated_at": "2025-03-17 21:53:30"
+                    "id": "f7694e51-38e7-4a04-8eaa-b812abb4e21e",
+                    "player_id": "7649a11c-e9ed-4011-9e04-4cbd7e370907",
+                    "pair_id": "5dfbfd5c-26e2-4dbe-8bd6-1040a6cf1e10",
+                    "created_at": "2025-03-17 23:51:47",
+                    "updated_at": "2025-03-17 23:51:47"
                   }
                 }
               ]
             },
             "relationship": {
-              "id": "d4c11946-3d0c-40bb-aa14-399b15628778",
-              "pair_id": "ca87508b-afcf-4b1e-a378-abc0fcc0769c",
-              "match_id": "2c7578c6-38d9-4e97-bc29-3c9332ff809f",
+              "id": "fd42ed48-e145-469a-8f8e-57d2a2e11bd4",
+              "pair_id": "5dfbfd5c-26e2-4dbe-8bd6-1040a6cf1e10",
+              "match_id": "0858b8ee-0ccb-4764-94a7-1deb9d956c23",
               "score": 0,
               "is_winner": 0,
-              "created_at": "2025-03-17 21:54:06",
-              "updated_at": "2025-03-17 21:54:06"
+              "created_at": "2025-03-18 01:21:28",
+              "updated_at": "2025-03-18 01:21:28"
             }
           }
         ]
@@ -176,15 +181,20 @@ Respuesta de la petición:
     },
     {
       "match": {
-        "id": "89ee7e96-958a-4e7a-930d-8f75d834f86e",
-        "group_id": "6fa6b6d5-eca2-4f70-a004-df7535b9ec8f",
+        "id": "0a328326-c541-4b3d-a9f7-ee22bcd2ca43",
+        "group_id": "19dcf711-ac20-4be5-8bc9-daa27582c6c2",
         "is_active": 1,
-        "created_at": "2025-03-17 21:54:06",
-        "updated_at": "2025-03-17 21:54:06",
+        "created_at": "2025-03-18 01:21:28",
+        "updated_at": "2025-03-18 01:21:28",
         "registration_category": {
           "id": "4291ffa3-0b5c-4c3c-bd29-31cfddb130be",
           "name": "open",
           "description": "Libre"
+        },
+        "match_category": {
+          "id": "75173798-35ea-4415-8ac4-89a8a2918600",
+          "name": "qualifier",
+          "description": "Clasificación"
         },
         "match_status": {
           "id": "02ee09c2-34bc-4f27-84ff-6ceca7c50882",
@@ -194,11 +204,11 @@ Respuesta de la petición:
         "pairs": [
           {
             "pair": {
-              "id": "210fca16-c98c-4182-a14f-823fde1d6210",
+              "id": "e8786b51-94fa-4b71-8e71-781840a67685",
               "is_eliminated": 0,
               "is_active": 1,
-              "created_at": "2025-03-17 21:53:30",
-              "updated_at": "2025-03-17 21:53:30",
+              "created_at": "2025-03-17 23:51:48",
+              "updated_at": "2025-03-17 23:51:48",
               "registration_category": {
                 "id": "4291ffa3-0b5c-4c3c-bd29-31cfddb130be",
                 "name": "open",
@@ -207,65 +217,65 @@ Respuesta de la petición:
               "players": [
                 {
                   "player": {
-                    "id": "dc908c32-7951-423d-831b-29007f5cf98c",
-                    "fullname": "Ana Ramírez",
-                    "city": "Irapuato",
-                    "weight": "63.10",
-                    "height": "1.65",
-                    "age": 26,
-                    "experience": 7,
+                    "id": "91cffd78-8883-4269-92b8-bd1405e5bed4",
+                    "fullname": "Alberto Méndez",
+                    "city": "San José Iturbide",
+                    "weight": "77.50",
+                    "height": "1.83",
+                    "age": 33,
+                    "experience": 13,
                     "is_active": 1,
-                    "created_at": "2025-03-17 21:53:30",
-                    "updated_at": "2025-03-17 21:53:30"
+                    "created_at": "2025-03-17 23:51:48",
+                    "updated_at": "2025-03-17 23:51:48"
                   },
                   "relationship": {
-                    "id": "c5c263a9-601e-4a5b-b827-85d55523b7af",
-                    "player_id": "dc908c32-7951-423d-831b-29007f5cf98c",
-                    "pair_id": "210fca16-c98c-4182-a14f-823fde1d6210",
-                    "created_at": "2025-03-17 21:53:30",
-                    "updated_at": "2025-03-17 21:53:30"
+                    "id": "e0a3cabb-5ade-487b-a908-3017c51908f5",
+                    "player_id": "91cffd78-8883-4269-92b8-bd1405e5bed4",
+                    "pair_id": "e8786b51-94fa-4b71-8e71-781840a67685",
+                    "created_at": "2025-03-17 23:51:48",
+                    "updated_at": "2025-03-17 23:51:48"
                   }
                 },
                 {
                   "player": {
-                    "id": "2d9b9633-cac7-4e48-a969-a4f1e0603a28",
-                    "fullname": "Carlos Martínez",
-                    "city": "Celaya",
-                    "weight": "78.40",
-                    "height": "1.80",
-                    "age": 32,
-                    "experience": 10,
+                    "id": "32882818-4306-4698-a08f-35cd08b34f58",
+                    "fullname": "Martha González",
+                    "city": "Tierra Blanca",
+                    "weight": "65.00",
+                    "height": "1.70",
+                    "age": 28,
+                    "experience": 8,
                     "is_active": 1,
-                    "created_at": "2025-03-17 21:53:30",
-                    "updated_at": "2025-03-17 21:53:30"
+                    "created_at": "2025-03-17 23:51:48",
+                    "updated_at": "2025-03-17 23:51:48"
                   },
                   "relationship": {
-                    "id": "d32b9729-ccb6-46fa-b9ce-c62f217bd132",
-                    "player_id": "2d9b9633-cac7-4e48-a969-a4f1e0603a28",
-                    "pair_id": "210fca16-c98c-4182-a14f-823fde1d6210",
-                    "created_at": "2025-03-17 21:53:30",
-                    "updated_at": "2025-03-17 21:53:30"
+                    "id": "e392ca32-94bb-4fef-9e5f-10a9140d6e56",
+                    "player_id": "32882818-4306-4698-a08f-35cd08b34f58",
+                    "pair_id": "e8786b51-94fa-4b71-8e71-781840a67685",
+                    "created_at": "2025-03-17 23:51:48",
+                    "updated_at": "2025-03-17 23:51:48"
                   }
                 }
               ]
             },
             "relationship": {
-              "id": "455d786a-8df9-4b11-b50f-5d6d35a5f118",
-              "pair_id": "210fca16-c98c-4182-a14f-823fde1d6210",
-              "match_id": "89ee7e96-958a-4e7a-930d-8f75d834f86e",
+              "id": "76a7da90-679d-4460-87a0-086f000ec527",
+              "pair_id": "e8786b51-94fa-4b71-8e71-781840a67685",
+              "match_id": "0a328326-c541-4b3d-a9f7-ee22bcd2ca43",
               "score": 0,
               "is_winner": 0,
-              "created_at": "2025-03-17 21:54:06",
-              "updated_at": "2025-03-17 21:54:06"
+              "created_at": "2025-03-18 01:21:28",
+              "updated_at": "2025-03-18 01:21:28"
             }
           },
           {
             "pair": {
-              "id": "da671096-f0ff-4b6a-b63a-4ad68d5d187b",
+              "id": "4aeacf96-38c9-4400-859c-461ae9a6024d",
               "is_eliminated": 0,
               "is_active": 1,
-              "created_at": "2025-03-17 21:53:30",
-              "updated_at": "2025-03-17 21:53:30",
+              "created_at": "2025-03-17 23:51:48",
+              "updated_at": "2025-03-17 23:51:48",
               "registration_category": {
                 "id": "4291ffa3-0b5c-4c3c-bd29-31cfddb130be",
                 "name": "open",
@@ -274,62 +284,62 @@ Respuesta de la petición:
               "players": [
                 {
                   "player": {
-                    "id": "656adb45-241c-449e-90d8-9481e2e7a001",
-                    "fullname": "Elena Morales",
-                    "city": "Purísima del Rincón",
-                    "weight": "64.00",
-                    "height": "1.69",
-                    "age": 23,
-                    "experience": 5,
+                    "id": "39e1f248-7c69-40ce-9406-0b226c7207a5",
+                    "fullname": "Jorge Medina",
+                    "city": "Pueblo Nuevo",
+                    "weight": "76.50",
+                    "height": "1.82",
+                    "age": 32,
+                    "experience": 13,
                     "is_active": 1,
-                    "created_at": "2025-03-17 21:53:30",
-                    "updated_at": "2025-03-17 21:53:30"
+                    "created_at": "2025-03-17 23:51:48",
+                    "updated_at": "2025-03-17 23:51:48"
                   },
                   "relationship": {
-                    "id": "35b8eda9-da72-488f-85fa-6260fd4cb2fd",
-                    "player_id": "656adb45-241c-449e-90d8-9481e2e7a001",
-                    "pair_id": "da671096-f0ff-4b6a-b63a-4ad68d5d187b",
-                    "created_at": "2025-03-17 21:53:30",
-                    "updated_at": "2025-03-17 21:53:30"
+                    "id": "61197d8f-0a14-4d3b-8ab4-fb3ed23db98a",
+                    "player_id": "39e1f248-7c69-40ce-9406-0b226c7207a5",
+                    "pair_id": "4aeacf96-38c9-4400-859c-461ae9a6024d",
+                    "created_at": "2025-03-17 23:51:48",
+                    "updated_at": "2025-03-17 23:51:48"
                   }
                 },
                 {
                   "player": {
-                    "id": "c1a91924-9fd6-4c75-9ee9-a8bd00b1e4c4",
-                    "fullname": "Diego Fernández",
+                    "id": "ba7c13e5-7b86-436f-a9cd-e454eb0dbe6f",
+                    "fullname": "Maricela Sánchez",
                     "city": "Moroleón",
-                    "weight": "77.00",
-                    "height": "1.82",
-                    "age": 27,
+                    "weight": "65.20",
+                    "height": "1.70",
+                    "age": 29,
                     "experience": 8,
                     "is_active": 1,
-                    "created_at": "2025-03-17 21:53:30",
-                    "updated_at": "2025-03-17 21:53:30"
+                    "created_at": "2025-03-17 23:51:48",
+                    "updated_at": "2025-03-17 23:51:48"
                   },
                   "relationship": {
-                    "id": "d7e4b75f-d0e2-4594-a554-043abc92eeec",
-                    "player_id": "c1a91924-9fd6-4c75-9ee9-a8bd00b1e4c4",
-                    "pair_id": "da671096-f0ff-4b6a-b63a-4ad68d5d187b",
-                    "created_at": "2025-03-17 21:53:30",
-                    "updated_at": "2025-03-17 21:53:30"
+                    "id": "e36c443e-ef6d-45d6-895b-421549034889",
+                    "player_id": "ba7c13e5-7b86-436f-a9cd-e454eb0dbe6f",
+                    "pair_id": "4aeacf96-38c9-4400-859c-461ae9a6024d",
+                    "created_at": "2025-03-17 23:51:48",
+                    "updated_at": "2025-03-17 23:51:48"
                   }
                 }
               ]
             },
             "relationship": {
-              "id": "7fd9bcff-9419-4957-bb53-db4b5efff6cd",
-              "pair_id": "da671096-f0ff-4b6a-b63a-4ad68d5d187b",
-              "match_id": "89ee7e96-958a-4e7a-930d-8f75d834f86e",
+              "id": "f6c6ca0c-b1d3-4446-9ea7-1b92c4eae5ce",
+              "pair_id": "4aeacf96-38c9-4400-859c-461ae9a6024d",
+              "match_id": "0a328326-c541-4b3d-a9f7-ee22bcd2ca43",
               "score": 0,
               "is_winner": 0,
-              "created_at": "2025-03-17 21:54:06",
-              "updated_at": "2025-03-17 21:54:06"
+              "created_at": "2025-03-18 01:21:28",
+              "updated_at": "2025-03-18 01:21:28"
             }
           }
         ]
       }
     },
-    ...,
+    ... 
   ],
   "status": 200,
   "description": "Information about the group matches"

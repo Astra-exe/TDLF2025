@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>📘</text></svg>">
-  <title>Parejas de los grupos</title>
+  <title>Parejas de un grupo</title>
   <style>body {
   font-family: sans-serif;
   font-size: 16px;
@@ -249,7 +249,7 @@ img {
 <a href="https://astra-exe.github.io/TDLF2025/api/groups-pairs/players.html">Jugadores de las parejas del grupo/</a>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/groups-pairs/show.html">Parejas de un grupo/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups-pairs/show.html"><b>Parejas de un grupo</b>/</a>
 </li>
 </ul>
 </li>
@@ -279,8 +279,68 @@ img {
 </ul>
 </li>
 </ul></aside>
-    <main class="main"><h1>Parejas de los grupos</h1>
-<p>Grupos de parejas.</p></main>
+    <main class="main"><h1>Parejas de un grupo</h1>
+<pre><code>[GET] /v1/groups/@id/pairs
+</code></pre>
+<p> Ejemplo:</p>
+<p> </p>
+<pre><code class="language-bash"> curl -X GET \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY' \
+  http://localhost:8080/v1/groups/@id/pairs
+ </code></pre>
+<p>Respuesta de la petición:</p>
+<pre><code class="language-json">{
+  &quot;data&quot;: [
+    {
+      &quot;pair&quot;: {
+        &quot;id&quot;: &quot;5dfbfd5c-26e2-4dbe-8bd6-1040a6cf1e10&quot;,
+        &quot;is_eliminated&quot;: 0,
+        &quot;is_active&quot;: 1,
+        &quot;created_at&quot;: &quot;2025-03-17 23:51:47&quot;,
+        &quot;updated_at&quot;: &quot;2025-03-17 23:51:47&quot;,
+        &quot;registration_category&quot;: {
+          &quot;id&quot;: &quot;4291ffa3-0b5c-4c3c-bd29-31cfddb130be&quot;,
+          &quot;name&quot;: &quot;open&quot;,
+          &quot;description&quot;: &quot;Libre&quot;
+        }
+      },
+      &quot;relationship&quot;: {
+        &quot;id&quot;: &quot;48142ac1-f2da-485e-af15-1fcd386b34d6&quot;,
+        &quot;pair_id&quot;: &quot;5dfbfd5c-26e2-4dbe-8bd6-1040a6cf1e10&quot;,
+        &quot;group_id&quot;: &quot;19dcf711-ac20-4be5-8bc9-daa27582c6c2&quot;,
+        &quot;created_at&quot;: &quot;2025-03-18 01:21:28&quot;,
+        &quot;updated_at&quot;: &quot;2025-03-18 01:21:28&quot;
+      }
+    },
+    {
+      &quot;pair&quot;: {
+        &quot;id&quot;: &quot;6b8689f2-d90b-44f5-b5c2-1caa9bccc71e&quot;,
+        &quot;is_eliminated&quot;: 0,
+        &quot;is_active&quot;: 1,
+        &quot;created_at&quot;: &quot;2025-03-17 23:51:48&quot;,
+        &quot;updated_at&quot;: &quot;2025-03-17 23:51:48&quot;,
+        &quot;registration_category&quot;: {
+          &quot;id&quot;: &quot;4291ffa3-0b5c-4c3c-bd29-31cfddb130be&quot;,
+          &quot;name&quot;: &quot;open&quot;,
+          &quot;description&quot;: &quot;Libre&quot;
+        }
+      },
+      &quot;relationship&quot;: {
+        &quot;id&quot;: &quot;4f3c6b42-9a1e-4ab5-9fcd-a42691388086&quot;,
+        &quot;pair_id&quot;: &quot;6b8689f2-d90b-44f5-b5c2-1caa9bccc71e&quot;,
+        &quot;group_id&quot;: &quot;19dcf711-ac20-4be5-8bc9-daa27582c6c2&quot;,
+        &quot;created_at&quot;: &quot;2025-03-18 01:21:28&quot;,
+        &quot;updated_at&quot;: &quot;2025-03-18 01:21:28&quot;
+      }
+    },
+    ...
+  ],
+  &quot;status&quot;: 200,
+  &quot;description&quot;: &quot;Information about the group pairs&quot;
+}
+</code></pre></main>
   </div>
   <div>
     <hr>

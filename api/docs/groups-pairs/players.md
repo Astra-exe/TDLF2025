@@ -149,7 +149,7 @@ Respuesta de la petición:
         "updated_at": "2025-03-17 16:07:14"
       }
     },
-    ...,
+    ...
   ],
   "status": 200,
   "description": "Information about the players of the group pairs"

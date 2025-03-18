@@ -63,8 +63,10 @@ class ActionsController extends BaseController
         // Nombre: A_2025, B_2025, C_2025, ...
         // Descripción: A, B, C, ...
         foreach ($categories as $category) {
+            $group->reset();
+
             // Obtiene el número de "grupos" de la "categoría".
-            $group->reset()->select('COUNT(*) AS _count')
+            $group->select('COUNT(*) AS _count')
                 ->eq($column, $category->id)
                 ->eq('is_active', 1)
                 ->find();
@@ -88,6 +90,8 @@ class ActionsController extends BaseController
             // Calcula el número total de "grupos" de la "categoría".
             $numGroups = $pair->_count / $params['max_pairs'];
 
+            $pair->reset();
+
             // Comprueba si la "categoría" completa los "grupos" de las "parejas de jugadores".
             if ($numGroups < 1 || is_float($numGroups)) {
                 $this->respondDependecyError('The registration category of pairs players does not complete the groups');
@@ -109,14 +113,14 @@ class ActionsController extends BaseController
 
             // Obtiene la información de las "parejas" de la "categoría"
             // y lo ordena de manera aleatoria.
-            $pairs = $pair->reset()->select('id')
+            $pairs = $pair->select('id')
                 ->eq($column, $category->id)
                 ->eq('is_active', 1)
                 ->findAll();
 
-            shuffle($pairs);
-
             $pair->reset();
+
+            shuffle($pairs);
 
             // Segmenta las "parejas" en el número total de "grupos".
             foreach (array_chunk($pairs, $params['max_pairs']) as $key => $segment) {
@@ -140,7 +144,11 @@ class ActionsController extends BaseController
                 }
 
                 // Consulta la información de las "parejas" del grupo.
-                $groupsPairs = $group->groupPairPivot;
+                $groupsPairs = $groupPairPivot->select('pair_id')
+                    ->eq('group_id', $group->id)
+                    ->findAll();
+
+                $groupPairPivot->reset();
 
                 // Registra la combinación de los "partidos"
                 // de las "parejas" del "grupo".

@@ -118,7 +118,8 @@ Respuesta de la petición:
           "updated_at": "2025-03-07 14:44:28"
         }
       }
-    ]
+    ],
+    ...
   ],
   "status": 200,
   "pagination": {
