@@ -13,6 +13,81 @@ use PDOException;
 class PairController extends BaseController
 {
     /**
+     * Muestra la información de todas las "parejas".
+     */
+    public function index(): void
+    {
+        // Define los query params de la petición.
+        $queryFields = [
+            'page' => 1,
+            'orderBy' => 'created_at',
+            'sortBy' => 'desc',
+            'registration_category_id' => null,
+            'is_eliminated' => null,
+            'is_active' => null,
+        ];
+
+        $queryParams = [];
+
+        // Obtiene solo los query params necesarios.
+        foreach ($queryFields as $param => $default) {
+            $queryParams[$param] = $this->app()->request()->query->{$param} ?? $default;
+
+            if (is_string($queryParams[$param]) && empty($queryParams[$param])) {
+                $queryParams[$param] = $default;
+            }
+
+            if (is_null($queryParams[$param])) {
+                unset($queryParams[$param]);
+            }
+        }
+
+        $queryNames = array_keys($queryFields);
+
+        // Obtiene y establece las reglas de validación.
+        $this->gump()->validation_rules(PairValidation::getRules($queryNames));
+
+        // Obtiene y establece los filtros de validación.
+        $this->gump()->filter_rules(PairValidation::getFilters($queryNames));
+
+        // Comprueba los query params de la petición.
+        $queryParams = $this->gump()->run($queryParams);
+
+        // Comprueba si existen errores de validación.
+        if ($this->gump()->errors()) {
+            $this->respondValidationErrors(
+                $this->gump()->get_errors_array(),
+                'The pairs search information is incorrect');
+        }
+
+        // Consulta la información de todas las "parejas" con paginación.
+        $pair = new PairModel;
+        $pair->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
+
+        // Filtra las "parejas" por estatus de eliminación y estatus de actividad.
+        foreach (['registration_category_id', 'is_eliminated', 'is_active'] as $param) {
+            if (isset($queryParams[$param])) {
+                $pair->eq($param, $queryParams[$param]);
+            }
+        }
+
+        // Obtiene la información sobre la paginación.
+        $pair->paginate($queryParams['page']);
+        $pagination = $pair->pagination;
+
+        // Consulta la "categoría de inscripción" de cada "pareja".
+        $pairs = array_map(static function (PairModel $pair): PairModel {
+            $pair->setCustomData('registration_category', $pair->registrationCategory);
+
+            unset($pair->registration_category_id);
+
+            return $pair;
+        }, $pair->findAll());
+
+        $this->respondPagination($pairs, $pagination, 'Information about all the pairs with pagination');
+    }
+
+    /**
      * Registra la información de una "pareja".
      */
     public function create(): void

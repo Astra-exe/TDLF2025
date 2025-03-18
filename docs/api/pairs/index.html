@@ -303,7 +303,65 @@ img {
 </li>
 </ul></aside>
     <main class="main"><h1>Parejas</h1>
-<p>Parejas inscritas al torneo.</p></main>
+<p>Parejas inscritas al torneo.</p>
+<pre><code>[GET] /v1/pairs
+</code></pre>
+<p>Parámetros de consulta:</p>
+<table>
+<tr><th>Parámetro </th><th>Tipo </th><th>Rango </th><th>Por defecto </th><th>Descripción </th></tr>
+<tr><td><code>page</code> </td><td><code>integer</code> </td><td><code>min_numeric: 1</code> </td><td><code>1</code> </td><td>Número de la página de resultados de las parejas. </td></tr>
+<tr><td><code>orderBy</code> </td><td><code>string</code> </td><td><code>contains: [created_at, updated_at]</code> </td><td><code>created_at</code> </td><td>Campo de ordenamiento de las parejas. </td></tr>
+<tr><td><code>sortBy</code> </td><td><code>string</code> </td><td><code>contains: [asc, desc]</code> </td><td><code>desc</code> </td><td>Modo de ordenamiento de las parejas. </td></tr>
+<tr><td><code>registration_category_id</code> </td><td><code>string</code> </td><td><code>exact_len: 36</code> </td><td><code>null</code> </td><td>Identificador de la categoría de inscripción de las parejas (<a href="../registration-categories/index.html">ver</a>). </td></tr>
+<tr><td><code>is_eliminated</code> </td><td><code>boolean</code> </td><td><code>contains: [yes/no, on/off, 1/0, true/false]</code> </td><td><code>null</code> </td><td>Filtrar las parejas por estatus de eliminación. </td></tr>
+<tr><td><code>is_active</code> </td><td><code>boolean</code> </td><td><code>contains: [yes/no, on/off, 1/0, true/false]</code> </td><td><code>null</code> </td><td>Filtrar las parejas por estatus de actividad. </td></tr>
+</table>
+<p>Ejemplo:</p>
+<pre><code class="language-bash">curl -X GET \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY' \
+  http://localhost:8080/v1/pairs?page=2&amp;orderBy=created_at&amp;sortBy=desc&amp;registration_category_id=cba89529-0ba9-49e4-85ad-83e63c8e9d7e&amp;is_eliminated=true&amp;is_active=true
+</code></pre>
+<pre><code class="language-json">{
+  &quot;data&quot;: [
+    {
+      &quot;id&quot;: &quot;a0b84d91-9a78-4534-ab8f-691405622eb9&quot;,
+      &quot;is_eliminated&quot;: 0,
+      &quot;is_active&quot;: 1,
+      &quot;created_at&quot;: &quot;2025-03-18 14:37:30&quot;,
+      &quot;updated_at&quot;: &quot;2025-03-18 14:37:30&quot;,
+      &quot;registration_category&quot;: {
+        &quot;id&quot;: &quot;76d95a95-0fa3-4d58-a8ce-031a1db25b3c&quot;,
+        &quot;name&quot;: &quot;open&quot;,
+        &quot;description&quot;: &quot;Libre&quot;
+      }
+    },
+    {
+      &quot;id&quot;: &quot;66478a05-50af-4e8f-bfb3-13fe79e1cb4e&quot;,
+      &quot;is_eliminated&quot;: 0,
+      &quot;is_active&quot;: 1,
+      &quot;created_at&quot;: &quot;2025-03-18 14:37:30&quot;,
+      &quot;updated_at&quot;: &quot;2025-03-18 14:37:30&quot;,
+      &quot;registration_category&quot;: {
+        &quot;id&quot;: &quot;76d95a95-0fa3-4d58-a8ce-031a1db25b3c&quot;,
+        &quot;name&quot;: &quot;open&quot;,
+        &quot;description&quot;: &quot;Libre&quot;
+      }
+    },
+    ...
+  ],
+  &quot;status&quot;: 200,
+  &quot;pagination&quot;: {
+    &quot;page&quot;: 1,
+    &quot;limit&quot;: 8,
+    &quot;total&quot;: 5,
+    &quot;count&quot;: 36,
+    &quot;offset&quot;: 0
+  },
+  &quot;description&quot;: &quot;Information about all the pairs with pagination&quot;
+}
+</code></pre></main>
   </div>
   <div>
     <hr>
