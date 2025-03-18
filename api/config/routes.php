@@ -62,9 +62,11 @@ return (static function () use ($app): void {
 
         // Categorías de los partidos.
         $router->get($base_route('/v1/categories/matches'), \App\Controllers\MatchCategoryController::class.'->index');
+        $router->get($base_route('/v1/categories/matches/@id'), \App\Controllers\MatchCategoryController::class.'->show');
 
         // Estatus de los partidos.
         $router->get($base_route('/v1/status/matches'), \App\Controllers\MatchStatusController::class.'->index');
+        $router->get($base_route('/v1/status/matches/@id'), \App\Controllers\MatchStatusController::class.'->show');
 
         // Roles de los usuarios de acceso.
         $router->get($base_route('/v1/roles'), \App\Controllers\RoleController::class.'->index');
