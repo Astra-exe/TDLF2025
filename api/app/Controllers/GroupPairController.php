@@ -58,6 +58,6 @@ class GroupPairController extends BaseController
             ];
         }, $group->groupPairPivot);
 
-        $this->respond($pairs, 'Information about the group pairs');
+        $this->respond($pairs, 'Information about the players of the group pairs');
     }
 }
