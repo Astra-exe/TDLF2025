@@ -15,8 +15,8 @@ class RoleController extends BaseController
      */
     public function index(): void
     {
-        $roles = (new RoleModel)->orderBy('name ASC')->findAll();
-        $this->respond($roles, 'Information about all the access user roles');
+        $roles = (new RoleModel)->orderBy('description ASC')->findAll();
+        $this->respond($roles, 'Information about all the access users roles');
     }
 
     /**

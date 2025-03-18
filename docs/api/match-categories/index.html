@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>📘</text></svg>">
-  <title>Acciones</title>
+  <title>Categorías de los partidos</title>
   <style>body {
   font-family: sans-serif;
   font-size: 16px;
@@ -233,11 +233,8 @@ img {
   <div class="content">
     <aside class="sidebar"><ul>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/actions/index.html"><b>Acciones</b>/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/actions/index.html">Acciones/</a>
 <ul>
-<li>
-<a href="https://astra-exe.github.io/TDLF2025/api/actions/randomizeGroupsPairsMatches.html">Asignar grupos, parejas y partidos de manera aleatoria/</a>
-</li>
 </ul>
 </li>
 <li>
@@ -256,7 +253,7 @@ img {
 </ul>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/match-categories/index.html">Categorías de los partidos/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/match-categories/index.html"><b>Categorías de los partidos</b>/</a>
 <ul>
 </ul>
 </li>
@@ -296,8 +293,60 @@ img {
 </ul>
 </li>
 </ul></aside>
-    <main class="main"><h1>Acciones</h1>
-<p>Ejecuta acciones o comandos específicos desde un endpoint.</p></main>
+    <main class="main"><h1>Categorías de los partidos</h1>
+<p>Categorías de las rondas de los partidos.</p>
+<pre><code>[GET] /v1/categories/matches
+</code></pre>
+<p>Ejemplo:</p>
+<pre><code class="language-bash">curl -X GET \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY' \
+  http://localhost:8080/v1/categories/matches
+</code></pre>
+<p>Respuesta de la petición:</p>
+<pre><code class="language-json">{
+  &quot;data&quot;: [
+    {
+      &quot;id&quot;: &quot;6c7f2686-7b40-47ff-b5b5-cbd52c6cea89&quot;,
+      &quot;name&quot;: &quot;qualifier&quot;,
+      &quot;description&quot;: &quot;Clasificación&quot;,
+      &quot;created_at&quot;: &quot;2025-03-18 14:29:06&quot;,
+      &quot;updated_at&quot;: &quot;2025-03-18 14:29:06&quot;
+    },
+    {
+      &quot;id&quot;: &quot;dc19c9bf-4339-4ed2-a603-5b2dd1058a6f&quot;,
+      &quot;name&quot;: &quot;quarters&quot;,
+      &quot;description&quot;: &quot;Cuartos de final&quot;,
+      &quot;created_at&quot;: &quot;2025-03-18 14:29:06&quot;,
+      &quot;updated_at&quot;: &quot;2025-03-18 14:29:06&quot;
+    },
+    {
+      &quot;id&quot;: &quot;9efe8408-b826-4f15-a383-1f00d47118a8&quot;,
+      &quot;name&quot;: &quot;final&quot;,
+      &quot;description&quot;: &quot;Final&quot;,
+      &quot;created_at&quot;: &quot;2025-03-18 14:29:06&quot;,
+      &quot;updated_at&quot;: &quot;2025-03-18 14:29:06&quot;
+    },
+    {
+      &quot;id&quot;: &quot;91ee11b0-dd16-40e5-b0a5-a6bb17c3938a&quot;,
+      &quot;name&quot;: &quot;eighths&quot;,
+      &quot;description&quot;: &quot;Octavos de final&quot;,
+      &quot;created_at&quot;: &quot;2025-03-18 14:29:06&quot;,
+      &quot;updated_at&quot;: &quot;2025-03-18 14:29:06&quot;
+    },
+    {
+      &quot;id&quot;: &quot;8cded9b8-4e7f-4def-b6ef-bd954e13c0df&quot;,
+      &quot;name&quot;: &quot;semifinal&quot;,
+      &quot;description&quot;: &quot;Semifinal&quot;,
+      &quot;created_at&quot;: &quot;2025-03-18 14:29:06&quot;,
+      &quot;updated_at&quot;: &quot;2025-03-18 14:29:06&quot;
+    }
+  ],
+  &quot;status&quot;: 200,
+  &quot;description&quot;: &quot;Information about all the matches categories&quot;
+}
+</code></pre></main>
   </div>
   <div>
     <hr>

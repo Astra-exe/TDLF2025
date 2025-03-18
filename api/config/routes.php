@@ -60,6 +60,12 @@ return (static function () use ($app): void {
         // Partidos.
         $router->delete($base_route('/v1/matches/@id'), \App\Controllers\MatchController::class.'->delete');
 
+        // Categorías de los partidos.
+        $router->get($base_route('/v1/categories/matches'), \App\Controllers\MatchCategoryController::class.'->index');
+
+        // Estatus de los partidos.
+        $router->get($base_route('/v1/status/matches'), \App\Controllers\MatchStatusController::class.'->index');
+
         // Roles de los usuarios de acceso.
         $router->get($base_route('/v1/roles'), \App\Controllers\RoleController::class.'->index');
         $router->get($base_route('/v1/roles/@id'), \App\Controllers\RoleController::class.'->show');

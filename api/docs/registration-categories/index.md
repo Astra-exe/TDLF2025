@@ -22,18 +22,18 @@ Respuesta de la petición:
 {
   "data": [
     {
-      "id": "15134933-1932-4df4-bb5a-b304774b229c",
-      "name": "open",
-      "description": "Libre",
-      "created_at": "2025-03-07 14:38:11",
-      "updated_at": "2025-03-07 14:38:11"
-    },
-    {
-      "id": "810f3713-ca58-4f11-99c1-db40edb58ab7",
+      "id": "eb69a503-6eb3-4f20-b30b-c9a4762a8cfd",
       "name": "seniors",
       "description": "50 y más",
-      "created_at": "2025-03-07 14:38:11",
-      "updated_at": "2025-03-07 14:38:11"
+      "created_at": "2025-03-18 14:29:06",
+      "updated_at": "2025-03-18 14:29:06"
+    },
+    {
+      "id": "76d95a95-0fa3-4d58-a8ce-031a1db25b3c",
+      "name": "open",
+      "description": "Libre",
+      "created_at": "2025-03-18 14:29:06",
+      "updated_at": "2025-03-18 14:29:06"
     }
   ],
   "status": 200,
