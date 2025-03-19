@@ -10,12 +10,12 @@ Parámetros de consulta:
 
 | Parámetro | Tipo | Rango | Por defecto | Descripción |
 | --------- | ---- | ----- | ----------- | ----------- |
-| `page` | `integer` | `min_numeric: 1` | `1` | Número de la página de resultados de las parejas de jugadores. |
-| `orderBy` | `string` | `contains: [created_at, updated_at]` | `created_at` | Campo de ordenamiento de las parejas de jugadores. |
-| `sortBy` | `string` | `contains: [asc, desc]` | `desc` | Modo de ordenamiento de las parejas de jugadores. |
-| `registration_category_id` | `string` | `exact_len: 36` | `null` | Identificador de la categoría de inscripción de las parejas de jugadores ([ver](../registration-categories/index.html)). |
-| `is_eliminated` | `boolean` | `contains: [yes/no, on/off, 1/0, true/false]` | `null` | Filtrar las parejas de jugadores por estatus de eliminación. |
-| `is_active` | `boolean` | `contains: [yes/no, on/off, 1/0, true/false]` | `null` | Filtrar las parejas por estatus de actividad. |
+| `page` | `integer` | `min_numeric: 1` | `1` | Número de la página de resultados de las parejas con sus jugadores. |
+| `orderBy` | `string` | `contains: [created_at, updated_at]` | `created_at` | Campo de ordenamiento de las parejas con sus jugadores. |
+| `sortBy` | `string` | `contains: [asc, desc]` | `desc` | Modo de ordenamiento de las parejas con sus jugadores. |
+| `registration_category_id` | `string` | `exact_len: 36` | `null` | Identificador de la categoría de inscripción de las parejas con sus jugadores ([ver](../registration-categories/index.html)). |
+| `is_eliminated` | `boolean` | `contains: [yes/no, on/off, 1/0, true/false]` | `null` | Filtrar las parejas con sus jugadores por estatus de eliminación. |
+| `is_active` | `boolean` | `contains: [yes/no, on/off, 1/0, true/false]` | `null` | Filtrar las parejas con sus jugadores por estatus de actividad. |
 
 Ejemplo:
 

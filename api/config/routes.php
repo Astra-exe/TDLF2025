@@ -51,15 +51,16 @@ return (static function () use ($app): void {
         $router->get($base_route('/v1/pairs/@id/groups'), \App\Controllers\PairController::class.'->group');
         $router->delete($base_route('/v1/pairs/@id'), \App\Controllers\PairController::class.'->delete');
 
+        // Grupos y parejas.
+        $router->get($base_route('/v1/groups/pairs'), \App\Controllers\GroupPairController::class.'->index');
+        $router->get($base_route('/v1/groups/@id/pairs'), \App\Controllers\GroupPairController::class.'->show');
+        $router->get($base_route('/v1/groups/@id/pairs/players'), \App\Controllers\GroupPairController::class.'->players');
+
         // Grupos.
         $router->get($base_route('/v1/groups'), \App\Controllers\GroupController::class.'->index');
         $router->get($base_route('/v1/groups/@id'), \App\Controllers\GroupController::class.'->show');
         $router->get($base_route('/v1/groups/@id/matches'), \App\Controllers\GroupController::class.'->matches');
         $router->get($base_route('/v1/groups/@id/matches/pairs/players'), \App\Controllers\GroupController::class.'->matchesPairsPlayers');
-
-        // Grupos y parejas.
-        $router->get($base_route('/v1/groups/@id/pairs'), \App\Controllers\GroupPairController::class.'->show');
-        $router->get($base_route('/v1/groups/@id/pairs/players'), \App\Controllers\GroupPairController::class.'->players');
 
         // Partidos y parejas.
         $router->get($base_route('/v1/matches/pairs'), \App\Controllers\MatchPairController::class.'->index');
