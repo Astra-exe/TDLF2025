@@ -32,6 +32,6 @@ Respuesta de la petición:
     "updated_at": "2025-03-07 14:38:11"
   },
   "status": 200,
-  "description": "Information about the registration category of pairs players"
+  "description": "Information about the registration category"
 }
 ```

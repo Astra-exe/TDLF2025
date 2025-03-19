@@ -14,18 +14,18 @@ class RegistrationCategoryModel extends BaseModel
         'pairs' => [
             self::HAS_MANY, PairModel::class,
             'registration_category_id',
-            ['orderBy' => 'created_at DESC'],
+            ['eq' => ['is_active', 1], 'orderBy' => 'created_at DESC'],
         ],
         'groups' => [
             self::HAS_MANY, GroupModel::class,
             'registration_category_id',
-            ['orderBy' => 'name ASC'],
+            ['eq' => ['is_active', 1], 'orderBy' => 'name ASC'],
         ],
         'matches' => [
             self::HAS_MANY,
             MatchModel::class,
             'registration_category_id',
-            ['orderBy' => 'created_at DESC'],
+            ['eq' => ['is_active', 1], 'orderBy' => 'created_at DESC'],
         ],
     ];
 

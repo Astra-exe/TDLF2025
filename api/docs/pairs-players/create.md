@@ -105,6 +105,6 @@ Respuesta de la petición:
     ]
   },
   "status": 201,
-  "description": "The pair with the players was created successfully"
+  "description": "The pair with players was created successfully"
 }
 ```

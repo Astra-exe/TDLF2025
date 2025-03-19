@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>📘</text></svg>">
-  <title>Jugadores</title>
+  <title>Grupo de un jugador</title>
   <style>body {
   font-family: sans-serif;
   font-size: 16px;
@@ -292,7 +292,7 @@ img {
 <a href="https://astra-exe.github.io/TDLF2025/api/players/delete.html">Eliminar un jugador/</a>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/players/group.html">Grupo de un jugador/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/players/group.html"><b>Grupo de un jugador</b>/</a>
 </li>
 <li>
 <a href="https://astra-exe.github.io/TDLF2025/api/players/pair.html">Pareja de un jugador/</a>
@@ -316,65 +316,55 @@ img {
 </ul>
 </li>
 </ul></aside>
-    <main class="main"><h1>Jugadores</h1>
-<p>Jugadores inscritos al torneo.</p>
-<pre><code>[GET] /v1/players
+    <main class="main"><h1>Grupo de un jugador</h1>
+<pre><code>[GET] /v1/players/@id/groups
 </code></pre>
-<p>Parámetros de consulta:</p>
+<p>Parámetros de la ruta:</p>
 <table>
-<tr><th>Parámetro </th><th>Tipo </th><th>Rango </th><th>Por defecto </th><th>Descripción </th></tr>
-<tr><td><code>page</code> </td><td><code>integer</code> </td><td><code>min_numeric: 1</code> </td><td><code>1</code> </td><td>Número de la página de resultados de los jugadores. </td></tr>
-<tr><td><code>search</code> </td><td><code>string</code> </td><td><code>max_len: 255</code> </td><td><code>''</code> </td><td>Patrón de búsqueda de los jugadores. </td></tr>
-<tr><td><code>filterBy</code> </td><td><code>string</code> </td><td><code>contains: [fullname]</code> </td><td><code>fullname</code> </td><td>Campo de búsqueda de los jugadores. </td></tr>
-<tr><td><code>orderBy</code> </td><td><code>string</code> </td><td><code>contains: [fullname, weight, height, age, experience, created_at, updated_at]</code> </td><td><code>created_at</code> </td><td>Campo de ordenamiento de los jugadores. </td></tr>
-<tr><td><code>sortBy</code> </td><td><code>string</code> </td><td><code>contains: [asc, desc]</code> </td><td><code>desc</code> </td><td>Modo de ordenamiento de los jugadores. </td></tr>
-<tr><td><code>is_active</code> </td><td><code>boolean</code> </td><td><code>contains: [yes/no, on/off, 1/0, true/false]</code> </td><td><code>null</code> </td><td>Filtrar los jugadores por estatus de actividad. </td></tr>
+<tr><th>Parámetros </th><th>Tipo </th><th>Requerido </th><th>Descripción </th></tr>
+<tr><td><code>id</code> </td><td><code>string</code> </td><td><code>true</code> </td><td>Identificador del jugador. </td></tr>
 </table>
 <p>Ejemplo:</p>
 <pre><code class="language-bash">curl -X GET \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'X-API-KEY: API_KEY' \
-  http://localhost:8080/v1/players?page=2&amp;search=Ricardo&amp;filterBy=fullname&amp;orderBy=age&amp;sortBy=asc&amp;is_active=true
+  http://localhost:8080/v1/players/@id/groups
 </code></pre>
 <p>Respuesta de la petición:</p>
 <pre><code class="language-json">{
-  &quot;data&quot;: [
-    {
-      &quot;id&quot;: &quot;07b80796-fd26-4b1b-9f5d-6330e96ed849&quot;,
-      &quot;fullname&quot;: &quot;Ricardo García Jiménez&quot;,
-      &quot;city&quot;: &quot;Salvatierra&quot;,
-      &quot;weight&quot;: &quot;120.00&quot;,
-      &quot;height&quot;: &quot;1.82&quot;,
-      &quot;age&quot;: 26,
-      &quot;experience&quot;: 0,
+  &quot;data&quot;: {
+    &quot;group&quot;: {
+      &quot;id&quot;: &quot;5a478de5-5be1-482f-8d44-b98a79d1552c&quot;,
+      &quot;name&quot;: &quot;A_2025&quot;,
+      &quot;description&quot;: &quot;A&quot;,
+      &quot;is_eliminated&quot;: 0,
       &quot;is_active&quot;: 1,
-      &quot;created_at&quot;: &quot;2025-03-07 14:44:28&quot;,
-      &quot;updated_at&quot;: &quot;2025-03-07 14:44:28&quot;
+      &quot;created_at&quot;: &quot;2025-03-18 14:41:31&quot;,
+      &quot;updated_at&quot;: &quot;2025-03-18 14:41:31&quot;,
+      &quot;registration_category&quot;: {
+        &quot;id&quot;: &quot;eb69a503-6eb3-4f20-b30b-c9a4762a8cfd&quot;,
+        &quot;name&quot;: &quot;seniors&quot;,
+        &quot;description&quot;: &quot;50 y más&quot;
+      }
     },
-    {
-      &quot;id&quot;: &quot;b7f22815-7082-41ac-9ba5-0e43022d7d5f&quot;,
-      &quot;fullname&quot;: &quot;Juan José Ramírez López&quot;,
-      &quot;city&quot;: &quot;Irapuato&quot;,
-      &quot;weight&quot;: &quot;70.00&quot;,
-      &quot;height&quot;: &quot;1.65&quot;,
-      &quot;age&quot;: 25,
-      &quot;experience&quot;: 5,
-      &quot;is_active&quot;: 1,
-      &quot;created_at&quot;: &quot;2025-03-07 14:44:28&quot;,
-      &quot;updated_at&quot;: &quot;2025-03-07 14:44:28&quot;
+    &quot;relationship_pair_player&quot;: {
+      &quot;id&quot;: &quot;e0eb2e6a-4a07-4434-b6dc-7b65620f19c3&quot;,
+      &quot;player_id&quot;: &quot;23b96bfe-b43c-4dd9-8a9e-0f7cd3d019fe&quot;,
+      &quot;pair_id&quot;: &quot;087a1273-19c8-4ccf-8751-b2db6811f1cc&quot;,
+      &quot;created_at&quot;: &quot;2025-03-18 14:40:07&quot;,
+      &quot;updated_at&quot;: &quot;2025-03-18 14:40:07&quot;
     },
-    ...
-  ],
-  &quot;status&quot;: 200,
-  &quot;pagination&quot;: {
-    &quot;page&quot;: 1,
-    &quot;limit&quot;: 8,
-    &quot;total&quot;: 1,
-    &quot;count&quot;: 2,
-    &quot;offset&quot;: 0
+    &quot;relationship_group_pair&quot;: {
+      &quot;id&quot;: &quot;d573b626-36e1-46fc-90ab-3adb51f0acb6&quot;,
+      &quot;pair_id&quot;: &quot;087a1273-19c8-4ccf-8751-b2db6811f1cc&quot;,
+      &quot;group_id&quot;: &quot;5a478de5-5be1-482f-8d44-b98a79d1552c&quot;,
+      &quot;created_at&quot;: &quot;2025-03-18 14:41:31&quot;,
+      &quot;updated_at&quot;: &quot;2025-03-18 14:41:31&quot;
+    }
   },
-  &quot;description&quot;: &quot;Information about all the players with pagination&quot;
+  &quot;status&quot;: 200,
+  &quot;description&quot;: &quot;Information about the player group&quot;
 }
 </code></pre></main>
   </div>

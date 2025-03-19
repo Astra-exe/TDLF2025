@@ -227,6 +227,51 @@ class PairController extends BaseController
     }
 
     /**
+     * Muestra la información del "grupo" de una "pareja".
+     */
+    public function group(string $id): void
+    {
+        // Obtiene las reglas de validación
+        // y las establece como obligatorias.
+        $rules = PairValidation::getRules(['id']);
+        array_unshift($rules['id'], 'required');
+
+        // Establece las reglas de validación.
+        $this->gump()->validation_rules($rules);
+
+        // Comprueba los parámetros de la petición.
+        $this->gump()->run(['id' => $id]);
+
+        // Comprueba si existen errores de validación.
+        if ($this->gump()->errors()) {
+            $this->respondValidationErrors(
+                $this->gump()->get_errors_array(),
+                'The pair identifier is incorrect');
+        }
+
+        // Consulta la información de la "pareja".
+        $pair = new PairModel;
+        $pair->select('id')->find($id);
+
+        // Comprueba si existe la "pareja".
+        if (! $pair->isHydrated()) {
+            $this->respondNotFound('The pair information was not found');
+        }
+
+        // Consulta la relación de la "pareja" con el "grupo".
+        $relationship = $pair->groupPairPivot;
+
+        // Consulta el "grupo" de la "pareja".
+        $group = $relationship->_group;
+
+        $group->setCustomData('registration_category', $group->registrationCategory);
+
+        unset($group->registration_category_id);
+
+        $this->respond(['group' => $group, 'relationship' => $relationship], 'Information about the pair group');
+    }
+
+    /**
      * Elimina la información de una "pareja".
      */
     public function delete(string $id): void
@@ -266,7 +311,7 @@ class PairController extends BaseController
         // Elimina la información de la "pareja".
         try {
             $pair->delete();
-        } catch (PDOException) {
+        } catch (PDOException $e) {
             $this->respondConflict('The pair contains related information');
         }
 

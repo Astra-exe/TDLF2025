@@ -4,7 +4,7 @@
 [POST] /v1/randomize/groups/pairs/matches
 ```
 
-> Realiza la acción una única vez para las [categorías de registro](../registration-categories/index.html) que no contengan grupos asignados.
+> Realiza la acción una única vez para las [categorías de inscripción](../registration-categories/index.html) que no contengan grupos asignados.
 
 Ejemplo:
 

@@ -158,6 +158,6 @@ Respuesta de la petición:
     ...
   ],
   "status": 200,
-  "description": "Information about the players of the group pairs"
+  "description": "Information about the group pairs with players"
 }
 ```

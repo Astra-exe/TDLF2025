@@ -48,6 +48,6 @@ Respuesta de la petición:
     ...
   ],
   "status": 200,
-  "description": "Information about the groups of the registration category of pairs players"
+  "description": "Information about the registration category groups"
 }
 ```
