@@ -311,7 +311,7 @@ class PairController extends BaseController
         // Elimina la información de la "pareja".
         try {
             $pair->delete();
-        } catch (PDOException) {
+        } catch (PDOException $e) {
             $this->respondConflict('The pair contains related information');
         }
 
