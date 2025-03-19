@@ -3,6 +3,7 @@ import PairsForm from "@/app/components/PairsForm";
 import { Player } from "@/app/lib/definitions";
 import { fetchAllPlayers, fetchCategories } from "@/app/lib/data";
 import { auth } from "@/auth";
+import { Suspense } from "react";
 
 export default async function CreatePairsPage() {
   const session = await auth();
@@ -33,10 +34,12 @@ export default async function CreatePairsPage() {
         <h1 className="text-3xl md:text-4xl font-bold text-center mt-5 mb-7">
           Crear Parejas
         </h1>
-        <PairsForm
-          playersList={playersData}
-          categoriesList={categoriesData.data}
-        />
+        <Suspense>
+          <PairsForm
+            playersList={playersData}
+            categoriesList={categoriesData.data}
+          />
+        </Suspense>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import AppBreadcrumb from "@/app/components/AppBreadcrumb";
 import InscriptionForm from "@/app/components/InscripcionForm";
+import { Suspense } from "react";
 
 export default function InscriptionPage() {
   return (
@@ -17,7 +18,9 @@ export default function InscriptionPage() {
         <h1 className="text-3xl md:text-4xl font-bold text-center mt-5 mb-7">
           Inscripción de jugadores
         </h1>
-        <InscriptionForm />
+        <Suspense>
+          <InscriptionForm />
+        </Suspense>
       </div>
     </div>
   );
