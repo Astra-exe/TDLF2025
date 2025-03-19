@@ -28,6 +28,9 @@ ENV \
 COPY ./ "${APACHE_DOCUMENT_ROOT}"
 COPY ./.env "${APACHE_DOCUMENT_ROOT}"
 
+# Usuario y grupo de los archivos del proyecto.
+RUN chown -R www-data:www-data "${APACHE_DOCUMENT_ROOT}"
+
 # Utiliza la configuración en producción de PHP.
 RUN mv "${PHP_INI_DIR}/php.ini-production" "${PHP_INI_DIR}/php.ini"
 
