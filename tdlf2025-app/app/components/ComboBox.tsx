@@ -1,4 +1,8 @@
 import { useState } from "react";
+import { Controller, Control } from "react-hook-form";
+import { cn } from "@/app/lib/utils";
+import { Check, ChevronsUpDown } from "lucide-react";
+import type { Player } from "@/app/lib/definitions";
 import {
   Popover,
   PopoverTrigger,
@@ -19,15 +23,12 @@ import {
   FormLabel,
   FormMessage,
 } from "@/app/components/ui/form";
-import { Controller, Control } from "react-hook-form";
-import { cn } from "@/app/lib/utils";
-import { Check, ChevronsUpDown } from "lucide-react";
 
 type ComboBoxProps = {
   labelField: string;
   name: string;
   control: Control<any>; // Correctly typed control prop
-  suggestions: any; // Suggestions passed as an array
+  suggestions: Player[]; // Suggestions passed as an array
 };
 
 export default function ComboBox({
@@ -59,8 +60,8 @@ export default function ComboBox({
                 >
                   {field.value
                     ? suggestions.find(
-                        (suggestion) => suggestion.value === field.value
-                      )?.label
+                        (suggestion) => suggestion.id === field.value
+                      )?.fullname
                     : "Selecciona uno"}
                   <ChevronsUpDown className="opacity-50" />
                 </Button>
@@ -74,18 +75,18 @@ export default function ComboBox({
                   <CommandGroup>
                     {suggestions.map((suggestion) => (
                       <CommandItem
-                        value={suggestion.label}
-                        key={suggestion.value}
+                        value={suggestion.fullname}
+                        key={suggestion.id}
                         onSelect={() => {
-                          field.onChange(suggestion.value);
+                          field.onChange(suggestion.id);
                           setOpen(false);
                         }}
                       >
-                        {suggestion.label}
+                        {suggestion.fullname}
                         <Check
                           className={cn(
                             "ml-auto",
-                            suggestion.value === field.value
+                            suggestion.id === field.value
                               ? "opacity-100"
                               : "opacity-0"
                           )}
