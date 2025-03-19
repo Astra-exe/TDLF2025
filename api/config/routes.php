@@ -58,6 +58,11 @@ return (static function () use ($app): void {
         $router->get($base_route('/v1/groups/@id/pairs'), \App\Controllers\GroupPairController::class.'->show');
         $router->get($base_route('/v1/groups/@id/pairs/players'), \App\Controllers\GroupPairController::class.'->players');
 
+        // Partidos y parejas.
+        $router->get($base_route('/v1/matches/pairs'), \App\Controllers\MatchPairController::class.'->index');
+        $router->get($base_route('/v1/matches/@id/pairs'), \App\Controllers\MatchPairController::class.'->show');
+        $router->get($base_route('/v1/matches/@id/pairs/players'), \App\Controllers\MatchPairController::class.'->players');
+
         // Partidos.
         $router->get($base_route('/v1/matches'), \App\Controllers\MatchController::class.'->index');
         $router->get($base_route('/v1/matches/@id'), \App\Controllers\MatchController::class.'->show');
@@ -71,10 +76,6 @@ return (static function () use ($app): void {
         // Estatus de los partidos.
         $router->get($base_route('/v1/status/matches'), \App\Controllers\MatchStatusController::class.'->index');
         $router->get($base_route('/v1/status/matches/@id'), \App\Controllers\MatchStatusController::class.'->show');
-
-        // Partidos y parejas.
-        $router->get($base_route('/v1/matches/@id/pairs'), \App\Controllers\MatchPairController::class.'->show');
-        $router->get($base_route('/v1/matches/@id/pairs/players'), \App\Controllers\MatchPairController::class.'->players');
 
         // Roles de los usuarios de acceso.
         $router->get($base_route('/v1/roles'), \App\Controllers\RoleController::class.'->index');

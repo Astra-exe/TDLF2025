@@ -11,7 +11,96 @@ use App\Validations\MatchValidation;
 
 class MatchPairController extends BaseController
 {
-    public function index(): void {}
+    /**
+     * Muestra la información de todas las "parejas" de los "partidos".
+     */
+    public function index(): void
+    {
+        // Define los query params de la petición.
+        $queryFields = [
+            'page' => 1,
+            'orderBy' => 'created_at',
+            'sortBy' => 'desc',
+            'registration_category_id' => null,
+            'group_id' => null,
+            'match_category_id' => null,
+            'match_status_id' => null,
+            'is_active' => null,
+        ];
+
+        $queryParams = [];
+
+        // Obtiene solo los query params necesarios.
+        foreach ($queryFields as $param => $default) {
+            $queryParams[$param] = $this->app()->request()->query->{$param} ?? $default;
+
+            if (is_string($queryParams[$param]) && empty($queryParams[$param])) {
+                $queryParams[$param] = $default;
+            }
+
+            if (is_null($queryParams[$param])) {
+                unset($queryParams[$param]);
+            }
+        }
+
+        $queryNames = array_keys($queryFields);
+
+        // Obtiene y establece las reglas de validación.
+        $this->gump()->validation_rules(MatchValidation::getRules($queryNames));
+
+        // Obtiene y establece los filtros de validación.
+        $this->gump()->filter_rules(MatchValidation::getFilters($queryNames));
+
+        // Comprueba los query params de la petición.
+        $queryParams = $this->gump()->run($queryParams);
+
+        // Comprueba si existen errores de validación.
+        if ($this->gump()->errors()) {
+            $this->respondValidationErrors(
+                $this->gump()->get_errors_array(),
+                'The matches pairs information is incorrect');
+        }
+
+        // Consulta la información de todos los "partidos" con paginación.
+        $match = new MatchModel;
+        $match->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
+
+        // Filtra los "partidos" por identificador de categoría de inscripción,
+        // identificador de grupo, identificador de categoría de partido,
+        // identificador de estatus de partido y estatus de actividad.
+        foreach (['registration_category_id', 'group_id', 'match_category_id', 'match_status_id', 'is_active'] as $param) {
+            if (isset($queryParams[$param])) {
+                $match->eq($param, $queryParams[$param]);
+            }
+        }
+
+        // Obtiene la información sobre la paginación.
+        $match->paginate($queryParams['page']);
+        $pagination = $match->pagination;
+
+        // Consulta la información de las "parejas" de los "partido".
+        $matches = array_map(static function (MatchModel $match): array {
+            $match->setCustomData('registration_category', $match->registrationCategory);
+            $match->setCustomData('match_category', $match->matchCategory);
+            $match->setCustomData('match_status', $match->matchStatus);
+
+            unset($match->registration_category_id, $match->match_status_id, $match->match_category_id);
+
+            // Consulta la información de las "parejas".
+            $pairs = array_map(static function (MatchPairPivotModel $matchPairRel): array {
+                $pair = $matchPairRel->pair;
+                $pair->setCustomData('registration_category', $pair->registrationCategory);
+
+                unset($pair->registration_category_id);
+
+                return ['pair' => $pair, 'relationship' => $matchPairRel];
+            }, $match->matchPairPivot);
+
+            return ['match' => $match, 'pairs' => $pairs];
+        }, $match->findAll());
+
+        $this->respondPagination($matches, $pagination, 'Information about the matches pairs with pagination');
+    }
 
     /**
      * Muestra la información de las "parejas" del "partido".
