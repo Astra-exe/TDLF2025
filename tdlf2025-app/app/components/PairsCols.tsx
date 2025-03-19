@@ -6,8 +6,14 @@ import Link from "next/link";
 
 export type PairRow = {
   id: string;
-  player1: string;
-  player2: string;
+  player1: {
+    id: string;
+    name: string;
+  };
+  player2: {
+    id: string;
+    name: string;
+  };
   category: "Libre" | "Seniors";
 };
 
@@ -17,10 +23,10 @@ export const columns: ColumnDef<PairRow>[] = [
     header: "Jugador 1",
     cell: ({ row }) => (
       <Link
-        href={`/jugador/${row.original.id}`}
+        href={`/jugador/${row.original.player1.id}`}
         className="hover:underline transition-all"
       >
-        {row.getValue("player1")}
+        {row.original.player1.name}
       </Link>
     ),
   },
@@ -29,10 +35,10 @@ export const columns: ColumnDef<PairRow>[] = [
     header: "Jugador 2",
     cell: ({ row }) => (
       <Link
-        href={`/jugador/${row.original.id}`}
+        href={`/jugador/${row.original.player2.id}`}
         className="hover:underline transition-all"
       >
-        {row.getValue("player2")}
+        {row.original.player2.name}
       </Link>
     ),
   },
