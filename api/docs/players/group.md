@@ -55,6 +55,6 @@ Respuesta de la petición:
     }
   },
   "status": 200,
-  "description": "Information about the pair group"
+  "description": "Information about the player group"
 }
 ```

@@ -251,7 +251,7 @@ class PlayerController extends BaseController
             'group' => $group,
             'relationship_pair_player' => $pairPlayerRel,
             'relationship_group_pair' => $groupPairRel,
-        ], 'Information about the pair group');
+        ], 'Information about the player group');
     }
 
     /**
