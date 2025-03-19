@@ -195,6 +195,6 @@ class MatchPairController extends BaseController
             return ['pair' => $pair, 'relationship' => $matchPairRel];
         }, $match->matchPairPivot);
 
-        $this->respond($pairs, 'Information about the players of the match pairs');
+        $this->respond($pairs, 'Information about the match pairs with players');
     }
 }

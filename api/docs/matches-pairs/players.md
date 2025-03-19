@@ -161,6 +161,6 @@ Respuesta de la petición:
     }
   ],
   "status": 200,
-  "description": "Information about the players of the match pairs"
+  "description": "Information about the match pairs with players"
 }
 ```

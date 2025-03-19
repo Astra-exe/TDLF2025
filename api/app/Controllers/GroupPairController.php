@@ -104,6 +104,6 @@ class GroupPairController extends BaseController
             return ['pair' => $pair, 'relationship' => $groupPairRel];
         }, $group->groupPairPivot);
 
-        $this->respond($pairs, 'Information about the players of the group pairs');
+        $this->respond($pairs, 'Information about the group pairs with players');
     }
 }

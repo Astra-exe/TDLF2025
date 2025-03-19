@@ -132,7 +132,7 @@ class PairPlayerController extends BaseController
         if ($this->gump()->errors()) {
             $this->respondValidationErrors(
                 $this->gump()->get_errors_array(),
-                'The registration information of the pair with the players is incorrect');
+                'The pair with players information is incorrect');
         }
 
         $pair = new PairModel;
@@ -175,7 +175,7 @@ class PairPlayerController extends BaseController
             'relationship' => $relationship,
         ], $pair->pairPlayerPivot);
 
-        $this->respondCreated(['pair' => $pair, 'players' => $players], 'The pair with the players was created successfully');
+        $this->respondCreated(['pair' => $pair, 'players' => $players], 'The pair with players was created successfully');
     }
 
     /**

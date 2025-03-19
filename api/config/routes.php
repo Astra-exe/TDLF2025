@@ -54,6 +54,7 @@ return (static function () use ($app): void {
         // Grupos.
         $router->get($base_route('/v1/groups'), \App\Controllers\GroupController::class.'->index');
         $router->get($base_route('/v1/groups/@id'), \App\Controllers\GroupController::class.'->show');
+        $router->get($base_route('/v1/groups/@id/matches'), \App\Controllers\GroupController::class.'->matches');
         $router->get($base_route('/v1/groups/@id/matches/pairs/players'), \App\Controllers\GroupController::class.'->matchesPairsPlayers');
 
         // Grupos y parejas.

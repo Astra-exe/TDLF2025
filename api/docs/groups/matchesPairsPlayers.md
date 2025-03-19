@@ -348,6 +348,6 @@ Respuesta de la petición:
     ... 
   ],
   "status": 200,
-  "description": "Information about the group matches"
+  "description": "Information about the group matches with pairs players"
 }
 ```

@@ -16,7 +16,7 @@ class RegistrationCategoryController extends BaseController
     public function index(): void
     {
         $categories = (new RegistrationCategoryModel)->orderBy('description ASC')->findAll();
-        $this->respond($categories, 'Information about all the categories of pairs players registration');
+        $this->respond($categories, 'Information about all the registrations categories');
     }
 
     /**
@@ -40,7 +40,7 @@ class RegistrationCategoryController extends BaseController
         if ($this->gump()->errors()) {
             $this->respondValidationErrors(
                 $this->gump()->get_errors_array(),
-                'The registration category of pairs players identifier is incorrect');
+                'The registration category identifier is incorrect');
         }
 
         // Consulta la información de la "categoría de inscripción".
@@ -49,10 +49,10 @@ class RegistrationCategoryController extends BaseController
 
         // Comprueba si existe la "categoría de inscripción".
         if (! $registrationCategory->isHydrated()) {
-            $this->respondNotFound('The registration category of pairs players information was not found');
+            $this->respondNotFound('The registration category information was not found');
         }
 
-        $this->respond($registrationCategory, 'Information about the registration category of pairs players');
+        $this->respond($registrationCategory, 'Information about the registration category');
     }
 
     /**
@@ -76,7 +76,7 @@ class RegistrationCategoryController extends BaseController
         if ($this->gump()->errors()) {
             $this->respondValidationErrors(
                 $this->gump()->get_errors_array(),
-                'The registration category of pairs players identifier is incorrect');
+                'The registration category identifier is incorrect');
         }
 
         // Consulta la información de la "categoría de inscripción".
@@ -85,9 +85,9 @@ class RegistrationCategoryController extends BaseController
 
         // Comprueba si existe la "categoría de inscripción".
         if (! $registrationCategory->isHydrated()) {
-            $this->respondNotFound('The registration category of pairs players information was not found');
+            $this->respondNotFound('The registration category information was not found');
         }
 
-        $this->respond($registrationCategory->groups, 'Information about the groups of the registration category of pairs players');
+        $this->respond($registrationCategory->groups, 'Information about the registration category groups');
     }
 }
