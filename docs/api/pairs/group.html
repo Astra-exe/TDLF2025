@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>📘</text></svg>">
-  <title>Crear un jugador</title>
+  <title>Grupo de una pareja</title>
   <style>body {
   font-family: sans-serif;
   font-size: 16px;
@@ -273,8 +273,20 @@ img {
 </ul>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/pairs/index.html">Parejas/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs/index.html"><b>Parejas</b>/</a>
 <ul>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs/create.html">Crear una pareja/</a>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs/delete.html">Eliminar una pareja/</a>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs/group.html"><b>Grupo de una pareja</b>/</a>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs/show.html">Información de una pareja/</a>
+</li>
 </ul>
 </li>
 <li>
@@ -283,23 +295,8 @@ img {
 </ul>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/players/index.html"><b>Jugadores</b>/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/players/index.html">Jugadores/</a>
 <ul>
-<li>
-<a href="https://astra-exe.github.io/TDLF2025/api/players/create.html"><b>Crear un jugador</b>/</a>
-</li>
-<li>
-<a href="https://astra-exe.github.io/TDLF2025/api/players/delete.html">Eliminar un jugador/</a>
-</li>
-<li>
-<a href="https://astra-exe.github.io/TDLF2025/api/players/group.html">Grupo de un jugador/</a>
-</li>
-<li>
-<a href="https://astra-exe.github.io/TDLF2025/api/players/pair.html">Pareja de un jugador/</a>
-</li>
-<li>
-<a href="https://astra-exe.github.io/TDLF2025/api/players/show.html">Información de un jugador/</a>
-</li>
 </ul>
 </li>
 <li>
@@ -313,50 +310,48 @@ img {
 </ul>
 </li>
 </ul></aside>
-    <main class="main"><h1>Crear un jugador</h1>
-<pre><code>[POST] /v1/players
+    <main class="main"><h1>Grupo de una pareja</h1>
+<pre><code>[GET] /v1/pairs/@id/groups
 </code></pre>
-<p>Cuerpo de la petición:</p>
+<p>Parámetros de la ruta:</p>
 <table>
-<tr><th>Campo </th><th>Tipo </th><th>Requerido </th><th>Rango </th><th>Descripción </th></tr>
-<tr><td><code>fullname</code> </td><td><code>string</code> </td><td><code>true</code> </td><td><code>between_len: [1, 128]</code> </td><td>Nombre completo del jugador. </td></tr>
-<tr><td><code>city</code> </td><td><code>string</code> </td><td><code>true</code> </td><td><code>between_len: [1, 128]</code> </td><td>Ciudad o localidad de origen del jugador. </td></tr>
-<tr><td><code>weight</code> </td><td><code>float</code> </td><td><code>true</code> </td><td><code>between_numeric: [20, 600]</code> </td><td>Peso en kilos del jugador. </td></tr>
-<tr><td><code>height</code> </td><td><code>float</code> </td><td><code>true</code> </td><td><code>between_numeric: [0.5, 2.5]</code> </td><td>Estatura en metros del jugador. </td></tr>
-<tr><td><code>age</code> </td><td><code>integer</code> </td><td><code>true</code> </td><td><code>between_numeric: [14, 122]</code> </td><td>Edad del jugador. </td></tr>
-<tr><td><code>experience</code> </td><td><code>integer</code> </td><td><code>true</code> </td><td><code>between_numeric: [0, 50]</code> </td><td>Tiempo en años que el jugador ha practicado el deporte. </td></tr>
+<tr><th>Parámetros </th><th>Tipo </th><th>Requerido </th><th>Descripción </th></tr>
+<tr><td><code>id</code> </td><td><code>string</code> </td><td><code>true</code> </td><td>Identificador de la pareja. </td></tr>
 </table>
 <p>Ejemplo:</p>
-<pre><code class="language-bash">curl -X POST \
+<pre><code class="language-bash">curl -X GET \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'X-API-KEY: API_KEY' \
-  http://localhost:8080/v1/players \
-  -d '{
-    &quot;fullname&quot;: &quot;Francisco Javier Solís Martínez&quot;,
-    &quot;city&quot;: &quot;Irapuato&quot;,
-    &quot;weight&quot;: &quot;70&quot;,
-    &quot;height&quot;: &quot;1.70&quot;,
-    &quot;age&quot;: &quot;25&quot;,
-    &quot;experience&quot;: &quot;5&quot;
-  }'
+  http://localhost:8080/v1/pairs/@id/groups
 </code></pre>
 <p>Respuesta de la petición:</p>
 <pre><code class="language-json">{
   &quot;data&quot;: {
-    &quot;id&quot;: &quot;cbfee9f9-0d0a-4b0c-9ede-0628fc2a3387&quot;,
-    &quot;fullname&quot;: &quot;Francisco Javier Solís Martínez&quot;,
-    &quot;city&quot;: &quot;Irapuato&quot;,
-    &quot;weight&quot;: &quot;70.00&quot;,
-    &quot;height&quot;: &quot;1.70&quot;,
-    &quot;age&quot;: 25,
-    &quot;experience&quot;: 5,
-    &quot;is_active&quot;: 1,
-    &quot;created_at&quot;: &quot;2025-03-13 22:37:14&quot;,
-    &quot;updated_at&quot;: &quot;2025-03-13 22:37:14&quot;
+    &quot;group&quot;: {
+      &quot;id&quot;: &quot;5a478de5-5be1-482f-8d44-b98a79d1552c&quot;,
+      &quot;name&quot;: &quot;A_2025&quot;,
+      &quot;description&quot;: &quot;A&quot;,
+      &quot;is_eliminated&quot;: 0,
+      &quot;is_active&quot;: 1,
+      &quot;created_at&quot;: &quot;2025-03-18 14:41:31&quot;,
+      &quot;updated_at&quot;: &quot;2025-03-18 14:41:31&quot;,
+      &quot;registration_category&quot;: {
+        &quot;id&quot;: &quot;eb69a503-6eb3-4f20-b30b-c9a4762a8cfd&quot;,
+        &quot;name&quot;: &quot;seniors&quot;,
+        &quot;description&quot;: &quot;50 y más&quot;
+      }
+    },
+    &quot;relationship&quot;: {
+      &quot;id&quot;: &quot;d573b626-36e1-46fc-90ab-3adb51f0acb6&quot;,
+      &quot;pair_id&quot;: &quot;087a1273-19c8-4ccf-8751-b2db6811f1cc&quot;,
+      &quot;group_id&quot;: &quot;5a478de5-5be1-482f-8d44-b98a79d1552c&quot;,
+      &quot;created_at&quot;: &quot;2025-03-18 14:41:31&quot;,
+      &quot;updated_at&quot;: &quot;2025-03-18 14:41:31&quot;
+    }
   },
-  &quot;status&quot;: 201,
-  &quot;description&quot;: &quot;The player was created successfully&quot;
+  &quot;status&quot;: 200,
+  &quot;description&quot;: &quot;Information about the pair group&quot;
 }
 </code></pre></main>
   </div>

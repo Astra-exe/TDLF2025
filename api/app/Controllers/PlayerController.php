@@ -203,6 +203,58 @@ class PlayerController extends BaseController
     }
 
     /**
+     * Muestra la información del "grupo" de un "jugador".
+     */
+    public function group(string $id): void
+    {
+        // Obtiene las reglas de validación
+        // y las establece como obligatorias.
+        $rules = PlayerValidation::getRules(['id']);
+        array_unshift($rules['id'], 'required');
+
+        // Establece las reglas de validación.
+        $this->gump()->validation_rules($rules);
+
+        // Comprueba los parámetros de la petición.
+        $this->gump()->run(['id' => $id]);
+
+        // Comprueba si existen errores de validación.
+        if ($this->gump()->errors()) {
+            $this->respondValidationErrors(
+                $this->gump()->get_errors_array(),
+                'The player identifier is incorrect');
+        }
+
+        // Consulta la información del "jugador".
+        $player = new PlayerModel;
+        $player->select('id')->find($id);
+
+        // Comprueba si existe el "jugador".
+        if (! $player->isHydrated()) {
+            $this->respondNotFound('The player information was not found');
+        }
+
+        // Consulta la relación de la "pareja" con el "jugador".
+        $pairPlayerRel = $player->pairPlayerPivot;
+
+        // Consulta la relación de la "pareja" con el "grupo".
+        $groupPairRel = $pairPlayerRel->pair->groupPairPivot;
+
+        // Consulta el "grupo" de la "pareja".
+        $group = $groupPairRel->_group;
+
+        $group->setCustomData('registration_category', $group->registrationCategory);
+
+        unset($group->registration_category_id);
+
+        $this->respond([
+            'group' => $group,
+            'relationship_pair_player' => $pairPlayerRel,
+            'relationship_group_pair' => $groupPairRel,
+        ], 'Information about the pair group');
+    }
+
+    /**
      * Elimina la información de un "jugador".
      */
     public function delete(string $id): void
