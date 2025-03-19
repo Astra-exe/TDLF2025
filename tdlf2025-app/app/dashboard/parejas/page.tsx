@@ -21,8 +21,14 @@ export default async function PairsPage() {
 
     return {
       id: idPair,
-      player1: player1Info?.player?.fullname ?? "No reconocido",
-      player2: player2Info?.player?.fullname ?? "No reconocido",
+      player1: {
+        id: player1Info?.player?.id,
+        name: player1Info?.player?.fullname ?? "No reconocido",
+      },
+      player2: {
+        id: player2Info?.player?.id,
+        name: player2Info?.player?.fullname ?? "No reconocido",
+      },
       category:
         pairInfo?.data?.registration_category?.description ?? "Sin categoria",
     };
