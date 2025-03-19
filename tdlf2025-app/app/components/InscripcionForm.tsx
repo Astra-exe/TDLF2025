@@ -76,23 +76,35 @@ export default function InscriptionForm() {
     console.log(data);
     try {
       const result = inscripcionSchema.safeParse(data);
-      if (!result.success) throw new Error("Invalid Data");
+      if (!result.success) throw new Error("Data invalida");
       // fetch to craete a new group
       const { fullname, city, weight, height, age, experience } = result.data;
-      await createPlayer({
-        fullname,
-        city,
-        weight,
-        height,
-        age,
-        experience,
-      });
-      toast.success("Jugador inscrito con exito");
+      toast.promise(
+        createPlayer({
+          fullname,
+          city,
+          weight,
+          height,
+          age,
+          experience,
+        }),
+        {
+          loading: "Inscribiendo jugador...",
+          success: () => "Jugador inscrito con éxito!",
+          error: (error) => {
+            if (error instanceof Error) {
+              return error.message.includes("No autorizado")
+                ? "Debes iniciar sesión para crear parejas"
+                : error.message;
+            }
+            return "Error desconocido al inscribir al jugador";
+          },
+        }
+      );
     } catch (error) {
-      console.log(error);
-      toast.error(error.message ?? "Ocurrio un error");
+      console.error("Unexpected error:", error);
+      toast.error("Error inesperado al crear la pareja");
     }
-    // toast depends if there is an error
     form.reset();
   };
 
