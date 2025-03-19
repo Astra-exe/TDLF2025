@@ -8,6 +8,7 @@ RUN \
     git \
     unzip \
     libicu-dev \
+    libpq-dev \
   && apt-get clean \
   && docker-php-ext-install -j"$(nproc)" \
     pdo_pgsql \
