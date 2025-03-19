@@ -1,7 +1,9 @@
-export type User = {
+export type UserSession = {
   id: string;
   username: string;
+  password: string;
   apiKey: string;
+  expiresAt: number;
 };
 
 export type Player = {
@@ -13,6 +15,16 @@ export type Player = {
   age: number;
   experience: number;
   is_active: number;
+  created_at: string;
+  updated_at: string;
+};
+
+export type PlayerRelationship = {
+  id: string;
+  player_id: string;
+  pair_id: string;
+  created_at: string;
+  updated_at: string;
 };
 
 export type Pair = {
@@ -26,4 +38,11 @@ export type Category = {
   id: string;
   name: string;
   description: string;
+  created_at: string;
+  updated_at: string;
+};
+
+export type PairsPlayers = {
+  player: Player;
+  relationship: PlayerRelationship;
 };
