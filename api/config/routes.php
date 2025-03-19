@@ -73,6 +73,7 @@ return (static function () use ($app): void {
         $router->get($base_route('/v1/status/matches/@id'), \App\Controllers\MatchStatusController::class.'->show');
 
         // Partidos y parejas.
+        $router->get($base_route('/v1/matches/@id/pairs'), \App\Controllers\MatchPairController::class.'->show');
         $router->get($base_route('/v1/matches/@id/pairs/players'), \App\Controllers\MatchPairController::class.'->players');
 
         // Roles de los usuarios de acceso.

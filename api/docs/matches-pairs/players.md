@@ -12,7 +12,7 @@ Parámetros de la ruta:
 
 Ejemplo:
 
- ```bash
+```bash
  curl -X GET \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
