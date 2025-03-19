@@ -4,7 +4,7 @@
 [DELETE] /v1/matches/@id
 ```
 
-Parámetros de la petición:
+Parámetros de la ruta:
 
 | Parámetros | Tipo | Requerido | Descripción |
 | ---------- | ---- | --------- | ----------- |

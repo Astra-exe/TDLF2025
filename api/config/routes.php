@@ -59,6 +59,7 @@ return (static function () use ($app): void {
         $router->get($base_route('/v1/groups/@id/pairs/players'), \App\Controllers\GroupPairController::class.'->players');
 
         // Partidos.
+        $router->get($base_route('/v1/matches'), \App\Controllers\MatchController::class.'->index');
         $router->delete($base_route('/v1/matches/@id'), \App\Controllers\MatchController::class.'->delete');
 
         // Categorías de los partidos.

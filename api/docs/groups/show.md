@@ -4,7 +4,7 @@
 [GET] /v1/groups/@id
 ```
 
-Parámetros de la petición:
+Parámetros de la ruta:
 
 | Parámetros | Tipo | Requerido | Descripción |
 | ---------- | ---- | --------- | ----------- |

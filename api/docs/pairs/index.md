@@ -27,6 +27,8 @@ curl -X GET \
   http://localhost:8080/v1/pairs?page=2&orderBy=created_at&sortBy=desc&registration_category_id=cba89529-0ba9-49e4-85ad-83e63c8e9d7e&is_eliminated=true&is_active=true
 ```
 
+Respuesta de la petición:
+
 ```json
 {
   "data": [

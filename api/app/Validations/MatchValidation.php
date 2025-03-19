@@ -25,6 +25,9 @@ class MatchValidation extends BaseValidation
             'match_category_id' => ['guidv4', 'contains_list' => self::getMatchCategories()],
             'match_status_id' => ['guidv4', 'contains_list' => self::getMatchStatus()],
             'is_active' => ['boolean'],
+            'page' => ['integer', 'min_numeric' => 1],
+            'orderBy' => ['contains' => ['created_at', 'updated_at']],
+            'sortBy' => ['contains' => ['asc', 'desc']],
         ];
     }
 
@@ -32,6 +35,8 @@ class MatchValidation extends BaseValidation
     {
         return [
             'is_active' => 'boolean|whole_number',
+            'page' => 'whole_number',
+            'sortBy' => 'upper_case',
         ];
     }
 

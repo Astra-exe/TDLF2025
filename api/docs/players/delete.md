@@ -6,7 +6,7 @@
 
 > El jugador no debe contener información asociada a una pareja.
 
-Parámetros de la petición:
+Parámetros de la ruta:
 
 | Parámetros | Tipo | Requerido | Descripción |
 | ---------- | ---- | --------- | ----------- |

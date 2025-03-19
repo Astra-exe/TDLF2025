@@ -6,7 +6,7 @@
 
 > La pareja no debe contener información asociada a grupos y partidos.
 
-Parámetros de la petición:
+Parámetros de la ruta:
 
 | Parámetros | Tipo | Requerido | Descripción |
 | ---------- | ---- | --------- | ----------- |

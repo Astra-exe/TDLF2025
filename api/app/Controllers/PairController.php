@@ -64,7 +64,8 @@ class PairController extends BaseController
         $pair = new PairModel;
         $pair->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
 
-        // Filtra las "parejas" por estatus de eliminación y estatus de actividad.
+        // Filtra las "parejas" por identificador de categoría de inscripción,
+        // estatus de eliminación y estatus de actividad.
         foreach (['registration_category_id', 'is_eliminated', 'is_active'] as $param) {
             if (isset($queryParams[$param])) {
                 $pair->eq($param, $queryParams[$param]);

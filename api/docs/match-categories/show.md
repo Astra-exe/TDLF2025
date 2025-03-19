@@ -4,7 +4,7 @@
 [GET] /v1/categories/matches/@id
 ```
 
-Parámetros de la petición:
+Parámetros de la ruta:
 
 | Parámetros | Tipo | Requerido | Descripción |
 | ---------- | ---- | --------- | ----------- |

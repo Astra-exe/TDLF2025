@@ -297,7 +297,88 @@ img {
 </li>
 </ul></aside>
     <main class="main"><h1>Partidos</h1>
-<p>Partidos asignados.</p></main>
+<p>Partidos asignados.</p>
+<pre><code>[GET] /v1/matches
+</code></pre>
+<p>Parámetros de consulta:</p>
+<table>
+<tr><th>Parámetro </th><th>Tipo </th><th>Rango </th><th>Por defecto </th><th>Descripción </th></tr>
+<tr><td><code>page</code> </td><td><code>integer</code> </td><td><code>min_numeric: 1</code> </td><td><code>1</code> </td><td>Número de la página de resultados de los partidos. </td></tr>
+<tr><td><code>orderBy</code> </td><td><code>string</code> </td><td><code>contains: [created_at, updated_at]</code> </td><td><code>created_at</code> </td><td>Campo de ordenamiento de los partidos. </td></tr>
+<tr><td><code>sortBy</code> </td><td><code>string</code> </td><td><code>contains: [asc, desc]</code> </td><td><code>desc</code> </td><td>Modo de ordenamiento de los partidos. </td></tr>
+<tr><td><code>registration_category_id</code> </td><td><code>string</code> </td><td><code>exact_len: 36</code> </td><td><code>null</code> </td><td>Identificador de la categoría de inscripción de los partidos (<a href="../registration-categories/index.html">ver</a>). </td></tr>
+<tr><td><code>group_id</code> </td><td><code>string</code> </td><td><code>exact_len: 36</code> </td><td><code>null</code> </td><td>Identificador del grupo de los partidos (<a href="../groups/index.html">ver</a>). </td></tr>
+<tr><td><code>match_category_id</code> </td><td><code>string</code> </td><td><code>exact_len: 36</code> </td><td><code>null</code> </td><td>Identificador de la categoría de las rondas de los partidos (<a href="../match-categories/index.html">ver</a>). </td></tr>
+<tr><td><code>match_status_id</code> </td><td><code>string</code> </td><td><code>exact_len: 36</code> </td><td><code>null</code> </td><td>Identificador del estatus de juego de los partidos (<a href="../match-status/index.html">ver</a>). </td></tr>
+<tr><td><code>is_active</code> </td><td><code>boolean</code> </td><td><code>contains: [yes/no, on/off, 1/0, true/false]</code> </td><td><code>null</code> </td><td>Filtrar los partidos por estatus de actividad. </td></tr>
+</table>
+<p>Ejemplo:</p>
+<pre><code class="language-bash">curl -X GET \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY' \
+  http://localhost:8080/v1/matches?page=2&amp;orderBy=created_at&amp;sortBy=desc&amp;registration_category_id=cba89529-0ba9-49e4-85ad-83e63c8e9d7e&amp;group_id=c236d76f-e834-40a1-8080-9f78a9a299f2&amp;match_category_id=dc19c9bf-4339-4ed2-a603-5b2dd1058a6&amp;match_status_id=29d4b630-468f-4dcc-b775-5bad0b796a89&amp;is_active=true
+</code></pre>
+<p>Respuesta de la petición:</p>
+<pre><code class="language-json">{
+  &quot;data&quot;: [
+    {
+      &quot;id&quot;: &quot;fd73aa9c-fac8-4761-a6ba-12c674612929&quot;,
+      &quot;group_id&quot;: &quot;f5c3df23-f459-4a36-912e-50736614df95&quot;,
+      &quot;is_active&quot;: 1,
+      &quot;created_at&quot;: &quot;2025-03-18 14:41:31&quot;,
+      &quot;updated_at&quot;: &quot;2025-03-18 14:41:31&quot;,
+      &quot;registration_category&quot;: {
+        &quot;id&quot;: &quot;76d95a95-0fa3-4d58-a8ce-031a1db25b3c&quot;,
+        &quot;name&quot;: &quot;open&quot;,
+        &quot;description&quot;: &quot;Libre&quot;
+      },
+      &quot;match_category&quot;: {
+        &quot;id&quot;: &quot;6c7f2686-7b40-47ff-b5b5-cbd52c6cea89&quot;,
+        &quot;name&quot;: &quot;qualifier&quot;,
+        &quot;description&quot;: &quot;Clasificación&quot;
+      },
+      &quot;match_status&quot;: {
+        &quot;id&quot;: &quot;29d4b630-468f-4dcc-b775-5bad0b796a89&quot;,
+        &quot;name&quot;: &quot;scheduled&quot;,
+        &quot;description&quot;: &quot;Programado&quot;
+      }
+    },
+    {
+      &quot;id&quot;: &quot;097c1b44-1bed-40fe-b522-ced60e91c185&quot;,
+      &quot;group_id&quot;: &quot;f5c3df23-f459-4a36-912e-50736614df95&quot;,
+      &quot;is_active&quot;: 1,
+      &quot;created_at&quot;: &quot;2025-03-18 14:41:31&quot;,
+      &quot;updated_at&quot;: &quot;2025-03-18 14:41:31&quot;,
+      &quot;registration_category&quot;: {
+        &quot;id&quot;: &quot;76d95a95-0fa3-4d58-a8ce-031a1db25b3c&quot;,
+        &quot;name&quot;: &quot;open&quot;,
+        &quot;description&quot;: &quot;Libre&quot;
+      },
+      &quot;match_category&quot;: {
+        &quot;id&quot;: &quot;6c7f2686-7b40-47ff-b5b5-cbd52c6cea89&quot;,
+        &quot;name&quot;: &quot;qualifier&quot;,
+        &quot;description&quot;: &quot;Clasificación&quot;
+      },
+      &quot;match_status&quot;: {
+        &quot;id&quot;: &quot;29d4b630-468f-4dcc-b775-5bad0b796a89&quot;,
+        &quot;name&quot;: &quot;scheduled&quot;,
+        &quot;description&quot;: &quot;Programado&quot;
+      }
+    },
+    ...
+  ],
+  &quot;status&quot;: 200,
+  &quot;pagination&quot;: {
+    &quot;page&quot;: 1,
+    &quot;limit&quot;: 8,
+    &quot;total&quot;: 6,
+    &quot;count&quot;: 48,
+    &quot;offset&quot;: 0
+  },
+  &quot;description&quot;: &quot;Information about all the matches with pagination&quot;
+}
+</code></pre></main>
   </div>
   <div>
     <hr>
