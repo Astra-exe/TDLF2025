@@ -10,7 +10,7 @@ type Credentials = {
   password: string;
 };
 
-type NewPlayer = Omit<Player, "id" | "is_active">;
+type NewPlayer = Omit<Player, "id" | "is_active" | "created_at" | "updated_at">;
 type NewPair = Omit<Pair, "id" | "is_eliminated">;
 
 export async function authenticate(
@@ -44,29 +44,35 @@ export async function createPlayer(playerData: NewPlayer) {
     if (!session?.user) {
       throw new Error("No autorizado");
     }
-    console.log("autorizado create player");
     // fetch to create it
-    // const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/players`;
-    // const response = await fetch(url, {
-    //   method: "POST",
-    //   body: JSON.stringify(playerData),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     X_API_KEY: session.apiKey,
-    //   },
-    // });
-    // const data = await response.json();
-
-    // if(response.ok) {
-    //   return data
-    // }
+    console.log("autorizado create player");
+    // console.log({ playerData, session });
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/players`;
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(playerData),
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": session.user.apiKey,
+      },
+    });
+    // console.log({ response });
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.log(errorData);
+      throw new Error(
+        errorData?.description || "Error al obtener al crear al juagador"
+      );
+    }
+    const data = await response.json();
+    return data;
   } catch (error) {
     throw error;
   }
 }
 
 export async function createPair(pairData: NewPair) {
-  console.log({ pairData });
+  // console.log({ pairData });
   try {
     const session = await auth();
     // console.log({ session });
@@ -75,22 +81,23 @@ export async function createPair(pairData: NewPair) {
     }
     console.log("autorizado create pair");
     // fetch to create it
-    // const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/pairs`;
-    // const response = await fetch(url, {
-    //   method: "POST",
-    //   body: JSON.stringify(pairData),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     X_API_KEY: session.apiKey,
-    //   },
-    // });
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/pairs`;
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(pairData),
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": session.user.apiKey,
+      },
+    });
+    console.log({ response });
 
-    // if(!response.ok) {
-    // const errorData = await response.json();
-    // throw new Error(errorData?.message || "Error al crear la pareja");
-    // }
-    // const data = await response.json()
-    // return data
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData?.description || "Error al crear la pareja");
+    }
+    const data = await response.json();
+    return data;
   } catch (error) {
     if (error instanceof Error) {
       throw error;
