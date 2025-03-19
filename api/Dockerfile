@@ -21,7 +21,7 @@ COPY --from=composer/composer:2-bin /composer /usr/local/bin/composer
 ENV \
   APACHE_DOCUMENT_ROOT=/var/www/html \
   APACHE_APP_ROOT=/var/www/html/public \
-  APACHE_PORT=80/tcp \
+  APACHE_PORT=80/tcp
 
 # Copia todos los archivos del proyecto a "/var/www/html/".
 COPY ./ "${APACHE_DOCUMENT_ROOT}"
