@@ -124,9 +124,10 @@ class GroupController extends BaseController
     }
 
     /**
-     * Muestra la información de los "partidos" del "grupo".
+     * Muestra la información de los "partidos"
+     * "parejas" y "jugadores" del "grupo".
      */
-    public function matches(string $id): void
+    public function matchesPairsPlayers(string $id): void
     {
         // Obtiene las reglas de validación
         // y las establece como obligatorias.

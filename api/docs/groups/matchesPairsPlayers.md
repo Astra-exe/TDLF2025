@@ -1,7 +1,7 @@
-# Partidos de las parejas de un grupo
+# Partidos, parejas y jugadores de un grupo
 
 ```
-[GET] /v1/groups/@id/matches
+[GET] /v1/groups/@id/matches/pairs/players
 ```
 
 Parámetros de la ruta:
@@ -17,7 +17,7 @@ Ejemplo:
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'X-API-KEY: API_KEY' \
-  http://localhost:8080/v1/groups/@id/matches
+  http://localhost:8080/v1/groups/@id/matches/pairs/players
 ```
 
 Respuesta de la petición:
