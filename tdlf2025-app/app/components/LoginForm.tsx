@@ -6,6 +6,7 @@ import { z } from "zod";
 import { useActionState } from "react";
 import { authenticate } from "@/app/lib/actions";
 import { useSearchParams } from "next/navigation";
+import { startTransition } from "react";
 
 import { Button } from "@/app/components/ui/button";
 import {
@@ -60,7 +61,10 @@ export default function LoginForm() {
 
   async function onSubmit(values: z.infer<typeof formLoginSchema>) {
     console.log(values);
-    formAction(values);
+    // Use startTransition to call the server action
+    startTransition(() => {
+      formAction(values); // Pass validated data to the server action
+    });
   }
 
   return (
