@@ -92,6 +92,48 @@ class MatchController extends BaseController
     }
 
     /**
+     * Muestra la información del "grupo" de un "partido".
+     */
+    public function group(string $id): void
+    {
+        // Obtiene las reglas de validación
+        // y las establece como obligatorias.
+        $rules = MatchValidation::getRules(['id']);
+        array_unshift($rules['id'], 'required');
+
+        // Establece las reglas de validación.
+        $this->gump()->validation_rules($rules);
+
+        // Comprueba los parámetros de la petición.
+        $this->gump()->run(['id' => $id]);
+
+        // Comprueba si existen errores de validación.
+        if ($this->gump()->errors()) {
+            $this->respondValidationErrors(
+                $this->gump()->get_errors_array(),
+                'The match identifier is incorrect');
+        }
+
+        // Consulta la información del "partido".
+        $match = new MatchModel;
+        $match->select('id')->find($id);
+
+        // Comprueba si existe el "partido".
+        if (! $match->isHydrated()) {
+            $this->respondNotFound('The match information was not found');
+        }
+
+        // Obtiene el "grupo" del "partido".
+        $group = $match->_group;
+
+        $group->setCustomData('registration_category', $group->registrationCategory);
+
+        unset($group->registration_category_id);
+
+        $this->respond($group, 'Information about the match group');
+    }
+
+    /**
      * Elimina la información de un "partido".
      */
     public function delete(string $id): void
