@@ -28,6 +28,7 @@ export default function DataTable<TData, TValue>({
   data,
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  // console.log({ dataTable: data });
 
   const table = useReactTable({
     data,
