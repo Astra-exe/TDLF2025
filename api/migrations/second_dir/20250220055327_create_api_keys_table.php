@@ -21,9 +21,9 @@ final class CreateApiKeysTable extends AbstractMigration
             ->addColumn('user_id', 'uuid')
             ->addColumn('hash', 'string', ['length' => 255])
             ->addColumn('is_revoked', 'boolean', ['default' => false])
-            ->addColumn('expires_at', 'datetime')
-            ->addColumn('created_at', 'datetime', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
-            ->addColumn('updated_at', 'datetime', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
+            ->addColumn('expires_at', 'timestamp')
+            ->addColumn('created_at', 'timestamp', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
+            ->addColumn('updated_at', 'timestamp', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
             ->addUniqueConstraint('user_id', 'api_keys_user_id_unique')
             ->addForeignKey('user_id', 'users', 'id', ForeignKey::CASCADE, ForeignKey::RESTRICT)
             ->create();

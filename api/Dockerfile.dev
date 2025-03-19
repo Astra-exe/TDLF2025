@@ -51,7 +51,7 @@ EXPOSE "${APACHE_PORT}"
 WORKDIR "${APACHE_DOCUMENT_ROOT}"
 
 # Instala las dependencias del proyecto con "composer".
-RUN composer install --no-dev -o
+RUN composer install -n --no-dev -o
 
 # Crea la base de datos de la aplicación,
 # ejecuta las migraciones y el servidor Apache.

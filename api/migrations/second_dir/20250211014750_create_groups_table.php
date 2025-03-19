@@ -23,8 +23,8 @@ final class CreateGroupsTable extends AbstractMigration
             ->addColumn('description', 'string', ['length' => 64])
             ->addColumn('is_eliminated', 'boolean', ['default' => false])
             ->addColumn('is_active', 'boolean', ['default' => true])
-            ->addColumn('created_at', 'datetime', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
-            ->addColumn('updated_at', 'datetime', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
+            ->addColumn('created_at', 'timestamp', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
+            ->addColumn('updated_at', 'timestamp', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
             ->addForeignKey('registration_category_id', 'registration_categories', 'id', ForeignKey::RESTRICT, ForeignKey::RESTRICT)
             ->addUniqueConstraint(['registration_category_id', 'name'], 'groups_registration_category_id_name_unique')
             ->create();

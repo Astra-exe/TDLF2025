@@ -18,8 +18,8 @@ final class CreateMatchCategoryTable extends AbstractMigration
             ->addColumn('id', 'uuid')
             ->addColumn('name', 'string', ['length' => 32])
             ->addColumn('description', 'string', ['length' => 64])
-            ->addColumn('created_at', 'datetime', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
-            ->addColumn('updated_at', 'datetime', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
+            ->addColumn('created_at', 'timestamp', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
+            ->addColumn('updated_at', 'timestamp', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
             ->addUniqueConstraint('name', 'match_categories_name_unique')
             ->create();
     }
