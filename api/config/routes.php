@@ -60,6 +60,7 @@ return (static function () use ($app): void {
 
         // Partidos.
         $router->get($base_route('/v1/matches'), \App\Controllers\MatchController::class.'->index');
+        $router->get($base_route('/v1/matches/@id'), \App\Controllers\MatchController::class.'->show');
         $router->get($base_route('/v1/matches/@id/groups'), \App\Controllers\MatchController::class.'->group');
         $router->delete($base_route('/v1/matches/@id'), \App\Controllers\MatchController::class.'->delete');
 
