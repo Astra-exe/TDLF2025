@@ -149,3 +149,27 @@ h1, h2, h3, h4, h5, h6 {
   }
 
 }
+
+
+.grid-pattern-background {
+  --_heigh-pattern: 100vh;
+  --_num-lines: 7vmin;
+  --_degrees-mask: 0deg;
+  --line: hsl(0 0% 95% / 0.2);
+}
+
+.grid-pattern-background::before {
+  content: "";
+  display: block;
+  height: var(--_heigh-pattern);
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+  background:
+  linear-gradient(90deg, var(--line) 1px, transparent 1px 10vmin) 50% -5vmin /
+  var(--_num-lines) var(--_num-lines),
+  linear-gradient(var(--line) 1px, transparent 1px 10vmin) 50% -5vmin / var(--_num-lines) var(--_num-lines);
+  top: 0;
+  -webkit-mask: linear-gradient(var(--_degrees-mask), transparent 15%, white);
+  mask: linear-gradient(var(--_degrees-mask), transparent 15%, white);
+}
