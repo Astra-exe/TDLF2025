@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FirstDir;
 
+use Phoenix\Database\Element\ColumnSettings;
 use Phoenix\Migration\AbstractMigration;
 
 /**
@@ -22,8 +23,8 @@ final class CreatePlayersTable extends AbstractMigration
             ->addColumn('age', 'tinyinteger', ['signed' => false])
             ->addColumn('experience', 'tinyinteger', ['signed' => false, 'default' => 0])
             ->addColumn('is_active', 'boolean', ['default' => true])
-            ->addColumn('created_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
-            ->addColumn('updated_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
+            ->addColumn('created_at', 'timestamp', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
+            ->addColumn('updated_at', 'timestamp', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
             ->create();
     }
 
