@@ -25,7 +25,7 @@ final class CreateMatchesPairsTable extends AbstractMigration
             ->addColumn('created_at', 'datetime', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
             ->addColumn('updated_at', 'datetime', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
             ->addForeignKey('pair_id', 'pairs', 'id', ForeignKey::RESTRICT, ForeignKey::RESTRICT)
-            ->addForeignKey('match_id', 'matches', 'id', ForeignKey::RESTRICT, ForeignKey::RESTRICT)
+            ->addForeignKey('match_id', 'matches', 'id', ForeignKey::CASCADE, ForeignKey::RESTRICT)
             ->addUniqueConstraint(['pair_id', 'match_id'], 'matches_pairs_pair_id_match_id_unique')
             ->create();
     }

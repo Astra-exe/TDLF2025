@@ -15,7 +15,7 @@ class RoleModel extends BaseModel
             self::HAS_MANY,
             UserModel::class,
             'role_id',
-            ['select' => ['id', 'email', 'username', 'role_id', 'fullname', 'is_active', 'created_at', 'updated_at']],
+            ['select' => ['id', 'email', 'username', 'role_id', 'fullname', 'is_active', 'created_at', 'updated_at'], 'orderBy' => 'created_at DESC'],
         ],
     ];
 

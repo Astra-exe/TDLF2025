@@ -4,7 +4,7 @@
 [GET] /v1/pairs/@id/players
 ```
 
-Parámetros de la petición:
+Parámetros de la ruta:
 
 | Parámetros | Tipo | Requerido | Descripción |
 | ---------- | ---- | --------- | ----------- |

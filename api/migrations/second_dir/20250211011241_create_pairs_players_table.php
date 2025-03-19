@@ -23,7 +23,7 @@ final class CreatePairsPlayersTable extends AbstractMigration
             ->addColumn('created_at', 'datetime', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
             ->addColumn('updated_at', 'datetime', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
             ->addForeignKey('player_id', 'players', 'id', ForeignKey::RESTRICT, ForeignKey::RESTRICT)
-            ->addForeignKey('pair_id', 'pairs', 'id', ForeignKey::RESTRICT, ForeignKey::RESTRICT)
+            ->addForeignKey('pair_id', 'pairs', 'id', ForeignKey::CASCADE, ForeignKey::RESTRICT)
             ->addUniqueConstraint('player_id', 'pairs_players_player_id_unique')
             ->create();
     }

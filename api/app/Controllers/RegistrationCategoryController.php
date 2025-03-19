@@ -15,7 +15,7 @@ class RegistrationCategoryController extends BaseController
      */
     public function index(): void
     {
-        $categories = (new RegistrationCategoryModel)->orderBy('name ASC')->findAll();
+        $categories = (new RegistrationCategoryModel)->orderBy('description ASC')->findAll();
         $this->respond($categories, 'Information about all the categories of pairs players registration');
     }
 
@@ -53,5 +53,41 @@ class RegistrationCategoryController extends BaseController
         }
 
         $this->respond($registrationCategory, 'Information about the registration category of pairs players');
+    }
+
+    /**
+     * Muestra la información de los "grupos"
+     * de una "categoría de inscripción de las parejas de jugadores".
+     */
+    public function groups(string $id): void
+    {
+        // Obtiene las reglas de validación
+        // y las establece como obligatorias.
+        $rules = RegistrationCategoryValidation::getRules(['id']);
+        array_unshift($rules['id'], 'required');
+
+        // Establece las reglas de validación.
+        $this->gump()->validation_rules($rules);
+
+        // Comprueba los parámetros de la petición.
+        $this->gump()->run(['id' => $id]);
+
+        // Comprueba si existen errores de validación.
+        if ($this->gump()->errors()) {
+            $this->respondValidationErrors(
+                $this->gump()->get_errors_array(),
+                'The registration category of pairs players identifier is incorrect');
+        }
+
+        // Consulta la información de la "categoría de inscripción".
+        $registrationCategory = new RegistrationCategoryModel;
+        $registrationCategory->select('id')->find($id);
+
+        // Comprueba si existe la "categoría de inscripción".
+        if (! $registrationCategory->isHydrated()) {
+            $this->respondNotFound('The registration category of pairs players information was not found');
+        }
+
+        $this->respond($registrationCategory->groups, 'Information about the groups of the registration category of pairs players');
     }
 }

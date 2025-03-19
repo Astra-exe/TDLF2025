@@ -13,7 +13,9 @@ Parámetros de consulta:
 | `page` | `integer` | `min_numeric: 1` | `1` | Número de la página de resultados de las parejas de jugadores. |
 | `orderBy` | `string` | `contains: [created_at, updated_at]` | `created_at` | Campo de ordenamiento de las parejas de jugadores. |
 | `sortBy` | `string` | `contains: [asc, desc]` | `desc` | Modo de ordenamiento de las parejas de jugadores. |
+| `registration_category_id` | `string` | `exact_len: 36` | `null` | Identificador de la categoría de inscripción de las parejas de jugadores ([ver](../registration-categories/index.html)). |
 | `is_eliminated` | `boolean` | `contains: [yes/no, on/off, 1/0, true/false]` | `null` | Filtrar las parejas de jugadores por estatus de eliminación. |
+| `is_active` | `boolean` | `contains: [yes/no, on/off, 1/0, true/false]` | `null` | Filtrar las parejas por estatus de actividad. |
 
 Ejemplo:
 
@@ -22,7 +24,7 @@ curl -X GET \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'X-API-KEY: API_KEY' \
-  http://localhost:8080/v1/pairs/players?page=2&orderBy=created_at&sortBy=desc&is_eliminated=true
+  http://localhost:8080/v1/pairs/players?page=2&orderBy=created_at&sortBy=desc&registration_category_id=cba89529-0ba9-49e4-85ad-83e63c8e9d7e&is_eliminated=true&is_active=true
 ```
 
 Respuesta de la petición:
@@ -117,7 +119,8 @@ Respuesta de la petición:
           "updated_at": "2025-03-07 14:44:28"
         }
       }
-    ]
+    ],
+    ...
   ],
   "status": 200,
   "pagination": {

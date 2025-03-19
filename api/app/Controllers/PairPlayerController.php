@@ -21,7 +21,9 @@ class PairPlayerController extends BaseController
             'page' => 1,
             'orderBy' => 'created_at',
             'sortBy' => 'desc',
+            'registration_category_id' => null,
             'is_eliminated' => null,
+            'is_active' => null,
         ];
 
         $queryParams = [];
@@ -29,6 +31,10 @@ class PairPlayerController extends BaseController
         // Obtiene solo los query params necesarios.
         foreach ($queryFields as $param => $default) {
             $queryParams[$param] = $this->app()->request()->query->{$param} ?? $default;
+
+            if (is_string($queryParams[$param]) && empty($queryParams[$param])) {
+                $queryParams[$param] = $default;
+            }
 
             if (is_null($queryParams[$param])) {
                 unset($queryParams[$param]);
@@ -55,26 +61,28 @@ class PairPlayerController extends BaseController
 
         // Consulta la información de todas las "parejas" con paginación.
         $pairs = new PairModel;
-        $pairs->select('id')->paginate($queryParams['page'])
+        $pairs->select('id')
             ->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
 
-        // Filtra las "parejas" por estatus de eliminación.
-        if (isset($queryParams['is_eliminated'])) {
-            $pairs->eq('is_eliminated', $queryParams['is_eliminated']);
+        // Filtra las "parejas" por identificador de categoría de inscripción,
+        // estatus de eliminación y estatus de actividad.
+        foreach (['registration_category_id', 'is_eliminated', 'is_active'] as $param) {
+            if (isset($queryParams[$param])) {
+                $pairs->eq($param, $queryParams[$param]);
+            }
         }
 
         // Obtiene la información sobre la paginación.
+        $pairs->paginate($queryParams['page']);
         $pagination = $pairs->pagination;
 
-        $players = [];
-
         // Consulta los "jugadores de todas las pareja".
-        foreach ($pairs->findAll() as $pair) {
-            $players[] = array_map(static fn (PairPlayerPivotModel $relationship) => [
+        $players = array_map(static function (PairModel $pair): array {
+            return array_map(static fn (PairPlayerPivotModel $relationship): array => [
                 'player' => $relationship->player,
                 'relationship' => $relationship,
             ], $pair->pairPlayerPivot);
-        }
+        }, $pairs->findAll());
 
         $this->respondPagination($players, $pagination, 'Information about all the pairs players with pagination');
     }
@@ -162,7 +170,7 @@ class PairPlayerController extends BaseController
         unset($pair->registration_category_id);
 
         // Consulta los "jugadores" registrados de la "pareja".
-        $players = array_map(static fn (PairPlayerPivotModel $relationship) => [
+        $players = array_map(static fn (PairPlayerPivotModel $relationship): array => [
             'player' => $relationship->player,
             'relationship' => $relationship,
         ], $pair->pairPlayerPivot);
@@ -203,7 +211,7 @@ class PairPlayerController extends BaseController
         }
 
         // Consulta los "jugadores" de la "pareja".
-        $players = array_map(static fn ($relationship) => [
+        $players = array_map(static fn (PairPlayerPivotModel $relationship): array => [
             'player' => $relationship->player,
             'relationship' => $relationship,
         ], $pair->pairPlayerPivot);

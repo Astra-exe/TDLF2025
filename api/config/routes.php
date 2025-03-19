@@ -29,12 +29,14 @@ return (static function () use ($app): void {
         // Categorías de inscripción de parejas.
         $router->get($base_route('/v1/categories/registrations'), \App\Controllers\RegistrationCategoryController::class.'->index');
         $router->get($base_route('/v1/categories/registrations/@id'), \App\Controllers\RegistrationCategoryController::class.'->show');
+        $router->get($base_route('/v1/categories/registrations/@id/groups'), \App\Controllers\RegistrationCategoryController::class.'->groups');
 
         // Jugadores.
         $router->get($base_route('/v1/players'), \App\Controllers\PlayerController::class.'->index');
         $router->post($base_route('/v1/players'), \App\Controllers\PlayerController::class.'->create');
         $router->get($base_route('/v1/players/@id'), \App\Controllers\PlayerController::class.'->show');
         $router->get($base_route('/v1/players/@id/pairs'), \App\Controllers\PlayerController::class.'->pair');
+        $router->delete($base_route('/v1/players/@id'), \App\Controllers\PlayerController::class.'->delete');
 
         // Parejas y jugadores.
         $router->get($base_route('/v1/pairs/players'), \App\Controllers\PairPlayerController::class.'->index');
@@ -42,11 +44,43 @@ return (static function () use ($app): void {
         $router->post($base_route('/v1/pairs/players'), \App\Controllers\PairPlayerController::class.'->create');
 
         // Parejas.
+        $router->get($base_route('/v1/pairs'), \App\Controllers\PairController::class.'->index');
         $router->post($base_route('/v1/pairs'), \App\Controllers\PairController::class.'->create');
         $router->get($base_route('/v1/pairs/@id'), \App\Controllers\PairController::class.'->show');
+        $router->delete($base_route('/v1/pairs/@id'), \App\Controllers\PairController::class.'->delete');
+
+        // Grupos.
+        $router->get($base_route('/v1/groups'), \App\Controllers\GroupController::class.'->index');
+        $router->get($base_route('/v1/groups/@id'), \App\Controllers\GroupController::class.'->show');
+        $router->get($base_route('/v1/groups/@id/matches/pairs/players'), \App\Controllers\GroupController::class.'->matchesPairsPlayers');
+
+        // Grupos y parejas.
+        $router->get($base_route('/v1/groups/@id/pairs'), \App\Controllers\GroupPairController::class.'->show');
+        $router->get($base_route('/v1/groups/@id/pairs/players'), \App\Controllers\GroupPairController::class.'->players');
+
+        // Partidos.
+        $router->get($base_route('/v1/matches'), \App\Controllers\MatchController::class.'->index');
+        $router->get($base_route('/v1/matches/@id'), \App\Controllers\MatchController::class.'->show');
+        $router->get($base_route('/v1/matches/@id/groups'), \App\Controllers\MatchController::class.'->group');
+        $router->delete($base_route('/v1/matches/@id'), \App\Controllers\MatchController::class.'->delete');
+
+        // Categorías de los partidos.
+        $router->get($base_route('/v1/categories/matches'), \App\Controllers\MatchCategoryController::class.'->index');
+        $router->get($base_route('/v1/categories/matches/@id'), \App\Controllers\MatchCategoryController::class.'->show');
+
+        // Estatus de los partidos.
+        $router->get($base_route('/v1/status/matches'), \App\Controllers\MatchStatusController::class.'->index');
+        $router->get($base_route('/v1/status/matches/@id'), \App\Controllers\MatchStatusController::class.'->show');
+
+        // Partidos y parejas.
+        $router->get($base_route('/v1/matches/@id/pairs'), \App\Controllers\MatchPairController::class.'->show');
+        $router->get($base_route('/v1/matches/@id/pairs/players'), \App\Controllers\MatchPairController::class.'->players');
 
         // Roles de los usuarios de acceso.
         $router->get($base_route('/v1/roles'), \App\Controllers\RoleController::class.'->index');
         $router->get($base_route('/v1/roles/@id'), \App\Controllers\RoleController::class.'->show');
+
+        // Acciones especiales.
+        $router->post($base_route('/v1/actions/randomize/groups/pairs/matches'), \App\Controllers\ActionsController::class.'->randomizeGroupsPairsMatches');
     }, [\App\Middlewares\AuthMiddleware::class]);
 })();

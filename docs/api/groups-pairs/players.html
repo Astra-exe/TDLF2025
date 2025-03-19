@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>📘</text></svg>">
+  <title>Parejas y jugadores de un grupo</title>
+  <style>body {
+  font-family: sans-serif;
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.navbar {
+  clear: both;
+  color: #069;
+  overflow: hidden;
+  background-color: #17a;
+  padding: 0.7ex;
+  border-top: 1px solid;
+  border-top-color: #ccc;
+  border-bottom: 1px solid #069;
+}
+
+.navbar a {
+  padding: 0.5ex 1ex;
+  color: #fff;
+}
+
+.navbar a:hover {
+  background-color: #069;
+}
+
+.navbar a, .sidebar a {
+  text-decoration: none;
+}
+
+.left {
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+
+.right {
+  float: right;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #069;
+}
+
+.sidebar {
+  float: left;
+  margin: 0 1px 0 0;
+  padding: 1em 0;
+  border-right: 1px dotted #ccc;
+  width: 200px;
+}
+
+.sidebar ul {
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li ul {
+  padding-left: 0.6em;
+}
+
+.sidebar li a {
+  display: block;
+  margin: 0;
+  padding: 0.8ex 2em 0.8ex 1em;
+}
+
+.sidebar a:hover, th, blockquote, pre, code {
+  background-color: #ddd;
+}
+
+.content {
+  clear: both;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+}
+
+.main {
+  margin: 0 0 0 200px;
+  max-width: 50em;
+  padding: 1.5em;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7ex;
+  text-align: center;
+}
+
+.footer p {
+  margin: 0.5ex 1ex;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 1em 1ex 0.5ex 0;
+}
+
+h2~*:not(h2) {
+  margin-left: 1ch;
+}
+
+h1 {
+  font-size: 2.0em;
+}
+
+h2 {
+  font-size: 1.9em;
+}
+
+h3 {
+  font-size: 1.6em;
+}
+
+h4 {
+  font-size: 1.5em;
+}
+
+h5 {
+  font-size: 1.2em;
+}
+
+h6 {
+  font-size: 1.1em;
+}
+
+pre, code {
+  margin: 0;
+  font-size: 100%;
+}
+
+pre {
+  padding: 1ch;
+}
+
+pre, table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 0.7ex;
+}
+
+blockquote::before {
+  float: left;
+  width: 1ch;
+  margin-right: 1ch;
+  content: ">";
+}
+
+img {
+  max-width: 100%;
+}
+
+@media (max-width: 999px) {
+  .sidebar {
+    float: none;
+    margin: 0;
+    width: 100%;
+    border: none;
+  }
+
+  .main {
+    margin: 0;
+  }
+
+  .footer {
+    flex-direction: column;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #000;
+    color: #fff;
+  }
+
+  .navbar {
+    border-top-color: #222;
+  }
+
+  .sidebar a:hover, th {
+    background-color: #222;
+  }
+
+  a {
+    color: #6cf;
+  }
+
+  .main img[src$=svg] {
+    filter: invert(1);
+  }
+
+  blockquote, pre, code {
+    background-color: #111;
+    border-color: #aaa;
+  }
+}</style>
+</head>
+<body>
+  <nav class="navbar"><a href="https://astra-exe.github.io/TDLF2025/api/index.html"><b>Inicio</b></a>
+<span class="right"><a href="https://github.com/Astra-exe/TDLF2025/tree/main/api">Repositorio</a> <a href="mailto:ricardogj08@riseup.net">Contacto</a></span></nav>
+  <div class="content">
+    <aside class="sidebar"><ul>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/actions/index.html">Acciones/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/auth/index.html">Autenticación/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups/index.html">Grupos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups-pairs/index.html"><b>Parejas de los grupos</b>/</a>
+<ul>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups-pairs/players.html"><b>Parejas y jugadores de un grupo</b>/</a>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups-pairs/show.html">Parejas de un grupo/</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/match-categories/index.html">Categorías de los partidos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/match-status/index.html">Estatus de los partidos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/matches/index.html">Partidos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/matches-pairs/index.html">Parejas de los partidos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs/index.html">Parejas/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs-players/index.html">Jugadores de las parejas/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/players/index.html">Jugadores/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/registration-categories/index.html">Categorías de inscripción/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/roles/index.html">Roles/</a>
+<ul>
+</ul>
+</li>
+</ul></aside>
+    <main class="main"><h1>Parejas y jugadores de un grupo</h1>
+<pre><code>[GET] /v1/groups/@id/pairs/players
+</code></pre>
+<p>Parámetros de la ruta:</p>
+<table>
+<tr><th>Parámetros </th><th>Tipo </th><th>Requerido </th><th>Descripción </th></tr>
+<tr><td><code>id</code> </td><td><code>string</code> </td><td><code>true</code> </td><td>Identificador del grupo. </td></tr>
+</table>
+<p>Ejemplo:</p>
+<pre><code class="language-bash"> curl -X GET \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY' \
+  http://localhost:8080/v1/groups/@id/pairs/players
+</code></pre>
+<p>Respuesta de la petición:</p>
+<pre><code class="language-json">{
+  &quot;data&quot;: [
+    {
+      &quot;pair&quot;: {
+        &quot;id&quot;: &quot;e1543be4-b9b0-415a-a9d7-cef3455b13c5&quot;,
+        &quot;is_eliminated&quot;: 0,
+        &quot;is_active&quot;: 1,
+        &quot;created_at&quot;: &quot;2025-03-17 14:34:44&quot;,
+        &quot;updated_at&quot;: &quot;2025-03-17 14:34:44&quot;,
+        &quot;registration_category&quot;: {
+          &quot;id&quot;: &quot;c98fb1f7-837b-4301-947f-8367f6fb29b8&quot;,
+          &quot;name&quot;: &quot;open&quot;,
+          &quot;description&quot;: &quot;Libre&quot;
+        },
+        &quot;players&quot;: [
+          {
+            &quot;player&quot;: {
+              &quot;id&quot;: &quot;530a7061-2cf1-483d-8e06-7b5b87e3faf6&quot;,
+              &quot;fullname&quot;: &quot;Lourdes Herrera&quot;,
+              &quot;city&quot;: &quot;Apaseo el Alto&quot;,
+              &quot;weight&quot;: &quot;62.50&quot;,
+              &quot;height&quot;: &quot;1.67&quot;,
+              &quot;age&quot;: 25,
+              &quot;experience&quot;: 7,
+              &quot;is_active&quot;: 1,
+              &quot;created_at&quot;: &quot;2025-03-17 14:34:44&quot;,
+              &quot;updated_at&quot;: &quot;2025-03-17 14:34:44&quot;
+            },
+            &quot;relationship&quot;: {
+              &quot;id&quot;: &quot;16d46f1e-1a39-4309-9fd3-632eb5c8c55d&quot;,
+              &quot;player_id&quot;: &quot;530a7061-2cf1-483d-8e06-7b5b87e3faf6&quot;,
+              &quot;pair_id&quot;: &quot;e1543be4-b9b0-415a-a9d7-cef3455b13c5&quot;,
+              &quot;created_at&quot;: &quot;2025-03-17 14:34:44&quot;,
+              &quot;updated_at&quot;: &quot;2025-03-17 14:34:44&quot;
+            }
+          },
+          {
+            &quot;player&quot;: {
+              &quot;id&quot;: &quot;7da5a922-4964-49b8-9cc7-7290ad2f1495&quot;,
+              &quot;fullname&quot;: &quot;Enrique Castro&quot;,
+              &quot;city&quot;: &quot;Juventino Rosas&quot;,
+              &quot;weight&quot;: &quot;75.00&quot;,
+              &quot;height&quot;: &quot;1.79&quot;,
+              &quot;age&quot;: 28,
+              &quot;experience&quot;: 12,
+              &quot;is_active&quot;: 1,
+              &quot;created_at&quot;: &quot;2025-03-17 14:34:44&quot;,
+              &quot;updated_at&quot;: &quot;2025-03-17 14:34:44&quot;
+            },
+            &quot;relationship&quot;: {
+              &quot;id&quot;: &quot;8f19088e-2629-4b2e-bf02-a7bcf4550f9b&quot;,
+              &quot;player_id&quot;: &quot;7da5a922-4964-49b8-9cc7-7290ad2f1495&quot;,
+              &quot;pair_id&quot;: &quot;e1543be4-b9b0-415a-a9d7-cef3455b13c5&quot;,
+              &quot;created_at&quot;: &quot;2025-03-17 14:34:44&quot;,
+              &quot;updated_at&quot;: &quot;2025-03-17 14:34:44&quot;
+            }
+          }
+        ]
+      },
+      &quot;relationship&quot;: {
+        &quot;id&quot;: &quot;2d57999d-111c-49a8-bdc8-215805e0b99e&quot;,
+        &quot;pair_id&quot;: &quot;e1543be4-b9b0-415a-a9d7-cef3455b13c5&quot;,
+        &quot;group_id&quot;: &quot;3a8b9ca2-09e6-47b8-8c8b-edbf506bd8fe&quot;,
+        &quot;created_at&quot;: &quot;2025-03-17 16:07:14&quot;,
+        &quot;updated_at&quot;: &quot;2025-03-17 16:07:14&quot;
+      }
+    },
+    {
+      &quot;pair&quot;: {
+        &quot;id&quot;: &quot;87dbb871-fa5f-4698-bfad-d6ae6beb0e7a&quot;,
+        &quot;is_eliminated&quot;: 0,
+        &quot;is_active&quot;: 1,
+        &quot;created_at&quot;: &quot;2025-03-17 14:34:44&quot;,
+        &quot;updated_at&quot;: &quot;2025-03-17 14:34:44&quot;,
+        &quot;registration_category&quot;: {
+          &quot;id&quot;: &quot;c98fb1f7-837b-4301-947f-8367f6fb29b8&quot;,
+          &quot;name&quot;: &quot;open&quot;,
+          &quot;description&quot;: &quot;Libre&quot;
+        },
+        &quot;players&quot;: [
+          {
+            &quot;player&quot;: {
+              &quot;id&quot;: &quot;dbe3d8f9-6985-4cac-a2ab-f442f60ab822&quot;,
+              &quot;fullname&quot;: &quot;Karla Rivas&quot;,
+              &quot;city&quot;: &quot;Victoria&quot;,
+              &quot;weight&quot;: &quot;63.00&quot;,
+              &quot;height&quot;: &quot;1.68&quot;,
+              &quot;age&quot;: 27,
+              &quot;experience&quot;: 7,
+              &quot;is_active&quot;: 1,
+              &quot;created_at&quot;: &quot;2025-03-17 14:34:44&quot;,
+              &quot;updated_at&quot;: &quot;2025-03-17 14:34:44&quot;
+            },
+            &quot;relationship&quot;: {
+              &quot;id&quot;: &quot;1c3c812e-224e-45eb-9f90-9c3c0cc8fea1&quot;,
+              &quot;player_id&quot;: &quot;dbe3d8f9-6985-4cac-a2ab-f442f60ab822&quot;,
+              &quot;pair_id&quot;: &quot;87dbb871-fa5f-4698-bfad-d6ae6beb0e7a&quot;,
+              &quot;created_at&quot;: &quot;2025-03-17 14:34:44&quot;,
+              &quot;updated_at&quot;: &quot;2025-03-17 14:34:44&quot;
+            }
+          },
+          {
+            &quot;player&quot;: {
+              &quot;id&quot;: &quot;f2f293f2-09c8-413e-9fbf-2bfe311b38e0&quot;,
+              &quot;fullname&quot;: &quot;Ricardo Silva&quot;,
+              &quot;city&quot;: &quot;Doctor Mora&quot;,
+              &quot;weight&quot;: &quot;74.50&quot;,
+              &quot;height&quot;: &quot;1.80&quot;,
+              &quot;age&quot;: 32,
+              &quot;experience&quot;: 12,
+              &quot;is_active&quot;: 1,
+              &quot;created_at&quot;: &quot;2025-03-17 14:34:44&quot;,
+              &quot;updated_at&quot;: &quot;2025-03-17 14:34:44&quot;
+            },
+            &quot;relationship&quot;: {
+              &quot;id&quot;: &quot;97d4b22f-708d-4819-8fa1-2b7bfc2d7f1b&quot;,
+              &quot;player_id&quot;: &quot;f2f293f2-09c8-413e-9fbf-2bfe311b38e0&quot;,
+              &quot;pair_id&quot;: &quot;87dbb871-fa5f-4698-bfad-d6ae6beb0e7a&quot;,
+              &quot;created_at&quot;: &quot;2025-03-17 14:34:44&quot;,
+              &quot;updated_at&quot;: &quot;2025-03-17 14:34:44&quot;
+            }
+          }
+        ]
+      },
+      &quot;relationship&quot;: {
+        &quot;id&quot;: &quot;6f60337a-8b09-4878-be55-3ffec0412cef&quot;,
+        &quot;pair_id&quot;: &quot;87dbb871-fa5f-4698-bfad-d6ae6beb0e7a&quot;,
+        &quot;group_id&quot;: &quot;3a8b9ca2-09e6-47b8-8c8b-edbf506bd8fe&quot;,
+        &quot;created_at&quot;: &quot;2025-03-17 16:07:14&quot;,
+        &quot;updated_at&quot;: &quot;2025-03-17 16:07:14&quot;
+      }
+    },
+    ...
+  ],
+  &quot;status&quot;: 200,
+  &quot;description&quot;: &quot;Information about the players of the group pairs&quot;
+}
+</code></pre></main>
+  </div>
+  <div>
+    <hr>
+    <footer class="footer">
+      <p>Generated with <a href="https://notabug.org/ricardogj08/swiki" target="_blank">swiki</a>, a simple wiki generator written in POSIX <code>sh</code>.</p>
+      <p>© CC-BY-4.0</p>
+    </footer>
+  </div>
+</body>
+</html>

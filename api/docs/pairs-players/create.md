@@ -1,7 +1,7 @@
 # Crear una pareja con jugadores
 
 ```
-[POST] /v1/players/pairs
+[POST] /v1/pairs/players
 ```
 
 Cuerpo de la petición:
@@ -50,6 +50,7 @@ Respuesta de la petición:
     "pair": {
       "id": "98eaa36b-98e1-4842-80d3-771627af3458",
       "is_eliminated": 0,
+      "is_active": 1,
       "created_at": "2025-03-07 14:44:28",
       "updated_at": "2025-03-07 14:44:28",
       "registration_category": {

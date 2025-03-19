@@ -11,7 +11,22 @@ namespace App\Models;
 class RegistrationCategoryModel extends BaseModel
 {
     protected array $relations = [
-        'pairs' => [self::HAS_MANY, PairModel::class, 'registration_category_id'],
+        'pairs' => [
+            self::HAS_MANY, PairModel::class,
+            'registration_category_id',
+            ['orderBy' => 'created_at DESC'],
+        ],
+        'groups' => [
+            self::HAS_MANY, GroupModel::class,
+            'registration_category_id',
+            ['orderBy' => 'name ASC'],
+        ],
+        'matches' => [
+            self::HAS_MANY,
+            MatchModel::class,
+            'registration_category_id',
+            ['orderBy' => 'created_at DESC'],
+        ],
     ];
 
     public function getTableName(): string

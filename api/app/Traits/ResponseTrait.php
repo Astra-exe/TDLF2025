@@ -78,12 +78,20 @@ trait ResponseTrait
     }
 
     /**
+     * Genera una respuesta de conflicto.
+     */
+    protected function respondConflict(string $description, string $error = 'Conflict'): void
+    {
+        $this->respondFail($description, Http::CONFLICT(), $error);
+    }
+
+    /**
      * Genera una respuesta cuando se intenta
      * crear un nuevo recurso que ya existe.
      */
-    protected function respondResourceExists(string $description, string $error = 'Conflict'): void
+    protected function respondResourceExists(string $description, string $error = 'Resource exists'): void
     {
-        $this->respondFail($description, Http::CONFLICT(), $error);
+        $this->respondConflict($description, $error);
     }
 
     /**
@@ -140,10 +148,15 @@ trait ResponseTrait
     /**
      * Genera una respuesta para paginación.
      */
-    protected function respondPagination(mixed $data, mixed $pagination, string $description)
+    protected function respondPagination(mixed $data, mixed $pagination, string $description): void
     {
         $this->body['pagination'] = $pagination;
 
         $this->respond($data, $description, Http::OK());
+    }
+
+    public function respondDependecyError(string $description, string $error = 'Failed Dependency'): void
+    {
+        $this->respondFail($description, Http::FAILED_DEPENDENCY(), $error);
     }
 }

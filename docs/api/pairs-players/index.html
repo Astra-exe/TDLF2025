@@ -233,12 +233,42 @@ img {
   <div class="content">
     <aside class="sidebar"><ul>
 <li>
+<a href="https://astra-exe.github.io/TDLF2025/api/actions/index.html">Acciones/</a>
+<ul>
+</ul>
+</li>
+<li>
 <a href="https://astra-exe.github.io/TDLF2025/api/auth/index.html">Autenticación/</a>
 <ul>
 </ul>
 </li>
 <li>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups/index.html">Grupos/</a>
+<ul>
+</ul>
+</li>
+<li>
 <a href="https://astra-exe.github.io/TDLF2025/api/groups-pairs/index.html">Parejas de los grupos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/match-categories/index.html">Categorías de los partidos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/match-status/index.html">Estatus de los partidos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/matches/index.html">Partidos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/matches-pairs/index.html">Parejas de los partidos/</a>
 <ul>
 </ul>
 </li>
@@ -284,14 +314,16 @@ img {
 <tr><td><code>page</code> </td><td><code>integer</code> </td><td><code>min_numeric: 1</code> </td><td><code>1</code> </td><td>Número de la página de resultados de las parejas de jugadores. </td></tr>
 <tr><td><code>orderBy</code> </td><td><code>string</code> </td><td><code>contains: [created_at, updated_at]</code> </td><td><code>created_at</code> </td><td>Campo de ordenamiento de las parejas de jugadores. </td></tr>
 <tr><td><code>sortBy</code> </td><td><code>string</code> </td><td><code>contains: [asc, desc]</code> </td><td><code>desc</code> </td><td>Modo de ordenamiento de las parejas de jugadores. </td></tr>
+<tr><td><code>registration_category_id</code> </td><td><code>string</code> </td><td><code>exact_len: 36</code> </td><td><code>null</code> </td><td>Identificador de la categoría de inscripción de las parejas de jugadores (<a href="../registration-categories/index.html">ver</a>). </td></tr>
 <tr><td><code>is_eliminated</code> </td><td><code>boolean</code> </td><td><code>contains: [yes/no, on/off, 1/0, true/false]</code> </td><td><code>null</code> </td><td>Filtrar las parejas de jugadores por estatus de eliminación. </td></tr>
+<tr><td><code>is_active</code> </td><td><code>boolean</code> </td><td><code>contains: [yes/no, on/off, 1/0, true/false]</code> </td><td><code>null</code> </td><td>Filtrar las parejas por estatus de actividad. </td></tr>
 </table>
 <p>Ejemplo:</p>
 <pre><code class="language-bash">curl -X GET \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'X-API-KEY: API_KEY' \
-  http://localhost:8080/v1/pairs/players?page=2&amp;orderBy=created_at&amp;sortBy=desc&amp;is_eliminated=true
+  http://localhost:8080/v1/pairs/players?page=2&amp;orderBy=created_at&amp;sortBy=desc&amp;registration_category_id=cba89529-0ba9-49e4-85ad-83e63c8e9d7e&amp;is_eliminated=true&amp;is_active=true
 </code></pre>
 <p>Respuesta de la petición:</p>
 <pre><code class="language-json">{
@@ -383,7 +415,8 @@ img {
           &quot;updated_at&quot;: &quot;2025-03-07 14:44:28&quot;
         }
       }
-    ]
+    ],
+    ...
   ],
   &quot;status&quot;: 200,
   &quot;pagination&quot;: {

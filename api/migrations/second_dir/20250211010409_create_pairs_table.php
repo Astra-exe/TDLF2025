@@ -20,6 +20,7 @@ final class CreatePairsTable extends AbstractMigration
             ->addColumn('id', 'uuid')
             ->addColumn('registration_category_id', 'uuid')
             ->addColumn('is_eliminated', 'boolean', ['default' => false])
+            ->addColumn('is_active', 'boolean', ['default' => true])
             ->addColumn('created_at', 'datetime', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
             ->addColumn('updated_at', 'datetime', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
             ->addForeignKey('registration_category_id', 'registration_categories', 'id', ForeignKey::RESTRICT, ForeignKey::RESTRICT)

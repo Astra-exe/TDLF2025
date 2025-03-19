@@ -23,8 +23,16 @@ class Date
     /**
      * Obtiene el datetime desde un formato de fecha y hora.
      */
-    public static function strToDateTime(string $format): string
+    public static function strtodatetime(string $format): string
     {
         return date(self::DATETIME_FORMAT, strtotime($format));
+    }
+
+    /**
+     * Obtiene el año actual.
+     */
+    public static function getCurrentYear(): int
+    {
+        return (int) date('Y');
     }
 }

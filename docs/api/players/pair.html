@@ -233,12 +233,42 @@ img {
   <div class="content">
     <aside class="sidebar"><ul>
 <li>
+<a href="https://astra-exe.github.io/TDLF2025/api/actions/index.html">Acciones/</a>
+<ul>
+</ul>
+</li>
+<li>
 <a href="https://astra-exe.github.io/TDLF2025/api/auth/index.html">Autenticación/</a>
 <ul>
 </ul>
 </li>
 <li>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups/index.html">Grupos/</a>
+<ul>
+</ul>
+</li>
+<li>
 <a href="https://astra-exe.github.io/TDLF2025/api/groups-pairs/index.html">Parejas de los grupos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/match-categories/index.html">Categorías de los partidos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/match-status/index.html">Estatus de los partidos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/matches/index.html">Partidos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/matches-pairs/index.html">Parejas de los partidos/</a>
 <ul>
 </ul>
 </li>
@@ -257,6 +287,9 @@ img {
 <ul>
 <li>
 <a href="https://astra-exe.github.io/TDLF2025/api/players/create.html">Crear un jugador/</a>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/players/delete.html">Eliminar un jugador/</a>
 </li>
 <li>
 <a href="https://astra-exe.github.io/TDLF2025/api/players/pair.html"><b>Pareja de un jugador</b>/</a>
@@ -280,7 +313,7 @@ img {
     <main class="main"><h1>Pareja de un jugador</h1>
 <pre><code>[GET] /v1/players/@id/pairs
 </code></pre>
-<p>Parámetros de la petición:</p>
+<p>Parámetros de la ruta:</p>
 <table>
 <tr><th>Parámetros </th><th>Tipo </th><th>Requerido </th><th>Descripción </th></tr>
 <tr><td><code>id</code> </td><td><code>string</code> </td><td><code>true</code> </td><td>Identificador del jugador. </td></tr>
@@ -298,6 +331,7 @@ img {
     &quot;pair&quot;: {
       &quot;id&quot;: &quot;98eaa36b-98e1-4842-80d3-771627af3458&quot;,
       &quot;is_eliminated&quot;: 0,
+      &quot;is_active&quot;: 1,
       &quot;created_at&quot;: &quot;2025-03-07 14:44:28&quot;,
       &quot;updated_at&quot;: &quot;2025-03-07 14:44:28&quot;,
       &quot;registration_category&quot;: {

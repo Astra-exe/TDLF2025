@@ -22,28 +22,28 @@ Respuesta de la petición:
 {
   "data": [
     {
-      "id": "ff23a6f7-0862-4431-b3b3-015beae0cb9f",
+      "id": "1acc20ec-b070-4c93-be67-40dd206b2d5f",
       "name": "admin",
       "description": "Administrador",
-      "created_at": "2025-03-07 14:38:11",
-      "updated_at": "2025-03-07 14:38:11"
+      "created_at": "2025-03-18 14:29:06",
+      "updated_at": "2025-03-18 14:29:06"
     },
     {
-      "id": "e2498f8e-baf8-41b3-b51e-6636cbe1fae5",
-      "name": "reader",
-      "description": "Solo lectura",
-      "created_at": "2025-03-07 14:38:11",
-      "updated_at": "2025-03-07 14:38:11"
-    },
-    {
-      "id": "34023d80-58cd-49f5-aef4-d12d39f21cb0",
+      "id": "c0bad9bb-092e-444b-98eb-d55b3cd1c72d",
       "name": "web",
       "description": "Sitio web",
-      "created_at": "2025-03-07 14:38:11",
-      "updated_at": "2025-03-07 14:38:11"
+      "created_at": "2025-03-18 14:29:06",
+      "updated_at": "2025-03-18 14:29:06"
+    },
+    {
+      "id": "61654117-62b1-445e-b258-83b807fcd25d",
+      "name": "reader",
+      "description": "Solo lectura",
+      "created_at": "2025-03-18 14:29:06",
+      "updated_at": "2025-03-18 14:29:06"
     }
   ],
   "status": 200,
-  "description": "Information about all access user roles"
+  "description": "Information about all the access users roles"
 }
 ```
