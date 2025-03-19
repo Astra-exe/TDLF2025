@@ -39,7 +39,7 @@ php -S localhost:8080 -t public/
 ## Docker
 
 ```
-docker build -t TDLF2025/api ./
+docker build -t TDLF2025/api -f Dockerfile.dev ./
 docker run --name TDLF2025-api --env-file .env -p 8080:80 TDLF2025/api
 ```
 
