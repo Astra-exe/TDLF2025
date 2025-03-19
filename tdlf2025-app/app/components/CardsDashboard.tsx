@@ -1,10 +1,22 @@
-export default function CardsDashboard() {
+import { auth } from "@/auth";
+import { fetchCardsData } from "@/app/lib/data";
+
+export default async function CardsDashboard() {
+  const session = await auth();
+  if (!session?.user || !session?.user?.apiKey) {
+    throw new Error("No autorizado");
+  }
+  const apiKey = session.user.apiKey;
+  const { numberOfPlayers, numberOfPairs } = await fetchCardsData(apiKey);
   return (
     <>
-      <Card title="Parejas categoria libre" value={12} />
+      <Card title="Categorias del torneo" value={2} />
+      <Card title="Jugadores inscritos" value={numberOfPlayers} />
+      <Card title="Parejas inscritas" value={numberOfPairs} />
+      <Card title="Parejas categoria Libre" value={12} />
+      {/* <Card title="Parejas categoria 50 y más" value={12} />
       <Card title="Grupos categoria libre" value={4} />
-      <Card title="Parejas categoria 50 y más" value={12} />
-      <Card title="Grupos categoria 50 y más" value={4} />
+      <Card title="Grupos categoria 50 y más" value={4} /> */}
     </>
   );
 }

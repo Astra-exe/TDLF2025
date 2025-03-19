@@ -17,10 +17,6 @@ export async function fetchPlayers({
   orderBy = "",
   sortBy = "",
 }: FetchPlayersProps) {
-  // const session = await auth();
-  // if (!session?.user) {
-  //   throw new Error("No autorizado");
-  // }
   const url = `${URL_API}/players?page=${page}`;
   const response = await fetch(url, {
     method: "GET",
@@ -29,7 +25,7 @@ export async function fetchPlayers({
       "X-API-KEY": apiKey,
     },
   });
-
+  console.log({ response });
   if (!response.ok) {
     const errorData = await response.json();
     console.log(errorData);
@@ -128,6 +124,59 @@ export async function fetchAllPlayers(apiKey: string) {
   }
 
   return allPlayers;
+}
+
+export async function fetchPlayerById({
+  idPlayer,
+  apiKey,
+}: {
+  idPlayer: string;
+  apiKey: string;
+}) {
+  try {
+    const url = `${URL_API}/players/${idPlayer}`;
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": apiKey,
+      },
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function fetchCardsData(apiKey: string) {
+  const playersPromise = fetchPlayers({ apiKey, page: 1 });
+  const pairsPromise = fetchPairs(apiKey);
+  // const playersOpenPromise = fetchPlayers({apiKey, page: 1, search: 'open',filterBy: 'category',})
+  // const playersSeniorPromise = fetchPlayers({apiKey, page: 1, search: 'senior',filterBy: 'category',})
+
+  const data = await Promise.all([
+    playersPromise,
+    pairsPromise,
+    // playersOpenPromise,
+    // playersSeniorPromise
+  ]);
+
+  const numberOfPlayers = data[0].pagination.count;
+  const numberOfPairs = data[0].pagination.count;
+
+  return {
+    numberOfPlayers,
+    numberOfPairs,
+    // numberOfPlayersOpen
+    // numberOfPlayersSenior
+    // numberOfGroups
+    // numberOfMatches
+    // numberOfGroupsOpen
+    // numberOfGroupsSenior
+    // numberOfMatchesOpen
+    // numberOfMatchesSenior
+  };
 }
 
 export async function fetchFilterPlayers() {}
