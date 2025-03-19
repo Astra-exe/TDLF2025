@@ -2,6 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { Player, Category } from "@/app/lib/definitions";
 import { Button } from "@/app/components/ui/button";
 import {
   Form,
@@ -11,7 +12,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/app/components/ui/form";
-
 import {
   Select,
   SelectContent,
@@ -19,32 +19,33 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/app/components/ui/select";
-import ComboBox from "./ComboBox";
+import ComboBox from "@/app/components/ComboBox";
 import { createPair } from "@/app/lib/actions";
 import { toast } from "sonner";
 
-const pairsSchema = z.object({
-  player1Id: z.string().nonempty("Jugador 1 requerido"),
-  player2Id: z.string().nonempty("Jugador 2 requerido"),
-  categoryId: z.string().nonempty("Categoria requerida"),
-  // .length(36, { message: "Categoria no valida" }),
-});
+const pairsSchema = z
+  .object({
+    player1Id: z.string().nonempty("Jugador 1 requerido"),
+    player2Id: z.string().nonempty("Jugador 2 requerido"),
+    categoryId: z
+      .string()
+      .nonempty("Categoria requerida")
+      .length(36, { message: "Categoria no valida" }),
+  })
+  .refine((data) => data.player1Id !== data.player2Id, {
+    message: "Error, selecciona diferentes jugadores para crear una pareja",
+    path: ["confirm"], // path of error
+  });
 
 type PairsData = z.infer<typeof pairsSchema>;
 
-const languages = [
-  { label: "English", value: "en" },
-  { label: "French", value: "fr" },
-  { label: "German", value: "de" },
-  { label: "Spanish", value: "es" },
-  { label: "Portuguese", value: "pt" },
-  { label: "Russian", value: "ru" },
-  { label: "Japanese", value: "ja" },
-  { label: "Korean", value: "ko" },
-  { label: "Chinese", value: "zh" },
-] as const;
-
-export default function PairsForm() {
+export default function PairsForm({
+  playersList,
+  categoriesList,
+}: {
+  playersList: Player[];
+  categoriesList: Category[];
+}) {
   // fetch the categories and the players
   const form = useForm<PairsData>({
     resolver: zodResolver(pairsSchema),
@@ -62,6 +63,7 @@ export default function PairsForm() {
       if (!result.success) throw new Error("Invalid Data");
       // fetch to craete a new group
       const { player1Id, player2Id, categoryId } = result.data;
+      console.log({ player1Id, player2Id, categoryId });
       toast.promise(
         createPair({
           players: [player1Id, player2Id],
@@ -95,19 +97,19 @@ export default function PairsForm() {
             labelField="Jugador 1"
             name="player1Id"
             control={form.control}
-            suggestions={languages}
+            suggestions={playersList}
           />
           <ComboBox
             labelField="Jugador 2"
             name="player2Id"
             control={form.control}
-            suggestions={languages}
+            suggestions={playersList}
           />
           <FormField
             control={form.control}
             name="categoryId"
             render={({ field }) => (
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select onValueChange={field.onChange} value={field.value}>
                 <FormItem>
                   <FormLabel>Categoria</FormLabel>
                   <FormControl>
@@ -116,8 +118,16 @@ export default function PairsForm() {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="open">Libre</SelectItem>
-                    <SelectItem value="seniors">50 y más</SelectItem>
+                    {categoriesList.map((category) => {
+                      return (
+                        <SelectItem
+                          key={`category-${category.id}`}
+                          value={category.id}
+                        >
+                          {category.description}
+                        </SelectItem>
+                      );
+                    })}
                   </SelectContent>
                   <FormMessage />
                 </FormItem>
