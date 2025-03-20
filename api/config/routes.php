@@ -91,6 +91,6 @@ return (static function () use ($app): void {
 
         // Modelo de datos.
         $router->get($base_route('/v1/analysis/profiles/@id'), App\Controllers\AnalysisController::class.'->profile');
-        $router->get($base_route('/v1/analysis/heatmap'), App\Controllers\AnalysisController::class.'->heatmap');
+        // $router->get($base_route('/v1/analysis/heatmap'), App\Controllers\AnalysisController::class.'->heatmap');
     }, [\App\Middlewares\AuthMiddleware::class]);
 })();
