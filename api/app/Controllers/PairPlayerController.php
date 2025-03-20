@@ -63,8 +63,7 @@ class PairPlayerController extends BaseController
         $pairs = new PairModel;
         $pairs->select('id');
 
-        // Filtra las "parejas" por identificador de categoría de inscripción,
-        // estatus de eliminación y estatus de actividad.
+        // Establece los filtros permitidos.
         foreach (['registration_category_id', 'is_eliminated', 'is_active'] as $param) {
             if (isset($queryParams[$param])) {
                 $pairs->eq($param, $queryParams[$param]);

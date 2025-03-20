@@ -60,23 +60,21 @@ class MatchController extends BaseController
         }
 
         // Consulta la información de todos los "partidos" con paginación.
-        $match = new MatchModel;
+        $matchModel = new MatchModel;
 
-        // Filtra los "partidos" por identificador de categoría de inscripción,
-        // identificador de grupo, identificador de categoría de partido,
-        // identificador de estatus de partido y estatus de actividad.
+        // Establece los filtros permitidos.
         foreach (['registration_category_id', 'group_id', 'match_category_id', 'match_status_id', 'is_active'] as $param) {
             if (isset($queryParams[$param])) {
-                $match->eq($param, $queryParams[$param]);
+                $matchModel->eq($param, $queryParams[$param]);
             }
         }
 
         // Obtiene la información sobre la paginación.
-        $match->paginate($queryParams['page']);
-        $pagination = $match->pagination;
+        $matchModel->paginate($queryParams['page']);
+        $pagination = $matchModel->pagination;
 
         // Aplica los parámetros de ordenamiento.
-        $match->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
+        $matchModel->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
 
         // Consulta la información de la categoría de inscripción,
         // categoría del partido y estatus del partido.
@@ -88,10 +86,15 @@ class MatchController extends BaseController
             unset($match->registration_category_id, $match->match_status_id, $match->match_category_id);
 
             return $match;
-        }, $match->findAll());
+        }, $matchModel->findAll());
 
         $this->respondPagination($matches, $pagination, 'Information about all the matches with pagination');
     }
+
+    /**
+     * Registra la información de un "partido".
+     */
+    public function create(): void {}
 
     /**
      * Muestra la información de un "partido".

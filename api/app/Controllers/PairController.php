@@ -61,22 +61,21 @@ class PairController extends BaseController
         }
 
         // Consulta la información de todas las "parejas" con paginación.
-        $pair = new PairModel;
+        $pairModel = new PairModel;
 
-        // Filtra las "parejas" por identificador de categoría de inscripción,
-        // estatus de eliminación y estatus de actividad.
+        // Establece los filtros permitidos.
         foreach (['registration_category_id', 'is_eliminated', 'is_active'] as $param) {
             if (isset($queryParams[$param])) {
-                $pair->eq($param, $queryParams[$param]);
+                $pairModel->eq($param, $queryParams[$param]);
             }
         }
 
         // Obtiene la información sobre la paginación.
-        $pair->paginate($queryParams['page']);
-        $pagination = $pair->pagination;
+        $pairModel->paginate($queryParams['page']);
+        $pagination = $pairModel->pagination;
 
         // Aplica los parámetros de ordenamiento.
-        $pair->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
+        $pairModel->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
 
         // Consulta la "categoría de inscripción" de cada "pareja".
         $pairs = array_map(static function (PairModel $pair): PairModel {
@@ -85,7 +84,7 @@ class PairController extends BaseController
             unset($pair->registration_category_id);
 
             return $pair;
-        }, $pair->findAll());
+        }, $pairModel->findAll());
 
         $this->respondPagination($pairs, $pagination, 'Information about all the pairs with pagination');
     }

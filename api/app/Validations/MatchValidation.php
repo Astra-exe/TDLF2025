@@ -12,9 +12,9 @@ use App\Models\MatchStatusModel;
  */
 class MatchValidation extends BaseValidation
 {
-    private static array $matchCategoriesIDs = [];
+    private static array $matchCategoriesIds = [];
 
-    private static array $matchStatusIDs = [];
+    private static array $matchStatusIds = [];
 
     public static function getAllRules(): array
     {
@@ -45,13 +45,13 @@ class MatchValidation extends BaseValidation
      */
     public static function getMatchCategories(): array
     {
-        if (empty(self::$matchCategoriesIDs)) {
+        if (empty(self::$matchCategoriesIds)) {
             $categories = (new MatchCategoryModel)->select('id')->findAll();
 
-            self::$matchCategoriesIDs = array_column($categories, 'id');
+            self::$matchCategoriesIds = array_column($categories, 'id');
         }
 
-        return self::$matchCategoriesIDs;
+        return self::$matchCategoriesIds;
     }
 
     /**
@@ -59,12 +59,12 @@ class MatchValidation extends BaseValidation
      */
     public static function getMatchStatus(): array
     {
-        if (empty(self::$matchStatusIDs)) {
+        if (empty(self::$matchStatusIds)) {
             $status = (new MatchStatusModel)->select('id')->findAll();
 
-            self::$matchStatusIDs = array_column($status, 'id');
+            self::$matchStatusIds = array_column($status, 'id');
         }
 
-        return self::$matchStatusIDs;
+        return self::$matchStatusIds;
     }
 }

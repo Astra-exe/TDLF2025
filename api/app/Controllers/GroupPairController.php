@@ -61,28 +61,28 @@ class GroupPairController extends BaseController
         }
 
         // Consulta la información de todos los "grupos" con paginación.
-        $group = new GroupModel;
-        $group->like($queryParams['filterBy'], sprintf('%%%s%%', $queryParams['search']));
+        $groupModel = new GroupModel;
+        $groupModel->like($queryParams['filterBy'], sprintf('%%%s%%', $queryParams['search']));
 
         // Filtra los "grupos" por estatus de eliminación y estatus de actividad.
         foreach (['registration_category_id', 'is_eliminated', 'is_active'] as $param) {
             if (isset($queryParams[$param])) {
-                $group->eq($param, $queryParams[$param]);
+                $groupModel->eq($param, $queryParams[$param]);
             }
         }
 
         // Obtiene la información sobre la paginación.
-        $group->paginate($queryParams['page']);
-        $pagination = $group->pagination;
+        $groupModel->paginate($queryParams['page']);
+        $pagination = $groupModel->pagination;
 
         // Aplica los parámetros de ordenamiento.
-        $group->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
+        $groupModel->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
 
         // Consulta los "grupos" de la búsqueda.
-        $groups = array_map(static function (GroupModel $_group): array {
-            $_group->setCustomData('registration_category', $_group->registrationCategory);
+        $groups = array_map(static function (GroupModel $group): array {
+            $group->setCustomData('registration_category', $group->registrationCategory);
 
-            unset($_group->registration_category_id);
+            unset($group->registration_category_id);
 
             // Consulta la información de las "parejas" del "grupo".
             $pairs = array_map(static function (GroupPairPivotModel $relationship): array {
@@ -92,10 +92,10 @@ class GroupPairController extends BaseController
                 unset($pair->registration_category_id);
 
                 return ['pair' => $pair, 'relationship' => $relationship];
-            }, $_group->groupPairPivot);
+            }, $group->groupPairPivot);
 
-            return ['group' => $_group, 'pairs' => $pairs];
-        }, $group->findAll());
+            return ['group' => $group, 'pairs' => $pairs];
+        }, $groupModel->findAll());
 
         $this->respondPagination($groups, $pagination, 'Information about all the groups pairs with pagination');
     }
