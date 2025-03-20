@@ -68,31 +68,8 @@ def playerp(height, weight, age):
 
 # Functions to create a map to know how many players visit the tournament for each city.
 
-#Functions to make a cache of the coordinates of the cities
-def load_cache(path="coords_cache.json"):
-    if Path(path).exists():
-        with open(path, "r") as f:
-            return json.load(f)
-    return {}
-
-def save_cache(cache, path="coords_cache.json"):
-    with open(path, "w") as f:
-        return json.dump(cache, f)
-
-#Function to get the coordinates of the cities from the cache
-def get_coords_nominatim(city, cache):
-    if city in cache:
-        #print("Usando caché")
-        return cache[city]
-    
-    coords = get_coords_nominatim_no_cache(city)
-    if coords:
-        cache[city] = coords
-        save_cache(cache)
-    return coords
-
 #function to get the coordinates of the cities from nominatim api
-def get_coords_nominatim_no_cache(city):
+def get_coords_nominatim(city):
     url = "https://nominatim.openstreetmap.org/search"
     params = {"q": f"{city}, México", "format": "json", "limit": 1}
     headers = {"User-Agent": "torneo_gobierno_irapuato_frontenis_v1.0 (contacto@irapuato.gob.mx)"}
@@ -109,16 +86,11 @@ def get_coords_nominatim_no_cache(city):
 
 #the function returns a map with folium 
 def players_location(df):
-    # load cache
-    cache = load_cache()
 
     # get coords (using cache)
     df["coords"] = df["city"].apply(
-        lambda x: (time.sleep(1), get_coords_nominatim(x, cache))[1]
+        lambda x: (get_coords_nominatim(x))
     )
-
-    # Save updated cache
-    save_cache(cache)
 
     # Create map
     mapa = folium.Map(
