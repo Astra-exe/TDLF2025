@@ -22,7 +22,7 @@ final class CreatePlayersTable extends AbstractMigration
             ->addColumn('height', 'decimal', ['signed' => false, 'length' => 3, 'decimals' => 2])
             ->addColumn('age', 'tinyinteger', ['signed' => false])
             ->addColumn('experience', 'tinyinteger', ['signed' => false, 'default' => 0])
-            ->addColumn('is_active', 'boolean', ['default' => true])
+            ->addColumn('is_active', 'tinyinteger', ['signed' => false, 'length' => 1, 'default' => 1])
             ->addColumn('created_at', 'timestamp', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
             ->addColumn('updated_at', 'timestamp', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
             ->create();

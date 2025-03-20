@@ -20,7 +20,7 @@ final class CreateApiKeysTable extends AbstractMigration
             ->addColumn('id', 'uuid')
             ->addColumn('user_id', 'uuid')
             ->addColumn('hash', 'string', ['length' => 255])
-            ->addColumn('is_revoked', 'boolean', ['default' => false])
+            ->addColumn('is_revoked', 'tinyinteger', ['signed' => false, 'length' => 1, 'default' => 0])
             ->addColumn('expires_at', 'timestamp')
             ->addColumn('created_at', 'timestamp', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
             ->addColumn('updated_at', 'timestamp', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])

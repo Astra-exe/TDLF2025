@@ -21,7 +21,7 @@ final class CreateMatchesTable extends AbstractMigration
             ->addColumn('group_id', 'uuid')
             ->addColumn('match_category_id', 'uuid')
             ->addColumn('match_status_id', 'uuid')
-            ->addColumn('is_active', 'boolean', ['default' => true])
+            ->addColumn('is_active', 'tinyinteger', ['signed' => false, 'length' => 1, 'default' => 1])
             ->addColumn('created_at', 'timestamp', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
             ->addColumn('updated_at', 'timestamp', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
             ->addForeignKey('registration_category_id', 'registration_categories', 'id', ForeignKey::RESTRICT, ForeignKey::RESTRICT)

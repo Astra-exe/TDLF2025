@@ -21,7 +21,7 @@ final class CreateMatchesPairsTable extends AbstractMigration
             ->addColumn('pair_id', 'uuid')
             ->addColumn('match_id', 'uuid')
             ->addColumn('score', 'tinyinteger', ['signed' => false, 'default' => 0])
-            ->addColumn('is_winner', 'boolean', ['default' => false])
+            ->addColumn('is_winner', 'tinyinteger', ['signed' => false, 'length' => 1, 'default' => 0])
             ->addColumn('created_at', 'timestamp', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
             ->addColumn('updated_at', 'timestamp', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
             ->addForeignKey('pair_id', 'pairs', 'id', ForeignKey::RESTRICT, ForeignKey::RESTRICT)

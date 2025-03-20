@@ -23,7 +23,7 @@ final class CreateUsersTable extends AbstractMigration
             ->addColumn('role_id', 'uuid')
             ->addColumn('fullname', 'string', ['length' => 128])
             ->addColumn('password', 'string', ['length' => 255])
-            ->addColumn('is_active', 'boolean', ['default' => false])
+            ->addColumn('is_active', 'tinyinteger', ['signed' => false, 'length' => 1, 'default' => 1])
             ->addColumn('created_at', 'timestamp', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
             ->addColumn('updated_at', 'timestamp', ['default' => ColumnSettings::DEFAULT_VALUE_CURRENT_TIMESTAMP])
             ->addForeignKey('role_id', 'roles', 'id', ForeignKey::RESTRICT, ForeignKey::RESTRICT)
