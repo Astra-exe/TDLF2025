@@ -67,31 +67,8 @@ def playerp(height, weight, age):
     return recommendations
 
 # Functions to create a map to know how many players visit the tournament for each city.
-
-#function to get the coordinates of the cities from nominatim api
-def get_coords_nominatim(city):
-    url = "https://nominatim.openstreetmap.org/search"
-    params = {"q": f"{city}, México", "format": "json", "limit": 1}
-    headers = {"User-Agent": "torneo_gobierno_irapuato_frontenis_v1.0 (contacto@irapuato.gob.mx)"}
-
-    try:
-        #print("No se esta usando cache")
-        response = requests.get(url, params=params, headers=headers, timeout=15)
-        response.raise_for_status()  # launch an exception if the request was unsuccesful
-        data = response.json()
-        return [float(data[0]["lat"]), float(data[0]["lon"])] if data else None
-    except requests.exceptions.RequestException as e:
-        print(f"Error en {city}: {str(e)}")
-        return None
-
 #the function returns a map with folium 
 def players_location(df):
-
-    # get coords (using cache)
-    df["coords"] = df["city"].apply(
-        lambda x: (get_coords_nominatim(x))
-    )
-
     # Create map
     mapa = folium.Map(
         location=[20.6736, -101.325],
