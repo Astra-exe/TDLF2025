@@ -50,6 +50,7 @@ return (static function () use ($app): void {
         $router->post($base_route('/v1/pairs'), \App\Controllers\PairController::class.'->create');
         $router->get($base_route('/v1/pairs/@id'), \App\Controllers\PairController::class.'->show');
         $router->get($base_route('/v1/pairs/@id/groups'), \App\Controllers\PairController::class.'->group');
+        $router->put($base_route('/v1/pairs/@id'), \App\Controllers\PairController::class.'->update');
         $router->delete($base_route('/v1/pairs/@id'), \App\Controllers\PairController::class.'->delete');
 
         // Grupos y parejas.

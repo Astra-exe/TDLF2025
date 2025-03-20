@@ -274,6 +274,71 @@ class PairController extends BaseController
     }
 
     /**
+     * Modifica la información de una "pareja".
+     */
+    public function update(string $id): void
+    {
+        // Define los campos que se pueden modificar.
+        $fields = ['is_eliminated', 'is_active'];
+
+        $data = ['id' => $id];
+
+        // Obtiene solo los campos necesarios.
+        foreach ($fields as $field) {
+            $data[$field] = $this->app()->request()->data->{$field} ?? null;
+
+            if (is_null($data[$field])) {
+                unset($data[$field]);
+            }
+        }
+
+        $fieldNames = array_keys($data);
+
+        // Obtiene las reglas de validación
+        // y establece el identificador como obligatorio.
+        $rules = PairValidation::getRules(['id', ...$fieldNames]);
+        array_unshift($rules['id'], 'required');
+
+        // Establece las reglas de validación.
+        $this->gump()->validation_rules($rules);
+
+        // Establece los filtros de validación.
+        $this->gump()->filter_rules(PairValidation::getFilters($fieldNames));
+
+        // Valida el cuerpo de la petición.
+        $data = $this->gump()->run($data);
+
+        unset($data['id']);
+
+        // Comprueba si existen errores de validación.
+        if ($this->gump()->errors()) {
+            $this->respondValidationErrors(
+                $this->gump()->get_errors_array(),
+                'The pair information is incorrect');
+        }
+
+        // Consulta la información la "pareja".
+        $pair = new PairModel;
+        $pair->select('id')->find($id);
+
+        // Comprueba si existe la "pareja".
+        if (! $pair->isHydrated()) {
+            $this->respondNotFound('The pair information was not found');
+        }
+
+        // Modifica la información de la "pareja".
+        if (! empty($data)) {
+            $pair->copyFrom($data);
+            $pair->update();
+        }
+
+        // Consulta la información actualizada de la "pareja".
+        $pair->find($id);
+
+        $this->respondUpdated($pair, 'The pair was updated successfully');
+    }
+
+    /**
      * Elimina la información de una "pareja".
      */
     public function delete(string $id): void

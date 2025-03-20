@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>📘</text></svg>">
-  <title>Grupo de una pareja</title>
+  <title>Modificar una pareja</title>
   <style>body {
   font-family: sans-serif;
   font-size: 16px;
@@ -287,13 +287,13 @@ img {
 <a href="https://astra-exe.github.io/TDLF2025/api/pairs/delete.html">Eliminar una pareja/</a>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/pairs/group.html"><b>Grupo de una pareja</b>/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs/group.html">Grupo de una pareja/</a>
 </li>
 <li>
 <a href="https://astra-exe.github.io/TDLF2025/api/pairs/show.html">Información de una pareja/</a>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/pairs/update.html">Modificar una pareja/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs/update.html"><b>Modificar una pareja</b>/</a>
 </li>
 </ul>
 </li>
@@ -318,48 +318,38 @@ img {
 </ul>
 </li>
 </ul></aside>
-    <main class="main"><h1>Grupo de una pareja</h1>
-<pre><code>[GET] /v1/pairs/@id/groups
+    <main class="main"><h1>Modificar una pareja</h1>
+<pre><code>[PUT] /v1/pairs/@id
 </code></pre>
-<p>Parámetros de la ruta:</p>
+<p>Cuerpo de la petición:</p>
 <table>
-<tr><th>Parámetros </th><th>Tipo </th><th>Requerido </th><th>Descripción </th></tr>
-<tr><td><code>id</code> </td><td><code>string</code> </td><td><code>true</code> </td><td>Identificador de la pareja. </td></tr>
+<tr><th>Campo </th><th>Tipo </th><th>Requerido </th><th>Rango </th><th>Descripción </th></tr>
+<tr><td><code>is_eliminated</code> </td><td><code>boolean</code> </td><td><code>false</code> </td><td><code>contains: [yes/no, on/off, 1/0, true/false]</code> </td><td>Estatus de eliminación de la pareja. </td></tr>
+<tr><td><code>is_active</code> </td><td><code>boolean</code> </td><td><code>false</code> </td><td><code>contains: [yes/no, on/off, 1/0, true/false]</code> </td><td>Estatus de actividad de la pareja. </td></tr>
 </table>
 <p>Ejemplo:</p>
-<pre><code class="language-bash">curl -X GET \
+<pre><code class="language-bash">curl -X PUT \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'X-API-KEY: API_KEY' \
-  http://localhost:8080/v1/pairs/@id/groups
+  http://localhost:8080/v1/pairs/@id \
+  -d '{
+    &quot;is_eliminated&quot;: &quot;1&quot;
+    &quot;is_active&quot;: &quot;0&quot;
+  }'
 </code></pre>
 <p>Respuesta de la petición:</p>
 <pre><code class="language-json">{
   &quot;data&quot;: {
-    &quot;group&quot;: {
-      &quot;id&quot;: &quot;5a478de5-5be1-482f-8d44-b98a79d1552c&quot;,
-      &quot;name&quot;: &quot;A_2025&quot;,
-      &quot;description&quot;: &quot;A&quot;,
-      &quot;is_eliminated&quot;: 0,
-      &quot;is_active&quot;: 1,
-      &quot;created_at&quot;: &quot;2025-03-18 14:41:31&quot;,
-      &quot;updated_at&quot;: &quot;2025-03-18 14:41:31&quot;,
-      &quot;registration_category&quot;: {
-        &quot;id&quot;: &quot;eb69a503-6eb3-4f20-b30b-c9a4762a8cfd&quot;,
-        &quot;name&quot;: &quot;seniors&quot;,
-        &quot;description&quot;: &quot;50 y más&quot;
-      }
-    },
-    &quot;relationship&quot;: {
-      &quot;id&quot;: &quot;d573b626-36e1-46fc-90ab-3adb51f0acb6&quot;,
-      &quot;pair_id&quot;: &quot;087a1273-19c8-4ccf-8751-b2db6811f1cc&quot;,
-      &quot;group_id&quot;: &quot;5a478de5-5be1-482f-8d44-b98a79d1552c&quot;,
-      &quot;created_at&quot;: &quot;2025-03-18 14:41:31&quot;,
-      &quot;updated_at&quot;: &quot;2025-03-18 14:41:31&quot;
-    }
+    &quot;id&quot;: &quot;a23aa875-d127-483b-9734-9676b93a6ff7&quot;,
+    &quot;registration_category_id&quot;: &quot;eb69a503-6eb3-4f20-b30b-c9a4762a8cfd&quot;,
+    &quot;is_eliminated&quot;: 1,
+    &quot;is_active&quot;: 0,
+    &quot;created_at&quot;: &quot;2025-03-18 14:40:07&quot;,
+    &quot;updated_at&quot;: &quot;2025-03-20 13:37:56&quot;
   },
   &quot;status&quot;: 200,
-  &quot;description&quot;: &quot;Information about the pair group&quot;
+  &quot;description&quot;: &quot;The pair was updated successfully&quot;
 }
 </code></pre></main>
   </div>
