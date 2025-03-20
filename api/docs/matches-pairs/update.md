@@ -28,7 +28,7 @@ curl -X PUT \
   http://localhost:8080/v1/matches/@matchId/pairs/@pairId \
   -d '{
     "score": "10",
-    "experience": "5"
+    "is_winner": "1"
   }'
 ```
 

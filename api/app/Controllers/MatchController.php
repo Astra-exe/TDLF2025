@@ -92,11 +92,6 @@ class MatchController extends BaseController
     }
 
     /**
-     * Registra la información de un "partido".
-     */
-    public function create(): void {}
-
-    /**
      * Muestra la información de un "partido".
      */
     public function show(string $id): void
