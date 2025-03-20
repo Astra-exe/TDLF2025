@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>📘</text></svg>">
-  <title>Modificar una pareja</title>
+  <title>Modificar la pareja de un partido</title>
   <style>body {
   font-family: sans-serif;
   font-size: 16px;
@@ -273,28 +273,22 @@ img {
 </ul>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/matches-pairs/index.html">Parejas de los partidos/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/matches-pairs/index.html"><b>Parejas de los partidos</b>/</a>
 <ul>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/matches-pairs/players.html">Parejas y jugadores de un partido/</a>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/matches-pairs/show.html">Parejas de un partido/</a>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/matches-pairs/update.html"><b>Modificar la pareja de un partido</b>/</a>
+</li>
 </ul>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/pairs/index.html"><b>Parejas</b>/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs/index.html">Parejas/</a>
 <ul>
-<li>
-<a href="https://astra-exe.github.io/TDLF2025/api/pairs/create.html">Crear una pareja/</a>
-</li>
-<li>
-<a href="https://astra-exe.github.io/TDLF2025/api/pairs/delete.html">Eliminar una pareja/</a>
-</li>
-<li>
-<a href="https://astra-exe.github.io/TDLF2025/api/pairs/group.html">Grupo de una pareja/</a>
-</li>
-<li>
-<a href="https://astra-exe.github.io/TDLF2025/api/pairs/show.html">Información de una pareja/</a>
-</li>
-<li>
-<a href="https://astra-exe.github.io/TDLF2025/api/pairs/update.html"><b>Modificar una pareja</b>/</a>
-</li>
 </ul>
 </li>
 <li>
@@ -318,43 +312,81 @@ img {
 </ul>
 </li>
 </ul></aside>
-    <main class="main"><h1>Modificar una pareja</h1>
-<pre><code>[PUT] /v1/pairs/@id
+    <main class="main"><h1>Modificar la pareja de un partido</h1>
+<pre><code>[PUT] /v1/matches/@matchId/pairs/@pairId
 </code></pre>
 <p>Parámetros de la ruta:</p>
 <table>
 <tr><th>Parámetros </th><th>Tipo </th><th>Requerido </th><th>Descripción </th></tr>
-<tr><td><code>id</code> </td><td><code>string</code> </td><td><code>true</code> </td><td>Identificador de la pareja. </td></tr>
+<tr><td><code>matchId</code> </td><td><code>string</code> </td><td><code>true</code> </td><td>Identificador del partido. </td></tr>
+<tr><td><code>pairId</code> </td><td><code>string</code> </td><td><code>true</code> </td><td>Identificador de la pareja. </td></tr>
 </table>
 <p>Cuerpo de la petición:</p>
 <table>
 <tr><th>Campo </th><th>Tipo </th><th>Requerido </th><th>Rango </th><th>Descripción </th></tr>
-<tr><td><code>is_eliminated</code> </td><td><code>boolean</code> </td><td><code>false</code> </td><td><code>contains: [yes/no, on/off, 1/0, true/false]</code> </td><td>Estatus de eliminación de la pareja. </td></tr>
-<tr><td><code>is_active</code> </td><td><code>boolean</code> </td><td><code>false</code> </td><td><code>contains: [yes/no, on/off, 1/0, true/false]</code> </td><td>Estatus de actividad de la pareja. </td></tr>
+<tr><td><code>score</code> </td><td><code>integer</code> </td><td><code>false</code> </td><td><code>between_numeric: [0, 255]</code> </td><td>Puntaje de la pareja en el partido. </td></tr>
+<tr><td><code>is_winner</code> </td><td><code>boolean</code> </td><td><code>false</code> </td><td><code>contains: [yes/no, on/off, 1/0, true/false]</code> </td><td>Estatus de ganador de la pareja en el partido. </td></tr>
 </table>
 <p>Ejemplo:</p>
 <pre><code class="language-bash">curl -X PUT \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'X-API-KEY: API_KEY' \
-  http://localhost:8080/v1/pairs/@id \
+  http://localhost:8080/v1/matches/@matchId/pairs/@pairId \
   -d '{
-    &quot;is_eliminated&quot;: &quot;1&quot;
-    &quot;is_active&quot;: &quot;0&quot;
+    &quot;score&quot;: &quot;10&quot;,
+    &quot;experience&quot;: &quot;5&quot;
   }'
 </code></pre>
 <p>Respuesta de la petición:</p>
 <pre><code class="language-json">{
   &quot;data&quot;: {
-    &quot;id&quot;: &quot;a23aa875-d127-483b-9734-9676b93a6ff7&quot;,
-    &quot;registration_category_id&quot;: &quot;eb69a503-6eb3-4f20-b30b-c9a4762a8cfd&quot;,
-    &quot;is_eliminated&quot;: 1,
-    &quot;is_active&quot;: 0,
-    &quot;created_at&quot;: &quot;2025-03-18 14:40:07&quot;,
-    &quot;updated_at&quot;: &quot;2025-03-20 13:37:56&quot;
+    &quot;match&quot;: {
+      &quot;id&quot;: &quot;27113a35-baed-40b2-9af9-e0c261582b6a&quot;,
+      &quot;group_id&quot;: &quot;e58c7d88-1c0a-4476-b5eb-9b4b45d1a559&quot;,
+      &quot;is_active&quot;: 1,
+      &quot;created_at&quot;: &quot;2025-03-18 14:41:31&quot;,
+      &quot;updated_at&quot;: &quot;2025-03-20 14:17:04&quot;,
+      &quot;registration_category&quot;: {
+        &quot;id&quot;: &quot;76d95a95-0fa3-4d58-a8ce-031a1db25b3c&quot;,
+        &quot;name&quot;: &quot;open&quot;,
+        &quot;description&quot;: &quot;Libre&quot;
+      },
+      &quot;match_category&quot;: {
+        &quot;id&quot;: &quot;6c7f2686-7b40-47ff-b5b5-cbd52c6cea89&quot;,
+        &quot;name&quot;: &quot;qualifier&quot;,
+        &quot;description&quot;: &quot;Clasificación&quot;
+      },
+      &quot;match_status&quot;: {
+        &quot;id&quot;: &quot;29d4b630-468f-4dcc-b775-5bad0b796a89&quot;,
+        &quot;name&quot;: &quot;scheduled&quot;,
+        &quot;description&quot;: &quot;Programado&quot;
+      }
+    },
+    &quot;pair&quot;: {
+      &quot;id&quot;: &quot;75de4f9a-726d-4eda-83aa-c42aa579691f&quot;,
+      &quot;is_eliminated&quot;: 0,
+      &quot;is_active&quot;: 1,
+      &quot;created_at&quot;: &quot;2025-03-18 14:37:31&quot;,
+      &quot;updated_at&quot;: &quot;2025-03-18 14:37:31&quot;,
+      &quot;registration_category&quot;: {
+        &quot;id&quot;: &quot;76d95a95-0fa3-4d58-a8ce-031a1db25b3c&quot;,
+        &quot;name&quot;: &quot;open&quot;,
+        &quot;description&quot;: &quot;Libre&quot;
+      }
+    },
+    &quot;relationship&quot;: {
+      &quot;id&quot;: &quot;d54b558b-65b4-4e89-b463-7390ed90387f&quot;,
+      &quot;pair_id&quot;: &quot;75de4f9a-726d-4eda-83aa-c42aa579691f&quot;,
+      &quot;match_id&quot;: &quot;27113a35-baed-40b2-9af9-e0c261582b6a&quot;,
+      &quot;score&quot;: 10,
+      &quot;is_winner&quot;: 1,
+      &quot;created_at&quot;: &quot;2025-03-18 14:41:31&quot;,
+      &quot;updated_at&quot;: &quot;2025-03-20 16:48:33&quot;
+    }
   },
   &quot;status&quot;: 200,
-  &quot;description&quot;: &quot;The pair was updated successfully&quot;
+  &quot;description&quot;: &quot;The match pair was updated successfully&quot;
 }
 </code></pre></main>
   </div>

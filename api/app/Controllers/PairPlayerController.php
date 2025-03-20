@@ -110,10 +110,10 @@ class PairPlayerController extends BaseController
         $playersFields = ['fullname', 'city', 'weight', 'height', 'age', 'experience'];
 
         // Obtiene las reglas de validación.
-        $rules = [
-            ...PairValidation::getRules($pairFields),
-            ...PairValidation::getPlayersRules($playersFields),
-        ];
+        $rules = array_merge(
+            PairValidation::getRules($pairFields),
+            PairValidation::getPlayersRules($playersFields),
+        );
 
         // Define todas las reglas de validación como obligatorias.
         foreach (array_keys($rules) as $rule) {

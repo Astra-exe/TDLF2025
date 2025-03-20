@@ -68,9 +68,11 @@ return (static function () use ($app): void {
         $router->get($base_route('/v1/matches/pairs'), \App\Controllers\MatchPairController::class.'->index');
         $router->get($base_route('/v1/matches/@id/pairs'), \App\Controllers\MatchPairController::class.'->show');
         $router->get($base_route('/v1/matches/@id/pairs/players'), \App\Controllers\MatchPairController::class.'->players');
+        $router->put($base_route('/v1/matches/@matchId/pairs/@pairId'), \App\Controllers\MatchPairController::class.'->update');
 
         // Partidos.
         $router->get($base_route('/v1/matches'), \App\Controllers\MatchController::class.'->index');
+        $router->post($base_route('/v1/matches'), \App\Controllers\MatchController::class.'->create');
         $router->get($base_route('/v1/matches/@id'), \App\Controllers\MatchController::class.'->show');
         $router->get($base_route('/v1/matches/@id/groups'), \App\Controllers\MatchController::class.'->group');
         $router->put($base_route('/v1/matches/@id'), \App\Controllers\MatchController::class.'->update');

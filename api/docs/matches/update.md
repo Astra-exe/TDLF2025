@@ -4,6 +4,12 @@
 [PUT] /v1/matches/@id
 ```
 
+Parámetros de la ruta:
+
+| Parámetros | Tipo | Requerido | Descripción |
+| ---------- | ---- | --------- | ----------- |
+| `id` | `string` | `true` | Identificador del partido. |
+
 Cuerpo de la petición:
 
 | Campo | Tipo | Requerido | Rango | Descripción |

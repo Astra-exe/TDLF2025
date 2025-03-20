@@ -4,6 +4,12 @@
 [PUT] /v1/pairs/@id
 ```
 
+Parámetros de la ruta:
+
+| Parámetros | Tipo | Requerido | Descripción |
+| ---------- | ---- | --------- | ----------- |
+| `id` | `string` | `true` | Identificador de la pareja. |
+
 Cuerpo de la petición:
 
 | Campo | Tipo | Requerido | Rango | Descripción |

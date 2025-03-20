@@ -4,6 +4,12 @@
 [PUT] /v1/players/@id
 ```
 
+Parámetros de la ruta:
+
+| Parámetros | Tipo | Requerido | Descripción |
+| ---------- | ---- | --------- | ----------- |
+| `id` | `string` | `true` | Identificador del jugador. |
+
 Cuerpo de la petición:
 
 | Campo | Tipo | Requerido | Rango | Descripción |
