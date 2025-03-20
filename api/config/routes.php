@@ -90,7 +90,7 @@ return (static function () use ($app): void {
         $router->post($base_route('/v1/actions/randomize/groups/pairs/matches'), \App\Controllers\ActionsController::class.'->randomizeGroupsPairsMatches');
 
         // Modelo de datos.
-        $router->get($base_route('/v1/data/model/profiles/@id'), App\Controllers\DataModelController::class.'->profile');
-        $router->get($base_route('/v1/data/model/heatmap'), App\Controllers\DataModelController::class.'->heatmap');
+        $router->get($base_route('/v1/analysis/profiles/@id'), App\Controllers\AnalysisController::class.'->profile');
+        $router->get($base_route('/v1/analysis/heatmap'), App\Controllers\AnalysisController::class.'->heatmap');
     }, [\App\Middlewares\AuthMiddleware::class]);
 })();

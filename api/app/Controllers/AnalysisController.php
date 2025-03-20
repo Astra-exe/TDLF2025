@@ -10,7 +10,7 @@ use App\Validations\PlayerValidation;
 use Httpful\Exception\ConnectionErrorException;
 use Httpful\Request;
 
-class DataModelController extends BaseController
+class AnalysisController extends BaseController
 {
     private const ENV_VARNAME = 'APP_DATA_MODEL_URL';
 
