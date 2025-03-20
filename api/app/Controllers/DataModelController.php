@@ -64,7 +64,7 @@ class DataModelController extends BaseController
             $this->respondServiceUnavailable($e->getMessage());
         }
 
-        $this->respond($response?->body, 'Information about the player profile');
+        $this->respond($response->body ?? null, 'Information about the player profile');
     }
 
     /**
@@ -82,6 +82,6 @@ class DataModelController extends BaseController
             $this->respondServiceUnavailable($e->getMessage());
         }
 
-        $this->respond($response?->body, 'Information about the heatmap players');
+        $this->respond($response->body ?? null, 'Information about the heatmap players');
     }
 }
