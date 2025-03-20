@@ -35,7 +35,7 @@ class ApiController extends BaseController
                     'email' => 'juan.ramirez.j99@gmail.com',
                     'linkedin' => 'https://www.linkedin.com/in/juan-rl/',
                     'repository' => 'https://github.com/Astra-exe/',
-                    'role' => 'Data analyst',
+                    'role' => 'Data scientist',
                 ],
             ],
         ], 'Information about the API RESTful');
@@ -54,6 +54,6 @@ class ApiController extends BaseController
      */
     public function errors(Throwable $error): void
     {
-        $this->respondServerError($error->getTraceAsString());
+        $this->respondServerError($error->getTrace(), $error->getMessage());
     }
 }

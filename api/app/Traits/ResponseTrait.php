@@ -54,8 +54,10 @@ trait ResponseTrait
     /**
      * Genera una respuesta de errores de servidor.
      */
-    protected function respondServerError(string $description, string $error = 'Internal Server Error'): void
+    protected function respondServerError(array $trace, string $description, string $error = 'Internal Server Error'): void
     {
+        $this->body['stack_traces'] = $trace;
+
         $this->respondFail($description, Http::INTERNAL_SERVER_ERROR(), $error);
     }
 
