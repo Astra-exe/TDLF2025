@@ -3,7 +3,7 @@ from utils.features import (
     players_location
 )
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import requests
 import numpy as np
@@ -45,6 +45,10 @@ def get_apikey():
     
     return None
 #endpoints
+@app.route('/')
+def home():
+    return render_template('welcome.html')
+
 @app.route('/profile', methods=['POST'])
 def make_profile():
     #get api key
