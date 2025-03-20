@@ -17,6 +17,17 @@ use App\Models\RegistrationCategoryModel;
 class ActionsController extends BaseController
 {
     /**
+     * Obtiene las reglas del torneo por "categoría de inscripción".
+     */
+    private function getRules(): array
+    {
+        return [
+            'open' => ['max_pairs' => 4, 'max_groups' => 27],
+            'seniors' => ['max_pairs' => 3, 'max_groups' => 27],
+        ];
+    }
+
+    /**
      * Genera "grupos" para cada tipo de "categoría de inscripción"
      * y asigna las "parejas" de cada "categoría" a un "grupo" de manera aleatoria.
      *
@@ -24,13 +35,10 @@ class ActionsController extends BaseController
      */
     public function randomizeGroupsPairsMatches(): void
     {
-        $settings = [
-            'open' => ['max_pairs' => 4, 'max_groups' => 27],
-            'seniors' => ['max_pairs' => 3, 'max_groups' => 27],
-        ];
+        $rules = $this->getRules();
 
         $registrationCategory = new RegistrationCategoryModel;
-        $categoriesNames = array_keys($settings);
+        $categoriesNames = array_keys($rules);
 
         // Obtiene la información de todas las "categorías de inscripción".
         $categories = $registrationCategory->select('id', 'name')
@@ -79,7 +87,7 @@ class ActionsController extends BaseController
             $group->reset();
 
             // Obtiene los parámetro de configuración de la "categoría".
-            $params = $settings[$category->name];
+            $params = $rules[$category->name];
 
             // Obtiene el número de "parejas" de la "categoría".
             $pair->select('COUNT(*) AS _count')
