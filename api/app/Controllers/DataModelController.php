@@ -55,11 +55,11 @@ class DataModelController extends BaseController
         }
 
         // Construye la url de la petición.
-        $url = sprintf('%s/profiles/%s', $this->getUrl(), $id);
+        $url = sprintf('%s/profile/%s', $this->getUrl(), $id);
 
         try {
             // Realiza la petición.
-            $response = Request::get($url)->expectsJson()->sendsJson();
+            $response = Request::get($url)->expectsJson()->send();
         } catch (ConnectionErrorException $e) {
             $this->respondServiceUnavailable($e->getMessage());
         }
@@ -77,7 +77,7 @@ class DataModelController extends BaseController
 
         try {
             // Realiza la petición.
-            $response = Request::get($url)->expectsJson()->sendsJson();
+            $response = Request::get($url)->expectsJson()->send();
         } catch (ConnectionErrorException $e) {
             $this->respondServiceUnavailable($e->getMessage());
         }
