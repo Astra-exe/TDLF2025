@@ -73,6 +73,7 @@ return (static function () use ($app): void {
         $router->get($base_route('/v1/matches'), \App\Controllers\MatchController::class.'->index');
         $router->get($base_route('/v1/matches/@id'), \App\Controllers\MatchController::class.'->show');
         $router->get($base_route('/v1/matches/@id/groups'), \App\Controllers\MatchController::class.'->group');
+        $router->put($base_route('/v1/matches/@id'), \App\Controllers\MatchController::class.'->update');
         $router->delete($base_route('/v1/matches/@id'), \App\Controllers\MatchController::class.'->delete');
 
         // Categorías de los partidos.

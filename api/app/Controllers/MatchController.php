@@ -177,6 +177,77 @@ class MatchController extends BaseController
     }
 
     /**
+     * Modifica la información de un "partido".
+     */
+    public function update(string $id): void
+    {
+        // Define los campos que se pueden modificar.
+        $fields = ['match_category_id', 'match_status_id', 'is_active'];
+
+        $data = ['id' => $id];
+
+        // Obtiene solo los campos necesarios.
+        foreach ($fields as $field) {
+            $data[$field] = $this->app()->request()->data->{$field} ?? null;
+
+            if (is_null($data[$field])) {
+                unset($data[$field]);
+            }
+        }
+
+        $fieldNames = array_keys($data);
+
+        // Obtiene las reglas de validación
+        // y establece el identificador como obligatorio.
+        $rules = MatchValidation::getRules(['id', ...$fieldNames]);
+        array_unshift($rules['id'], 'required');
+
+        // Establece las reglas de validación.
+        $this->gump()->validation_rules($rules);
+
+        // Establece los filtros de validación.
+        $this->gump()->filter_rules(MatchValidation::getFilters($fieldNames));
+
+        // Valida el cuerpo de la petición.
+        $data = $this->gump()->run($data);
+
+        unset($data['id']);
+
+        // Comprueba si existen errores de validación.
+        if ($this->gump()->errors()) {
+            $this->respondValidationErrors(
+                $this->gump()->get_errors_array(),
+                'The match information is incorrect');
+        }
+
+        // Consulta la información del "partido".
+        $match = new MatchModel;
+        $match->select('id')->find($id);
+
+        // Comprueba si existe el "partido".
+        if (! $match->isHydrated()) {
+            $this->respondNotFound('The match information was not found');
+        }
+
+        // Modifica la información del "partido".
+        if (! empty($data)) {
+            $match->copyFrom($data);
+            $match->update();
+        }
+
+        // Consulta la información actualizada del "partido".
+        $match->find($id);
+
+        $match->setCustomData('registration_category', $match->registrationCategory);
+        $match->setCustomData('match_category', $match->matchCategory);
+        $match->setCustomData('match_status', $match->matchStatus);
+
+        unset($match->registration_category_id, $match->match_status_id, $match->match_category_id);
+
+        $this->respondUpdated($match, 'The match was updated successfully');
+    }
+
+    /**
      * Elimina la información de un "partido".
      */
     public function delete(string $id): void
