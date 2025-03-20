@@ -140,13 +140,16 @@ def make_map():
                 "city": city,
                 "players": count
             })
-        #make a df with pandas
-        df = pd.DataFrame(cities_df)
-        df = df.sort_values("players", ascending=False).head(30)
+        
+        return jsonify([cities_df, {"message":"Ruta en mantenimiento"}]), 200
 
-        #create the map
-        map = players_location(df)
-        return jsonify({"map_html": map}), 200
+        #make a df with pandas
+        # df = pd.DataFrame(cities_df)
+        # df = df.sort_values("players", ascending=False).head(30)
+
+        # #create the map
+        # map = players_location(df)
+        # return jsonify({"map_html": map}), 200
 
     except requests.exceptions.RequestException as e:
         print(str(e))
