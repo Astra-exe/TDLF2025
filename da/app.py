@@ -86,71 +86,17 @@ def make_profile(player_id):
     
 @app.route('/map', methods=['GET'])
 def make_map():
-    # Obtener la API key
-    api_key = get_apikey()
-    if api_key is None:
-        return jsonify({"error": "No se pudo obtener la Api Key para la ruta /map"}), 400
-
-    headers = {
-        'X-API-KEY': api_key
-    }
-
-    # get the first call
+    
     try:
-        response = requests.get('https://api-nq8l.onrender.com/v1/players', headers=headers)
-
-        # Verificar el código de estado de la respuesta
-        if response.status_code == 200:
-            # Verificar si la respuesta tiene contenido
-            if response.text.strip():
-                first_call = response.json()
-            else:
-                return jsonify({"error": "Respuesta vacía de la API"}), 500
-        else:
-            print("Error:", response.text, response.status_code)
-            return jsonify({"error": response.text, "status_code": response.status_code}), response.status_code
+        with open("players_location.json", "r") as file:
+            df = pd.read_json(file)
         
-        # get players info from all pages
-        pages = first_call["pagination"]["total"]
-        players = []
-
-        for i in range(1, pages + 1):
-            params = {
-                "page": i
-            }
-            response = requests.get("https://api-nq8l.onrender.com/v1/players", headers=headers, params=params)
-            if response.status_code == 200:
-                data = response.json()
-                players.extend(data["data"])
-            else:
-                return jsonify({"error": response.text, "status_code": response.status_code}), response.status_code
-        
-        #count the number of players by city
-        cities = {}
-        for player in players:
-            if player["city"] in cities:
-                cities[player["city"]] += 1
-            else:
-                cities[player["city"]] = 1
-        
-        #make a df with two columns city and number of players
-        cities_df = []
-        for city, count in cities.items():
-            cities_df.append({
-                "city": city,
-                "players": count
-            })
-        
-        return jsonify([cities_df, {"message":"Ruta en mantenimiento"}]), 200
-
-        #make a df with pandas
-        # df = pd.DataFrame(cities_df)
-        # df = df.sort_values("players", ascending=False).head(30)
-
-        # #create the map
-        # map = players_location(df)
-        # return jsonify({"map_html": map}), 200
-
+        # Get the map
+        map_html = players_location(df)
+        return jsonify({"map": map_html}), 200
+    
+    except FileNotFoundError:
+        return jsonify({"error": "Archivo no encontrado"}), 404
     except requests.exceptions.RequestException as e:
         print(str(e))
         return jsonify({'error': str(e)}), 400
