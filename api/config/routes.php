@@ -11,6 +11,9 @@ return (static function () use ($app): void {
         return rtrim($app->get('flight.base_url'), '/').$path;
     };
 
+    // 404.
+    $app->map('notFound', [new \App\Controllers\HomeController($app), 'notFound']);
+
     // Crea una instancia del enrutador.
     $router = $app->router();
 
