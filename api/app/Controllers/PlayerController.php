@@ -60,8 +60,7 @@ class PlayerController extends BaseController
 
         // Consulta la información de todos los "jugadores" con paginación.
         $players = new PlayerModel;
-        $players->like($queryParams['filterBy'], sprintf('%%%s%%', $queryParams['search']))
-            ->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
+        $players->like($queryParams['filterBy'], sprintf('%%%s%%', $queryParams['search']));
 
         // Filtra los "jugadores" por estatus de actividad.
         if (isset($queryParams['is_active'])) {
@@ -71,6 +70,9 @@ class PlayerController extends BaseController
         // Obtiene la información sobre la paginación.
         $players->paginate($queryParams['page']);
         $pagination = $players->pagination;
+
+        // Aplica los parámetros de ordenamiento.
+        $players->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
 
         $this->respondPagination($players->findAll(), $pagination, 'Information about all the players with pagination');
     }

@@ -62,8 +62,7 @@ class GroupPairController extends BaseController
 
         // Consulta la información de todos los "grupos" con paginación.
         $group = new GroupModel;
-        $group->like($queryParams['filterBy'], sprintf('%%%s%%', $queryParams['search']))
-            ->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
+        $group->like($queryParams['filterBy'], sprintf('%%%s%%', $queryParams['search']));
 
         // Filtra los "grupos" por estatus de eliminación y estatus de actividad.
         foreach (['registration_category_id', 'is_eliminated', 'is_active'] as $param) {
@@ -75,6 +74,9 @@ class GroupPairController extends BaseController
         // Obtiene la información sobre la paginación.
         $group->paginate($queryParams['page']);
         $pagination = $group->pagination;
+
+        // Aplica los parámetros de ordenamiento.
+        $group->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
 
         // Consulta los "grupos" de la búsqueda.
         $groups = array_map(static function (GroupModel $_group): array {

@@ -61,7 +61,6 @@ class MatchController extends BaseController
 
         // Consulta la información de todos los "partidos" con paginación.
         $match = new MatchModel;
-        $match->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
 
         // Filtra los "partidos" por identificador de categoría de inscripción,
         // identificador de grupo, identificador de categoría de partido,
@@ -75,6 +74,9 @@ class MatchController extends BaseController
         // Obtiene la información sobre la paginación.
         $match->paginate($queryParams['page']);
         $pagination = $match->pagination;
+
+        // Aplica los parámetros de ordenamiento.
+        $match->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
 
         // Consulta la información de la categoría de inscripción,
         // categoría del partido y estatus del partido.

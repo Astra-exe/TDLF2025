@@ -62,7 +62,6 @@ class PairController extends BaseController
 
         // Consulta la información de todas las "parejas" con paginación.
         $pair = new PairModel;
-        $pair->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
 
         // Filtra las "parejas" por identificador de categoría de inscripción,
         // estatus de eliminación y estatus de actividad.
@@ -75,6 +74,9 @@ class PairController extends BaseController
         // Obtiene la información sobre la paginación.
         $pair->paginate($queryParams['page']);
         $pagination = $pair->pagination;
+
+        // Aplica los parámetros de ordenamiento.
+        $pair->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
 
         // Consulta la "categoría de inscripción" de cada "pareja".
         $pairs = array_map(static function (PairModel $pair): PairModel {
