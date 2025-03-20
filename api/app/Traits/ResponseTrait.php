@@ -62,6 +62,14 @@ trait ResponseTrait
     }
 
     /**
+     * Genera una respuesta cuando un servicio no está disponible.
+     */
+    protected function respondServiceUnavailable(string $description, string $error = 'Service Unavailable'): void
+    {
+        $this->respondFail($description, Http::SERVICE_UNAVAILABLE(), $error);
+    }
+
+    /**
      * Genera una respuesta de errores de validación.
      */
     protected function respondValidationErrors(array $validations, string $description, string $error = 'Validation error'): void

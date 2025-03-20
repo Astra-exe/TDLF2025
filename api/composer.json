@@ -22,7 +22,8 @@
         "infocyph/uid": "^2.03",
         "flightphp/active-record": "^0.6.0",
         "juststeveking/http-status-code": "^3.0",
-        "wixel/gump": "^2.2"
+        "wixel/gump": "^2.2",
+        "nategood/httpful": "^1.0"
     },
     "require-dev": {
         "laravel/pint": "^1.20"

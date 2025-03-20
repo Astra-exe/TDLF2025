@@ -88,5 +88,9 @@ return (static function () use ($app): void {
 
         // Acciones especiales.
         $router->post($base_route('/v1/actions/randomize/groups/pairs/matches'), \App\Controllers\ActionsController::class.'->randomizeGroupsPairsMatches');
+
+        // Modelo de datos.
+        $router->get($base_route('/v1/data/model/profiles/@id'), App\Controllers\DataModelController::class.'->profile');
+        $router->get($base_route('/v1/data/model/heatmap'), App\Controllers\DataModelController::class.'->heatmap');
     }, [\App\Middlewares\AuthMiddleware::class]);
 })();
