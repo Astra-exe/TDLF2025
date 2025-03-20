@@ -142,6 +142,7 @@ def make_map():
             })
         #make a df with pandas
         df = pd.DataFrame(cities_df)
+        df = df.sort_values("players", ascending=False).head(30)
 
         #create the map
         map = players_location(df)
