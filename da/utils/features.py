@@ -137,4 +137,11 @@ def players_location(df):
     HeatMap(heat_data, radius=25, blur=15).add_to(mapa)
     return mapa._repr_html_()
 
+#Function to clear cache
+def clear_cache():
+    cache_path = "coords_cache.json"
+    if Path(cache_path).exists():
+        Path(cache_path).unlink()
+        return "Cache borrado con éxito"
+    return "No se encontró caché para borrar"
 

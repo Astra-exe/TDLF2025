@@ -1,6 +1,7 @@
 from utils.features import (
     playerp,
-    players_location
+    players_location,
+    clear_cache
 )
 
 from flask import Flask, request, jsonify, render_template
@@ -28,7 +29,7 @@ def get_apikey():
     }
 
     try:
-        response = requests.post('http://localhost:8080/v1/auth/login', json=payload)
+        response = requests.post('https://api-nq8l.onrender.com/v1/auth/login', json=payload)
         response.raise_for_status()
         data = response.json()
         data = data['data']
@@ -49,40 +50,39 @@ def get_apikey():
 def home():
     return render_template('welcome.html')
 
-@app.route('/profile', methods=['POST'])
-def make_profile():
-    #get api key
+@app.route('/profile/<player_id>', methods=['GET'])
+def make_profile(player_id):
+    # Get the API key
     api_key = get_apikey()
     if api_key is None:
-        return jsonify({"error":"No se pudo obtener la Api Key para la ruta /profile"}), 400
+        return jsonify({"error": "No se pudo obtener la Api Key para la ruta /profile"}), 400
+
     headers = {
         'X-API-KEY': api_key
     }
-    #Get the player id (a14c3843-495d-4b93-bddb-b12763ad9e89)
-    player_id = request.get_json(force=True)
 
-    #Get the data
+    # Get the player data
     try:
-        response = requests.get(f'http://localhost:8080/v1/players/{player_id["player_id"]}', headers=headers)
-        if response.status_code == 200:
-            data = response.json()
-        else:
-            return jsonify(response.json(), response.status_code)
-        
-        data = data['data']
-        age = int(data['age'])
-        height = float(data['height'])
-        weight = float(data['weight'])
+        response = requests.get(f'https://api-nq8l.onrender.com/v1/players/{player_id}', headers=headers)
+        response.raise_for_status()
+        data = response.json()
 
-        #make the player profile
+        player_data = data['data']
+        age = int(player_data['age'])
+        height = float(player_data['height'])
+        weight = float(player_data['weight'])
+
+        # Generate recommendations
         profile = playerp(height, weight, age)
         return jsonify(profile), 200
 
-
-    
+    except requests.exceptions.HTTPError as err:
+        # Handle HTTP errors
+        return jsonify({"error": f"Error al obtener datos del jugador: {str(err)}"}), err.response.status_code
     except Exception as e:
+        # Handle other exceptions
         print(str(e))
-        return jsonify({'error':str(e)}), 400
+        return jsonify({"error": str(e)}), 500
     
 @app.route('/map', methods=['GET'])
 def make_map():
@@ -97,7 +97,7 @@ def make_map():
 
     # get the first call
     try:
-        response = requests.get('http://localhost:8080/v1/players', headers=headers)
+        response = requests.get('https://api-nq8l.onrender.com/v1/players', headers=headers)
 
         # Verificar el código de estado de la respuesta
         if response.status_code == 200:
@@ -118,7 +118,7 @@ def make_map():
             params = {
                 "page": i
             }
-            response = requests.get("http://localhost:8080/v1/players", headers=headers, params=params)
+            response = requests.get("https://api-nq8l.onrender.com/v1/players", headers=headers, params=params)
             if response.status_code == 200:
                 data = response.json()
                 players.extend(data["data"])
@@ -151,6 +151,15 @@ def make_map():
         print(str(e))
         return jsonify({'error': str(e)}), 400
 
+@app.route('/clear_cache', methods=['DELETE'])
+def clear():
+    #clear the cache
+    try:
+        clear = clear_cache()
+        return jsonify({"message": clear}), 200
+    except Exception as e:
+        print(str(e))
+        return jsonify({'error': str(e)}), 400
 
 if __name__ == "__main__":
     app.run(port=3000, debug = True)
