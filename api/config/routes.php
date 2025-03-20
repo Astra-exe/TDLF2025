@@ -11,13 +11,10 @@ return (static function () use ($app): void {
         return rtrim($app->get('flight.base_url'), '/').$path;
     };
 
-    // 404.
-    $app->map('notFound', [new \App\Controllers\HomeController($app), 'notFound']);
-
     // Crea una instancia del enrutador.
     $router = $app->router();
 
-    $router->get($base_route('/'), \App\Controllers\HomeController::class.'->welcome');
+    $router->get($base_route('/'), \App\Controllers\ApiController::class.'->welcome');
 
     // Autenticación.
     $router->post($base_route('/v1/auth/login'), \App\Controllers\AuthController::class.'->login');

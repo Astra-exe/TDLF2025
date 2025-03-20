@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-class HomeController extends BaseController
+use Throwable;
+
+class ApiController extends BaseController
 {
     public function welcome(): void
     {
@@ -45,5 +47,13 @@ class HomeController extends BaseController
     public function notFound(): void
     {
         $this->respondNotFound('The endpoint was not found');
+    }
+
+    /**
+     * Respuestas de errores.
+     */
+    public function errors(Throwable $error): void
+    {
+        $this->respondServerError($error->getTraceAsString());
     }
 }

@@ -38,6 +38,12 @@ foreach (\App\Helpers\Config::getFromFilename('services') as $option) {
 }
 
 /**
+ * Manejo de errores.
+ */
+$app->map('notFound', [new \App\Controllers\ApiController($app), 'notFound']); // 404.
+$app->map('error', [new \App\Controllers\ApiController($app), 'errors']); // 500.
+
+/**
  * Habilita CORS.
  */
 $app->before('start', [new \App\Middlewares\CorsMiddleware($app), 'before']);
