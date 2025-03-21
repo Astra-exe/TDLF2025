@@ -7,16 +7,26 @@ export default async function CardsDashboard() {
     throw new Error("No autorizado");
   }
   const apiKey = session.user.apiKey;
-  const { numberOfPlayers, numberOfPairs } = await fetchCardsData(apiKey);
+  const {
+    numberOfPlayers,
+    numberOfPairs,
+    numberOfPairsOpen,
+    numberOfPairsSenior,
+  } = await fetchCardsData(apiKey);
   return (
     <>
       <Card title="Categorias del torneo" value={2} />
       <Card title="Jugadores inscritos" value={numberOfPlayers} />
       <Card title="Parejas inscritas" value={numberOfPairs} />
-      <Card title="Parejas categoria Libre" value={12} />
-      {/* <Card title="Parejas categoria 50 y más" value={12} />
-      <Card title="Grupos categoria libre" value={4} />
-      <Card title="Grupos categoria 50 y más" value={4} /> */}
+      <Card title="Jugadores categoria Libre" value={numberOfPairsOpen * 2} />
+      <Card
+        title="Jugadores categoria 50 y más"
+        value={numberOfPairsSenior * 2}
+      />
+      <Card title="Parejas categoria Libre" value={numberOfPairsOpen} />
+      <Card title="Parejas categoria 50 y más" value={numberOfPairsSenior} />
+      {/* <Card title="Grupos categoria libre" value={4} /> */}
+      {/* <Card title="Grupos categoria 50 y más" value={4} /> */}
     </>
   );
 }
@@ -29,7 +39,7 @@ export function Card({
   value: number | string;
 }) {
   return (
-    <article className="p-2 shadow-sm rounded-xl bg-gradient-to-b from-dark/40 border border-dotted border-neutral-700/80">
+    <article className="p-2 shadow-sm rounded-xl bg-gradient-to-br to-primary/80 via-dark/60 from-dark/40  hover:scale-105 transition-transform">
       <div className="flex p-4">
         {/* {Icon ? <Icon className="h-5 w-5 text-gray-700" /> : null} */}
         <h3 className="ml-2 text-lg font-medium">{title}</h3>
