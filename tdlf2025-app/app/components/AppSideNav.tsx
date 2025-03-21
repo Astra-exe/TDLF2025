@@ -17,6 +17,7 @@ import {
   Boxes,
   Group,
   LogOut,
+  CircleUser,
 } from "lucide-react";
 import { logOut } from "@/app/lib/actions";
 
@@ -31,6 +32,11 @@ const items = [
     title: "Inscripción",
     url: "/dashboard/inscripcion",
     icon: ClipboardPen,
+  },
+  {
+    title: "Jugadores",
+    url: "/dashboard/jugadores",
+    icon: CircleUser,
   },
   {
     title: "Parejas",
