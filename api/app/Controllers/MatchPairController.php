@@ -127,7 +127,7 @@ class MatchPairController extends BaseController
 
         // Consulta la información del "partido".
         $match = new MatchModel;
-        $match->select('id')->find($id);
+        $match->select('id')->eq('id', $id)->find();
 
         // Comprueba si existe el "partido".
         if (! $match->isHydrated()) {
@@ -172,7 +172,7 @@ class MatchPairController extends BaseController
 
         // Consulta la información del "partido".
         $match = new MatchModel;
-        $match->select('id')->find($id);
+        $match->select('id')->eq('id', $id)->find();
 
         // Comprueba si existe el "partido".
         if (! $match->isHydrated()) {

@@ -185,7 +185,7 @@ class PlayerController extends BaseController
 
         // Consulta la información del "jugador".
         $player = new PlayerModel;
-        $player->select('id')->find($id);
+        $player->select('id')->eq('id', $id)->find();
 
         // Comprueba si existe el "jugador".
         if (! $player->isHydrated()) {
@@ -229,7 +229,7 @@ class PlayerController extends BaseController
 
         // Consulta la información del "jugador".
         $player = new PlayerModel;
-        $player->select('id')->find($id);
+        $player->select('id')->eq('id', $id)->find();
 
         // Comprueba si existe el "jugador".
         if (! $player->isHydrated()) {
@@ -302,7 +302,7 @@ class PlayerController extends BaseController
 
         // Consulta la información del "jugador".
         $player = new PlayerModel;
-        $player->select('id')->find($id);
+        $player->select('id')->eq('id', $id)->find();
 
         // Comprueba si existe el "jugador".
         if (! $player->isHydrated()) {

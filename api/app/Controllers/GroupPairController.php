@@ -125,7 +125,7 @@ class GroupPairController extends BaseController
 
         // Consulta la información del "grupo".
         $group = new GroupModel;
-        $group->select('id')->find($id);
+        $group->select('id')->eq('id', $id)->find();
 
         // Comprueba si existe el "grupo".
         if (! $group->isHydrated()) {
@@ -170,7 +170,7 @@ class GroupPairController extends BaseController
 
         // Consulta la información del "grupo".
         $group = new GroupModel;
-        $group->select('id')->find($id);
+        $group->select('id')->eq('id', $id)->find();
 
         // Comprueba si existe el "grupo".
         if (! $group->isHydrated()) {

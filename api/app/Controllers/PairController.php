@@ -137,7 +137,7 @@ class PairController extends BaseController
         // Comprueba que los "jugadores" existan
         // y no se encuentren dentro de una "pareja".
         foreach ($data['players'] as $id) {
-            $player->select('id')->find($id);
+            $player->select('id')->eq('id', $id)->find();
 
             if (! $player->isHydrated()) {
                 $this->respondValidationErrors(
@@ -252,7 +252,7 @@ class PairController extends BaseController
 
         // Consulta la información de la "pareja".
         $pair = new PairModel;
-        $pair->select('id')->find($id);
+        $pair->select('id')->eq('id', $id)->find();
 
         // Comprueba si existe la "pareja".
         if (! $pair->isHydrated()) {
@@ -318,7 +318,7 @@ class PairController extends BaseController
 
         // Consulta la información la "pareja".
         $pair = new PairModel;
-        $pair->select('id')->find($id);
+        $pair->select('id')->eq('id', $id)->find();
 
         // Comprueba si existe la "pareja".
         if (! $pair->isHydrated()) {

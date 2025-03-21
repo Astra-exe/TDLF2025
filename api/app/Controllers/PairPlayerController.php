@@ -204,7 +204,7 @@ class PairPlayerController extends BaseController
 
         // Consulta la información de la "pareja".
         $pair = new PairModel;
-        $pair->select('id')->find($id);
+        $pair->select('id')->eq('id', $id)->find();
 
         // Comprueba si existe la "pareja".
         if (! $pair->isHydrated()) {

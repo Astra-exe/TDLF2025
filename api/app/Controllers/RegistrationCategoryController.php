@@ -81,7 +81,7 @@ class RegistrationCategoryController extends BaseController
 
         // Consulta la información de la "categoría de inscripción".
         $registrationCategory = new RegistrationCategoryModel;
-        $registrationCategory->select('id')->find($id);
+        $registrationCategory->select('id')->eq('id', $id)->find();
 
         // Comprueba si existe la "categoría de inscripción".
         if (! $registrationCategory->isHydrated()) {

@@ -85,7 +85,7 @@ class UserController extends BaseController
         // Obtiene el ID del nuevo "usuario".
         $id = $user->id;
         $user->reset();
-        $user->select(...$this->getColumns())->find($id);
+        $user->select(...$this->getColumns())->eq('id', $id)->find();
 
         $user->setCustomData('role', $user->role);
 
@@ -97,7 +97,41 @@ class UserController extends BaseController
     /**
      * Muestra la información de un "usuario".
      */
-    public function show(string $id): void {}
+    public function show(string $id): void
+    {
+        // Obtiene las reglas de validación
+        // y las establece como obligatorias.
+        $rules = UserValidation::getRules(['id']);
+        array_unshift($rules['id'], 'required');
+
+        // Establece las reglas de validación.
+        $this->gump()->validation_rules($rules);
+
+        // Comprueba los parámetros de la petición.
+        $this->gump()->run(['id' => $id]);
+
+        // Comprueba si existen errores de validación.
+        if ($this->gump()->errors()) {
+            $this->respondValidationErrors(
+                $this->gump()->get_errors_array(),
+                'The user identifier is incorrect');
+        }
+
+        // Consulta la información del "usuario".
+        $user = new UserModel;
+        $user->select(...$this->getColumns())->eq('id', $id)->find();
+
+        // Comprueba si existe el "usuario".
+        if (! $user->isHydrated()) {
+            $this->respondNotFound('The user information was not found');
+        }
+
+        $user->setCustomData('role', $user->role);
+
+        unset($user->role_id);
+
+        $this->respond($user, 'Information about the user');
+    }
 
     /**
      * Modifica la información de un "usuario".
