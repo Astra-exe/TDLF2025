@@ -21,7 +21,6 @@ return (static function (): array {
         'log_table_name' => 'phoenix_log',
         'migration_dirs' => [
             'first' => __DIR__.'/migrations/first_dir',
-            'second' => __DIR__.'/migrations/second_dir',
         ],
         'environments' => [
             'production' => [
