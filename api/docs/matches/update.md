@@ -39,7 +39,6 @@ Respuesta de la petición:
 {
   "data": {
     "id": "27113a35-baed-40b2-9af9-e0c261582b6a",
-    "group_id": "e58c7d88-1c0a-4476-b5eb-9b4b45d1a559",
     "is_active": 0,
     "created_at": "2025-03-18 14:41:31",
     "updated_at": "2025-03-20 14:14:41",

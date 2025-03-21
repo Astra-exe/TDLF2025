@@ -21,7 +21,6 @@ class MatchValidation extends BaseValidation
         return [
             'id' => ['guidv4'],
             'registration_category_id' => ['guidv4', 'contains_list' => PairValidation::getRegistrationCategories()],
-            'group_id' => ['guidv4'],
             'match_category_id' => ['guidv4', 'contains_list' => self::getMatchCategories()],
             'match_status_id' => ['guidv4', 'contains_list' => self::getMatchStatus()],
             'is_active' => ['boolean'],

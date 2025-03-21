@@ -23,7 +23,6 @@ class MatchPairController extends BaseController
             'orderBy' => 'created_at',
             'sortBy' => 'desc',
             'registration_category_id' => null,
-            'group_id' => null,
             'match_category_id' => null,
             'match_status_id' => null,
             'is_active' => null,
@@ -66,7 +65,7 @@ class MatchPairController extends BaseController
         $matchModel = new MatchModel;
 
         // Establece los filtros permitidos.
-        foreach (['registration_category_id', 'group_id', 'match_category_id', 'match_status_id', 'is_active'] as $param) {
+        foreach (['registration_category_id', 'match_category_id', 'match_status_id', 'is_active'] as $param) {
             if (isset($queryParams[$param])) {
                 $matchModel->eq($param, $queryParams[$param]);
             }

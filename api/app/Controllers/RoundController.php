@@ -88,7 +88,7 @@ class RoundController extends BaseController
 
             $group->reset();
 
-            // Obtiene los parámetro de configuración de la "categoría".
+            // Obtiene los parámetros de configuración de la "categoría".
             $params = $rules[$category->name];
 
             // Obtiene el número de "parejas" de la "categoría".
@@ -121,8 +121,7 @@ class RoundController extends BaseController
                 array_pop($groupsNames);
             }
 
-            // Obtiene la información de las "parejas" de la "categoría"
-            // y lo ordena de manera aleatoria.
+            // Obtiene la información de las "parejas" de la "categoría".
             $pairs = $pair->select('id')
                 ->eq($column, $category->id)
                 ->eq('is_active', 1)
@@ -130,9 +129,10 @@ class RoundController extends BaseController
 
             $pair->reset();
 
+            // Ordena las "parejas" de manera aleatoria.
             shuffle($pairs);
 
-            // Segmenta las "parejas" en el número total de "grupos".
+            // Segmenta las "parejas" con el número máximo de "parejas" por "grupo".
             foreach (array_chunk($pairs, $params['max_pairs']) as $key => $segment) {
                 // Registra la información del "grupo".
                 $group->copyFrom([
@@ -150,15 +150,14 @@ class RoundController extends BaseController
                     $groupPairPivot->reset();
                 }
 
-                // Consulta la información de las "parejas" del grupo.
+                // Consulta la información de las "parejas" del "grupo".
                 $groupsPairs = $groupPairPivot->select('pair_id')
                     ->eq('group_id', $group->id)
                     ->findAll();
 
                 $groupPairPivot->reset();
 
-                // Registra la combinación de los "partidos"
-                // de las "parejas" del "grupo".
+                // Registra la relación de los "partidos" con las "parejas" del "grupo".
                 for ($i = 0; $i < $params['max_pairs']; $i++) {
                     for ($j = $i + 1; $j < $params['max_pairs']; $j++) {
                         // Registra la información del "partido".
@@ -170,30 +169,18 @@ class RoundController extends BaseController
 
                         $match->insert();
 
-                        // Registra la información del "partido" al "grupo".
-                        $groupMatchPivot->copyFrom([
-                            'group_id' => $group->id,
-                            'match_id' => $match->id,
-                        ]);
-
+                        // Registra la relación del "partido" con el "grupo".
+                        $groupMatchPivot->copyFrom(['group_id' => $group->id, 'match_id' => $match->id]);
                         $groupMatchPivot->insert();
                         $groupMatchPivot->reset();
 
-                        // Registra la información del "partido" de la "pareja combinada".
-                        $matchPairPivot->copyFrom([
-                            'match_id' => $match->id,
-                            'pair_id' => $groupsPairs[$i]->pair_id,
-                        ]);
-
+                        // Registra la relación del "partido" con la primera "pareja".
+                        $matchPairPivot->copyFrom(['match_id' => $match->id, 'pair_id' => $groupsPairs[$i]->pair_id]);
                         $matchPairPivot->insert();
                         $matchPairPivot->reset();
 
-                        // Registra la información del "partido" de la "otra pareja".
-                        $matchPairPivot->copyFrom([
-                            'match_id' => $match->id,
-                            'pair_id' => $groupsPairs[$j]->pair_id,
-                        ]);
-
+                        // Registra la relación del "partido" con la otra "pareja".
+                        $matchPairPivot->copyFrom(['match_id' => $match->id, 'pair_id' => $groupsPairs[$j]->pair_id]);
                         $matchPairPivot->insert();
                         $matchPairPivot->reset();
 

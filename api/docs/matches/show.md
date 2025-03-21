@@ -26,7 +26,6 @@ Respuesta de la petición:
 {
   "data": {
     "id": "0ffe3275-808c-4d65-b68a-767135f1ea6c",
-    "group_id": "2f0a8d32-0e8e-47a8-a7d5-5518150840a4",
     "is_active": 1,
     "created_at": "2025-03-18 14:41:31",
     "updated_at": "2025-03-18 14:41:31",
