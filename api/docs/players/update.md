@@ -1,4 +1,4 @@
-# ✏️ Modificar un jugador
+# ✏️ Editar un jugador
 
 ```
 [PUT] /v1/players/@id

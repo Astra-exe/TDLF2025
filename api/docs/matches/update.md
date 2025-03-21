@@ -1,4 +1,4 @@
-# ✏️ Modificar un partido
+# ✏️ Editar un partido
 
 ```
 [PUT] /v1/matches/@id

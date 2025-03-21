@@ -1,4 +1,4 @@
-# ✏️ Modificar una pareja
+# ✏️ Editar una pareja
 
 ```
 [PUT] /v1/pairs/@id
