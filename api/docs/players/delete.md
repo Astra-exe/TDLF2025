@@ -1,4 +1,4 @@
-# Eliminar un jugador
+# ❌ Eliminar un jugador
 
 ```
 [DELETE] /v1/players/@id

@@ -1,4 +1,4 @@
-# Información de una categoría de partido
+# 👀 Información de una categoría de partido
 
 ```
 [GET] /v1/categories/matches/@id

@@ -1,4 +1,4 @@
-# Parejas
+# 👫 Parejas
 
 Parejas inscritas al torneo.
 

@@ -1,4 +1,4 @@
-# Jugadores de una pareja
+# 👀 Jugadores de una pareja
 
 ```
 [GET] /v1/pairs/@id/players

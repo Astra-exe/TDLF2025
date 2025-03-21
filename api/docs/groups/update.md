@@ -1,4 +1,4 @@
-# Modificar un grupo
+# ✏️ Modificar un grupo
 
 ```
 [PUT] /v1/groups/@id

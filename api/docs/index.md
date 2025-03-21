@@ -1,4 +1,4 @@
-# Documentación de la API
+# 🍓 Documentación de la API
 
 Documentación de la API RESTful del evento de frontenis *"Torneo de las Fresas Irapuato 2025"*.
 

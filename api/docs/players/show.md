@@ -1,4 +1,4 @@
-# Información de un jugador
+# 👀 Información de un jugador
 
 ```
 [GET] /v1/players/@id

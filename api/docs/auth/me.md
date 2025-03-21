@@ -1,4 +1,4 @@
-# Usuario autenticado
+# 🙍 Usuario autenticado
 
 ```
 [GET] /v1/auth/me

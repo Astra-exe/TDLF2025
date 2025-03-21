@@ -1,4 +1,4 @@
-# Información de un estatus de partido
+# 👀 Información de un estatus de partido
 
 ```
 [GET] /v1/status/matches/@id

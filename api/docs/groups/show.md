@@ -1,4 +1,4 @@
-# Información de un grupo
+# 👀 Información de un grupo
 
 ```
 [GET] /v1/groups/@id

@@ -1,4 +1,4 @@
-# Mapa de calor
+# 🔥 Mapa de calor
 
 ```
 [GET] /v1/analysis/heatmap

@@ -1,4 +1,4 @@
-# Asignar grupos, parejas y partidos
+# 🎲 Asignar grupos, parejas y partidos
 
 ```
 [POST] /v1/rounds/init

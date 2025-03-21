@@ -1,4 +1,4 @@
-# Grupo de un jugador
+# 👥 Grupo de un jugador
 
 ```
 [GET] /v1/players/@id/groups

@@ -1,4 +1,4 @@
-# Perfil de un jugador
+# ✨ Perfil de un jugador
 
 ```
 [GET] /v1/analysis/profiles/@id

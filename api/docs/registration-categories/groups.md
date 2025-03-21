@@ -1,4 +1,4 @@
-# Grupos de una categoría de inscripción
+# 👥 Grupos de una categoría de inscripción
 
 ```
 [GET] /v1/categories/registrations/@id/groups

@@ -1,4 +1,4 @@
-# Crear un jugador
+# ➕ Crear un jugador
 
 ```
 [POST] /v1/players

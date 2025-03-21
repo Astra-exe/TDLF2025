@@ -1,4 +1,4 @@
-# Eliminar un partido
+# ❌ Eliminar un partido
 
 ```
 [DELETE] /v1/matches/@id

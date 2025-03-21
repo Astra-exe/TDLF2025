@@ -1,4 +1,4 @@
-# Comprobar API key
+# 🔑 Comprobar API key
 
 ```
 [GET] /v1/auth/check

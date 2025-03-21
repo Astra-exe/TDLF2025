@@ -1,4 +1,4 @@
-# Categorías de los partidos
+# 🏷️ / 🎾 Categorías de los partidos
 
 Categorías de las rondas de los partidos.
 

@@ -1,0 +1,1 @@
+# ❌ Eliminar un usuario

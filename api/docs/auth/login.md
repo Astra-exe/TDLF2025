@@ -1,4 +1,4 @@
-# Inicio de sesión
+# 🪪 Inicio de sesión
 
 ```
 [POST] /v1/auth/login

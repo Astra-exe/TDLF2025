@@ -1,6 +1,6 @@
-# Categorías de inscripción
+# 🏷️ / 📋  Categorías de inscripción
 
-Categorías de inscripción de las parejas.
+Categorías de inscripción de los grupos, parejas y partidos.
 
 ```
 [GET] /v1/categories/registrations
