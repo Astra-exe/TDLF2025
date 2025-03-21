@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use App\Helpers\Date;
+use App\Models\GroupMatchPivotModel;
 use App\Models\GroupModel;
 use App\Models\GroupPairPivotModel;
 use App\Models\MatchCategoryModel;
@@ -60,6 +61,7 @@ class RoundController extends BaseController
         $group = new GroupModel;
         $groupPairPivot = new GroupPairPivotModel;
         $match = new MatchModel;
+        $groupMatchPivot = new GroupMatchPivotModel;
         $matchPairPivot = new MatchPairPivotModel;
 
         $column = 'registration_category_id';
@@ -162,12 +164,20 @@ class RoundController extends BaseController
                         // Registra la información del "partido".
                         $match->copyFrom([
                             $column => $category->id,
-                            'group_id' => $group->id,
                             'match_category_id' => $matchCategory->id,
                             'match_status_id' => $matchStatus->id,
                         ]);
 
                         $match->insert();
+
+                        // Registra la información del "partido" al "grupo".
+                        $groupMatchPivot->copyFrom([
+                            'group_id' => $group->id,
+                            'match_id' => $match->id,
+                        ]);
+
+                        $groupMatchPivot->insert();
+                        $groupMatchPivot->reset();
 
                         // Registra la información del "partido" de la "pareja combinada".
                         $matchPairPivot->copyFrom([
