@@ -27,325 +27,337 @@ Respuesta de la petición:
   "data": [
     {
       "match": {
-        "id": "0858b8ee-0ccb-4764-94a7-1deb9d956c23",
-        "group_id": "19dcf711-ac20-4be5-8bc9-daa27582c6c2",
+        "id": "0f5fed47-79d3-4428-bb3e-a3e69d196bdf",
         "is_active": 1,
-        "created_at": "2025-03-18 01:21:28",
-        "updated_at": "2025-03-18 01:21:28",
+        "created_at": "2025-03-20 21:27:39",
+        "updated_at": "2025-03-20 21:27:39",
         "registration_category": {
-          "id": "4291ffa3-0b5c-4c3c-bd29-31cfddb130be",
+          "id": "5d840f53-ffb0-427c-8554-bfff885d6b6a",
           "name": "open",
           "description": "Libre"
         },
         "match_category": {
-          "id": "75173798-35ea-4415-8ac4-89a8a2918600",
+          "id": "ad14f6d0-5296-4a6e-a986-6a99a20365b7",
           "name": "qualifier",
           "description": "Clasificación"
         },
         "match_status": {
-          "id": "02ee09c2-34bc-4f27-84ff-6ceca7c50882",
+          "id": "b06b08ff-0f65-456c-ae90-3dd740a26c9b",
           "name": "scheduled",
           "description": "Programado"
         },
         "pairs": [
           {
             "pair": {
-              "id": "4aeacf96-38c9-4400-859c-461ae9a6024d",
+              "id": "94b132c7-7de0-48c0-8990-67c08fc677b7",
               "is_eliminated": 0,
               "is_active": 1,
-              "created_at": "2025-03-17 23:51:48",
-              "updated_at": "2025-03-17 23:51:48",
+              "created_at": "2025-03-20 21:23:55",
+              "updated_at": "2025-03-20 21:23:55",
               "registration_category": {
-                "id": "4291ffa3-0b5c-4c3c-bd29-31cfddb130be",
+                "id": "5d840f53-ffb0-427c-8554-bfff885d6b6a",
                 "name": "open",
                 "description": "Libre"
               },
               "players": [
                 {
                   "player": {
-                    "id": "39e1f248-7c69-40ce-9406-0b226c7207a5",
-                    "fullname": "Jorge Medina",
-                    "city": "Pueblo Nuevo",
-                    "weight": "76.50",
-                    "height": "1.82",
-                    "age": 32,
-                    "experience": 13,
+                    "id": "db520e4c-f133-4c2f-8a95-d4ae12115dcf",
+                    "fullname": "Enrique Castro",
+                    "city": "Juventino Rosas",
+                    "weight": "75.00",
+                    "height": "1.79",
+                    "age": 28,
+                    "experience": 12,
                     "is_active": 1,
-                    "created_at": "2025-03-17 23:51:48",
-                    "updated_at": "2025-03-17 23:51:48"
+                    "created_at": "2025-03-20 21:23:55",
+                    "updated_at": "2025-03-20 21:23:55"
                   },
                   "relationship": {
-                    "id": "61197d8f-0a14-4d3b-8ab4-fb3ed23db98a",
-                    "player_id": "39e1f248-7c69-40ce-9406-0b226c7207a5",
-                    "pair_id": "4aeacf96-38c9-4400-859c-461ae9a6024d",
-                    "created_at": "2025-03-17 23:51:48",
-                    "updated_at": "2025-03-17 23:51:48"
+                    "id": "d704a086-5b83-4a5d-af30-c3e078bd9994",
+                    "player_id": "db520e4c-f133-4c2f-8a95-d4ae12115dcf",
+                    "pair_id": "94b132c7-7de0-48c0-8990-67c08fc677b7",
+                    "created_at": "2025-03-20 21:23:55",
+                    "updated_at": "2025-03-20 21:23:55"
                   }
                 },
                 {
                   "player": {
-                    "id": "ba7c13e5-7b86-436f-a9cd-e454eb0dbe6f",
-                    "fullname": "Maricela Sánchez",
-                    "city": "Moroleón",
-                    "weight": "65.20",
-                    "height": "1.70",
-                    "age": 29,
-                    "experience": 8,
+                    "id": "4fafb80d-7603-483d-ae88-adc6a3c22030",
+                    "fullname": "Lourdes Herrera",
+                    "city": "Apaseo el Alto",
+                    "weight": "62.50",
+                    "height": "1.67",
+                    "age": 25,
+                    "experience": 7,
                     "is_active": 1,
-                    "created_at": "2025-03-17 23:51:48",
-                    "updated_at": "2025-03-17 23:51:48"
+                    "created_at": "2025-03-20 21:23:55",
+                    "updated_at": "2025-03-20 21:23:55"
                   },
                   "relationship": {
-                    "id": "e36c443e-ef6d-45d6-895b-421549034889",
-                    "player_id": "ba7c13e5-7b86-436f-a9cd-e454eb0dbe6f",
-                    "pair_id": "4aeacf96-38c9-4400-859c-461ae9a6024d",
-                    "created_at": "2025-03-17 23:51:48",
-                    "updated_at": "2025-03-17 23:51:48"
+                    "id": "e39cb145-dc87-43fc-8658-a9897a823c12",
+                    "player_id": "4fafb80d-7603-483d-ae88-adc6a3c22030",
+                    "pair_id": "94b132c7-7de0-48c0-8990-67c08fc677b7",
+                    "created_at": "2025-03-20 21:23:55",
+                    "updated_at": "2025-03-20 21:23:55"
                   }
                 }
               ]
             },
             "relationship": {
-              "id": "e04a06f3-f1e3-4eb9-b543-ae82c46346c4",
-              "pair_id": "4aeacf96-38c9-4400-859c-461ae9a6024d",
-              "match_id": "0858b8ee-0ccb-4764-94a7-1deb9d956c23",
+              "id": "8eb56e51-e000-41ec-961e-0311189decc8",
+              "pair_id": "94b132c7-7de0-48c0-8990-67c08fc677b7",
+              "match_id": "0f5fed47-79d3-4428-bb3e-a3e69d196bdf",
               "score": 0,
               "is_winner": 0,
-              "created_at": "2025-03-18 01:21:28",
-              "updated_at": "2025-03-18 01:21:28"
+              "created_at": "2025-03-20 21:27:39",
+              "updated_at": "2025-03-20 21:27:39"
             }
           },
           {
             "pair": {
-              "id": "5dfbfd5c-26e2-4dbe-8bd6-1040a6cf1e10",
+              "id": "5de44dbe-9953-448f-a9bb-064f737b4111",
               "is_eliminated": 0,
               "is_active": 1,
-              "created_at": "2025-03-17 23:51:47",
-              "updated_at": "2025-03-17 23:51:47",
+              "created_at": "2025-03-20 21:23:55",
+              "updated_at": "2025-03-20 21:23:55",
               "registration_category": {
-                "id": "4291ffa3-0b5c-4c3c-bd29-31cfddb130be",
+                "id": "5d840f53-ffb0-427c-8554-bfff885d6b6a",
                 "name": "open",
                 "description": "Libre"
               },
               "players": [
                 {
                   "player": {
-                    "id": "85640d17-888b-4894-b7ea-8ac695c32533",
-                    "fullname": "Luis Hernández",
-                    "city": "León",
-                    "weight": "75.20",
-                    "height": "1.78",
-                    "age": 28,
-                    "experience": 12,
+                    "id": "fb093289-8c9b-4ed2-9e71-ef1b4c0cb67b",
+                    "fullname": "Roberto Díaz",
+                    "city": "Jerécuaro",
+                    "weight": "78.00",
+                    "height": "1.83",
+                    "age": 34,
+                    "experience": 13,
                     "is_active": 1,
-                    "created_at": "2025-03-17 23:51:47",
-                    "updated_at": "2025-03-17 23:51:47"
+                    "created_at": "2025-03-20 21:23:55",
+                    "updated_at": "2025-03-20 21:23:55"
                   },
                   "relationship": {
-                    "id": "d40eeadd-7ec0-4e77-a8ea-4ea51407857c",
-                    "player_id": "85640d17-888b-4894-b7ea-8ac695c32533",
-                    "pair_id": "5dfbfd5c-26e2-4dbe-8bd6-1040a6cf1e10",
-                    "created_at": "2025-03-17 23:51:47",
-                    "updated_at": "2025-03-17 23:51:47"
+                    "id": "14b2533e-f5e7-4792-b858-e62a359c8511",
+                    "player_id": "fb093289-8c9b-4ed2-9e71-ef1b4c0cb67b",
+                    "pair_id": "5de44dbe-9953-448f-a9bb-064f737b4111",
+                    "created_at": "2025-03-20 21:23:55",
+                    "updated_at": "2025-03-20 21:23:55"
                   }
                 },
                 {
                   "player": {
-                    "id": "7649a11c-e9ed-4011-9e04-4cbd7e370907",
-                    "fullname": "María Guzmán",
-                    "city": "Guanajuato",
-                    "weight": "62.50",
-                    "height": "1.68",
-                    "age": 24,
+                    "id": "851b6bed-765c-4675-b77d-513fd64e3fc9",
+                    "fullname": "Claudia Mendoza",
+                    "city": "Tarimoro",
+                    "weight": "64.50",
+                    "height": "1.70",
+                    "age": 27,
                     "experience": 8,
                     "is_active": 1,
-                    "created_at": "2025-03-17 23:51:47",
-                    "updated_at": "2025-03-17 23:51:47"
+                    "created_at": "2025-03-20 21:23:55",
+                    "updated_at": "2025-03-20 21:23:55"
                   },
                   "relationship": {
-                    "id": "f7694e51-38e7-4a04-8eaa-b812abb4e21e",
-                    "player_id": "7649a11c-e9ed-4011-9e04-4cbd7e370907",
-                    "pair_id": "5dfbfd5c-26e2-4dbe-8bd6-1040a6cf1e10",
-                    "created_at": "2025-03-17 23:51:47",
-                    "updated_at": "2025-03-17 23:51:47"
+                    "id": "8fb7d4f4-74cb-4911-821a-1f6bcd5154d1",
+                    "player_id": "851b6bed-765c-4675-b77d-513fd64e3fc9",
+                    "pair_id": "5de44dbe-9953-448f-a9bb-064f737b4111",
+                    "created_at": "2025-03-20 21:23:55",
+                    "updated_at": "2025-03-20 21:23:55"
                   }
                 }
               ]
             },
             "relationship": {
-              "id": "fd42ed48-e145-469a-8f8e-57d2a2e11bd4",
-              "pair_id": "5dfbfd5c-26e2-4dbe-8bd6-1040a6cf1e10",
-              "match_id": "0858b8ee-0ccb-4764-94a7-1deb9d956c23",
+              "id": "a93ccf7e-dbfd-4541-830b-3e607fd94dd4",
+              "pair_id": "5de44dbe-9953-448f-a9bb-064f737b4111",
+              "match_id": "0f5fed47-79d3-4428-bb3e-a3e69d196bdf",
               "score": 0,
               "is_winner": 0,
-              "created_at": "2025-03-18 01:21:28",
-              "updated_at": "2025-03-18 01:21:28"
+              "created_at": "2025-03-20 21:27:39",
+              "updated_at": "2025-03-20 21:27:39"
             }
           }
         ]
+      },
+      "relationship": {
+        "id": "8779d8d2-dcab-42f7-a886-2f855224b72c",
+        "group_id": "fb983148-d4f6-41c3-8fb5-bda2146f7fa6",
+        "match_id": "0f5fed47-79d3-4428-bb3e-a3e69d196bdf",
+        "created_at": "2025-03-20 21:27:39",
+        "updated_at": "2025-03-20 21:27:39"
       }
     },
     {
       "match": {
-        "id": "0a328326-c541-4b3d-a9f7-ee22bcd2ca43",
-        "group_id": "19dcf711-ac20-4be5-8bc9-daa27582c6c2",
+        "id": "5ef5e266-002f-4934-a11a-3fcb18d53394",
         "is_active": 1,
-        "created_at": "2025-03-18 01:21:28",
-        "updated_at": "2025-03-18 01:21:28",
+        "created_at": "2025-03-20 21:27:39",
+        "updated_at": "2025-03-20 21:27:39",
         "registration_category": {
-          "id": "4291ffa3-0b5c-4c3c-bd29-31cfddb130be",
+          "id": "5d840f53-ffb0-427c-8554-bfff885d6b6a",
           "name": "open",
           "description": "Libre"
         },
         "match_category": {
-          "id": "75173798-35ea-4415-8ac4-89a8a2918600",
+          "id": "ad14f6d0-5296-4a6e-a986-6a99a20365b7",
           "name": "qualifier",
           "description": "Clasificación"
         },
         "match_status": {
-          "id": "02ee09c2-34bc-4f27-84ff-6ceca7c50882",
+          "id": "b06b08ff-0f65-456c-ae90-3dd740a26c9b",
           "name": "scheduled",
           "description": "Programado"
         },
         "pairs": [
           {
             "pair": {
-              "id": "e8786b51-94fa-4b71-8e71-781840a67685",
+              "id": "bc436a6a-57b8-43a2-b407-b4110a11dfe9",
               "is_eliminated": 0,
               "is_active": 1,
-              "created_at": "2025-03-17 23:51:48",
-              "updated_at": "2025-03-17 23:51:48",
+              "created_at": "2025-03-20 21:23:55",
+              "updated_at": "2025-03-20 21:23:55",
               "registration_category": {
-                "id": "4291ffa3-0b5c-4c3c-bd29-31cfddb130be",
+                "id": "5d840f53-ffb0-427c-8554-bfff885d6b6a",
                 "name": "open",
                 "description": "Libre"
               },
               "players": [
                 {
                   "player": {
-                    "id": "91cffd78-8883-4269-92b8-bd1405e5bed4",
-                    "fullname": "Alberto Méndez",
-                    "city": "San José Iturbide",
-                    "weight": "77.50",
-                    "height": "1.83",
-                    "age": 33,
-                    "experience": 13,
+                    "id": "81c3cb2e-8e8b-451f-bea0-6e80ebb8fc71",
+                    "fullname": "Karla Rivas",
+                    "city": "Victoria",
+                    "weight": "63.00",
+                    "height": "1.68",
+                    "age": 27,
+                    "experience": 7,
                     "is_active": 1,
-                    "created_at": "2025-03-17 23:51:48",
-                    "updated_at": "2025-03-17 23:51:48"
+                    "created_at": "2025-03-20 21:23:55",
+                    "updated_at": "2025-03-20 21:23:55"
                   },
                   "relationship": {
-                    "id": "e0a3cabb-5ade-487b-a908-3017c51908f5",
-                    "player_id": "91cffd78-8883-4269-92b8-bd1405e5bed4",
-                    "pair_id": "e8786b51-94fa-4b71-8e71-781840a67685",
-                    "created_at": "2025-03-17 23:51:48",
-                    "updated_at": "2025-03-17 23:51:48"
+                    "id": "6411fcdc-3bda-48b0-a8eb-b8f67bf999ba",
+                    "player_id": "81c3cb2e-8e8b-451f-bea0-6e80ebb8fc71",
+                    "pair_id": "bc436a6a-57b8-43a2-b407-b4110a11dfe9",
+                    "created_at": "2025-03-20 21:23:55",
+                    "updated_at": "2025-03-20 21:23:55"
                   }
                 },
                 {
                   "player": {
-                    "id": "32882818-4306-4698-a08f-35cd08b34f58",
-                    "fullname": "Martha González",
-                    "city": "Tierra Blanca",
-                    "weight": "65.00",
-                    "height": "1.70",
-                    "age": 28,
-                    "experience": 8,
+                    "id": "fcc16996-934e-4e19-a167-af92457859ae",
+                    "fullname": "Ricardo Silva",
+                    "city": "Doctor Mora",
+                    "weight": "74.50",
+                    "height": "1.80",
+                    "age": 32,
+                    "experience": 12,
                     "is_active": 1,
-                    "created_at": "2025-03-17 23:51:48",
-                    "updated_at": "2025-03-17 23:51:48"
+                    "created_at": "2025-03-20 21:23:55",
+                    "updated_at": "2025-03-20 21:23:55"
                   },
                   "relationship": {
-                    "id": "e392ca32-94bb-4fef-9e5f-10a9140d6e56",
-                    "player_id": "32882818-4306-4698-a08f-35cd08b34f58",
-                    "pair_id": "e8786b51-94fa-4b71-8e71-781840a67685",
-                    "created_at": "2025-03-17 23:51:48",
-                    "updated_at": "2025-03-17 23:51:48"
+                    "id": "e138e8aa-751e-48c2-baa3-04acc2357be3",
+                    "player_id": "fcc16996-934e-4e19-a167-af92457859ae",
+                    "pair_id": "bc436a6a-57b8-43a2-b407-b4110a11dfe9",
+                    "created_at": "2025-03-20 21:23:55",
+                    "updated_at": "2025-03-20 21:23:55"
                   }
                 }
               ]
             },
             "relationship": {
-              "id": "76a7da90-679d-4460-87a0-086f000ec527",
-              "pair_id": "e8786b51-94fa-4b71-8e71-781840a67685",
-              "match_id": "0a328326-c541-4b3d-a9f7-ee22bcd2ca43",
+              "id": "92d1b565-7c42-4961-92c0-b116281c4ea4",
+              "pair_id": "bc436a6a-57b8-43a2-b407-b4110a11dfe9",
+              "match_id": "5ef5e266-002f-4934-a11a-3fcb18d53394",
               "score": 0,
               "is_winner": 0,
-              "created_at": "2025-03-18 01:21:28",
-              "updated_at": "2025-03-18 01:21:28"
+              "created_at": "2025-03-20 21:27:39",
+              "updated_at": "2025-03-20 21:27:39"
             }
           },
           {
             "pair": {
-              "id": "4aeacf96-38c9-4400-859c-461ae9a6024d",
+              "id": "94b132c7-7de0-48c0-8990-67c08fc677b7",
               "is_eliminated": 0,
               "is_active": 1,
-              "created_at": "2025-03-17 23:51:48",
-              "updated_at": "2025-03-17 23:51:48",
+              "created_at": "2025-03-20 21:23:55",
+              "updated_at": "2025-03-20 21:23:55",
               "registration_category": {
-                "id": "4291ffa3-0b5c-4c3c-bd29-31cfddb130be",
+                "id": "5d840f53-ffb0-427c-8554-bfff885d6b6a",
                 "name": "open",
                 "description": "Libre"
               },
               "players": [
                 {
                   "player": {
-                    "id": "39e1f248-7c69-40ce-9406-0b226c7207a5",
-                    "fullname": "Jorge Medina",
-                    "city": "Pueblo Nuevo",
-                    "weight": "76.50",
-                    "height": "1.82",
-                    "age": 32,
-                    "experience": 13,
+                    "id": "db520e4c-f133-4c2f-8a95-d4ae12115dcf",
+                    "fullname": "Enrique Castro",
+                    "city": "Juventino Rosas",
+                    "weight": "75.00",
+                    "height": "1.79",
+                    "age": 28,
+                    "experience": 12,
                     "is_active": 1,
-                    "created_at": "2025-03-17 23:51:48",
-                    "updated_at": "2025-03-17 23:51:48"
+                    "created_at": "2025-03-20 21:23:55",
+                    "updated_at": "2025-03-20 21:23:55"
                   },
                   "relationship": {
-                    "id": "61197d8f-0a14-4d3b-8ab4-fb3ed23db98a",
-                    "player_id": "39e1f248-7c69-40ce-9406-0b226c7207a5",
-                    "pair_id": "4aeacf96-38c9-4400-859c-461ae9a6024d",
-                    "created_at": "2025-03-17 23:51:48",
-                    "updated_at": "2025-03-17 23:51:48"
+                    "id": "d704a086-5b83-4a5d-af30-c3e078bd9994",
+                    "player_id": "db520e4c-f133-4c2f-8a95-d4ae12115dcf",
+                    "pair_id": "94b132c7-7de0-48c0-8990-67c08fc677b7",
+                    "created_at": "2025-03-20 21:23:55",
+                    "updated_at": "2025-03-20 21:23:55"
                   }
                 },
                 {
                   "player": {
-                    "id": "ba7c13e5-7b86-436f-a9cd-e454eb0dbe6f",
-                    "fullname": "Maricela Sánchez",
-                    "city": "Moroleón",
-                    "weight": "65.20",
-                    "height": "1.70",
-                    "age": 29,
-                    "experience": 8,
+                    "id": "4fafb80d-7603-483d-ae88-adc6a3c22030",
+                    "fullname": "Lourdes Herrera",
+                    "city": "Apaseo el Alto",
+                    "weight": "62.50",
+                    "height": "1.67",
+                    "age": 25,
+                    "experience": 7,
                     "is_active": 1,
-                    "created_at": "2025-03-17 23:51:48",
-                    "updated_at": "2025-03-17 23:51:48"
+                    "created_at": "2025-03-20 21:23:55",
+                    "updated_at": "2025-03-20 21:23:55"
                   },
                   "relationship": {
-                    "id": "e36c443e-ef6d-45d6-895b-421549034889",
-                    "player_id": "ba7c13e5-7b86-436f-a9cd-e454eb0dbe6f",
-                    "pair_id": "4aeacf96-38c9-4400-859c-461ae9a6024d",
-                    "created_at": "2025-03-17 23:51:48",
-                    "updated_at": "2025-03-17 23:51:48"
+                    "id": "e39cb145-dc87-43fc-8658-a9897a823c12",
+                    "player_id": "4fafb80d-7603-483d-ae88-adc6a3c22030",
+                    "pair_id": "94b132c7-7de0-48c0-8990-67c08fc677b7",
+                    "created_at": "2025-03-20 21:23:55",
+                    "updated_at": "2025-03-20 21:23:55"
                   }
                 }
               ]
             },
             "relationship": {
-              "id": "f6c6ca0c-b1d3-4446-9ea7-1b92c4eae5ce",
-              "pair_id": "4aeacf96-38c9-4400-859c-461ae9a6024d",
-              "match_id": "0a328326-c541-4b3d-a9f7-ee22bcd2ca43",
+              "id": "bc6137bf-8342-40b2-8a95-29b8ae6f89c0",
+              "pair_id": "94b132c7-7de0-48c0-8990-67c08fc677b7",
+              "match_id": "5ef5e266-002f-4934-a11a-3fcb18d53394",
               "score": 0,
               "is_winner": 0,
-              "created_at": "2025-03-18 01:21:28",
-              "updated_at": "2025-03-18 01:21:28"
+              "created_at": "2025-03-20 21:27:39",
+              "updated_at": "2025-03-20 21:27:39"
             }
           }
         ]
+      },
+      "relationship": {
+        "id": "4e68dbaa-759e-47f0-a300-6b0630fe4d26",
+        "group_id": "fb983148-d4f6-41c3-8fb5-bda2146f7fa6",
+        "match_id": "5ef5e266-002f-4934-a11a-3fcb18d53394",
+        "created_at": "2025-03-20 21:27:39",
+        "updated_at": "2025-03-20 21:27:39"
       }
     },
-    ... 
+    ...
   ],
   "status": 200,
   "description": "Information about the group matches with pairs players"

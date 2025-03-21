@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>📘</text></svg>">
+  <title>Partidos, parejas y jugadores de un grupo</title>
+  <style>body {
+  font-family: sans-serif;
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.navbar {
+  clear: both;
+  color: #069;
+  overflow: hidden;
+  background-color: #17a;
+  padding: 0.7ex;
+  border-top: 1px solid;
+  border-top-color: #ccc;
+  border-bottom: 1px solid #069;
+}
+
+.navbar a {
+  padding: 0.5ex 1ex;
+  color: #fff;
+}
+
+.navbar a:hover {
+  background-color: #069;
+}
+
+.navbar a, .sidebar a {
+  text-decoration: none;
+}
+
+.left {
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+
+.right {
+  float: right;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #069;
+}
+
+.sidebar {
+  float: left;
+  margin: 0 1px 0 0;
+  padding: 1em 0;
+  border-right: 1px dotted #ccc;
+  width: 200px;
+}
+
+.sidebar ul {
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li ul {
+  padding-left: 0.6em;
+}
+
+.sidebar li a {
+  display: block;
+  margin: 0;
+  padding: 0.8ex 2em 0.8ex 1em;
+}
+
+.sidebar a:hover, th, blockquote, pre, code {
+  background-color: #ddd;
+}
+
+.content {
+  clear: both;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+}
+
+.main {
+  margin: 0 0 0 200px;
+  max-width: 50em;
+  padding: 1.5em;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7ex;
+  text-align: center;
+}
+
+.footer p {
+  margin: 0.5ex 1ex;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 1em 1ex 0.5ex 0;
+}
+
+h2~*:not(h2) {
+  margin-left: 1ch;
+}
+
+h1 {
+  font-size: 2.0em;
+}
+
+h2 {
+  font-size: 1.9em;
+}
+
+h3 {
+  font-size: 1.6em;
+}
+
+h4 {
+  font-size: 1.5em;
+}
+
+h5 {
+  font-size: 1.2em;
+}
+
+h6 {
+  font-size: 1.1em;
+}
+
+pre, code {
+  margin: 0;
+  font-size: 100%;
+}
+
+pre {
+  padding: 1ch;
+}
+
+pre, table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 0.7ex;
+}
+
+blockquote::before {
+  float: left;
+  width: 1ch;
+  margin-right: 1ch;
+  content: ">";
+}
+
+img {
+  max-width: 100%;
+}
+
+@media (max-width: 999px) {
+  .sidebar {
+    float: none;
+    margin: 0;
+    width: 100%;
+    border: none;
+  }
+
+  .main {
+    margin: 0;
+  }
+
+  .footer {
+    flex-direction: column;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #000;
+    color: #fff;
+  }
+
+  .navbar {
+    border-top-color: #222;
+  }
+
+  .sidebar a:hover, th {
+    background-color: #222;
+  }
+
+  a {
+    color: #6cf;
+  }
+
+  .main img[src$=svg] {
+    filter: invert(1);
+  }
+
+  blockquote, pre, code {
+    background-color: #111;
+    border-color: #aaa;
+  }
+}</style>
+</head>
+<body>
+  <nav class="navbar"><a href="https://astra-exe.github.io/TDLF2025/api/index.html"><b>Inicio</b></a>
+<span class="right"><a href="https://github.com/Astra-exe/TDLF2025/tree/main/api">Repositorio</a> <a href="mailto:ricardogj08@riseup.net">Contacto</a></span></nav>
+  <div class="content">
+    <aside class="sidebar"><ul>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/analysis/index.html">Análisis de datos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/auth/index.html">Autenticación/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups/index.html">Grupos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups-matches/index.html"><b>Partidos de los grupos</b>/</a>
+<ul>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups-matches/pairsPlayers.html"><b>Partidos, parejas y jugadores de un grupo</b>/</a>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups-matches/show.html">Partidos de un grupo/</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups-pairs/index.html">Parejas de los grupos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/match-categories/index.html">Categorías de los partidos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/match-status/index.html">Estatus de los partidos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/matches/index.html">Partidos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/matches-pairs/index.html">Parejas de los partidos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs/index.html">Parejas/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs-players/index.html">Jugadores de las parejas/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/players/index.html">Jugadores/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/registration-categories/index.html">Categorías de inscripción/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/roles/index.html">Roles/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/rounds/index.html">Acciones de las rondas/</a>
+<ul>
+</ul>
+</li>
+</ul></aside>
+    <main class="main"><h1>Partidos, parejas y jugadores de un grupo</h1>
+<pre><code>[GET] /v1/groups/@id/matches/pairs/players
+</code></pre>
+<p>Parámetros de la ruta:</p>
+<table>
+<tr><th>Parámetros </th><th>Tipo </th><th>Requerido </th><th>Descripción </th></tr>
+<tr><td><code>id</code> </td><td><code>string</code> </td><td><code>true</code> </td><td>Identificador del grupo. </td></tr>
+</table>
+<p>Ejemplo:</p>
+<pre><code class="language-bash"> curl -X GET \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY' \
+  http://localhost:8080/v1/groups/@id/matches/pairs/players
+</code></pre>
+<p>Respuesta de la petición:</p>
+<pre><code class="language-json">{
+  &quot;data&quot;: [
+    {
+      &quot;match&quot;: {
+        &quot;id&quot;: &quot;0f5fed47-79d3-4428-bb3e-a3e69d196bdf&quot;,
+        &quot;is_active&quot;: 1,
+        &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+        &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+        &quot;registration_category&quot;: {
+          &quot;id&quot;: &quot;5d840f53-ffb0-427c-8554-bfff885d6b6a&quot;,
+          &quot;name&quot;: &quot;open&quot;,
+          &quot;description&quot;: &quot;Libre&quot;
+        },
+        &quot;match_category&quot;: {
+          &quot;id&quot;: &quot;ad14f6d0-5296-4a6e-a986-6a99a20365b7&quot;,
+          &quot;name&quot;: &quot;qualifier&quot;,
+          &quot;description&quot;: &quot;Clasificación&quot;
+        },
+        &quot;match_status&quot;: {
+          &quot;id&quot;: &quot;b06b08ff-0f65-456c-ae90-3dd740a26c9b&quot;,
+          &quot;name&quot;: &quot;scheduled&quot;,
+          &quot;description&quot;: &quot;Programado&quot;
+        },
+        &quot;pairs&quot;: [
+          {
+            &quot;pair&quot;: {
+              &quot;id&quot;: &quot;94b132c7-7de0-48c0-8990-67c08fc677b7&quot;,
+              &quot;is_eliminated&quot;: 0,
+              &quot;is_active&quot;: 1,
+              &quot;created_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+              &quot;updated_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+              &quot;registration_category&quot;: {
+                &quot;id&quot;: &quot;5d840f53-ffb0-427c-8554-bfff885d6b6a&quot;,
+                &quot;name&quot;: &quot;open&quot;,
+                &quot;description&quot;: &quot;Libre&quot;
+              },
+              &quot;players&quot;: [
+                {
+                  &quot;player&quot;: {
+                    &quot;id&quot;: &quot;db520e4c-f133-4c2f-8a95-d4ae12115dcf&quot;,
+                    &quot;fullname&quot;: &quot;Enrique Castro&quot;,
+                    &quot;city&quot;: &quot;Juventino Rosas&quot;,
+                    &quot;weight&quot;: &quot;75.00&quot;,
+                    &quot;height&quot;: &quot;1.79&quot;,
+                    &quot;age&quot;: 28,
+                    &quot;experience&quot;: 12,
+                    &quot;is_active&quot;: 1,
+                    &quot;created_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-20 21:23:55&quot;
+                  },
+                  &quot;relationship&quot;: {
+                    &quot;id&quot;: &quot;d704a086-5b83-4a5d-af30-c3e078bd9994&quot;,
+                    &quot;player_id&quot;: &quot;db520e4c-f133-4c2f-8a95-d4ae12115dcf&quot;,
+                    &quot;pair_id&quot;: &quot;94b132c7-7de0-48c0-8990-67c08fc677b7&quot;,
+                    &quot;created_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-20 21:23:55&quot;
+                  }
+                },
+                {
+                  &quot;player&quot;: {
+                    &quot;id&quot;: &quot;4fafb80d-7603-483d-ae88-adc6a3c22030&quot;,
+                    &quot;fullname&quot;: &quot;Lourdes Herrera&quot;,
+                    &quot;city&quot;: &quot;Apaseo el Alto&quot;,
+                    &quot;weight&quot;: &quot;62.50&quot;,
+                    &quot;height&quot;: &quot;1.67&quot;,
+                    &quot;age&quot;: 25,
+                    &quot;experience&quot;: 7,
+                    &quot;is_active&quot;: 1,
+                    &quot;created_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-20 21:23:55&quot;
+                  },
+                  &quot;relationship&quot;: {
+                    &quot;id&quot;: &quot;e39cb145-dc87-43fc-8658-a9897a823c12&quot;,
+                    &quot;player_id&quot;: &quot;4fafb80d-7603-483d-ae88-adc6a3c22030&quot;,
+                    &quot;pair_id&quot;: &quot;94b132c7-7de0-48c0-8990-67c08fc677b7&quot;,
+                    &quot;created_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-20 21:23:55&quot;
+                  }
+                }
+              ]
+            },
+            &quot;relationship&quot;: {
+              &quot;id&quot;: &quot;8eb56e51-e000-41ec-961e-0311189decc8&quot;,
+              &quot;pair_id&quot;: &quot;94b132c7-7de0-48c0-8990-67c08fc677b7&quot;,
+              &quot;match_id&quot;: &quot;0f5fed47-79d3-4428-bb3e-a3e69d196bdf&quot;,
+              &quot;score&quot;: 0,
+              &quot;is_winner&quot;: 0,
+              &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+              &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;
+            }
+          },
+          {
+            &quot;pair&quot;: {
+              &quot;id&quot;: &quot;5de44dbe-9953-448f-a9bb-064f737b4111&quot;,
+              &quot;is_eliminated&quot;: 0,
+              &quot;is_active&quot;: 1,
+              &quot;created_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+              &quot;updated_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+              &quot;registration_category&quot;: {
+                &quot;id&quot;: &quot;5d840f53-ffb0-427c-8554-bfff885d6b6a&quot;,
+                &quot;name&quot;: &quot;open&quot;,
+                &quot;description&quot;: &quot;Libre&quot;
+              },
+              &quot;players&quot;: [
+                {
+                  &quot;player&quot;: {
+                    &quot;id&quot;: &quot;fb093289-8c9b-4ed2-9e71-ef1b4c0cb67b&quot;,
+                    &quot;fullname&quot;: &quot;Roberto Díaz&quot;,
+                    &quot;city&quot;: &quot;Jerécuaro&quot;,
+                    &quot;weight&quot;: &quot;78.00&quot;,
+                    &quot;height&quot;: &quot;1.83&quot;,
+                    &quot;age&quot;: 34,
+                    &quot;experience&quot;: 13,
+                    &quot;is_active&quot;: 1,
+                    &quot;created_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-20 21:23:55&quot;
+                  },
+                  &quot;relationship&quot;: {
+                    &quot;id&quot;: &quot;14b2533e-f5e7-4792-b858-e62a359c8511&quot;,
+                    &quot;player_id&quot;: &quot;fb093289-8c9b-4ed2-9e71-ef1b4c0cb67b&quot;,
+                    &quot;pair_id&quot;: &quot;5de44dbe-9953-448f-a9bb-064f737b4111&quot;,
+                    &quot;created_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-20 21:23:55&quot;
+                  }
+                },
+                {
+                  &quot;player&quot;: {
+                    &quot;id&quot;: &quot;851b6bed-765c-4675-b77d-513fd64e3fc9&quot;,
+                    &quot;fullname&quot;: &quot;Claudia Mendoza&quot;,
+                    &quot;city&quot;: &quot;Tarimoro&quot;,
+                    &quot;weight&quot;: &quot;64.50&quot;,
+                    &quot;height&quot;: &quot;1.70&quot;,
+                    &quot;age&quot;: 27,
+                    &quot;experience&quot;: 8,
+                    &quot;is_active&quot;: 1,
+                    &quot;created_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-20 21:23:55&quot;
+                  },
+                  &quot;relationship&quot;: {
+                    &quot;id&quot;: &quot;8fb7d4f4-74cb-4911-821a-1f6bcd5154d1&quot;,
+                    &quot;player_id&quot;: &quot;851b6bed-765c-4675-b77d-513fd64e3fc9&quot;,
+                    &quot;pair_id&quot;: &quot;5de44dbe-9953-448f-a9bb-064f737b4111&quot;,
+                    &quot;created_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-20 21:23:55&quot;
+                  }
+                }
+              ]
+            },
+            &quot;relationship&quot;: {
+              &quot;id&quot;: &quot;a93ccf7e-dbfd-4541-830b-3e607fd94dd4&quot;,
+              &quot;pair_id&quot;: &quot;5de44dbe-9953-448f-a9bb-064f737b4111&quot;,
+              &quot;match_id&quot;: &quot;0f5fed47-79d3-4428-bb3e-a3e69d196bdf&quot;,
+              &quot;score&quot;: 0,
+              &quot;is_winner&quot;: 0,
+              &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+              &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;
+            }
+          }
+        ]
+      },
+      &quot;relationship&quot;: {
+        &quot;id&quot;: &quot;8779d8d2-dcab-42f7-a886-2f855224b72c&quot;,
+        &quot;group_id&quot;: &quot;fb983148-d4f6-41c3-8fb5-bda2146f7fa6&quot;,
+        &quot;match_id&quot;: &quot;0f5fed47-79d3-4428-bb3e-a3e69d196bdf&quot;,
+        &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+        &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;
+      }
+    },
+    {
+      &quot;match&quot;: {
+        &quot;id&quot;: &quot;5ef5e266-002f-4934-a11a-3fcb18d53394&quot;,
+        &quot;is_active&quot;: 1,
+        &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+        &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+        &quot;registration_category&quot;: {
+          &quot;id&quot;: &quot;5d840f53-ffb0-427c-8554-bfff885d6b6a&quot;,
+          &quot;name&quot;: &quot;open&quot;,
+          &quot;description&quot;: &quot;Libre&quot;
+        },
+        &quot;match_category&quot;: {
+          &quot;id&quot;: &quot;ad14f6d0-5296-4a6e-a986-6a99a20365b7&quot;,
+          &quot;name&quot;: &quot;qualifier&quot;,
+          &quot;description&quot;: &quot;Clasificación&quot;
+        },
+        &quot;match_status&quot;: {
+          &quot;id&quot;: &quot;b06b08ff-0f65-456c-ae90-3dd740a26c9b&quot;,
+          &quot;name&quot;: &quot;scheduled&quot;,
+          &quot;description&quot;: &quot;Programado&quot;
+        },
+        &quot;pairs&quot;: [
+          {
+            &quot;pair&quot;: {
+              &quot;id&quot;: &quot;bc436a6a-57b8-43a2-b407-b4110a11dfe9&quot;,
+              &quot;is_eliminated&quot;: 0,
+              &quot;is_active&quot;: 1,
+              &quot;created_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+              &quot;updated_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+              &quot;registration_category&quot;: {
+                &quot;id&quot;: &quot;5d840f53-ffb0-427c-8554-bfff885d6b6a&quot;,
+                &quot;name&quot;: &quot;open&quot;,
+                &quot;description&quot;: &quot;Libre&quot;
+              },
+              &quot;players&quot;: [
+                {
+                  &quot;player&quot;: {
+                    &quot;id&quot;: &quot;81c3cb2e-8e8b-451f-bea0-6e80ebb8fc71&quot;,
+                    &quot;fullname&quot;: &quot;Karla Rivas&quot;,
+                    &quot;city&quot;: &quot;Victoria&quot;,
+                    &quot;weight&quot;: &quot;63.00&quot;,
+                    &quot;height&quot;: &quot;1.68&quot;,
+                    &quot;age&quot;: 27,
+                    &quot;experience&quot;: 7,
+                    &quot;is_active&quot;: 1,
+                    &quot;created_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-20 21:23:55&quot;
+                  },
+                  &quot;relationship&quot;: {
+                    &quot;id&quot;: &quot;6411fcdc-3bda-48b0-a8eb-b8f67bf999ba&quot;,
+                    &quot;player_id&quot;: &quot;81c3cb2e-8e8b-451f-bea0-6e80ebb8fc71&quot;,
+                    &quot;pair_id&quot;: &quot;bc436a6a-57b8-43a2-b407-b4110a11dfe9&quot;,
+                    &quot;created_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-20 21:23:55&quot;
+                  }
+                },
+                {
+                  &quot;player&quot;: {
+                    &quot;id&quot;: &quot;fcc16996-934e-4e19-a167-af92457859ae&quot;,
+                    &quot;fullname&quot;: &quot;Ricardo Silva&quot;,
+                    &quot;city&quot;: &quot;Doctor Mora&quot;,
+                    &quot;weight&quot;: &quot;74.50&quot;,
+                    &quot;height&quot;: &quot;1.80&quot;,
+                    &quot;age&quot;: 32,
+                    &quot;experience&quot;: 12,
+                    &quot;is_active&quot;: 1,
+                    &quot;created_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-20 21:23:55&quot;
+                  },
+                  &quot;relationship&quot;: {
+                    &quot;id&quot;: &quot;e138e8aa-751e-48c2-baa3-04acc2357be3&quot;,
+                    &quot;player_id&quot;: &quot;fcc16996-934e-4e19-a167-af92457859ae&quot;,
+                    &quot;pair_id&quot;: &quot;bc436a6a-57b8-43a2-b407-b4110a11dfe9&quot;,
+                    &quot;created_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-20 21:23:55&quot;
+                  }
+                }
+              ]
+            },
+            &quot;relationship&quot;: {
+              &quot;id&quot;: &quot;92d1b565-7c42-4961-92c0-b116281c4ea4&quot;,
+              &quot;pair_id&quot;: &quot;bc436a6a-57b8-43a2-b407-b4110a11dfe9&quot;,
+              &quot;match_id&quot;: &quot;5ef5e266-002f-4934-a11a-3fcb18d53394&quot;,
+              &quot;score&quot;: 0,
+              &quot;is_winner&quot;: 0,
+              &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+              &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;
+            }
+          },
+          {
+            &quot;pair&quot;: {
+              &quot;id&quot;: &quot;94b132c7-7de0-48c0-8990-67c08fc677b7&quot;,
+              &quot;is_eliminated&quot;: 0,
+              &quot;is_active&quot;: 1,
+              &quot;created_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+              &quot;updated_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+              &quot;registration_category&quot;: {
+                &quot;id&quot;: &quot;5d840f53-ffb0-427c-8554-bfff885d6b6a&quot;,
+                &quot;name&quot;: &quot;open&quot;,
+                &quot;description&quot;: &quot;Libre&quot;
+              },
+              &quot;players&quot;: [
+                {
+                  &quot;player&quot;: {
+                    &quot;id&quot;: &quot;db520e4c-f133-4c2f-8a95-d4ae12115dcf&quot;,
+                    &quot;fullname&quot;: &quot;Enrique Castro&quot;,
+                    &quot;city&quot;: &quot;Juventino Rosas&quot;,
+                    &quot;weight&quot;: &quot;75.00&quot;,
+                    &quot;height&quot;: &quot;1.79&quot;,
+                    &quot;age&quot;: 28,
+                    &quot;experience&quot;: 12,
+                    &quot;is_active&quot;: 1,
+                    &quot;created_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-20 21:23:55&quot;
+                  },
+                  &quot;relationship&quot;: {
+                    &quot;id&quot;: &quot;d704a086-5b83-4a5d-af30-c3e078bd9994&quot;,
+                    &quot;player_id&quot;: &quot;db520e4c-f133-4c2f-8a95-d4ae12115dcf&quot;,
+                    &quot;pair_id&quot;: &quot;94b132c7-7de0-48c0-8990-67c08fc677b7&quot;,
+                    &quot;created_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-20 21:23:55&quot;
+                  }
+                },
+                {
+                  &quot;player&quot;: {
+                    &quot;id&quot;: &quot;4fafb80d-7603-483d-ae88-adc6a3c22030&quot;,
+                    &quot;fullname&quot;: &quot;Lourdes Herrera&quot;,
+                    &quot;city&quot;: &quot;Apaseo el Alto&quot;,
+                    &quot;weight&quot;: &quot;62.50&quot;,
+                    &quot;height&quot;: &quot;1.67&quot;,
+                    &quot;age&quot;: 25,
+                    &quot;experience&quot;: 7,
+                    &quot;is_active&quot;: 1,
+                    &quot;created_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-20 21:23:55&quot;
+                  },
+                  &quot;relationship&quot;: {
+                    &quot;id&quot;: &quot;e39cb145-dc87-43fc-8658-a9897a823c12&quot;,
+                    &quot;player_id&quot;: &quot;4fafb80d-7603-483d-ae88-adc6a3c22030&quot;,
+                    &quot;pair_id&quot;: &quot;94b132c7-7de0-48c0-8990-67c08fc677b7&quot;,
+                    &quot;created_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+                    &quot;updated_at&quot;: &quot;2025-03-20 21:23:55&quot;
+                  }
+                }
+              ]
+            },
+            &quot;relationship&quot;: {
+              &quot;id&quot;: &quot;bc6137bf-8342-40b2-8a95-29b8ae6f89c0&quot;,
+              &quot;pair_id&quot;: &quot;94b132c7-7de0-48c0-8990-67c08fc677b7&quot;,
+              &quot;match_id&quot;: &quot;5ef5e266-002f-4934-a11a-3fcb18d53394&quot;,
+              &quot;score&quot;: 0,
+              &quot;is_winner&quot;: 0,
+              &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+              &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;
+            }
+          }
+        ]
+      },
+      &quot;relationship&quot;: {
+        &quot;id&quot;: &quot;4e68dbaa-759e-47f0-a300-6b0630fe4d26&quot;,
+        &quot;group_id&quot;: &quot;fb983148-d4f6-41c3-8fb5-bda2146f7fa6&quot;,
+        &quot;match_id&quot;: &quot;5ef5e266-002f-4934-a11a-3fcb18d53394&quot;,
+        &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+        &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;
+      }
+    },
+    ...
+  ],
+  &quot;status&quot;: 200,
+  &quot;description&quot;: &quot;Information about the group matches with pairs players&quot;
+}
+</code></pre></main>
+  </div>
+  <div>
+    <hr>
+    <footer class="footer">
+      <p>Generated with <a href="https://notabug.org/ricardogj08/swiki" target="_blank">swiki</a>, a simple wiki generator written in POSIX <code>sh</code>.</p>
+      <p>© CC-BY-4.0</p>
+    </footer>
+  </div>
+</body>
+</html>

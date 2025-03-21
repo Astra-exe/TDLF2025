@@ -26,47 +26,63 @@ Respuesta de la petición:
 {
   "data": [
     {
-      "id": "3d27948c-6d99-4fb9-9ed5-753335be3218",
-      "group_id": "1a912849-496e-4673-9ba2-7475f33ce48f",
-      "is_active": 1,
-      "created_at": "2025-03-18 14:41:31",
-      "updated_at": "2025-03-18 14:41:31",
-      "registration_category": {
-        "id": "76d95a95-0fa3-4d58-a8ce-031a1db25b3c",
-        "name": "open",
-        "description": "Libre"
+      "match": {
+        "id": "0f5fed47-79d3-4428-bb3e-a3e69d196bdf",
+        "is_active": 1,
+        "created_at": "2025-03-20 21:27:39",
+        "updated_at": "2025-03-20 21:27:39",
+        "registration_category": {
+          "id": "5d840f53-ffb0-427c-8554-bfff885d6b6a",
+          "name": "open",
+          "description": "Libre"
+        },
+        "match_category": {
+          "id": "ad14f6d0-5296-4a6e-a986-6a99a20365b7",
+          "name": "qualifier",
+          "description": "Clasificación"
+        },
+        "match_status": {
+          "id": "b06b08ff-0f65-456c-ae90-3dd740a26c9b",
+          "name": "scheduled",
+          "description": "Programado"
+        }
       },
-      "match_category": {
-        "id": "6c7f2686-7b40-47ff-b5b5-cbd52c6cea89",
-        "name": "qualifier",
-        "description": "Clasificación"
-      },
-      "match_status": {
-        "id": "29d4b630-468f-4dcc-b775-5bad0b796a89",
-        "name": "scheduled",
-        "description": "Programado"
+      "relationship": {
+        "id": "8779d8d2-dcab-42f7-a886-2f855224b72c",
+        "group_id": "fb983148-d4f6-41c3-8fb5-bda2146f7fa6",
+        "match_id": "0f5fed47-79d3-4428-bb3e-a3e69d196bdf",
+        "created_at": "2025-03-20 21:27:39",
+        "updated_at": "2025-03-20 21:27:39"
       }
     },
     {
-      "id": "5cd099d7-ff1a-4877-9fd0-6fb49252e3bb",
-      "group_id": "1a912849-496e-4673-9ba2-7475f33ce48f",
-      "is_active": 1,
-      "created_at": "2025-03-18 14:41:31",
-      "updated_at": "2025-03-18 14:41:31",
-      "registration_category": {
-        "id": "76d95a95-0fa3-4d58-a8ce-031a1db25b3c",
-        "name": "open",
-        "description": "Libre"
+      "match": {
+        "id": "5ef5e266-002f-4934-a11a-3fcb18d53394",
+        "is_active": 1,
+        "created_at": "2025-03-20 21:27:39",
+        "updated_at": "2025-03-20 21:27:39",
+        "registration_category": {
+          "id": "5d840f53-ffb0-427c-8554-bfff885d6b6a",
+          "name": "open",
+          "description": "Libre"
+        },
+        "match_category": {
+          "id": "ad14f6d0-5296-4a6e-a986-6a99a20365b7",
+          "name": "qualifier",
+          "description": "Clasificación"
+        },
+        "match_status": {
+          "id": "b06b08ff-0f65-456c-ae90-3dd740a26c9b",
+          "name": "scheduled",
+          "description": "Programado"
+        }
       },
-      "match_category": {
-        "id": "6c7f2686-7b40-47ff-b5b5-cbd52c6cea89",
-        "name": "qualifier",
-        "description": "Clasificación"
-      },
-      "match_status": {
-        "id": "29d4b630-468f-4dcc-b775-5bad0b796a89",
-        "name": "scheduled",
-        "description": "Programado"
+      "relationship": {
+        "id": "4e68dbaa-759e-47f0-a300-6b0630fe4d26",
+        "group_id": "fb983148-d4f6-41c3-8fb5-bda2146f7fa6",
+        "match_id": "5ef5e266-002f-4934-a11a-3fcb18d53394",
+        "created_at": "2025-03-20 21:27:39",
+        "updated_at": "2025-03-20 21:27:39"
       }
     },
     ...
