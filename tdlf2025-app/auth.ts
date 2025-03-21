@@ -22,15 +22,30 @@ async function authLogin(username: string, password: string):  Promise<UserSessi
     // console.log({response})
     const { data } = await response.json()
 
-    if(response.ok && data.api_key) {
-      return {
-        id: '1',
-        username,
-        password,
-        apiKey: data.api_key,
-        expiresAt: Date.now() + (8 * 60 * 1000)
+    if(response.ok && data.api_key ) {
+      const responseMe = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/auth/me`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-API-KEY": data.api_key,
+        },
+      })
+      const {data: authMe} = await responseMe.json()
+
+      if( responseMe.ok && authMe.role.name) {
+        return {
+          id: '1',
+          username,
+          password,
+          apiKey: data.api_key,
+          role: authMe.role.name,
+          expiresAt: Date.now() + (8 * 60 * 1000)
+        }
       }
     }
+
+
+
   } catch (error) {
     console.error('Failed to fetch user:', error);
     throw new Error('Failed to fetch user.');
@@ -68,7 +83,7 @@ export const {auth, signIn, signOut} = NextAuth({
     },
   })],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user }: {token: any, user:any}) {
       // Add the API key to the JWT token
       console.log('jwt function')
       if (user) {
@@ -103,3 +118,26 @@ export const {auth, signIn, signOut} = NextAuth({
   },
   secret: process.env.AUTH_SECRET
 })
+
+
+// write an entire auth config with next-auth to use in nextJs that got this:
+// - two apiKey, one for admin and other fo rthe public routes
+// - username, expirestAt (8 min), password
+
+// write an example of how to use it in the private routes in the dashboard and how to do it in the public routes and access to the apiKey in each case to pass that apikey to the services of external API
+
+
+
+// ok it is possible to execute this code:
+
+//   const session = await auth()
+//   if (!session?.user?.apiKey) {
+//     throw new Error("Unauthorized")
+//   }
+// const apikey = session.user.apiKey
+
+// In some kind of layout and got access to the apiKey value in each children page where I need it (for the dashboard and the public routes) or maybe with a middleware with the apiKey and the role as headers?
+
+
+
+// ok is possible to do this with cookies?
