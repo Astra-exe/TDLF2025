@@ -38,6 +38,13 @@ final class SeederRolesTable extends AbstractMigration
                 'created_at' => Date::getCurrentDateTime(),
                 'updated_at' => Date::getCurrentDateTime(),
             ],
+            [
+                'id' => Database::getUuid(),
+                'name' => 'judge',
+                'description' => 'Juez',
+                'created_at' => Date::getCurrentDateTime(),
+                'updated_at' => Date::getCurrentDateTime(),
+            ],
         ]);
     }
 

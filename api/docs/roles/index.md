@@ -41,6 +41,13 @@ Respuesta de la petición:
       "description": "Solo lectura",
       "created_at": "2025-03-18 14:29:06",
       "updated_at": "2025-03-18 14:29:06"
+    },
+    {
+      "id": "f30b421c-8e30-4bf8-9984-64c3ecef85d0",
+      "name": "judge",
+      "description": "Juez",
+      "created_at": "2025-03-18 14:29:06",
+      "updated_at": "2025-03-18 14:29:06"
     }
   ],
   "status": 200,
