@@ -164,14 +164,17 @@ class MatchController extends BaseController
             $this->respondNotFound('The match information was not found');
         }
 
+        // Obtiene la relación del "grupo" con el "partido".
+        $relationship = $match->groupMatchPivot;
+
         // Obtiene el "grupo" del "partido".
-        $group = $match->_group;
+        $group = $relationship->_group;
 
         $group->setCustomData('registration_category', $group->registrationCategory);
 
         unset($group->registration_category_id);
 
-        $this->respond($group, 'Information about the match group');
+        $this->respond(['group' => $group, 'relationship' => $relationship], 'Information about the match group');
     }
 
     /**
