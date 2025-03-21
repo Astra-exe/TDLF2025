@@ -3,6 +3,7 @@ export type UserSession = {
   username: string;
   password: string;
   apiKey: string;
+  role: string;
   expiresAt: number;
 };
 
