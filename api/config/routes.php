@@ -89,8 +89,8 @@ return (static function () use ($app): void {
         $router->get($base_route('/v1/roles'), \App\Controllers\RoleController::class.'->index');
         $router->get($base_route('/v1/roles/@id'), \App\Controllers\RoleController::class.'->show');
 
-        // Acciones especiales.
-        $router->post($base_route('/v1/actions/randomize/groups/pairs/matches'), \App\Controllers\ActionsController::class.'->randomizeGroupsPairsMatches');
+        // Acciones de las rondas del torneo.
+        $router->post($base_route('/v1/rounds/init'), \App\Controllers\RoundController::class.'->init');
 
         // Modelo de datos.
         $router->get($base_route('/v1/analysis/profiles/@id'), App\Controllers\AnalysisController::class.'->profile');

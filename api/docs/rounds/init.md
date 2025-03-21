@@ -1,7 +1,7 @@
-# Asignar grupos, parejas y partidos de manera aleatoria
+# Asignar grupos, parejas y partidos
 
 ```
-[POST] /v1/randomize/groups/pairs/matches
+[POST] /v1/rounds/init
 ```
 
 > Realiza la acción una única vez para las [categorías de inscripción](../registration-categories/index.html) que no contengan grupos asignados.
@@ -12,7 +12,7 @@ Ejemplo:
 curl -X POST \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  http://localhost:8080/v1/randomize/groups/pairs/matches
+  http://localhost:8080/v1/rounds/init
 ```
 
 Respuesta de la petición:
@@ -21,6 +21,6 @@ Respuesta de la petición:
 {
   "data": null,
   "status": 200,
-  "description": "The action that randomly sets groups, pairs and matches was executed successfully"
+  "description": "The round init action was executed successfully"
 }
 ```

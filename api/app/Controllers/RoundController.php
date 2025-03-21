@@ -14,7 +14,7 @@ use App\Models\MatchStatusModel;
 use App\Models\PairModel;
 use App\Models\RegistrationCategoryModel;
 
-class ActionsController extends BaseController
+class RoundController extends BaseController
 {
     /**
      * Obtiene las reglas del torneo por "categoría de inscripción".
@@ -31,9 +31,9 @@ class ActionsController extends BaseController
      * Genera "grupos" para cada tipo de "categoría de inscripción"
      * y asigna las "parejas" de cada "categoría" a un "grupo" de manera aleatoria.
      *
-     * Después de crearlos se generan todas las "partidos" posibles del mismo "grupo".
+     * Después de crearlos se generan todos los "partidos" posibles del mismo "grupo".
      */
-    public function randomizeGroupsPairsMatches(): void
+    public function init(): void
     {
         $rules = $this->getRules();
 
@@ -193,6 +193,6 @@ class ActionsController extends BaseController
             }
         }
 
-        $this->respondNoContent('The action that randomly sets groups, pairs and matches was executed successfully');
+        $this->respondNoContent('The round init action was executed successfully');
     }
 }
