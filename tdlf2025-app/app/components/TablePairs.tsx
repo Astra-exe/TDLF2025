@@ -6,6 +6,7 @@ import {
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
+  getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import {
@@ -17,6 +18,7 @@ import {
   TableRow,
 } from "@/app/components/ui/table";
 import { Input } from "@/app/components/ui/input";
+import { Button } from "./ui/button";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -36,15 +38,26 @@ export default function DataTable<TData, TValue>({
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
     state: {
       columnFilters,
     },
     globalFilterFn: (row, columnId, filterValue) => {
       // Custom global filter logic for player1 and player2
-      const value = row.getValue(columnId);
-      return String(value)
-        .toLowerCase()
-        .includes(String(filterValue).toLowerCase());
+      const player1Name =
+        (
+          row.original as { player1: { name: string } }
+        ).player1?.name?.toLowerCase() ?? "";
+      const player2Name =
+        (
+          row.original as { player2: { name: string } }
+        ).player2?.name?.toLowerCase() ?? "";
+      const filterTerm = String(filterValue).toLowerCase();
+
+      return (
+        player1Name.includes(filterTerm) || player2Name.includes(filterTerm)
+        // || String(row.getValue(columnId)).toLowerCase().includes(filterTerm)
+      );
     },
   });
 
@@ -103,6 +116,26 @@ export default function DataTable<TData, TValue>({
             )}
           </TableBody>
         </Table>
+      </div>
+      <div className="flex items-center justify-end space-x-2 py-4">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+          className="cursor-pointer"
+        >
+          Anterior
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+          className="cursor-pointer"
+        >
+          Siguiente
+        </Button>
       </div>
     </div>
   );
