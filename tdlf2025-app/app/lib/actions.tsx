@@ -1,9 +1,9 @@
 "use server";
 
-import { signIn, signOut } from "@/auth";
+import { signIn, signOut, auth } from "@/auth";
 import { AuthError } from "next-auth";
 import type { Player, Pair } from "./definitions";
-import { auth } from "@/auth";
+import { revalidatePath } from "next/cache";
 
 type Credentials = {
   username: string;
@@ -103,5 +103,63 @@ export async function createPair(pairData: NewPair) {
       throw error;
     }
     throw new Error("Error desconocido al crear la pareja");
+  }
+}
+
+export async function deletePlayerById(id: string) {
+  try {
+    const session = await auth();
+    // console.log({ session });
+    if (!session?.user) {
+      throw new Error("No autorizado");
+    }
+
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/players/${id}`;
+    const response = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": session.user.apiKey,
+      },
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.log(errorData);
+      throw new Error(errorData?.description || "Error al eliminar el jugador");
+    }
+    const dataPlayerRemoved = await response.json();
+    revalidatePath("/dashboard/jugadores");
+    return dataPlayerRemoved;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function deletePairById(id: string) {
+  try {
+    const session = await auth();
+    // console.log({ session });
+    if (!session?.user) {
+      throw new Error("No autorizado");
+    }
+
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/pairs/${id}`;
+    const response = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": session.user.apiKey,
+      },
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.log(errorData);
+      throw new Error(errorData?.description || "Error al eliminar la pareja");
+    }
+    const dataPairRemoved = await response.json();
+    revalidatePath("/dashboard/parejas");
+    return dataPairRemoved;
+  } catch (error) {
+    throw error;
   }
 }
