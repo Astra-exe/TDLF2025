@@ -146,7 +146,7 @@ class PairController extends BaseController
             }
 
             if ($player->pairPlayerPivot->isHydrated()) {
-                $this->respondValidationErrors(
+                $this->respondResourceExists(
                     ['players' => 'The players are already in a pair'],
                     'The pair players information is incorrect');
             }

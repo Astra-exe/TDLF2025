@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Helpers\Password;
+
 /**
  * Modelo que representa la tabla
  * de los "usuarios de acceso".
@@ -26,5 +28,13 @@ class UserModel extends BaseModel
     public function getTableName(): string
     {
         return 'users';
+    }
+
+    protected function beforeInsert(BaseModel $self): void
+    {
+        parent::beforeInsert($self);
+
+        $self->password = Password::encrypt($self->password);
+        $self->is_active = 1;
     }
 }

@@ -99,8 +99,10 @@ trait ResponseTrait
      * Genera una respuesta cuando se intenta
      * crear un nuevo recurso que ya existe.
      */
-    protected function respondResourceExists(string $description, string $error = 'Resource exists'): void
+    protected function respondResourceExists(array $validations, string $description, string $error = 'Resource exists'): void
     {
+        $this->body['validations'] = $validations;
+
         $this->respondConflict($description, $error);
     }
 

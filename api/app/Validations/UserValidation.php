@@ -21,12 +21,14 @@ class UserValidation extends BaseValidation
             'fullname' => ['alpha_space', 'between_len' => [1, 128]],
             'password' => ['regex' => '/^\S+$/', 'between_len' => [8, 64]],
             'is_active' => ['boolean'],
+            'password_confirm' => ['equalsfield' => 'password'],
         ];
     }
 
     public static function getAllFilters(): array
     {
         return [
+            'fullname' => 'trim',
             'email' => ['lower_case'],
             'is_active' => ['boolean'],
         ];

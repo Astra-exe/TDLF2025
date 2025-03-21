@@ -26,6 +26,13 @@ return (static function () use ($app): void {
         $router->post($base_route('/v1/auth/refresh'), \App\Controllers\AuthController::class.'->refresh');
         $router->post($base_route('/v1/auth/logout'), \App\Controllers\AuthController::class.'->logout');
 
+        // Usuarios de acceso.
+        $router->get($base_route('/v1/users'), \App\Controllers\UserController::class.'->index');
+        $router->post($base_route('/v1/users'), \App\Controllers\UserController::class.'->create');
+        $router->get($base_route('/v1/users/@id'), \App\Controllers\UserController::class.'->show');
+        $router->put($base_route('/v1/users/@id'), \App\Controllers\UserController::class.'->update');
+        $router->delete($base_route('/v1/users/@id'), \App\Controllers\UserController::class.'->delete');
+
         // Categorías de inscripción de parejas.
         $router->get($base_route('/v1/categories/registrations'), \App\Controllers\RegistrationCategoryController::class.'->index');
         $router->get($base_route('/v1/categories/registrations/@id'), \App\Controllers\RegistrationCategoryController::class.'->show');
