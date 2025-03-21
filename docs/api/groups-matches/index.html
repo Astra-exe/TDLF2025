@@ -317,6 +317,346 @@ img {
     <main class="main"><h1>Partidos de los grupos</h1>
 <p>Partidos asignados a los grupos.</p>
 <pre><code>[GET] /v1/groups/matches
+</code></pre>
+<p>Parámetros de consulta:</p>
+<table>
+<tr><th>Parámetro </th><th>Tipo </th><th>Rango </th><th>Por defecto </th><th>Descripción </th></tr>
+<tr><td><code>page</code> </td><td><code>integer</code> </td><td><code>min_numeric: 1</code> </td><td><code>1</code> </td><td>Número de la página de resultados de los grupos con sus partidos. </td></tr>
+<tr><td><code>filterBy</code> </td><td><code>string</code> </td><td><code>contains: [name, description]</code> </td><td><code>name</code> </td><td>Campo de búsqueda de los grupos con sus partidos. </td></tr>
+<tr><td><code>orderBy</code> </td><td><code>string</code> </td><td><code>contains: [name, description, created_at, updated_at]</code> </td><td><code>name</code> </td><td>Campo de ordenamiento de los grupos con sus partidos. </td></tr>
+<tr><td><code>sortBy</code> </td><td><code>string</code> </td><td><code>contains: [asc, desc]</code> </td><td><code>asc</code> </td><td>Modo de ordenamiento de los grupos con sus partidos. </td></tr>
+<tr><td><code>registration_category_id</code> </td><td><code>string</code> </td><td><code>exact_len: 36</code> </td><td><code>null</code> </td><td>Identificador de la categoría de inscripción de los grupos con sus partidos (<a href="../registration-categories/index.html">ver</a>). </td></tr>
+<tr><td><code>is_eliminated</code> </td><td><code>boolean</code> </td><td><code>contains: [yes/no, on/off, 1/0, true/false]</code> </td><td><code>null</code> </td><td>Filtrar los grupos con sus partidos por estatus de eliminación. </td></tr>
+<tr><td><code>is_active</code> </td><td><code>boolean</code> </td><td><code>contains: [yes/no, on/off, 1/0, true/false]</code> </td><td><code>null</code> </td><td>Filtrar los grupos con sus partidos por estatus de actividad. </td></tr>
+</table>
+<p>Ejemplo:</p>
+<pre><code class="language-bash">curl -X GET \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY' \
+  http://localhost:8080/v1/groups/matches?page=2&amp;filterBy=name&amp;orderBy=name&amp;sortBy=asc&amp;registration_category_id=cba89529-0ba9-49e4-85ad-83e63c8e9d7e&amp;is_eliminated=false&amp;is_active=true
+</code></pre>
+<p>Respuesta de la petición:</p>
+<pre><code class="language-json">{
+  &quot;data&quot;: [
+    {
+      &quot;group&quot;: {
+        &quot;id&quot;: &quot;af30be04-7be1-47a9-afd7-c2faa611cf5a&quot;,
+        &quot;name&quot;: &quot;A_2025&quot;,
+        &quot;description&quot;: &quot;A&quot;,
+        &quot;is_eliminated&quot;: 0,
+        &quot;is_active&quot;: 1,
+        &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+        &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+        &quot;registration_category&quot;: {
+          &quot;id&quot;: &quot;21c13c24-af5d-45bd-9294-2de7e175ceee&quot;,
+          &quot;name&quot;: &quot;seniors&quot;,
+          &quot;description&quot;: &quot;50 y más&quot;
+        }
+      },
+      &quot;matches&quot;: [
+        {
+          &quot;match&quot;: {
+            &quot;id&quot;: &quot;537b09ef-1f93-40cc-b774-8b454cae31f8&quot;,
+            &quot;is_active&quot;: 1,
+            &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;registration_category&quot;: {
+              &quot;id&quot;: &quot;21c13c24-af5d-45bd-9294-2de7e175ceee&quot;,
+              &quot;name&quot;: &quot;seniors&quot;,
+              &quot;description&quot;: &quot;50 y más&quot;
+            },
+            &quot;match_category&quot;: {
+              &quot;id&quot;: &quot;ad14f6d0-5296-4a6e-a986-6a99a20365b7&quot;,
+              &quot;name&quot;: &quot;qualifier&quot;,
+              &quot;description&quot;: &quot;Clasificación&quot;
+            },
+            &quot;match_status&quot;: {
+              &quot;id&quot;: &quot;b06b08ff-0f65-456c-ae90-3dd740a26c9b&quot;,
+              &quot;name&quot;: &quot;scheduled&quot;,
+              &quot;description&quot;: &quot;Programado&quot;
+            }
+          },
+          &quot;relationship&quot;: {
+            &quot;id&quot;: &quot;fce0a11f-1550-465d-914f-a732ba531423&quot;,
+            &quot;group_id&quot;: &quot;af30be04-7be1-47a9-afd7-c2faa611cf5a&quot;,
+            &quot;match_id&quot;: &quot;537b09ef-1f93-40cc-b774-8b454cae31f8&quot;,
+            &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;
+          }
+        },
+        {
+          &quot;match&quot;: {
+            &quot;id&quot;: &quot;5d9334eb-6f35-4c28-90bc-d7fe0ebbf50b&quot;,
+            &quot;is_active&quot;: 1,
+            &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;registration_category&quot;: {
+              &quot;id&quot;: &quot;21c13c24-af5d-45bd-9294-2de7e175ceee&quot;,
+              &quot;name&quot;: &quot;seniors&quot;,
+              &quot;description&quot;: &quot;50 y más&quot;
+            },
+            &quot;match_category&quot;: {
+              &quot;id&quot;: &quot;ad14f6d0-5296-4a6e-a986-6a99a20365b7&quot;,
+              &quot;name&quot;: &quot;qualifier&quot;,
+              &quot;description&quot;: &quot;Clasificación&quot;
+            },
+            &quot;match_status&quot;: {
+              &quot;id&quot;: &quot;b06b08ff-0f65-456c-ae90-3dd740a26c9b&quot;,
+              &quot;name&quot;: &quot;scheduled&quot;,
+              &quot;description&quot;: &quot;Programado&quot;
+            }
+          },
+          &quot;relationship&quot;: {
+            &quot;id&quot;: &quot;4158d9fe-54ae-45c4-91fc-d5738880a0a7&quot;,
+            &quot;group_id&quot;: &quot;af30be04-7be1-47a9-afd7-c2faa611cf5a&quot;,
+            &quot;match_id&quot;: &quot;5d9334eb-6f35-4c28-90bc-d7fe0ebbf50b&quot;,
+            &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;
+          }
+        },
+        {
+          &quot;match&quot;: {
+            &quot;id&quot;: &quot;fb905589-2dda-43f4-aed3-e7e4323bff36&quot;,
+            &quot;is_active&quot;: 1,
+            &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;registration_category&quot;: {
+              &quot;id&quot;: &quot;21c13c24-af5d-45bd-9294-2de7e175ceee&quot;,
+              &quot;name&quot;: &quot;seniors&quot;,
+              &quot;description&quot;: &quot;50 y más&quot;
+            },
+            &quot;match_category&quot;: {
+              &quot;id&quot;: &quot;ad14f6d0-5296-4a6e-a986-6a99a20365b7&quot;,
+              &quot;name&quot;: &quot;qualifier&quot;,
+              &quot;description&quot;: &quot;Clasificación&quot;
+            },
+            &quot;match_status&quot;: {
+              &quot;id&quot;: &quot;b06b08ff-0f65-456c-ae90-3dd740a26c9b&quot;,
+              &quot;name&quot;: &quot;scheduled&quot;,
+              &quot;description&quot;: &quot;Programado&quot;
+            }
+          },
+          &quot;relationship&quot;: {
+            &quot;id&quot;: &quot;5dae6c51-e966-4d1a-87f0-ccf4fac0c3ca&quot;,
+            &quot;group_id&quot;: &quot;af30be04-7be1-47a9-afd7-c2faa611cf5a&quot;,
+            &quot;match_id&quot;: &quot;fb905589-2dda-43f4-aed3-e7e4323bff36&quot;,
+            &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;
+          }
+        }
+      ]
+    },
+    {
+      &quot;group&quot;: {
+        &quot;id&quot;: &quot;fb983148-d4f6-41c3-8fb5-bda2146f7fa6&quot;,
+        &quot;name&quot;: &quot;A_2025&quot;,
+        &quot;description&quot;: &quot;A&quot;,
+        &quot;is_eliminated&quot;: 0,
+        &quot;is_active&quot;: 1,
+        &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+        &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+        &quot;registration_category&quot;: {
+          &quot;id&quot;: &quot;5d840f53-ffb0-427c-8554-bfff885d6b6a&quot;,
+          &quot;name&quot;: &quot;open&quot;,
+          &quot;description&quot;: &quot;Libre&quot;
+        }
+      },
+      &quot;matches&quot;: [
+        {
+          &quot;match&quot;: {
+            &quot;id&quot;: &quot;0f5fed47-79d3-4428-bb3e-a3e69d196bdf&quot;,
+            &quot;is_active&quot;: 1,
+            &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;registration_category&quot;: {
+              &quot;id&quot;: &quot;5d840f53-ffb0-427c-8554-bfff885d6b6a&quot;,
+              &quot;name&quot;: &quot;open&quot;,
+              &quot;description&quot;: &quot;Libre&quot;
+            },
+            &quot;match_category&quot;: {
+              &quot;id&quot;: &quot;ad14f6d0-5296-4a6e-a986-6a99a20365b7&quot;,
+              &quot;name&quot;: &quot;qualifier&quot;,
+              &quot;description&quot;: &quot;Clasificación&quot;
+            },
+            &quot;match_status&quot;: {
+              &quot;id&quot;: &quot;b06b08ff-0f65-456c-ae90-3dd740a26c9b&quot;,
+              &quot;name&quot;: &quot;scheduled&quot;,
+              &quot;description&quot;: &quot;Programado&quot;
+            }
+          },
+          &quot;relationship&quot;: {
+            &quot;id&quot;: &quot;8779d8d2-dcab-42f7-a886-2f855224b72c&quot;,
+            &quot;group_id&quot;: &quot;fb983148-d4f6-41c3-8fb5-bda2146f7fa6&quot;,
+            &quot;match_id&quot;: &quot;0f5fed47-79d3-4428-bb3e-a3e69d196bdf&quot;,
+            &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;
+          }
+        },
+        {
+          &quot;match&quot;: {
+            &quot;id&quot;: &quot;5ef5e266-002f-4934-a11a-3fcb18d53394&quot;,
+            &quot;is_active&quot;: 1,
+            &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;registration_category&quot;: {
+              &quot;id&quot;: &quot;5d840f53-ffb0-427c-8554-bfff885d6b6a&quot;,
+              &quot;name&quot;: &quot;open&quot;,
+              &quot;description&quot;: &quot;Libre&quot;
+            },
+            &quot;match_category&quot;: {
+              &quot;id&quot;: &quot;ad14f6d0-5296-4a6e-a986-6a99a20365b7&quot;,
+              &quot;name&quot;: &quot;qualifier&quot;,
+              &quot;description&quot;: &quot;Clasificación&quot;
+            },
+            &quot;match_status&quot;: {
+              &quot;id&quot;: &quot;b06b08ff-0f65-456c-ae90-3dd740a26c9b&quot;,
+              &quot;name&quot;: &quot;scheduled&quot;,
+              &quot;description&quot;: &quot;Programado&quot;
+            }
+          },
+          &quot;relationship&quot;: {
+            &quot;id&quot;: &quot;4e68dbaa-759e-47f0-a300-6b0630fe4d26&quot;,
+            &quot;group_id&quot;: &quot;fb983148-d4f6-41c3-8fb5-bda2146f7fa6&quot;,
+            &quot;match_id&quot;: &quot;5ef5e266-002f-4934-a11a-3fcb18d53394&quot;,
+            &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;
+          }
+        },
+        {
+          &quot;match&quot;: {
+            &quot;id&quot;: &quot;66076df0-c5e6-4cab-a79a-ace28bb79421&quot;,
+            &quot;is_active&quot;: 1,
+            &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;registration_category&quot;: {
+              &quot;id&quot;: &quot;5d840f53-ffb0-427c-8554-bfff885d6b6a&quot;,
+              &quot;name&quot;: &quot;open&quot;,
+              &quot;description&quot;: &quot;Libre&quot;
+            },
+            &quot;match_category&quot;: {
+              &quot;id&quot;: &quot;ad14f6d0-5296-4a6e-a986-6a99a20365b7&quot;,
+              &quot;name&quot;: &quot;qualifier&quot;,
+              &quot;description&quot;: &quot;Clasificación&quot;
+            },
+            &quot;match_status&quot;: {
+              &quot;id&quot;: &quot;b06b08ff-0f65-456c-ae90-3dd740a26c9b&quot;,
+              &quot;name&quot;: &quot;scheduled&quot;,
+              &quot;description&quot;: &quot;Programado&quot;
+            }
+          },
+          &quot;relationship&quot;: {
+            &quot;id&quot;: &quot;e9fb6819-991f-4891-a98f-c0c8ae9bc1d6&quot;,
+            &quot;group_id&quot;: &quot;fb983148-d4f6-41c3-8fb5-bda2146f7fa6&quot;,
+            &quot;match_id&quot;: &quot;66076df0-c5e6-4cab-a79a-ace28bb79421&quot;,
+            &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;
+          }
+        },
+        {
+          &quot;match&quot;: {
+            &quot;id&quot;: &quot;876608be-f594-4911-98d2-49e9c05cbb99&quot;,
+            &quot;is_active&quot;: 1,
+            &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;registration_category&quot;: {
+              &quot;id&quot;: &quot;5d840f53-ffb0-427c-8554-bfff885d6b6a&quot;,
+              &quot;name&quot;: &quot;open&quot;,
+              &quot;description&quot;: &quot;Libre&quot;
+            },
+            &quot;match_category&quot;: {
+              &quot;id&quot;: &quot;ad14f6d0-5296-4a6e-a986-6a99a20365b7&quot;,
+              &quot;name&quot;: &quot;qualifier&quot;,
+              &quot;description&quot;: &quot;Clasificación&quot;
+            },
+            &quot;match_status&quot;: {
+              &quot;id&quot;: &quot;b06b08ff-0f65-456c-ae90-3dd740a26c9b&quot;,
+              &quot;name&quot;: &quot;scheduled&quot;,
+              &quot;description&quot;: &quot;Programado&quot;
+            }
+          },
+          &quot;relationship&quot;: {
+            &quot;id&quot;: &quot;eb40d282-689a-4cb9-99f5-6c5ca50e0a64&quot;,
+            &quot;group_id&quot;: &quot;fb983148-d4f6-41c3-8fb5-bda2146f7fa6&quot;,
+            &quot;match_id&quot;: &quot;876608be-f594-4911-98d2-49e9c05cbb99&quot;,
+            &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;
+          }
+        },
+        {
+          &quot;match&quot;: {
+            &quot;id&quot;: &quot;99348b26-8323-4674-81ea-4e6c93da5798&quot;,
+            &quot;is_active&quot;: 1,
+            &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;registration_category&quot;: {
+              &quot;id&quot;: &quot;5d840f53-ffb0-427c-8554-bfff885d6b6a&quot;,
+              &quot;name&quot;: &quot;open&quot;,
+              &quot;description&quot;: &quot;Libre&quot;
+            },
+            &quot;match_category&quot;: {
+              &quot;id&quot;: &quot;ad14f6d0-5296-4a6e-a986-6a99a20365b7&quot;,
+              &quot;name&quot;: &quot;qualifier&quot;,
+              &quot;description&quot;: &quot;Clasificación&quot;
+            },
+            &quot;match_status&quot;: {
+              &quot;id&quot;: &quot;b06b08ff-0f65-456c-ae90-3dd740a26c9b&quot;,
+              &quot;name&quot;: &quot;scheduled&quot;,
+              &quot;description&quot;: &quot;Programado&quot;
+            }
+          },
+          &quot;relationship&quot;: {
+            &quot;id&quot;: &quot;a12c06fc-3b75-453d-99dd-884ce420d3dc&quot;,
+            &quot;group_id&quot;: &quot;fb983148-d4f6-41c3-8fb5-bda2146f7fa6&quot;,
+            &quot;match_id&quot;: &quot;99348b26-8323-4674-81ea-4e6c93da5798&quot;,
+            &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;
+          }
+        },
+        {
+          &quot;match&quot;: {
+            &quot;id&quot;: &quot;b91a8d6b-9063-443d-a627-cc5e07fe6b2c&quot;,
+            &quot;is_active&quot;: 1,
+            &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;registration_category&quot;: {
+              &quot;id&quot;: &quot;5d840f53-ffb0-427c-8554-bfff885d6b6a&quot;,
+              &quot;name&quot;: &quot;open&quot;,
+              &quot;description&quot;: &quot;Libre&quot;
+            },
+            &quot;match_category&quot;: {
+              &quot;id&quot;: &quot;ad14f6d0-5296-4a6e-a986-6a99a20365b7&quot;,
+              &quot;name&quot;: &quot;qualifier&quot;,
+              &quot;description&quot;: &quot;Clasificación&quot;
+            },
+            &quot;match_status&quot;: {
+              &quot;id&quot;: &quot;b06b08ff-0f65-456c-ae90-3dd740a26c9b&quot;,
+              &quot;name&quot;: &quot;scheduled&quot;,
+              &quot;description&quot;: &quot;Programado&quot;
+            }
+          },
+          &quot;relationship&quot;: {
+            &quot;id&quot;: &quot;ce404089-6724-41db-8b13-e66f1e32ec7a&quot;,
+            &quot;group_id&quot;: &quot;fb983148-d4f6-41c3-8fb5-bda2146f7fa6&quot;,
+            &quot;match_id&quot;: &quot;b91a8d6b-9063-443d-a627-cc5e07fe6b2c&quot;,
+            &quot;created_at&quot;: &quot;2025-03-20 21:27:39&quot;,
+            &quot;updated_at&quot;: &quot;2025-03-20 21:27:39&quot;
+          }
+        }
+      ]
+    },
+    ...
+  ],
+  &quot;status&quot;: 200,
+  &quot;pagination&quot;: {
+    &quot;page&quot;: 1,
+    &quot;limit&quot;: 8,
+    &quot;total&quot;: 2,
+    &quot;count&quot;: 10,
+    &quot;offset&quot;: 0
+  },
+  &quot;description&quot;: &quot;Information about all the groups matches with pagination&quot;
+}
 </code></pre></main>
   </div>
   <div>

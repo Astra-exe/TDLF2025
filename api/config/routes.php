@@ -58,13 +58,14 @@ return (static function () use ($app): void {
         $router->get($base_route('/v1/groups/@id/pairs'), \App\Controllers\GroupPairController::class.'->show');
         $router->get($base_route('/v1/groups/@id/pairs/players'), \App\Controllers\GroupPairController::class.'->players');
 
+        // Grupos y partidos.
+        $router->get($base_route('/v1/groups/matches'), \App\Controllers\GroupMatchController::class.'->index');
+        $router->get($base_route('/v1/groups/@id/matches'), \App\Controllers\GroupMatchController::class.'->show');
+        $router->get($base_route('/v1/groups/@id/matches/pairs/players'), \App\Controllers\GroupMatchController::class.'->pairsPLayers');
+
         // Grupos.
         $router->get($base_route('/v1/groups'), \App\Controllers\GroupController::class.'->index');
         $router->get($base_route('/v1/groups/@id'), \App\Controllers\GroupController::class.'->show');
-
-        // Grupos y partidos.
-        $router->get($base_route('/v1/groups/@id/matches'), \App\Controllers\GroupMatchController::class.'->show');
-        $router->get($base_route('/v1/groups/@id/matches/pairs/players'), \App\Controllers\GroupMatchController::class.'->pairsPLayers');
 
         // Partidos y parejas.
         $router->get($base_route('/v1/matches/pairs'), \App\Controllers\MatchPairController::class.'->index');

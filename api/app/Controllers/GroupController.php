@@ -121,4 +121,9 @@ class GroupController extends BaseController
 
         $this->respond($group, 'Information about the group');
     }
+
+    /**
+     * Modifica la información de un "grupo".
+     */
+    public function update(string $id): void {}
 }
