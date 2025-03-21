@@ -76,7 +76,7 @@ export default function ComboBox({
                     {suggestions.map((suggestion) => (
                       <CommandItem
                         value={suggestion.fullname}
-                        key={suggestion.id}
+                        key={`${name}-${suggestion.id}`}
                         onSelect={() => {
                           field.onChange(suggestion.id);
                           setOpen(false);
