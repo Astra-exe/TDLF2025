@@ -99,8 +99,9 @@ export default function LoginForm() {
           />
           <input type="hidden" name="redirectTo" value={callbackUrl} />
           <Button
-            className="cursor-pointer block ml-auto text-white"
+            className="cursor-pointer block ml-auto text-white disabled:opacity-70"
             type="submit"
+            disabled={isPending}
             aria-disabled={isPending}
           >
             Log in
