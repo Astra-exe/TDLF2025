@@ -1,3 +1,7 @@
+import { PairsPlayers } from "@/app/lib/definitions";
+import { PairRow } from "@/app/components/PairsCols";
+import { auth } from "@/auth";
+
 const URL_API = `${process.env.NEXT_PUBLIC_API_URL}/v1`;
 
 type FetchPlayersProps = {
@@ -8,6 +12,14 @@ type FetchPlayersProps = {
   orderBy?: string;
   sortBy?: string;
 };
+type FetchPairsProps = {
+  apiKey: string;
+  page: number;
+  registration_category_id?: string;
+  orderBy?: string;
+  sortBy?: string;
+  is_eliminated?: boolean | null;
+};
 
 export async function fetchPlayers({
   apiKey,
@@ -17,7 +29,7 @@ export async function fetchPlayers({
   orderBy = "",
   sortBy = "",
 }: FetchPlayersProps) {
-  const url = `${URL_API}/players?page=${page}`;
+  const url = `${URL_API}/players?page=${page}&search=${search}&filterBy=${filterBy}&orderBy=${orderBy}&sortBy=${sortBy}&is_active=true`;
   const response = await fetch(url, {
     method: "GET",
     headers: {
@@ -35,8 +47,15 @@ export async function fetchPlayers({
   return data;
 }
 
-export async function fetchPairs(apiKey: string) {
-  const url = `${URL_API}/pairs/players`;
+export async function fetchPairs({
+  apiKey,
+  page = 1,
+  orderBy = "",
+  sortBy = "",
+  registration_category_id = "",
+  is_eliminated = null,
+}: FetchPairsProps) {
+  const url = `${URL_API}/pairs/players?page=${page}&orderBy=${orderBy}&sortBy=${sortBy}&registration_category_id=${registration_category_id}&is_eliminated=${is_eliminated}&is_active=true`;
   const response = await fetch(url, {
     method: "GET",
     headers: {
@@ -150,26 +169,37 @@ export async function fetchPlayerById({
 }
 
 export async function fetchCardsData(apiKey: string) {
+  const { data: categoriesData } = await fetchCategories(apiKey);
+  const [category1, category2] = categoriesData;
   const playersPromise = fetchPlayers({ apiKey, page: 1 });
-  const pairsPromise = fetchPairs(apiKey);
-  // const playersOpenPromise = fetchPlayers({apiKey, page: 1, search: 'open',filterBy: 'category',})
-  // const playersSeniorPromise = fetchPlayers({apiKey, page: 1, search: 'senior',filterBy: 'category',})
+  const pairsPromise = fetchPairs({ apiKey, page: 1 });
+  const pairsSeniorPromise = fetchPairs({
+    apiKey,
+    page: 1,
+    registration_category_id: category1.id,
+  });
+  const pairsOpenPromise = fetchPairs({
+    apiKey,
+    page: 1,
+    registration_category_id: category2.id,
+  });
 
   const data = await Promise.all([
     playersPromise,
     pairsPromise,
-    // playersOpenPromise,
-    // playersSeniorPromise
+    pairsOpenPromise,
+    pairsSeniorPromise,
   ]);
-
   const numberOfPlayers = data[0].pagination.count;
-  const numberOfPairs = data[0].pagination.count;
+  const numberOfPairs = data[1].pagination.count;
+  const numberOfPairsOpen = data[2].pagination.count;
+  const numberOfPairsSenior = data[3].pagination.count;
 
   return {
     numberOfPlayers,
     numberOfPairs,
-    // numberOfPlayersOpen
-    // numberOfPlayersSenior
+    numberOfPairsOpen,
+    numberOfPairsSenior,
     // numberOfGroups
     // numberOfMatches
     // numberOfGroupsOpen
@@ -177,6 +207,146 @@ export async function fetchCardsData(apiKey: string) {
     // numberOfMatchesOpen
     // numberOfMatchesSenior
   };
+}
+
+export async function fetchAllPairs(apiKey: string) {
+  const allPairs = [];
+
+  // Fetch the first page to get the total pages
+  const { data: dataPairsPage1, pagination } = await fetchPairs({
+    page: 1,
+    apiKey: apiKey,
+  });
+  const totalPages = pagination.total;
+  allPairs.push(...dataPairsPage1);
+
+  // Loop through each page
+  for (let i = 2; i <= totalPages; i++) {
+    const { data: dataRestPairsPages } = await fetchPairs({
+      page: i,
+      apiKey,
+    });
+    allPairs.push(...dataRestPairsPages);
+  }
+
+  return allPairs;
+}
+
+export async function login(username: string, password: string) {
+  const url = `${URL_API}/auth/login`;
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify({
+        nickname: username,
+        password: password,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    // console.log({response})
+    const { data } = await response.json();
+
+    if (response.ok && data.api_key) {
+      return {
+        apiKey: data.api_key,
+      };
+    }
+  } catch (error) {
+    console.error("Failed to fetch user:", error);
+    throw new Error("Failed to fetch user.");
+  }
+}
+
+export async function fetchProfile({
+  apiKey,
+  idPlayer,
+}: {
+  apiKey: string;
+  idPlayer: string;
+}) {
+  const url = `${URL_API}/analysis/profiles/${idPlayer}`;
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": apiKey,
+      },
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.log(errorData);
+      throw new Error(
+        errorData?.description || "Error al obtener el perfil del jugador"
+      );
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function fetchTablePairData(apiKey: string) {
+  const dataPairs = await fetchAllPairs(apiKey);
+  const tableDataPromises = dataPairs.map(async (pairData: PairsPlayers[]) => {
+    const [player1Info, player2Info] = pairData;
+    const idPair = player1Info.relationship.pair_id;
+    const pairInfo = await fetchPairById({ idPair, apiKey });
+
+    return {
+      id: idPair,
+      player1: {
+        id: player1Info?.player?.id,
+        name: player1Info?.player?.fullname ?? "No reconocido",
+      },
+      player2: {
+        id: player2Info?.player?.id,
+        name: player2Info?.player?.fullname ?? "No reconocido",
+      },
+      category:
+        pairInfo?.data?.registration_category?.description ?? "Sin categoria",
+    };
+  });
+  const tableData: PairRow[] = await Promise.all(tableDataPromises);
+  return tableData;
+}
+
+export async function fetchTablePlayerData(apiKey: string) {
+  const dataPlayers = await fetchAllPlayers(apiKey);
+  const tableData = dataPlayers.map((playerData) => {
+    const { id, fullname, city, weight, height } = playerData;
+    return {
+      id,
+      fullname,
+      city,
+      weight,
+      height,
+    };
+  });
+  return tableData;
+}
+
+export async function getApiKey() {
+  const session = await auth();
+  let apiKey: string;
+  // If already authenticated (admin or public user)
+  if (session?.user?.apiKey) {
+    apiKey = session.user.apiKey;
+  } else {
+    // Programmatic sign-in with admin credentials
+    const data = await login(
+      process.env.API_USERNAME ?? "",
+      process.env.API_PASSWORD ?? ""
+    );
+    if (!data?.apiKey) {
+      throw new Error("No Autorizado");
+    }
+    apiKey = data.apiKey;
+  }
+  return apiKey;
 }
 
 export async function fetchFilterPlayers() {}
