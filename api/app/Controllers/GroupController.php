@@ -115,6 +115,11 @@ class GroupController extends BaseController
         $group = new GroupModel;
         $group->find($id);
 
+        // Comprueba si existe el "grupo".
+        if (! $group->isHydrated()) {
+            $this->respondNotFound('The group information was not found');
+        }
+
         $group->setCustomData('registration_category', $group->registrationCategory);
 
         unset($group->registration_category_id);
@@ -125,5 +130,69 @@ class GroupController extends BaseController
     /**
      * Modifica la información de un "grupo".
      */
-    public function update(string $id): void {}
+    public function update(string $id): void
+    {
+        // Define los campos que se pueden modificar.
+        $fields = ['is_eliminated', 'is_active'];
+
+        $data = ['id' => $id];
+
+        // Obtiene solo los campos necesarios.
+        foreach ($fields as $field) {
+            $data[$field] = $this->app()->request()->data->{$field} ?? null;
+
+            if (is_null($data[$field])) {
+                unset($data[$field]);
+            }
+        }
+
+        $fieldNames = array_keys($data);
+
+        // Obtiene las reglas de validación
+        // y establece el identificador como obligatorio.
+        $rules = GroupValidation::getRules(['id', ...$fieldNames]);
+        array_unshift($rules['id'], 'required');
+
+        // Establece las reglas de validación.
+        $this->gump()->validation_rules($rules);
+
+        // Establece los filtros de validación.
+        $this->gump()->filter_rules(GroupValidation::getFilters($fieldNames));
+
+        // Valida el cuerpo de la petición.
+        $data = $this->gump()->run($data);
+
+        unset($data['id']);
+
+        // Comprueba si existen errores de validación.
+        if ($this->gump()->errors()) {
+            $this->respondValidationErrors(
+                $this->gump()->get_errors_array(),
+                'The group information is incorrect');
+        }
+
+        // Consulta la información del "grupo".
+        $group = new GroupModel;
+        $group->select('id')->find($id);
+
+        // Comprueba si existe el "grupo".
+        if (! $group->isHydrated()) {
+            $this->respondNotFound('The group information was not found');
+        }
+
+        // Modifica la información del "grupo".
+        if (! empty($data)) {
+            $group->copyFrom($data);
+            $group->update();
+        }
+
+        // Consulta la información actualizada del "grupo".
+        $group->find($id);
+
+        $group->setCustomData('registration_category', $group->registrationCategory);
+
+        unset($group->registration_category_id);
+
+        $this->respond($group, 'The group was updated successfully');
+    }
 }
