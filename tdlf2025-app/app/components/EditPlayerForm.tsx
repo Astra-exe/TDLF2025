@@ -65,7 +65,6 @@ export default function EditPlayerForm({
 }: {
   player: Partial<Player>;
 }) {
-  console.log(player);
   const form = useForm<InscriptionData>({
     resolver: zodResolver(inscripcionSchema),
     defaultValues: {
@@ -77,15 +76,18 @@ export default function EditPlayerForm({
       experience: player.experience,
     },
   });
+  const playerId = player.id;
 
   const onSubmit = async (data: InscriptionData) => {
-    console.log(data);
     try {
+      if (!playerId) {
+        throw new Error("ID del jugador no encontrado");
+      }
       const result = inscripcionSchema.safeParse(data);
       if (!result.success) throw new Error("Data invalida");
       const { fullname, city, weight, height, age, experience } = result.data;
       toast.promise(
-        updatePlayerById(player.id, {
+        updatePlayerById(playerId, {
           fullname,
           city,
           weight,
