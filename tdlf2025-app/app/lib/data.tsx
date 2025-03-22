@@ -4,7 +4,6 @@ import {
   PairPlayersRelationByGroup,
   MatchesByGroup,
 } from "@/app/lib/definitions";
-import { PairRow } from "@/app/components/PairsCols";
 import { auth } from "@/auth";
 
 const URL_API = `${process.env.NEXT_PUBLIC_API_URL}/v1`;
