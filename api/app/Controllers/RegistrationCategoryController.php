@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Models\GroupModel;
 use App\Models\RegistrationCategoryModel;
 use App\Validations\RegistrationCategoryValidation;
 
@@ -88,6 +89,14 @@ class RegistrationCategoryController extends BaseController
             $this->respondNotFound('The registration category information was not found');
         }
 
-        $this->respond($registrationCategory->groups, 'Information about the registration category groups');
+        // Consulta la "categoría de inscripción" de los "grupos".
+        $groups = array_map(static function (GroupModel $group): GroupModel {
+            $group->setCustomData('registration_category', $group->registrationCategory);
+            unset($group->registration_category_id);
+
+            return $group;
+        }, $registrationCategory->groups);
+
+        $this->respond($groups, 'Information about the registration category groups');
     }
 }

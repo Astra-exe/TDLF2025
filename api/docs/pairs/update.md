@@ -37,11 +37,15 @@ Respuesta de la petición:
 {
   "data": {
     "id": "a23aa875-d127-483b-9734-9676b93a6ff7",
-    "registration_category_id": "eb69a503-6eb3-4f20-b30b-c9a4762a8cfd",
     "is_eliminated": 1,
     "is_active": 0,
     "created_at": "2025-03-18 14:40:07",
-    "updated_at": "2025-03-20 13:37:56"
+    "updated_at": "2025-03-20 13:37:56",
+    "registration_category": {
+      "id": "eb69a503-6eb3-4f20-b30b-c9a4762a8cfd",
+      "name": "open",
+      "description": "Libre"
+    }
   },
   "status": 200,
   "description": "The pair was updated successfully"
