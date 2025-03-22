@@ -101,6 +101,7 @@ export const columns: ColumnDef<MatchesRow>[] = [
       return (
         <div className="flex space-x-2">
           <Button>
+            {match.id}
             <Trash></Trash>
           </Button>
         </div>
