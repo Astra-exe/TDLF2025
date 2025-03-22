@@ -17,11 +17,17 @@ return (static function (): array {
     // Obtiene las opciones de configuración de la base de datos.
     $options = \App\Helpers\Config::getFromFilename('database');
 
+    // Establece los directorios de las migraciones.
+    $directories = ['first' => __DIR__.'/migrations/first_dir'];
+
+    // Agrega el directorio de las migraciones de desarrollo.
+    if (\App\Helpers\Env::get('APP_ENVIRONMENT') == 'development') {
+        $directories['second'] = __DIR__.'/migrations/second_dir';
+    }
+
     return [
         'log_table_name' => 'phoenix_log',
-        'migration_dirs' => [
-            'first' => __DIR__.'/migrations/first_dir',
-        ],
+        'migration_dirs' => $directories,
         'environments' => [
             'production' => [
                 'adapter' => $options['driver'],
