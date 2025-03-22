@@ -1,4 +1,9 @@
-import { PairsPlayers } from "@/app/lib/definitions";
+import {
+  Group,
+  PairsPlayers,
+  PairPlayersRelationByGroup,
+  MatchesByGroup,
+} from "@/app/lib/definitions";
 import { PairRow } from "@/app/components/PairsCols";
 import { auth } from "@/auth";
 
@@ -21,6 +26,7 @@ type FetchPairsProps = {
   is_eliminated?: boolean | null;
 };
 
+// -------------- Players -------------------
 export async function fetchPlayers({
   apiKey,
   page = 1,
@@ -42,81 +48,6 @@ export async function fetchPlayers({
     const errorData = await response.json();
     console.log(errorData);
     throw new Error(errorData?.description || "Error al obtener los jugadores");
-  }
-  const data = await response.json();
-  return data;
-}
-
-export async function fetchPairs({
-  apiKey,
-  page = 1,
-  orderBy = "",
-  sortBy = "",
-  registration_category_id = "",
-  is_eliminated = null,
-}: FetchPairsProps) {
-  const url = `${URL_API}/pairs/players?page=${page}&orderBy=${orderBy}&sortBy=${sortBy}&registration_category_id=${registration_category_id}&is_eliminated=${is_eliminated}&is_active=true`;
-  const response = await fetch(url, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "X-API-KEY": apiKey,
-    },
-  });
-  // console.log({ response });
-  if (!response.ok) {
-    const errorData = await response.json();
-    console.log(errorData);
-    throw new Error(errorData?.description || "Error al obtener las parejas");
-  }
-  const data = await response.json();
-  return data;
-}
-
-export async function fetchPairById({
-  idPair,
-  apiKey,
-}: {
-  idPair: string;
-  apiKey: string;
-}) {
-  try {
-    const url = `${URL_API}/pairs/${idPair}`;
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "X-API-KEY": apiKey,
-      },
-    });
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.log(errorData);
-      throw new Error(errorData?.description || "Error al obtener la pareja");
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    throw error;
-  }
-}
-
-export async function fetchCategories(apiKey: string) {
-  const url = `${URL_API}/categories/registrations`;
-  const response = await fetch(url, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "X-API-KEY": apiKey,
-    },
-  });
-  // console.log({ response });
-  if (!response.ok) {
-    const errorData = await response.json();
-    console.log(errorData);
-    throw new Error(
-      errorData?.description || "Error al obtener las categorias"
-    );
   }
   const data = await response.json();
   return data;
@@ -152,8 +83,166 @@ export async function fetchPlayerById({
   idPlayer: string;
   apiKey: string;
 }) {
+  const url = `${URL_API}/players/${idPlayer}`;
   try {
-    const url = `${URL_API}/players/${idPlayer}`;
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": apiKey,
+      },
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.log(errorData);
+      throw new Error(errorData?.description || "Error al obtener el jugador");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+// -------------- Pairs -------------------
+export async function fetchPairs({
+  apiKey,
+  page = 1,
+  orderBy = "",
+  sortBy = "",
+  registration_category_id = "",
+  is_eliminated = null,
+}: FetchPairsProps) {
+  const url = `${URL_API}/pairs/players?page=${page}&orderBy=${orderBy}&sortBy=${sortBy}&registration_category_id=${registration_category_id}&is_eliminated=${is_eliminated}&is_active=true`;
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "X-API-KEY": apiKey,
+    },
+  });
+  // console.log({ response });
+  if (!response.ok) {
+    const errorData = await response.json();
+    console.log(errorData);
+    throw new Error(errorData?.description || "Error al obtener las parejas");
+  }
+  const data = await response.json();
+  return data;
+}
+
+export async function fetchAllPairs(apiKey: string) {
+  const allPairs = [];
+
+  // Fetch the first page to get the total pages
+  const { data: dataPairsPage1, pagination } = await fetchPairs({
+    page: 1,
+    apiKey: apiKey,
+  });
+  const totalPages = pagination.total;
+  allPairs.push(...dataPairsPage1);
+
+  // Loop through each page
+  for (let i = 2; i <= totalPages; i++) {
+    const { data: dataRestPairsPages } = await fetchPairs({
+      page: i,
+      apiKey,
+    });
+    allPairs.push(...dataRestPairsPages);
+  }
+
+  return allPairs;
+}
+
+export async function fetchPairById({
+  idPair,
+  apiKey,
+}: {
+  idPair: string;
+  apiKey: string;
+}) {
+  const url = `${URL_API}/pairs/${idPair}`;
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": apiKey,
+      },
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.log(errorData);
+      throw new Error(errorData?.description || "Error al obtener la pareja");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function fetchPairPlayersById({
+  idPair,
+  apiKey,
+}: {
+  idPair: string;
+  apiKey: string;
+}) {
+  const url = `${URL_API}/pairs/${idPair}/players`;
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": apiKey,
+      },
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.log(errorData);
+      throw new Error(
+        errorData?.description || "Error al obtener los juagdores de la pareja"
+      );
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+// -------------- Categories -------------------
+export async function fetchCategories(apiKey: string) {
+  const url = `${URL_API}/categories/registrations`;
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "X-API-KEY": apiKey,
+    },
+  });
+  // console.log({ response });
+  if (!response.ok) {
+    const errorData = await response.json();
+    console.log(errorData);
+    throw new Error(
+      errorData?.description || "Error al obtener las categorias"
+    );
+  }
+  const data = await response.json();
+  return data;
+}
+
+export async function fetchCategoryById({
+  idCategory,
+  apiKey,
+}: {
+  idCategory: string;
+  apiKey: string;
+}) {
+  const url = `${URL_API}/categories/registrations/${idCategory}`;
+  try {
     const response = await fetch(url, {
       method: "GET",
       headers: {
@@ -168,6 +257,7 @@ export async function fetchPlayerById({
   }
 }
 
+// -------------- Others -------------------
 export async function fetchCardsData(apiKey: string) {
   const { data: categoriesData } = await fetchCategories(apiKey);
   const [category1, category2] = categoriesData;
@@ -207,29 +297,6 @@ export async function fetchCardsData(apiKey: string) {
     // numberOfMatchesOpen
     // numberOfMatchesSenior
   };
-}
-
-export async function fetchAllPairs(apiKey: string) {
-  const allPairs = [];
-
-  // Fetch the first page to get the total pages
-  const { data: dataPairsPage1, pagination } = await fetchPairs({
-    page: 1,
-    apiKey: apiKey,
-  });
-  const totalPages = pagination.total;
-  allPairs.push(...dataPairsPage1);
-
-  // Loop through each page
-  for (let i = 2; i <= totalPages; i++) {
-    const { data: dataRestPairsPages } = await fetchPairs({
-      page: i,
-      apiKey,
-    });
-    allPairs.push(...dataRestPairsPages);
-  }
-
-  return allPairs;
 }
 
 export async function login(username: string, password: string) {
@@ -289,6 +356,27 @@ export async function fetchProfile({
   }
 }
 
+export async function getApiKey() {
+  const session = await auth();
+  let apiKey: string;
+  // If already authenticated (admin or public user)
+  if (session?.user?.apiKey) {
+    apiKey = session.user.apiKey;
+  } else {
+    // Programmatic sign-in with admin credentials
+    const data = await login(
+      process.env.API_USERNAME ?? "",
+      process.env.API_PASSWORD ?? ""
+    );
+    if (!data?.apiKey) {
+      throw new Error("No Autorizado");
+    }
+    apiKey = data.apiKey;
+  }
+  return apiKey;
+}
+
+// -------------- Tables -------------------
 export async function fetchTablePairData(apiKey: string) {
   const dataPairs = await fetchAllPairs(apiKey);
   const tableDataPromises = dataPairs.map(async (pairData: PairsPlayers[]) => {
@@ -329,28 +417,343 @@ export async function fetchTablePlayerData(apiKey: string) {
   return tableData;
 }
 
-export async function getApiKey() {
-  const session = await auth();
-  let apiKey: string;
-  // If already authenticated (admin or public user)
-  if (session?.user?.apiKey) {
-    apiKey = session.user.apiKey;
-  } else {
-    // Programmatic sign-in with admin credentials
-    const data = await login(
-      process.env.API_USERNAME ?? "",
-      process.env.API_PASSWORD ?? ""
-    );
-    if (!data?.apiKey) {
-      throw new Error("No Autorizado");
+// -------------- Groups -------------------
+export async function fetchGroups(apiKey: string) {
+  const url = `${URL_API}/groups`;
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": apiKey,
+      },
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.log(errorData);
+      throw new Error(errorData?.description || "Error al obtener grupos");
     }
-    apiKey = data.apiKey;
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
   }
-  return apiKey;
 }
 
-export async function fetchFilterPlayers() {}
+export async function fetchGroupById({
+  idGroup,
+  apiKey,
+}: {
+  idGroup: string;
+  apiKey: string;
+}) {
+  const url = `${URL_API}/groups/${idGroup}`;
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": apiKey,
+      },
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.log(errorData);
+      throw new Error(errorData?.description || "Error al obtener el grupo");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
 
-export async function fetchGroups() {}
+export async function fetchGroupsByCategory({
+  idCategory,
+  apiKey,
+}: {
+  idCategory: string;
+  apiKey: string;
+}) {
+  const url = `${URL_API}/categories/registrations/${idCategory}/groups`;
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": apiKey,
+      },
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.log(errorData);
+      throw new Error(
+        errorData?.description || "Error al obtener grupos por categoria"
+      );
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
 
+export async function fetchPlayersPairsByGroup({
+  idGroup,
+  apiKey,
+}: {
+  idGroup: string;
+  apiKey: string;
+}) {
+  const url = `${URL_API}/groups/${idGroup}/pairs/players`;
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": apiKey,
+      },
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.log(errorData);
+      throw new Error(
+        errorData?.description ||
+          "Error al obtener Parejas y Jugadores por Grupo"
+      );
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function fetchGroupsPairsPlayersByCategory({
+  idCategory,
+  apiKey,
+}: {
+  idCategory: string;
+  apiKey: string;
+}) {
+  // get the category info
+  const { data: category } = await fetchCategoryById({ idCategory, apiKey });
+  // get the groups info by category
+  const { data: groups } = await fetchGroupsByCategory({ idCategory, apiKey });
+
+  const groupsInfoByCategoryPromises = groups.map(async (group: Group) => {
+    const idGroup = group.id;
+    // get the pairs player by group
+    const { data: pairsPlayersInfo } = await fetchPlayersPairsByGroup({
+      idGroup,
+      apiKey,
+    });
+    // normalize the data to get the needed data
+    const pairsList = pairsPlayersInfo.map(
+      (pairPlayers: PairPlayersRelationByGroup) => {
+        const playersForPair = pairPlayers.pair.players.map(
+          (players: PairsPlayers) => {
+            const playerInfo = players.player;
+            return {
+              id: playerInfo.id,
+              fullname: playerInfo.fullname,
+            };
+          }
+        );
+
+        return {
+          pair: {
+            id: pairPlayers.pair.id,
+          },
+          players: playersForPair,
+        };
+      }
+    );
+
+    return {
+      id: idGroup,
+      name: group.name,
+      description: group.description,
+      pairs: pairsList,
+    };
+  });
+
+  const groupsInfoByCategory = await Promise.all(groupsInfoByCategoryPromises);
+  // return the category info and teh groups by category
+  return {
+    categoryData: {
+      id: category.id,
+      name: category.name,
+      description: category.description,
+    },
+    groupsData: groupsInfoByCategory,
+  };
+}
+
+// -------------- Matches -------------------
 export async function fetchMatches() {}
+
+export async function fetchMatchesPlayersPairsByGroup({
+  idGroup,
+  apiKey,
+}: {
+  idGroup: string;
+  apiKey: string;
+}) {
+  const url = `${URL_API}/groups/${idGroup}/matches/pairs/players`;
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": apiKey,
+      },
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.log(errorData);
+      throw new Error(
+        errorData?.description || "Error al obtener partidos por grupo"
+      );
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function fetchMatchesPairsPlayersByGroup({
+  apiKey,
+  idGroup,
+}: {
+  apiKey: string;
+  idGroup: string;
+}) {
+  // get the group info and teh category info by group id
+  const { data: group } = await fetchGroupById({ idGroup, apiKey });
+  const { registration_category: category } = group;
+
+  const { data: matches } = await fetchMatchesPlayersPairsByGroup({
+    idGroup,
+    apiKey,
+  });
+
+  const matchesInfoByCategoryByGroup = matches.map(
+    ({ match }: { match: MatchesByGroup }) => {
+      const pairsByMatch = match.pairs.map((pairItem) => {
+        const { pair, relationship } = pairItem;
+
+        const playersForPair = pair.players.map((players: PairsPlayers) => {
+          const playerInfo = players.player;
+          return {
+            id: playerInfo.id,
+            fullname: playerInfo.fullname,
+          };
+        });
+
+        return {
+          id: pair.id,
+          players: playersForPair,
+          score: relationship.score,
+          isWinner: relationship.is_winner,
+        };
+      });
+
+      return {
+        id: match.id,
+        isActive: match.is_active,
+        matchCategory: { ...match.match_category },
+        matchStatus: { ...match.match_status },
+        matchPairs: pairsByMatch,
+      };
+    }
+  );
+
+  return {
+    categoryData: {
+      id: category.id,
+      name: category.name,
+      description: category.description,
+    },
+    groupData: {
+      id: group.id,
+      name: group.name,
+      description: group.description,
+    },
+    matchesData: matchesInfoByCategoryByGroup,
+  };
+}
+
+// Table matches
+export async function fetchTableMatchesByCategory({
+  apiKey,
+  idCategory,
+}: {
+  apiKey: string;
+  idCategory: string;
+}) {
+  const { data: category } = await fetchCategoryById({ idCategory, apiKey });
+  // get the groups info by category
+  const { data: groups } = await fetchGroupsByCategory({ idCategory, apiKey });
+
+  const matchesInfoByCategoryPromises = groups.map(async (group: Group) => {
+    const idGroup = group.id;
+    // get the data of matches
+    const { data: matches } = await fetchMatchesPlayersPairsByGroup({
+      idGroup,
+      apiKey,
+    });
+
+    const matchesInfoByCategoryByGroup = matches.map(
+      ({ match }: { match: MatchesByGroup }) => {
+        const pairsByMatch = match.pairs.map((pairItem) => {
+          const { pair, relationship } = pairItem;
+
+          const playersForPair = pair.players.map((players: PairsPlayers) => {
+            const playerInfo = players.player;
+            return {
+              id: playerInfo.id,
+              fullname: playerInfo.fullname,
+            };
+          });
+
+          return {
+            id: pair.id,
+            players: playersForPair,
+            score: relationship.score,
+            isWinner: relationship.is_winner,
+          };
+        });
+
+        return {
+          id: match.id,
+          isActive: match.is_active,
+          matchCategory: { ...match.match_category },
+          matchStatus: { ...match.match_status },
+          matchPairs: pairsByMatch,
+        };
+      }
+    );
+
+    return {
+      id: idGroup,
+      name: group.name,
+      description: group.description,
+      matchesInfoByCategoryByGroup,
+    };
+  });
+
+  const matchesInfoByCategory = await Promise.all(
+    matchesInfoByCategoryPromises
+  );
+
+  return {
+    categoryData: {
+      id: category.id,
+      name: category.name,
+      description: category.description,
+    },
+    matchesData: matchesInfoByCategory,
+  };
+}
