@@ -16,6 +16,21 @@ export default async function MatchesByCategoryPage(props: {
     apiKey,
     idCategory,
   });
+
+  // const tableMatchesData =
+
+  // id: string;
+  // group: string;
+  // pair1: {
+  //   id: string;
+  //   fullname: string;
+  // }[];
+  // pair2: {
+  //   id: string;
+  //   fullname: string;
+  // }[];
+  // pointsPair1: number;
+  // pointsPair2: number;
   console.log(categoryData, matchesData);
 
   return (
