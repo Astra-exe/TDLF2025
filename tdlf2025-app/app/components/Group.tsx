@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const groupsColors: Record<string, string> = {
   A: "hover:from-red-900",
   B: "hover:from-yellow-900",
@@ -15,15 +17,32 @@ const groupsColors: Record<string, string> = {
 
 export default function Group({
   name,
+  categoryId,
+  groupId,
   listPairs,
 }: {
   name: string;
-  listPairs: any[];
+  categoryId: string;
+  groupId: string;
+  listPairs: {
+    pair: {
+      id: string;
+    };
+    players: {
+      id: string;
+      fullname: string;
+    }[];
+  }[];
 }) {
   return (
     <article
       className={`relative grid grid-cols-[0.8fr_1fr] border rounded-lg bg-gradient-to-b from-stone-800 to-black ${groupsColors[name]} hover:scale-105 hover:saturate-150 transition-[transform,filter]`}
     >
+      <Link
+        href={`/grupos/${categoryId}/${groupId}`}
+        className="absolute block inset-0 z-20"
+        title={`Ver enfretamientos del Grupo ${name}`}
+      ></Link>
       <div className="absolute inset-0 h-full w-full bg-[radial-gradient(#ffffff35_1px,transparent_1px)] [background-size:14px_14px]"></div>
       <div className="flex justify-center items-center">
         <h2 className="text-3xl text-center font-bold">
@@ -34,12 +53,16 @@ export default function Group({
       </div>
       <div>
         <ul className="grid grid-rows-3 h-full">
-          {listPairs.map((pair) => {
+          {listPairs.map((pairItem) => {
+            const [player1, player2] = pairItem.players;
             return (
-              <li key={pair.id} className="border flex flex-col justify-center">
+              <li
+                key={pairItem.pair.id}
+                className="border flex flex-col justify-center"
+              >
                 <ul className="px-3 py-6 list-disc list-inside">
-                  <li>{pair.player1}</li>
-                  <li>{pair.player2}</li>
+                  <li>{player1.fullname}</li>
+                  <li>{player2.fullname}</li>
                 </ul>
               </li>
             );
