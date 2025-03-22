@@ -77,7 +77,7 @@ class PairPlayerController extends BaseController
         // Aplica los parámetros de ordenamiento.
         $pairs->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
 
-        // Consulta los "jugadores de todas las pareja".
+        // Consulta los "jugadores" de todas las "parejas".
         $players = array_map(static function (PairModel $pair): array {
             return array_map(static fn (PairPlayerPivotModel $relationship): array => [
                 'player' => $relationship->player,
@@ -164,8 +164,11 @@ class PairPlayerController extends BaseController
             $pairPlayerPivot->reset();
         }
 
+        $id = $pair->id;
+
         // Consulta la información de la "pareja" registrada.
-        $pair->find($pair->id);
+        $pair->reset();
+        $pair->find($id);
 
         // Consulta la "categoría de inscripción" de la "pareja".
         $pair->setCustomData('registration_category', $pair->registrationCategory);

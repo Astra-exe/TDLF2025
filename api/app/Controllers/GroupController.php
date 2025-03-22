@@ -79,7 +79,6 @@ class GroupController extends BaseController
 
         // Consulta la "categoría de inscripción" de cada "grupo".
         $groups = array_map(static function (GroupModel $group): GroupModel {
-            // Consulta la "categoría de inscripción" del "grupo".
             $group->setCustomData('registration_category', $group->registrationCategory);
             unset($group->registration_category_id);
 

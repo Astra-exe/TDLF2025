@@ -12,6 +12,8 @@ use App\Models\MatchStatusModel;
  */
 class MatchValidation extends BaseValidation
 {
+    private const NUM_PAIRS = 2;
+
     private static array $matchCategoriesIds = [];
 
     private static array $matchStatusIds = [];
@@ -27,6 +29,7 @@ class MatchValidation extends BaseValidation
             'page' => ['integer', 'min_numeric' => 1],
             'orderBy' => ['contains' => ['created_at', 'updated_at']],
             'sortBy' => ['contains' => ['asc', 'desc']],
+            'pairs' => array_merge(['valid_array_size_equal' => self::getNumPairs()], ...array_values(PairValidation::getRules(['id']))),
         ];
     }
 
@@ -65,5 +68,13 @@ class MatchValidation extends BaseValidation
         }
 
         return self::$matchStatusIds;
+    }
+
+    /**
+     * Obtiene el número de "contrincantes" en un "partido".
+     */
+    public static function getNumPairs(): int
+    {
+        return self::NUM_PAIRS;
     }
 }

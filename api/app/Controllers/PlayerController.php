@@ -120,7 +120,12 @@ class PlayerController extends BaseController
         $player = new PlayerModel;
         $player->copyFrom($data);
         $player->insert();
-        $player->find($player->id);
+
+        $id = $player->id;
+
+        // Consulta la información del "jugador" registrado.
+        $player->reset();
+        $player->find($id);
 
         $this->respondCreated($player, 'The player was created successfully');
     }

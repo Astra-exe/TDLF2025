@@ -79,7 +79,6 @@ class PairController extends BaseController
 
         // Consulta la "categoría de inscripción" de cada "pareja".
         $pairs = array_map(static function (PairModel $pair): PairModel {
-            // Consulta la "categoría de inscripción" de la "pareja".
             $pair->setCustomData('registration_category', $pair->registrationCategory);
             unset($pair->registration_category_id);
 
@@ -172,8 +171,11 @@ class PairController extends BaseController
             $pairPlayerPivot->reset();
         }
 
+        $id = $pair->id;
+
         // Consulta la información de la "pareja" registrada.
-        $pair->find($pair->id);
+        $pair->reset();
+        $pair->find($id);
 
         // Consulta la "categoría de inscripción" de la "pareja".
         $pair->setCustomData('registration_category', $pair->registrationCategory);

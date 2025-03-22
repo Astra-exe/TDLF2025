@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use App\Models\MatchModel;
+use App\Models\MatchPairPivotModel;
+use App\Models\PairModel;
 use App\Validations\MatchValidation;
 
 class MatchController extends BaseController
@@ -88,6 +90,97 @@ class MatchController extends BaseController
         }, $matchModel->findAll());
 
         $this->respondPagination($matches, $pagination, 'Information about all the matches with pagination');
+    }
+
+    /**
+     * Registra la información de un "partido".
+     */
+    public function create(): void
+    {
+        // Define los campos necesarios de la petición.
+        $fields = ['registration_category_id', 'match_category_id', 'match_status_id', 'pairs'];
+
+        $data = [];
+
+        // Obtiene solo los campos necesarios.
+        foreach ($fields as $field) {
+            $data[$field] = $this->app()->request()->data->{$field} ?? null;
+        }
+
+        // Obtiene las reglas de validación del "partido".
+        $rules = MatchValidation::getRules($fields);
+
+        // Define todas las reglas de validación como obligatorias.
+        foreach (array_keys($rules) as $rule) {
+            array_unshift($rules[$rule], 'required');
+        }
+
+        // Establece las reglas de validación.
+        $this->gump()->validation_rules($rules);
+
+        // Valida el cuerpo de la petición.
+        $data = $this->gump()->run($data);
+
+        // Comprueba si existen errores de validación.
+        if ($this->gump()->errors()) {
+            $this->respondValidationErrors(
+                $this->gump()->get_errors_array(),
+                'The match information is incorrect');
+        }
+
+        // Comprueba la información de las "parejas".
+        $dataPairs = (new PairModel)->select('id')
+            ->eq('registration_category_id', $data['registration_category_id'])
+            ->in($data['pairs'])
+            ->findAll();
+
+        // Comprueba que las "parejas" existan.
+        if (array_diff($data['pairs'], array_column($dataPairs, 'id'))) {
+            $this->respondValidationErrors(
+                ['pairs' => 'The pairs were not found'],
+                'The pairs information is incorrect');
+        }
+
+        unset($data['pairs']);
+
+        // Registra la información del "partido".
+        $match = new MatchModel;
+        $match->copyFrom($data);
+        $match->insert();
+
+        $matchPairPivot = new MatchPairPivotModel;
+
+        // Registra la relación de las "parejas" con el "partido".
+        foreach ($dataPairs as $pair) {
+            $matchPairPivot->copyFrom(['pair_id' => $pair->id, 'match_id' => $match->id]);
+            $matchPairPivot->insert();
+            $matchPairPivot->reset();
+        }
+
+        $id = $match->id;
+
+        // Consulta la información del "partido" registrado.
+        $match->reset();
+        $match->find($id);
+
+        $match->setCustomData('registration_category', $match->registrationCategory);
+        $match->setCustomData('match_category', $match->matchCategory);
+        $match->setCustomData('match_status', $match->matchStatus);
+
+        unset($match->registration_category_id, $match->match_status_id, $match->match_category_id);
+
+        // Consulta la información de las "parejas" del "partido".
+        $pairs = array_map(static function (MatchPairPivotModel $relationship): array {
+            $pair = $relationship->pair;
+
+            // Consulta la "categoría de inscripción" de la "pareja".
+            $pair->setCustomData('registration_category', $pair->registrationCategory);
+            unset($pair->registration_category_id);
+
+            return ['pair' => $pair, 'relationship' => $relationship];
+        }, $match->matchPairPivot);
+
+        $this->respondCreated(['match' => $match, 'pairs' => $pairs], 'The match was created successfully');
     }
 
     /**

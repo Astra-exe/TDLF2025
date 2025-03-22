@@ -136,14 +136,14 @@ class MatchPairController extends BaseController
         }
 
         // Consulta la información de las "parejas" del "partido".
-        $pairs = array_map(static function (MatchPairPivotModel $matchPairRel): array {
-            $pair = $matchPairRel->pair;
+        $pairs = array_map(static function (MatchPairPivotModel $relationship): array {
+            $pair = $relationship->pair;
 
             // Consulta la "categoría de inscripción" de la "pareja".
             $pair->setCustomData('registration_category', $pair->registrationCategory);
             unset($pair->registration_category_id);
 
-            return ['pair' => $pair, 'relationship' => $matchPairRel];
+            return ['pair' => $pair, 'relationship' => $relationship];
         }, $match->matchPairPivot);
 
         $this->respond($pairs, 'Information about the match pairs');
