@@ -151,8 +151,8 @@ class MatchController extends BaseController
         $matchPairPivot = new MatchPairPivotModel;
 
         // Registra la relación de las "parejas" con el "partido".
-        foreach ($dataPairs as $pair) {
-            $matchPairPivot->copyFrom(['pair_id' => $pair->id, 'match_id' => $match->id]);
+        foreach ($dataPairs as $dataPair) {
+            $matchPairPivot->copyFrom(['pair_id' => $dataPair->id, 'match_id' => $match->id]);
             $matchPairPivot->insert();
             $matchPairPivot->reset();
         }
