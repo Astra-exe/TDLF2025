@@ -140,8 +140,8 @@ class PairController extends BaseController
 
         // Comprueba que los "jugadores" no se encuentren
         // dentro de una "pareja".
-        foreach ($dataPlayers as $player) {
-            if ($player->pairPlayerPivot->isHydrated()) {
+        foreach ($dataPlayers as $dataPlayer) {
+            if ($dataPlayer->pairPlayerPivot->isHydrated()) {
                 $this->respondResourceExists(
                     ['players' => 'The players are already in a pair'],
                     'The players information is incorrect');
@@ -156,8 +156,8 @@ class PairController extends BaseController
         $pairPlayerPivot = new PairPlayerPivotModel;
 
         // Registra la relación del "jugador" con la "pareja".
-        foreach ($data['players'] as $id) {
-            $pairPlayerPivot->copyFrom(['player_id' => $id, 'pair_id' => $pair->id]);
+        foreach ($dataPlayers as $dataPlayer) {
+            $pairPlayerPivot->copyFrom(['player_id' => $dataPlayer->id, 'pair_id' => $pair->id]);
             $pairPlayerPivot->insert();
             $pairPlayerPivot->reset();
         }
