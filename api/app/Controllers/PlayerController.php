@@ -198,16 +198,16 @@ class PlayerController extends BaseController
         }
 
         // Consulta la relación de la "pareja" con el "jugador".
-        $relationship = $player->pairPlayerPivot;
+        $pairPlayerRel = $player->pairPlayerPivot;
 
         // Consulta la "pareja" del "jugador".
-        $pair = $relationship->pair;
+        $pair = $pairPlayerRel->pair;
 
         // Consulta la "categoría de inscripción" de la "pareja".
         $pair->setCustomData('registration_category', $pair->registrationCategory);
         unset($pair->registration_category_id);
 
-        $this->respond(['pair' => $pair, 'relationship' => $relationship], 'Information about the player pair');
+        $this->respond(['pair' => $pair, 'relationship' => $pairPlayerRel], 'Information about the player pair');
     }
 
     /**

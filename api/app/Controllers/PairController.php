@@ -173,9 +173,9 @@ class PairController extends BaseController
         unset($pair->registration_category_id);
 
         // Consulta los "jugadores" registrados de la "pareja".
-        $players = array_map(static fn (PairPlayerPivotModel $relationship): array => [
-            'player' => $relationship->player,
-            'relationship' => $relationship,
+        $players = array_map(static fn (PairPlayerPivotModel $pairPlayerRel): array => [
+            'player' => $pairPlayerRel->player,
+            'relationship' => $pairPlayerRel,
         ], $pair->pairPlayerPivot);
 
         $this->respondCreated(['pair' => $pair, 'players' => $players], 'The pair was created successfully');
@@ -253,16 +253,16 @@ class PairController extends BaseController
         }
 
         // Consulta la relación de la "pareja" con el "grupo".
-        $relationship = $pair->groupPairPivot;
+        $groupPairRel = $pair->groupPairPivot;
 
         // Consulta el "grupo" de la "pareja".
-        $group = $relationship->_group;
+        $group = $groupPairRel->_group;
 
         // Consulta la "categoría de inscripción" del "grupo".
         $group->setCustomData('registration_category', $group->registrationCategory);
         unset($group->registration_category_id);
 
-        $this->respond(['group' => $group, 'relationship' => $relationship], 'Information about the pair group');
+        $this->respond(['group' => $group, 'relationship' => $groupPairRel], 'Information about the pair group');
     }
 
     /**

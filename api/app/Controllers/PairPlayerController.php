@@ -80,9 +80,9 @@ class PairPlayerController extends BaseController
 
         // Consulta los "jugadores" de todas las "parejas".
         $players = array_map(static function (PairModel $pair): array {
-            return array_map(static fn (PairPlayerPivotModel $relationship): array => [
-                'player' => $relationship->player,
-                'relationship' => $relationship,
+            return array_map(static fn (PairPlayerPivotModel $pairPlayerRel): array => [
+                'player' => $pairPlayerRel->player,
+                'relationship' => $pairPlayerRel,
             ], $pair->pairPlayerPivot);
         }, $pairs->findAll());
 
@@ -170,9 +170,9 @@ class PairPlayerController extends BaseController
         unset($pair->registration_category_id);
 
         // Consulta los "jugadores" registrados de la "pareja".
-        $players = array_map(static fn (PairPlayerPivotModel $relationship): array => [
-            'player' => $relationship->player,
-            'relationship' => $relationship,
+        $players = array_map(static fn (PairPlayerPivotModel $pairPlayerRel): array => [
+            'player' => $pairPlayerRel->player,
+            'relationship' => $pairPlayerRel,
         ], $pair->pairPlayerPivot);
 
         $this->respondCreated(['pair' => $pair, 'players' => $players], 'The pair with players was created successfully');
@@ -211,9 +211,9 @@ class PairPlayerController extends BaseController
         }
 
         // Consulta los "jugadores" de la "pareja".
-        $players = array_map(static fn (PairPlayerPivotModel $relationship): array => [
-            'player' => $relationship->player,
-            'relationship' => $relationship,
+        $players = array_map(static fn (PairPlayerPivotModel $pairPlayerRel): array => [
+            'player' => $pairPlayerRel->player,
+            'relationship' => $pairPlayerRel,
         ], $pair->pairPlayerPivot);
 
         $this->respond($players, 'Information about the pair players');

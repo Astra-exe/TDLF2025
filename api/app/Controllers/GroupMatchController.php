@@ -86,15 +86,15 @@ class GroupMatchController extends BaseController
             unset($group->registration_category_id);
 
             // Consulta la información de los "partidos" del "grupo".
-            $matches = array_map(static function (GroupMatchPivotModel $relationship): array {
-                $match = $relationship->match;
+            $matches = array_map(static function (GroupMatchPivotModel $groupMatchRel): array {
+                $match = $groupMatchRel->match;
                 $match->setCustomData('registration_category', $match->registrationCategory);
                 $match->setCustomData('match_category', $match->matchCategory);
                 $match->setCustomData('match_status', $match->matchStatus);
 
                 unset($match->registration_category_id, $match->match_status_id, $match->match_category_id);
 
-                return ['match' => $match, 'relationship' => $relationship];
+                return ['match' => $match, 'relationship' => $groupMatchRel];
             }, $group->groupMatchPivot);
 
             return ['group' => $group, 'matches' => $matches];
@@ -136,15 +136,15 @@ class GroupMatchController extends BaseController
         }
 
         // Consulta la información de los "partidos" del "grupo".
-        $matches = array_map(static function (GroupMatchPivotModel $relationship): array {
-            $match = $relationship->match;
+        $matches = array_map(static function (GroupMatchPivotModel $groupMatchRel): array {
+            $match = $groupMatchRel->match;
             $match->setCustomData('registration_category', $match->registrationCategory);
             $match->setCustomData('match_category', $match->matchCategory);
             $match->setCustomData('match_status', $match->matchStatus);
 
             unset($match->registration_category_id, $match->match_status_id, $match->match_category_id);
 
-            return ['match' => $match, 'relationship' => $relationship];
+            return ['match' => $match, 'relationship' => $groupMatchRel];
         }, $group->groupMatchPivot);
 
         $this->respond($matches, 'Information about the group matches');

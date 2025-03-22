@@ -86,14 +86,14 @@ class GroupPairController extends BaseController
             unset($group->registration_category_id);
 
             // Consulta la información de las "parejas" del "grupo".
-            $pairs = array_map(static function (GroupPairPivotModel $relationship): array {
-                $pair = $relationship->pair;
+            $pairs = array_map(static function (GroupPairPivotModel $groupPairRel): array {
+                $pair = $groupPairRel->pair;
 
                 // Consulta la "categoría de inscripción" de la "pareja".
                 $pair->setCustomData('registration_category', $pair->registrationCategory);
                 unset($pair->registration_category_id);
 
-                return ['pair' => $pair, 'relationship' => $relationship];
+                return ['pair' => $pair, 'relationship' => $groupPairRel];
             }, $group->groupPairPivot);
 
             return ['group' => $group, 'pairs' => $pairs];
@@ -135,14 +135,14 @@ class GroupPairController extends BaseController
         }
 
         // Consulta la información de las "parejas" del "grupo".
-        $pairs = array_map(static function (GroupPairPivotModel $relationship): array {
-            $pair = $relationship->pair;
+        $pairs = array_map(static function (GroupPairPivotModel $groupPairRel): array {
+            $pair = $groupPairRel->pair;
 
             // Consulta la "categoría de inscripción" de la "pareja".
             $pair->setCustomData('registration_category', $pair->registrationCategory);
             unset($pair->registration_category_id);
 
-            return ['pair' => $pair, 'relationship' => $relationship];
+            return ['pair' => $pair, 'relationship' => $groupPairRel];
         }, $group->groupPairPivot);
 
         $this->respond($pairs, 'Information about the group pairs');

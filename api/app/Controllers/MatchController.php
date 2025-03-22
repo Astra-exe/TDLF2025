@@ -170,14 +170,14 @@ class MatchController extends BaseController
         unset($match->registration_category_id, $match->match_status_id, $match->match_category_id);
 
         // Consulta la información de las "parejas" del "partido".
-        $pairs = array_map(static function (MatchPairPivotModel $relationship): array {
-            $pair = $relationship->pair;
+        $pairs = array_map(static function (MatchPairPivotModel $matchPairRel): array {
+            $pair = $matchPairRel->pair;
 
             // Consulta la "categoría de inscripción" de la "pareja".
             $pair->setCustomData('registration_category', $pair->registrationCategory);
             unset($pair->registration_category_id);
 
-            return ['pair' => $pair, 'relationship' => $relationship];
+            return ['pair' => $pair, 'relationship' => $matchPairRel];
         }, $match->matchPairPivot);
 
         $this->respondCreated(['match' => $match, 'pairs' => $pairs], 'The match was created successfully');
@@ -257,16 +257,16 @@ class MatchController extends BaseController
         }
 
         // Obtiene la relación del "grupo" con el "partido".
-        $relationship = $match->groupMatchPivot;
+        $groupMatchRel = $match->groupMatchPivot;
 
         // Obtiene el "grupo" del "partido".
-        $group = $relationship->_group;
+        $group = $groupMatchRel->_group;
 
         // Consulta la "categoría de inscripción" del "grupo".
         $group->setCustomData('registration_category', $group->registrationCategory);
         unset($group->registration_category_id);
 
-        $this->respond(['group' => $group, 'relationship' => $relationship], 'Information about the match group');
+        $this->respond(['group' => $group, 'relationship' => $groupMatchRel], 'Information about the match group');
     }
 
     /**
