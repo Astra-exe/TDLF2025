@@ -27,6 +27,7 @@ import {
 type ComboBoxProps = {
   labelField: string;
   name: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control: Control<any>; // Correctly typed control prop
   suggestions: Player[]; // Suggestions passed as an array
 };
