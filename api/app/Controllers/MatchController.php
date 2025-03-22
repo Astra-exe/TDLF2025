@@ -135,10 +135,16 @@ class MatchController extends BaseController
             ->findAll();
 
         // Comprueba que las "parejas" existan.
-        if (array_diff($data['pairs'], array_column($dataPairs, 'id'))
-            || count($data['pairs']) !== count($dataPairs)) {
+        if (array_diff($data['pairs'], array_column($dataPairs, 'id'))) {
             $this->respondValidationErrors(
                 ['pairs' => 'The pairs were not found'],
+                'The pairs information is incorrect');
+        }
+
+        // Comprueba que las "parejas" no se repitan.
+        if (count($data['pairs']) !== count($dataPairs)) {
+            $this->respondValidationErrors(
+                ['pairs' => 'The pairs were repeated'],
                 'The pairs information is incorrect');
         }
 
