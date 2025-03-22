@@ -63,12 +63,8 @@ export default function InscriptionForm() {
   const form = useForm<InscriptionData>({
     resolver: zodResolver(inscripcionSchema),
     defaultValues: {
-      fullname: "Rafael Nadal",
-      city: "Irapuato",
-      weight: 67.4,
-      height: 1.73,
-      age: 32,
-      experience: 4,
+      fullname: "",
+      city: "",
     },
   });
 
