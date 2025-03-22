@@ -144,8 +144,8 @@ class RoundController extends BaseController
                 $group->insert();
 
                 // Registra la relación de la "pareja" con el "grupo".
-                foreach ($segment as $_pair) {
-                    $groupPairPivot->copyFrom(['group_id' => $group->id, 'pair_id' => $_pair->id]);
+                foreach ($segment as $dataPair) {
+                    $groupPairPivot->copyFrom(['group_id' => $group->id, 'pair_id' => $dataPair->id]);
                     $groupPairPivot->insert();
                     $groupPairPivot->reset();
                 }

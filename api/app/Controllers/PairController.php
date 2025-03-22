@@ -126,7 +126,7 @@ class PairController extends BaseController
 
         // Comprueba la información de los "jugadores".
         $dataPlayers = (new PlayerModel)->select('id')
-            ->in($data['players'])
+            ->in('id', $data['players'])
             ->findAll();
 
         // Comprueba que los "jugadores" existan.

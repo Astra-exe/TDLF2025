@@ -131,7 +131,7 @@ class MatchController extends BaseController
         // Comprueba la información de las "parejas".
         $dataPairs = (new PairModel)->select('id')
             ->eq('registration_category_id', $data['registration_category_id'])
-            ->in($data['pairs'])
+            ->in('id', $data['pairs'])
             ->findAll();
 
         // Comprueba que las "parejas" existan.
