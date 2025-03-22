@@ -84,6 +84,8 @@ class UserController extends BaseController
 
         // Obtiene el ID del nuevo "usuario".
         $id = $user->id;
+
+        // Obtiene la información del nuevo "usuario".
         $user->reset();
         $user->select(...$this->getColumns())->eq('id', $id)->find();
 
@@ -136,7 +138,84 @@ class UserController extends BaseController
     /**
      * Modifica la información de un "usuario".
      */
-    public function update(string $id): void {}
+    public function update(string $id): void
+    {
+        // Define los campos que se pueden modificar.
+        $fields = ['email', 'username', 'role_id', 'fullname', 'password', 'password_confirm'];
+
+        $data = ['id' => $id];
+
+        // Obtiene solo los campos necesarios.
+        foreach ($fields as $field) {
+            $data[$field] = $this->app()->request()->data->{$field} ?? null;
+
+            if (is_null($data[$field])) {
+                unset($data[$field]);
+            }
+        }
+
+        $fieldNames = array_keys($data);
+
+        // Obtiene las reglas de validación
+        // y establece el identificador como obligatorio.
+        $rules = UserValidation::getRules(['id', ...$fieldNames]);
+        array_unshift($rules['id'], 'required');
+
+        // Establece las reglas de validación.
+        $this->gump()->validation_rules($rules);
+
+        // Establece los filtros de validación.
+        $this->gump()->filter_rules(UserValidation::getFilters($fieldNames));
+
+        // Valida el cuerpo de la petición.
+        $data = $this->gump()->run($data);
+
+        foreach (['id', 'password_confirm'] as $field) {
+            unset($data[$field]);
+        }
+
+        // Comprueba si existen errores de validación.
+        if ($this->gump()->errors()) {
+            $this->respondValidationErrors(
+                $this->gump()->get_errors_array(),
+                'The user information is incorrect');
+        }
+
+        $user = new UserModel;
+
+        // Comprueba que los valores de las columnas sean únicos.
+        foreach (['username', 'email'] as $column) {
+            $user->select('id')->eq($column, $data[$column])->find();
+
+            if ($user->isHydrated()) {
+                $this->respondResourceExists(
+                    [$column => 'The '.$column.' field must be unique'],
+                    'The user information is incorrect');
+            }
+
+            $user->reset();
+        }
+
+        // Consulta la información del "usuario".
+        $user->select('id')->eq('id', $id)->find();
+
+        // Comprueba si existe el "usuario".
+        if (! $user->isHydrated()) {
+            $this->respondNotFound('The user information was not found');
+        }
+
+        // Modifica la información del "usuario".
+        if (! empty($data)) {
+            $user->copyFrom($data);
+            $user->update();
+            $user->reset();
+        }
+
+        // Consulta la información actualizada del "usuario".
+        $user->find($id);
+
+        $this->respondUpdated($user, 'The user was updated successfully');
+    }
 
     /**
      * Elimina la información de un "usuario".
