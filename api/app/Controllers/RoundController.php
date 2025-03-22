@@ -24,7 +24,7 @@ class RoundController extends BaseController
     {
         return [
             'open' => ['max_pairs' => 4, 'max_groups' => 27],
-            'seniors' => ['max_pairs' => 3, 'max_groups' => 27],
+            'seniors' => ['max_pairs' => 4, 'max_groups' => 27],
         ];
     }
 
