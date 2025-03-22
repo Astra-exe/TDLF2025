@@ -1,4 +1,4 @@
-# Grupo de un partido
+# 👥 Grupo de un partido
 
 ```
 [GET] /v1/matches/@id/groups
@@ -25,17 +25,26 @@ Respuesta de la petición:
 ```json
 {
   "data": {
-    "id": "2f0a8d32-0e8e-47a8-a7d5-5518150840a4",
-    "name": "A_2025",
-    "description": "A",
-    "is_eliminated": 0,
-    "is_active": 1,
-    "created_at": "2025-03-18 14:41:31",
-    "updated_at": "2025-03-18 14:41:31",
-    "registration_category": {
-      "id": "76d95a95-0fa3-4d58-a8ce-031a1db25b3c",
-      "name": "open",
-      "description": "Libre"
+    "group": {
+      "id": "fb983148-d4f6-41c3-8fb5-bda2146f7fa6",
+      "name": "A_2025",
+      "description": "A",
+      "is_eliminated": 0,
+      "is_active": 1,
+      "created_at": "2025-03-20 21:27:39",
+      "updated_at": "2025-03-20 21:27:39",
+      "registration_category": {
+        "id": "5d840f53-ffb0-427c-8554-bfff885d6b6a",
+        "name": "open",
+        "description": "Libre"
+      }
+    },
+    "relationship": {
+      "id": "ce404089-6724-41db-8b13-e66f1e32ec7a",
+      "group_id": "fb983148-d4f6-41c3-8fb5-bda2146f7fa6",
+      "match_id": "b91a8d6b-9063-443d-a627-cc5e07fe6b2c",
+      "created_at": "2025-03-20 21:27:39",
+      "updated_at": "2025-03-20 21:27:39"
     }
   },
   "status": 200,

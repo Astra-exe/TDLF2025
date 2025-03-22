@@ -1,4 +1,4 @@
-# Renovar API key
+# 🔄 Renovar API key
 
 ```
 [POST] /v1/auth/refresh

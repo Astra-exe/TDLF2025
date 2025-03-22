@@ -1,4 +1,4 @@
-# Parejas de los partidos
+# 🎾 + 👫 Parejas de los partidos
 
 Parejas de los partidos.
 
@@ -14,7 +14,6 @@ Parámetros de consulta:
 | `orderBy` | `string` | `contains: [created_at, updated_at]` | `created_at` | Campo de ordenamiento de los partidos con sus parejas. |
 | `sortBy` | `string` | `contains: [asc, desc]` | `desc` | Modo de ordenamiento de los partidos con sus parejas. |
 | `registration_category_id` | `string` | `exact_len: 36` | `null` | Identificador de la categoría de inscripción de los partidos con sus parejas ([ver](../registration-categories/index.html)). |
-| `group_id` | `string` | `exact_len: 36` | `null` | Identificador del grupo de los partidos con sus parejas ([ver](../groups/index.html)). |
 | `match_category_id` | `string` | `exact_len: 36` | `null` | Identificador de la categoría de las rondas de los partidos con sus parejas ([ver](../match-categories/index.html)). |
 | `match_status_id` | `string` | `exact_len: 36` | `null` | Identificador del estatus de juego de los partidos con sus parejas ([ver](../match-status/index.html)). |
 | `is_active` | `boolean` | `contains: [yes/no, on/off, 1/0, true/false]` | `null` | Filtrar los partidos con sus parejas por estatus de actividad. |
@@ -26,7 +25,7 @@ curl -X GET \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'X-API-KEY: API_KEY' \
-  http://localhost:8080/v1/matches/pairs?page=2&orderBy=created_at&sortBy=desc&registration_category_id=cba89529-0ba9-49e4-85ad-83e63c8e9d7e&group_id=c236d76f-e834-40a1-8080-9f78a9a299f2&match_category_id=dc19c9bf-4339-4ed2-a603-5b2dd1058a6&match_status_id=29d4b630-468f-4dcc-b775-5bad0b796a89&is_active=true
+  http://localhost:8080/v1/matches/pairs?page=2&orderBy=created_at&sortBy=desc&registration_category_id=cba89529-0ba9-49e4-85ad-83e63c8e9d7e&match_category_id=dc19c9bf-4339-4ed2-a603-5b2dd1058a6&match_status_id=29d4b630-468f-4dcc-b775-5bad0b796a89&is_active=true
 ```
 
 Respuesta de la petición:
@@ -37,7 +36,6 @@ Respuesta de la petición:
     {
       "match": {
         "id": "fd73aa9c-fac8-4761-a6ba-12c674612929",
-        "group_id": "f5c3df23-f459-4a36-912e-50736614df95",
         "is_active": 1,
         "created_at": "2025-03-18 14:41:31",
         "updated_at": "2025-03-18 14:41:31",
@@ -109,7 +107,6 @@ Respuesta de la petición:
     {
       "match": {
         "id": "097c1b44-1bed-40fe-b522-ced60e91c185",
-        "group_id": "f5c3df23-f459-4a36-912e-50736614df95",
         "is_active": 1,
         "created_at": "2025-03-18 14:41:31",
         "updated_at": "2025-03-18 14:41:31",

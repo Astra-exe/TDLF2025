@@ -1,4 +1,4 @@
-# Grupo de una pareja
+# 👥 Grupo de una pareja
 
 ```
 [GET] /v1/pairs/@id/groups

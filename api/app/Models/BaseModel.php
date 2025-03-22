@@ -59,7 +59,7 @@ abstract class BaseModel extends ActiveRecord
         $offset = ($page - 1) * self::LIMIT;
 
         // Establece la paginación.
-        $this->limit($offset, self::LIMIT);
+        $this->limit(self::LIMIT)->offset($offset);
 
         // Información de la paginación.
         $this->setCustomData('pagination', [

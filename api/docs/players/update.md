@@ -1,8 +1,14 @@
-# Modificar un jugador
+# ✏️ Editar un jugador
 
 ```
 [PUT] /v1/players/@id
 ```
+
+Parámetros de la ruta:
+
+| Parámetros | Tipo | Requerido | Descripción |
+| ---------- | ---- | --------- | ----------- |
+| `id` | `string` | `true` | Identificador del jugador. |
 
 Cuerpo de la petición:
 

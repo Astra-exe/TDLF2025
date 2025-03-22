@@ -48,6 +48,7 @@ class GroupPairController extends BaseController
         // Obtiene y establece las reglas de validación.
         $this->gump()->validation_rules(GroupValidation::getRules($queryNames));
 
+        // Obtiene y establece los filtros de validación.
         $this->gump()->filter_rules(GroupValidation::getFilters($queryNames));
 
         // Comprueba los query params de la petición.
@@ -61,39 +62,42 @@ class GroupPairController extends BaseController
         }
 
         // Consulta la información de todos los "grupos" con paginación.
-        $group = new GroupModel;
-        $group->like($queryParams['filterBy'], sprintf('%%%s%%', $queryParams['search']))
-            ->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
+        $groupModel = new GroupModel;
+        $groupModel->like($queryParams['filterBy'], sprintf('%%%s%%', $queryParams['search']));
 
-        // Filtra los "grupos" por estatus de eliminación y estatus de actividad.
+        // Establece los filtros permitidos.
         foreach (['registration_category_id', 'is_eliminated', 'is_active'] as $param) {
             if (isset($queryParams[$param])) {
-                $group->eq($param, $queryParams[$param]);
+                $groupModel->eq($param, $queryParams[$param]);
             }
         }
 
         // Obtiene la información sobre la paginación.
-        $group->paginate($queryParams['page']);
-        $pagination = $group->pagination;
+        $groupModel->paginate($queryParams['page']);
+        $pagination = $groupModel->pagination;
+
+        // Aplica los parámetros de ordenamiento.
+        $groupModel->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
 
         // Consulta los "grupos" de la búsqueda.
-        $groups = array_map(static function (GroupModel $_group): array {
-            $_group->setCustomData('registration_category', $_group->registrationCategory);
-
-            unset($_group->registration_category_id);
+        $groups = array_map(static function (GroupModel $group): array {
+            // Consulta la "categoría de inscripción" del "grupo".
+            $group->setCustomData('registration_category', $group->registrationCategory);
+            unset($group->registration_category_id);
 
             // Consulta la información de las "parejas" del "grupo".
-            $pairs = array_map(static function (GroupPairPivotModel $relationship): array {
-                $pair = $relationship->pair;
-                $pair->setCustomData('registration_category', $pair->registrationCategory);
+            $pairs = array_map(static function (GroupPairPivotModel $groupPairRel): array {
+                $pair = $groupPairRel->pair;
 
+                // Consulta la "categoría de inscripción" de la "pareja".
+                $pair->setCustomData('registration_category', $pair->registrationCategory);
                 unset($pair->registration_category_id);
 
-                return ['pair' => $pair, 'relationship' => $relationship];
-            }, $_group->groupPairPivot);
+                return ['pair' => $pair, 'relationship' => $groupPairRel];
+            }, $group->groupPairPivot);
 
-            return ['group' => $_group, 'pairs' => $pairs];
-        }, $group->findAll());
+            return ['group' => $group, 'pairs' => $pairs];
+        }, $groupModel->findAll());
 
         $this->respondPagination($groups, $pagination, 'Information about all the groups pairs with pagination');
     }
@@ -123,7 +127,7 @@ class GroupPairController extends BaseController
 
         // Consulta la información del "grupo".
         $group = new GroupModel;
-        $group->select('id')->find($id);
+        $group->select('id')->eq('id', $id)->find();
 
         // Comprueba si existe el "grupo".
         if (! $group->isHydrated()) {
@@ -131,13 +135,14 @@ class GroupPairController extends BaseController
         }
 
         // Consulta la información de las "parejas" del "grupo".
-        $pairs = array_map(static function (GroupPairPivotModel $relationship): array {
-            $pair = $relationship->pair;
-            $pair->setCustomData('registration_category', $pair->registrationCategory);
+        $pairs = array_map(static function (GroupPairPivotModel $groupPairRel): array {
+            $pair = $groupPairRel->pair;
 
+            // Consulta la "categoría de inscripción" de la "pareja".
+            $pair->setCustomData('registration_category', $pair->registrationCategory);
             unset($pair->registration_category_id);
 
-            return ['pair' => $pair, 'relationship' => $relationship];
+            return ['pair' => $pair, 'relationship' => $groupPairRel];
         }, $group->groupPairPivot);
 
         $this->respond($pairs, 'Information about the group pairs');
@@ -168,7 +173,7 @@ class GroupPairController extends BaseController
 
         // Consulta la información del "grupo".
         $group = new GroupModel;
-        $group->select('id')->find($id);
+        $group->select('id')->eq('id', $id)->find();
 
         // Comprueba si existe el "grupo".
         if (! $group->isHydrated()) {
@@ -178,8 +183,9 @@ class GroupPairController extends BaseController
         // Consulta la información de las "parejas" del "grupo".
         $pairs = array_map(static function (GroupPairPivotModel $groupPairRel): array {
             $pair = $groupPairRel->pair;
-            $pair->setCustomData('registration_category', $pair->registrationCategory);
 
+            // Consulta la "categoría de inscripción" de la "pareja".
+            $pair->setCustomData('registration_category', $pair->registrationCategory);
             unset($pair->registration_category_id);
 
             // Consulta la información de los "jugadores" de la "pareja".

@@ -1,4 +1,4 @@
-# Información de un rol
+# 👀 Información de un rol
 
 ```
 [GET] /v1/roles/@id

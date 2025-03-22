@@ -13,7 +13,7 @@ class PairValidation extends BaseValidation
 {
     private const NUM_PLAYERS = 2;
 
-    private static array $registrationCategoriesIDs = [];
+    private static array $registrationCategoriesIds = [];
 
     public static function getAllRules(): array
     {
@@ -25,6 +25,7 @@ class PairValidation extends BaseValidation
             'page' => ['integer', 'min_numeric' => 1],
             'orderBy' => ['contains' => ['created_at', 'updated_at']],
             'sortBy' => ['contains' => ['asc', 'desc']],
+            'players' => ['valid_array_size_equal' => self::getNumPlayers(), 'guidv4'],
         ];
     }
 
@@ -39,20 +40,6 @@ class PairValidation extends BaseValidation
     }
 
     /**
-     * Obtiene los IDs de las "categorías de inscripción de las parejas de jugadores".
-     */
-    public static function getRegistrationCategories(): array
-    {
-        if (empty(self::$registrationCategoriesIDs)) {
-            $categories = (new RegistrationCategoryModel)->select('id')->findAll();
-
-            self::$registrationCategoriesIDs = array_column($categories, 'id');
-        }
-
-        return self::$registrationCategoriesIDs;
-    }
-
-    /**
      * Obtiene el número de "jugadores" permitidos en una "pareja".
      */
     public static function getNumPlayers(): int
@@ -61,30 +48,16 @@ class PairValidation extends BaseValidation
     }
 
     /**
-     * Obtiene las reglas de validación de los "jugadores".
+     * Obtiene los IDs de las "categorías de inscripción de las parejas de jugadores".
      */
-    public static function getPlayersRules(array $fields): array
+    public static function getRegistrationCategories(): array
     {
-        $result = ['players' => ['valid_array_size_equal' => self::getNumPlayers()]];
+        if (empty(self::$registrationCategoriesIds)) {
+            $categories = (new RegistrationCategoryModel)->select('id')->findAll();
 
-        foreach (PlayerValidation::getRules($fields) as $field => $value) {
-            $result['players.*.'.$field] = $value;
+            self::$registrationCategoriesIds = array_column($categories, 'id');
         }
 
-        return $result;
-    }
-
-    /**
-     * Obtiene los filtros de validación de los "jugadores".
-     */
-    public static function getPlayersFilters(array $fields): array
-    {
-        $result = [];
-
-        foreach (PlayerValidation::getFilters($fields) as $field => $value) {
-            $result['players.*.'.$field] = $value;
-        }
-
-        return $result;
+        return self::$registrationCategoriesIds;
     }
 }

@@ -34,6 +34,9 @@ ENV \
 COPY ./ "${APACHE_DOCUMENT_ROOT}"
 COPY ./.env "${APACHE_DOCUMENT_ROOT}"
 
+# Usuario y grupo de los archivos del proyecto.
+RUN chown -R www-data:www-data "${APACHE_DOCUMENT_ROOT}"
+
 # Utiliza la configuración en producción de PHP.
 RUN mv "${PHP_INI_DIR}/php.ini-production" "${PHP_INI_DIR}/php.ini"
 
@@ -51,7 +54,7 @@ EXPOSE "${APACHE_PORT}"
 WORKDIR "${APACHE_DOCUMENT_ROOT}"
 
 # Instala las dependencias del proyecto con "composer".
-RUN composer install --no-dev -o
+RUN composer install -n --no-dev -o
 
 # Crea la base de datos de la aplicación,
 # ejecuta las migraciones y el servidor Apache.

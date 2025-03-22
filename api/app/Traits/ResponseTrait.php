@@ -54,9 +54,19 @@ trait ResponseTrait
     /**
      * Genera una respuesta de errores de servidor.
      */
-    protected function respondServerError(string $description, string $error = 'Internal Server Error'): void
+    protected function respondServerError(array $trace, string $description, string $error = 'Internal Server Error'): void
     {
+        $this->body['stack_traces'] = $trace;
+
         $this->respondFail($description, Http::INTERNAL_SERVER_ERROR(), $error);
+    }
+
+    /**
+     * Genera una respuesta cuando un servicio no está disponible.
+     */
+    protected function respondServiceUnavailable(string $description, string $error = 'Service Unavailable'): void
+    {
+        $this->respondFail($description, Http::SERVICE_UNAVAILABLE(), $error);
     }
 
     /**
@@ -89,8 +99,10 @@ trait ResponseTrait
      * Genera una respuesta cuando se intenta
      * crear un nuevo recurso que ya existe.
      */
-    protected function respondResourceExists(string $description, string $error = 'Resource exists'): void
+    protected function respondResourceExists(array $validations, string $description, string $error = 'Resource exists'): void
     {
+        $this->body['validations'] = $validations;
+
         $this->respondConflict($description, $error);
     }
 

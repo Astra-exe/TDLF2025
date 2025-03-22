@@ -22,12 +22,17 @@ class Database
      */
     private static function getDsn(array $options): string
     {
-        return sprintf('%s:host=%s;port=%u;dbname=%s;charset=%s',
+        $dsn = sprintf('%s:host=%s;port=%u;dbname=%s',
             $options['driver'],
             $options['host'],
             $options['port'],
-            $options['database'],
-            $options['charset']);
+            $options['database']);
+
+        if ($options['driver'] == 'mysql') {
+            $dsn = sprintf('%s;charset=%s', $dsn, $options['charset']);
+        }
+
+        return $dsn;
     }
 
     /**

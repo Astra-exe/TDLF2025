@@ -1,4 +1,4 @@
-# Eliminar una pareja
+# ❌ Eliminar una pareja
 
 ```
 [DELETE] /v1/pairs/@id

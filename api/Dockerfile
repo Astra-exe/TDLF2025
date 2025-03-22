@@ -8,9 +8,10 @@ RUN \
     git \
     unzip \
     libicu-dev \
+    libpq-dev \
   && apt-get clean \
   && docker-php-ext-install -j"$(nproc)" \
-    pdo_mysql \
+    pdo_pgsql \
     bcmath \
     intl
 
@@ -21,10 +22,14 @@ COPY --from=composer/composer:2-bin /composer /usr/local/bin/composer
 ENV \
   APACHE_DOCUMENT_ROOT=/var/www/html \
   APACHE_APP_ROOT=/var/www/html/public \
-  APACHE_PORT=80/tcp \
+  APACHE_PORT=80/tcp
 
 # Copia todos los archivos del proyecto a "/var/www/html/".
 COPY ./ "${APACHE_DOCUMENT_ROOT}"
+COPY ./.env "${APACHE_DOCUMENT_ROOT}"
+
+# Usuario y grupo de los archivos del proyecto.
+RUN chown -R www-data:www-data "${APACHE_DOCUMENT_ROOT}"
 
 # Utiliza la configuración en producción de PHP.
 RUN mv "${PHP_INI_DIR}/php.ini-production" "${PHP_INI_DIR}/php.ini"
@@ -43,7 +48,7 @@ EXPOSE "${APACHE_PORT}"
 WORKDIR "${APACHE_DOCUMENT_ROOT}"
 
 # Instala las dependencias del proyecto con "composer".
-RUN composer install --no-dev -o
+RUN composer install -n --no-dev -o
 
 # Crea la base de datos de la aplicación,
 # ejecuta las migraciones y el servidor Apache.

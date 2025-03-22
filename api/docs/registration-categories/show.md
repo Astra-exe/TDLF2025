@@ -1,4 +1,4 @@
-# Información de una categoría de inscripción
+# 👀 Información de una categoría de inscripción
 
 ```
 [GET] /v1/categories/registrations/@id

@@ -1,4 +1,4 @@
-# Información de una pareja
+# 👀 Información de una pareja
 
 ```
 [GET] /v1/pairs/@id

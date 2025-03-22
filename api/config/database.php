@@ -19,10 +19,13 @@ return (static function (): array {
         'collation' => Env::get('DB_COLLATION', 'utf8mb4_general_ci'),
     ];
 
-    $options['options'] = [
-        PDO::MYSQL_ATTR_INIT_COMMAND => sprintf('SET NAMES %s COLLATE %s', $options['charset'], $options['collation']),
-        // PDO::ATTR_AUTOCOMMIT => true,
-    ];
+    $options['options'] = match ($options['driver']) {
+        'mysql' => [
+            PDO::MYSQL_ATTR_INIT_COMMAND => sprintf('SET NAMES %s COLLATE %s', $options['charset'], $options['collation']),
+            // PDO::ATTR_AUTOCOMMIT => true,
+        ],
+        default => [],
+    };
 
     return $options;
 })();

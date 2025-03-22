@@ -1,4 +1,4 @@
-# Crear una pareja
+# ➕ Crear una pareja
 
 ```
 [POST] /v1/pairs

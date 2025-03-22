@@ -9,7 +9,7 @@ use App\Models\RoleModel;
  */
 class UserValidation extends BaseValidation
 {
-    private static array $rolesIDs = [];
+    private static array $rolesIds = [];
 
     public static function getAllRules(): array
     {
@@ -21,12 +21,14 @@ class UserValidation extends BaseValidation
             'fullname' => ['alpha_space', 'between_len' => [1, 128]],
             'password' => ['regex' => '/^\S+$/', 'between_len' => [8, 64]],
             'is_active' => ['boolean'],
+            'password_confirm' => ['equalsfield' => 'password'],
         ];
     }
 
     public static function getAllFilters(): array
     {
         return [
+            'fullname' => 'trim',
             'email' => ['lower_case'],
             'is_active' => ['boolean'],
         ];
@@ -37,12 +39,12 @@ class UserValidation extends BaseValidation
      */
     private static function getRoles()
     {
-        if (empty(self::$rolesIDs)) {
+        if (empty(self::$rolesIds)) {
             $roles = (new RoleModel)->select('id')->findAll();
 
-            self::$rolesIDs = array_column($roles, 'id');
+            self::$rolesIds = array_column($roles, 'id');
         }
 
-        return self::$rolesIDs;
+        return self::$rolesIds;
     }
 }

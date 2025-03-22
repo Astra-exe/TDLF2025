@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>📘</text></svg>">
+  <title>✏️ Editar la pareja de un partido</title>
+  <style>body {
+  font-family: sans-serif;
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.navbar {
+  clear: both;
+  color: #069;
+  overflow: hidden;
+  background-color: #17a;
+  padding: 0.7ex;
+  border-top: 1px solid;
+  border-top-color: #ccc;
+  border-bottom: 1px solid #069;
+}
+
+.navbar a {
+  padding: 0.5ex 1ex;
+  color: #fff;
+}
+
+.navbar a:hover {
+  background-color: #069;
+}
+
+.navbar a, .sidebar a {
+  text-decoration: none;
+}
+
+.left {
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+
+.right {
+  float: right;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #069;
+}
+
+.sidebar {
+  float: left;
+  margin: 0 1px 0 0;
+  padding: 1em 0;
+  border-right: 1px dotted #ccc;
+  width: 200px;
+}
+
+.sidebar ul {
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li ul {
+  padding-left: 0.6em;
+}
+
+.sidebar li a {
+  display: block;
+  margin: 0;
+  padding: 0.8ex 2em 0.8ex 1em;
+}
+
+.sidebar a:hover, th, blockquote, pre, code {
+  background-color: #ddd;
+}
+
+.content {
+  clear: both;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+}
+
+.main {
+  margin: 0 0 0 200px;
+  max-width: 50em;
+  padding: 1.5em;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7ex;
+  text-align: center;
+}
+
+.footer p {
+  margin: 0.5ex 1ex;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 1em 1ex 0.5ex 0;
+}
+
+h2~*:not(h2) {
+  margin-left: 1ch;
+}
+
+h1 {
+  font-size: 2.0em;
+}
+
+h2 {
+  font-size: 1.9em;
+}
+
+h3 {
+  font-size: 1.6em;
+}
+
+h4 {
+  font-size: 1.5em;
+}
+
+h5 {
+  font-size: 1.2em;
+}
+
+h6 {
+  font-size: 1.1em;
+}
+
+pre, code {
+  margin: 0;
+  font-size: 100%;
+}
+
+pre {
+  padding: 1ch;
+}
+
+pre, table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 0.7ex;
+}
+
+blockquote::before {
+  float: left;
+  width: 1ch;
+  margin-right: 1ch;
+  content: ">";
+}
+
+img {
+  max-width: 100%;
+}
+
+@media (max-width: 999px) {
+  .sidebar {
+    float: none;
+    margin: 0;
+    width: 100%;
+    border: none;
+  }
+
+  .main {
+    margin: 0;
+  }
+
+  .footer {
+    flex-direction: column;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #000;
+    color: #fff;
+  }
+
+  .navbar {
+    border-top-color: #222;
+  }
+
+  .sidebar a:hover, th {
+    background-color: #222;
+  }
+
+  a {
+    color: #6cf;
+  }
+
+  .main img[src$=svg] {
+    filter: invert(1);
+  }
+
+  blockquote, pre, code {
+    background-color: #111;
+    border-color: #aaa;
+  }
+}</style>
+</head>
+<body>
+  <nav class="navbar"><a href="https://astra-exe.github.io/TDLF2025/api/index.html"><b>Inicio</b></a>
+<span class="right"><a href="https://github.com/Astra-exe/TDLF2025/tree/main/api">Repositorio</a> <a href="mailto:ricardogj08@riseup.net">Contacto</a></span></nav>
+  <div class="content">
+    <aside class="sidebar"><ul>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/analysis/index.html">📊 Análisis de datos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/auth/index.html">🔐 Autenticación/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups/index.html">👥 Grupos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups-matches/index.html">👥 + 🎾 Partidos de los grupos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups-pairs/index.html">👥 + 👫 Parejas de los grupos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/match-categories/index.html">🏷️ / 🎾 Categorías de los partidos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/match-status/index.html">⏳ / 🎾 Estatus de los partidos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/matches/index.html">🎾 Partidos/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/matches-pairs/index.html"><b>🎾 + 👫 Parejas de los partidos</b>/</a>
+<ul>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/matches-pairs/players.html">👫 + 🏃‍♂️ Parejas y jugadores de un partido/</a>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/matches-pairs/show.html">👀 Parejas de un partido/</a>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/matches-pairs/update.html"><b>✏️ Editar la pareja de un partido</b>/</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs/index.html">👫 Parejas/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs-players/index.html">👫 + 🏃‍♂️ Jugadores de las parejas/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/players/index.html">🏃‍♂️ Jugadores/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/registration-categories/index.html">🏷️ / 📋  Categorías de inscripción/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/roles/index.html">🏷️ / 🧑 Roles/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/rounds/index.html">🏆 Acciones de las rondas/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/users/index.html">🧑 Usuarios/</a>
+<ul>
+</ul>
+</li>
+</ul></aside>
+    <main class="main"><h1>✏️ Editar la pareja de un partido</h1>
+<pre><code>[PUT] /v1/matches/@matchId/pairs/@pairId
+</code></pre>
+<p>Parámetros de la ruta:</p>
+<table>
+<tr><th>Parámetros </th><th>Tipo </th><th>Requerido </th><th>Descripción </th></tr>
+<tr><td><code>matchId</code> </td><td><code>string</code> </td><td><code>true</code> </td><td>Identificador del partido. </td></tr>
+<tr><td><code>pairId</code> </td><td><code>string</code> </td><td><code>true</code> </td><td>Identificador de la pareja. </td></tr>
+</table>
+<p>Cuerpo de la petición:</p>
+<table>
+<tr><th>Campo </th><th>Tipo </th><th>Requerido </th><th>Rango </th><th>Descripción </th></tr>
+<tr><td><code>score</code> </td><td><code>integer</code> </td><td><code>false</code> </td><td><code>between_numeric: [0, 255]</code> </td><td>Puntaje de la pareja en el partido. </td></tr>
+<tr><td><code>is_winner</code> </td><td><code>boolean</code> </td><td><code>false</code> </td><td><code>contains: [yes/no, on/off, 1/0, true/false]</code> </td><td>Estatus de ganador de la pareja en el partido. </td></tr>
+</table>
+<p>Ejemplo:</p>
+<pre><code class="language-bash">curl -X PUT \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY' \
+  http://localhost:8080/v1/matches/@matchId/pairs/@pairId \
+  -d '{
+    &quot;score&quot;: &quot;10&quot;,
+    &quot;is_winner&quot;: &quot;1&quot;
+  }'
+</code></pre>
+<p>Respuesta de la petición:</p>
+<pre><code class="language-json">{
+  &quot;data&quot;: {
+    &quot;match&quot;: {
+      &quot;id&quot;: &quot;27113a35-baed-40b2-9af9-e0c261582b6a&quot;,
+      &quot;is_active&quot;: 1,
+      &quot;created_at&quot;: &quot;2025-03-18 14:41:31&quot;,
+      &quot;updated_at&quot;: &quot;2025-03-20 14:17:04&quot;,
+      &quot;registration_category&quot;: {
+        &quot;id&quot;: &quot;76d95a95-0fa3-4d58-a8ce-031a1db25b3c&quot;,
+        &quot;name&quot;: &quot;open&quot;,
+        &quot;description&quot;: &quot;Libre&quot;
+      },
+      &quot;match_category&quot;: {
+        &quot;id&quot;: &quot;6c7f2686-7b40-47ff-b5b5-cbd52c6cea89&quot;,
+        &quot;name&quot;: &quot;qualifier&quot;,
+        &quot;description&quot;: &quot;Clasificación&quot;
+      },
+      &quot;match_status&quot;: {
+        &quot;id&quot;: &quot;29d4b630-468f-4dcc-b775-5bad0b796a89&quot;,
+        &quot;name&quot;: &quot;scheduled&quot;,
+        &quot;description&quot;: &quot;Programado&quot;
+      }
+    },
+    &quot;pair&quot;: {
+      &quot;id&quot;: &quot;75de4f9a-726d-4eda-83aa-c42aa579691f&quot;,
+      &quot;is_eliminated&quot;: 0,
+      &quot;is_active&quot;: 1,
+      &quot;created_at&quot;: &quot;2025-03-18 14:37:31&quot;,
+      &quot;updated_at&quot;: &quot;2025-03-18 14:37:31&quot;,
+      &quot;registration_category&quot;: {
+        &quot;id&quot;: &quot;76d95a95-0fa3-4d58-a8ce-031a1db25b3c&quot;,
+        &quot;name&quot;: &quot;open&quot;,
+        &quot;description&quot;: &quot;Libre&quot;
+      }
+    },
+    &quot;relationship&quot;: {
+      &quot;id&quot;: &quot;d54b558b-65b4-4e89-b463-7390ed90387f&quot;,
+      &quot;pair_id&quot;: &quot;75de4f9a-726d-4eda-83aa-c42aa579691f&quot;,
+      &quot;match_id&quot;: &quot;27113a35-baed-40b2-9af9-e0c261582b6a&quot;,
+      &quot;score&quot;: 10,
+      &quot;is_winner&quot;: 1,
+      &quot;created_at&quot;: &quot;2025-03-18 14:41:31&quot;,
+      &quot;updated_at&quot;: &quot;2025-03-20 16:48:33&quot;
+    }
+  },
+  &quot;status&quot;: 200,
+  &quot;description&quot;: &quot;The match pair was updated successfully&quot;
+}
+</code></pre></main>
+  </div>
+  <div>
+    <hr>
+    <footer class="footer">
+      <p>Generated with <a href="https://notabug.org/ricardogj08/swiki" target="_blank">swiki</a>, a simple wiki generator written in POSIX <code>sh</code>.</p>
+      <p>© CC-BY-4.0</p>
+    </footer>
+  </div>
+</body>
+</html>

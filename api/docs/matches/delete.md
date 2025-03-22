@@ -1,4 +1,4 @@
-# Eliminar un partido
+# ❌ Eliminar un partido
 
 ```
 [DELETE] /v1/matches/@id
@@ -26,7 +26,6 @@ Respuesta de la petición:
 {
   "data": {
     "id": "fd73aa9c-fac8-4761-a6ba-12c674612929",
-    "group_id": "f5c3df23-f459-4a36-912e-50736614df95",
     "is_active": 1,
     "created_at": "2025-03-18 14:41:31",
     "updated_at": "2025-03-18 14:41:31",

@@ -61,29 +61,29 @@ class PairController extends BaseController
         }
 
         // Consulta la información de todas las "parejas" con paginación.
-        $pair = new PairModel;
-        $pair->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
+        $pairModel = new PairModel;
 
-        // Filtra las "parejas" por identificador de categoría de inscripción,
-        // estatus de eliminación y estatus de actividad.
+        // Establece los filtros permitidos.
         foreach (['registration_category_id', 'is_eliminated', 'is_active'] as $param) {
             if (isset($queryParams[$param])) {
-                $pair->eq($param, $queryParams[$param]);
+                $pairModel->eq($param, $queryParams[$param]);
             }
         }
 
         // Obtiene la información sobre la paginación.
-        $pair->paginate($queryParams['page']);
-        $pagination = $pair->pagination;
+        $pairModel->paginate($queryParams['page']);
+        $pagination = $pairModel->pagination;
+
+        // Aplica los parámetros de ordenamiento.
+        $pairModel->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
 
         // Consulta la "categoría de inscripción" de cada "pareja".
         $pairs = array_map(static function (PairModel $pair): PairModel {
             $pair->setCustomData('registration_category', $pair->registrationCategory);
-
             unset($pair->registration_category_id);
 
             return $pair;
-        }, $pair->findAll());
+        }, $pairModel->findAll());
 
         $this->respondPagination($pairs, $pagination, 'Information about all the pairs with pagination');
     }
@@ -94,24 +94,17 @@ class PairController extends BaseController
     public function create(): void
     {
         // Define los campos necesarios de la petición.
-        $requestFields = ['registration_category_id', 'players'];
+        $fields = ['registration_category_id', 'players'];
 
         $data = [];
 
         // Obtiene solo los campos necesarios.
-        foreach ($requestFields as $field) {
+        foreach ($fields as $field) {
             $data[$field] = $this->app()->request()->data->{$field} ?? null;
         }
 
-        // Define los campos necesarios de la "pareja".
-        $pairFields = ['registration_category_id'];
-
         // Obtiene las reglas de validación de la "pareja".
-        $rules = PairValidation::getRules($pairFields);
-
-        // Obtiene las reglas de validación de los IDs de los "jugadores".
-        $rules['players'] = array_merge(
-            ...array_values(PairValidation::getPlayersRules(['id'])));
+        $rules = PairValidation::getRules($fields);
 
         // Define todas las reglas de validación como obligatorias.
         foreach (array_keys($rules) as $rule) {
@@ -131,35 +124,33 @@ class PairController extends BaseController
                 'The pair information is incorrect');
         }
 
-        $player = new PlayerModel;
+        // Comprueba la información de los "jugadores".
+        $dataPlayers = (new PlayerModel)->select('id')
+            ->in('id', $data['players'])
+            ->findAll();
 
-        // Comprueba que los "jugadores" existan
-        // y no se encuentren dentro de una "pareja".
-        foreach ($data['players'] as $id) {
-            $player->select('id')->find($id);
-
-            if (! $player->isHydrated()) {
-                $this->respondValidationErrors(
-                    ['players' => 'The players were not found'],
-                    'The pair players information is incorrect');
-            }
-
-            if ($player->pairPlayerPivot->isHydrated()) {
-                $this->respondValidationErrors(
-                    ['players' => 'The players are already in a pair'],
-                    'The pair players information is incorrect');
-            }
-
-            $player->reset();
+        // Comprueba que los "jugadores" existan.
+        if (array_diff($data['players'], array_column($dataPlayers, 'id'))) {
+            $this->respondValidationErrors(
+                ['players' => 'The players were not found'],
+                'The players information is incorrect');
         }
 
-        $pair = new PairModel;
+        unset($data['players']);
 
-        foreach ($pairFields as $field) {
-            $pair->{$field} = $data[$field];
+        // Comprueba que los "jugadores" no se encuentren
+        // dentro de una "pareja".
+        foreach ($dataPlayers as $player) {
+            if ($player->pairPlayerPivot->isHydrated()) {
+                $this->respondResourceExists(
+                    ['players' => 'The players are already in a pair'],
+                    'The players information is incorrect');
+            }
         }
 
         // Registra la información de la "pareja".
+        $pair = new PairModel;
+        $pair->copyFrom($data);
         $pair->insert();
 
         $pairPlayerPivot = new PairPlayerPivotModel;
@@ -171,16 +162,20 @@ class PairController extends BaseController
             $pairPlayerPivot->reset();
         }
 
-        // Consulta la información de la "pareja" registrada.
-        $pair->find($pair->id);
-        $pair->setCustomData('registration_category', $pair->registrationCategory);
+        $id = $pair->id;
 
+        // Consulta la información de la "pareja" registrada.
+        $pair->reset();
+        $pair->find($id);
+
+        // Consulta la "categoría de inscripción" de la "pareja".
+        $pair->setCustomData('registration_category', $pair->registrationCategory);
         unset($pair->registration_category_id);
 
         // Consulta los "jugadores" registrados de la "pareja".
-        $players = array_map(static fn (PairPlayerPivotModel $relationship): array => [
-            'player' => $relationship->player,
-            'relationship' => $relationship,
+        $players = array_map(static fn (PairPlayerPivotModel $pairPlayerRel): array => [
+            'player' => $pairPlayerRel->player,
+            'relationship' => $pairPlayerRel,
         ], $pair->pairPlayerPivot);
 
         $this->respondCreated(['pair' => $pair, 'players' => $players], 'The pair was created successfully');
@@ -220,7 +215,6 @@ class PairController extends BaseController
 
         // Consulta la categoría de inscripción de la "pareja".
         $pair->setCustomData('registration_category', $pair->registrationCategory);
-
         unset($pair->registration_category_id);
 
         $this->respond($pair, 'Information about the pair');
@@ -251,7 +245,7 @@ class PairController extends BaseController
 
         // Consulta la información de la "pareja".
         $pair = new PairModel;
-        $pair->select('id')->find($id);
+        $pair->select('id')->eq('id', $id)->find();
 
         // Comprueba si existe la "pareja".
         if (! $pair->isHydrated()) {
@@ -259,16 +253,86 @@ class PairController extends BaseController
         }
 
         // Consulta la relación de la "pareja" con el "grupo".
-        $relationship = $pair->groupPairPivot;
+        $groupPairRel = $pair->groupPairPivot;
 
         // Consulta el "grupo" de la "pareja".
-        $group = $relationship->_group;
+        $group = $groupPairRel->_group;
 
+        // Consulta la "categoría de inscripción" del "grupo".
         $group->setCustomData('registration_category', $group->registrationCategory);
-
         unset($group->registration_category_id);
 
-        $this->respond(['group' => $group, 'relationship' => $relationship], 'Information about the pair group');
+        $this->respond(['group' => $group, 'relationship' => $groupPairRel], 'Information about the pair group');
+    }
+
+    /**
+     * Modifica la información de una "pareja".
+     */
+    public function update(string $id): void
+    {
+        // Define los campos que se pueden modificar.
+        $fields = ['is_eliminated', 'is_active'];
+
+        $data = ['id' => $id];
+
+        // Obtiene solo los campos necesarios.
+        foreach ($fields as $field) {
+            $data[$field] = $this->app()->request()->data->{$field} ?? null;
+
+            if (is_null($data[$field])) {
+                unset($data[$field]);
+            }
+        }
+
+        $fieldNames = array_keys($data);
+
+        // Obtiene las reglas de validación
+        // y establece el identificador como obligatorio.
+        $rules = PairValidation::getRules(['id', ...$fieldNames]);
+        array_unshift($rules['id'], 'required');
+
+        // Establece las reglas de validación.
+        $this->gump()->validation_rules($rules);
+
+        // Establece los filtros de validación.
+        $this->gump()->filter_rules(PairValidation::getFilters($fieldNames));
+
+        // Valida el cuerpo de la petición.
+        $data = $this->gump()->run($data);
+
+        unset($data['id']);
+
+        // Comprueba si existen errores de validación.
+        if ($this->gump()->errors()) {
+            $this->respondValidationErrors(
+                $this->gump()->get_errors_array(),
+                'The pair information is incorrect');
+        }
+
+        // Consulta la información la "pareja".
+        $pair = new PairModel;
+        $pair->select('id')->eq('id', $id)->find();
+
+        // Comprueba si existe la "pareja".
+        if (! $pair->isHydrated()) {
+            $this->respondNotFound('The pair information was not found');
+        }
+
+        // Modifica la información de la "pareja".
+        if (! empty($data)) {
+            $pair->copyFrom($data);
+            $pair->update();
+            $pair->reset();
+        }
+
+        // Consulta la información actualizada de la "pareja".
+        $pair->find($id);
+
+        // Consulta la "categoría de inscripción" de la "pareja".
+        $pair->setCustomData('registration_category', $pair->registrationCategory);
+        unset($pair->registration_category_id);
+
+        $this->respondUpdated($pair, 'The pair was updated successfully');
     }
 
     /**
@@ -305,7 +369,6 @@ class PairController extends BaseController
 
         // Consulta la categoría de inscripción de la "pareja".
         $pair->setCustomData('registration_category', $pair->registrationCategory);
-
         unset($pair->registration_category_id);
 
         // Elimina la información de la "pareja".

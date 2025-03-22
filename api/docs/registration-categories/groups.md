@@ -1,4 +1,4 @@
-# Grupos de una categoría de inscripción
+# 👥 Grupos de una categoría de inscripción
 
 ```
 [GET] /v1/categories/registrations/@id/groups
@@ -26,24 +26,32 @@ Respuesta de la petición:
 {
   "data": [
     {
-      "id": "3a8b9ca2-09e6-47b8-8c8b-edbf506bd8fe",
-      "registration_category_id": "c98fb1f7-837b-4301-947f-8367f6fb29b8",
+      "id": "fb983148-d4f6-41c3-8fb5-bda2146f7fa6",
       "name": "A_2025",
       "description": "A",
       "is_eliminated": 0,
       "is_active": 1,
-      "created_at": "2025-03-17 16:07:14",
-      "updated_at": "2025-03-17 16:07:14"
+      "created_at": "2025-03-20 21:27:39",
+      "updated_at": "2025-03-20 23:52:50",
+      "registration_category": {
+        "id": "5d840f53-ffb0-427c-8554-bfff885d6b6a",
+        "name": "open",
+        "description": "Libre"
+      }
     },
     {
-      "id": "85544ec6-4021-4ebe-9eff-2569ae9e02d2",
-      "registration_category_id": "c98fb1f7-837b-4301-947f-8367f6fb29b8",
+      "id": "7836e4bf-c98f-4389-b29c-f771b005ec2c",
       "name": "B_2025",
       "description": "B",
       "is_eliminated": 0,
       "is_active": 1,
-      "created_at": "2025-03-17 16:07:14",
-      "updated_at": "2025-03-17 16:07:14"
+      "created_at": "2025-03-20 21:27:39",
+      "updated_at": "2025-03-20 21:27:39",
+      "registration_category": {
+        "id": "5d840f53-ffb0-427c-8554-bfff885d6b6a",
+        "name": "open",
+        "description": "Libre"
+      }
     },
     ...
   ],

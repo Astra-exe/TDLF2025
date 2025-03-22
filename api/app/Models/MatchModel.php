@@ -16,10 +16,10 @@ class MatchModel extends BaseModel
             'registration_category_id',
             ['select' => ['id', 'name', 'description']],
         ],
-        '_group' => [
-            self::BELONGS_TO,
-            GroupModel::class,
-            'group_id',
+        'groupMatchPivot' => [
+            self::HAS_ONE,
+            GroupMatchPivotModel::class,
+            'match_id',
         ],
         'matchCategory' => [
             self::BELONGS_TO,

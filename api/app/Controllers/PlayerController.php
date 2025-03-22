@@ -60,8 +60,7 @@ class PlayerController extends BaseController
 
         // Consulta la información de todos los "jugadores" con paginación.
         $players = new PlayerModel;
-        $players->like($queryParams['filterBy'], sprintf('%%%s%%', $queryParams['search']))
-            ->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
+        $players->like($queryParams['filterBy'], sprintf('%%%s%%', $queryParams['search']));
 
         // Filtra los "jugadores" por estatus de actividad.
         if (isset($queryParams['is_active'])) {
@@ -71,6 +70,9 @@ class PlayerController extends BaseController
         // Obtiene la información sobre la paginación.
         $players->paginate($queryParams['page']);
         $pagination = $players->pagination;
+
+        // Aplica los parámetros de ordenamiento.
+        $players->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
 
         $this->respondPagination($players->findAll(), $pagination, 'Information about all the players with pagination');
     }
@@ -118,7 +120,12 @@ class PlayerController extends BaseController
         $player = new PlayerModel;
         $player->copyFrom($data);
         $player->insert();
-        $player->find($player->id);
+
+        $id = $player->id;
+
+        // Consulta la información del "jugador" registrado.
+        $player->reset();
+        $player->find($id);
 
         $this->respondCreated($player, 'The player was created successfully');
     }
@@ -183,7 +190,7 @@ class PlayerController extends BaseController
 
         // Consulta la información del "jugador".
         $player = new PlayerModel;
-        $player->select('id')->find($id);
+        $player->select('id')->eq('id', $id)->find();
 
         // Comprueba si existe el "jugador".
         if (! $player->isHydrated()) {
@@ -191,15 +198,16 @@ class PlayerController extends BaseController
         }
 
         // Consulta la relación de la "pareja" con el "jugador".
-        $relationship = $player->pairPlayerPivot;
+        $pairPlayerRel = $player->pairPlayerPivot;
 
         // Consulta la "pareja" del "jugador".
-        $pair = $relationship->pair;
-        $pair->setCustomData('registration_category', $pair->registrationCategory);
+        $pair = $pairPlayerRel->pair;
 
+        // Consulta la "categoría de inscripción" de la "pareja".
+        $pair->setCustomData('registration_category', $pair->registrationCategory);
         unset($pair->registration_category_id);
 
-        $this->respond(['pair' => $pair, 'relationship' => $relationship], 'Information about the player pair');
+        $this->respond(['pair' => $pair, 'relationship' => $pairPlayerRel], 'Information about the player pair');
     }
 
     /**
@@ -227,7 +235,7 @@ class PlayerController extends BaseController
 
         // Consulta la información del "jugador".
         $player = new PlayerModel;
-        $player->select('id')->find($id);
+        $player->select('id')->eq('id', $id)->find();
 
         // Comprueba si existe el "jugador".
         if (! $player->isHydrated()) {
@@ -243,8 +251,8 @@ class PlayerController extends BaseController
         // Consulta el "grupo" de la "pareja".
         $group = $groupPairRel->_group;
 
+        // Consulta la "categoría de inscripción" del "grupo".
         $group->setCustomData('registration_category', $group->registrationCategory);
-
         unset($group->registration_category_id);
 
         $this->respond([
@@ -300,7 +308,7 @@ class PlayerController extends BaseController
 
         // Consulta la información del "jugador".
         $player = new PlayerModel;
-        $player->select('id')->find($id);
+        $player->select('id')->eq('id', $id)->find();
 
         // Comprueba si existe el "jugador".
         if (! $player->isHydrated()) {
@@ -311,6 +319,7 @@ class PlayerController extends BaseController
         if (! empty($data)) {
             $player->copyFrom($data);
             $player->update();
+            $player->reset();
         }
 
         // Consulta la información actualizada del "jugador".

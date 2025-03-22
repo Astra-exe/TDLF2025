@@ -1,4 +1,4 @@
-# Cerrar sesión
+# 👋 Cerrar sesión
 
 ```
 [POST] /v1/auth/logout

@@ -22,9 +22,9 @@ class GroupModel extends BaseModel
             'group_id',
             ['orderBy' => 'created_at DESC'],
         ],
-        'matches' => [
+        'groupMatchPivot' => [
             self::HAS_MANY,
-            MatchModel::class,
+            GroupMatchPivotModel::class,
             'group_id',
             ['orderBy' => 'created_at DESC'],
         ],

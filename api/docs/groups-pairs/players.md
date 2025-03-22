@@ -1,4 +1,4 @@
-# Parejas y jugadores de un grupo
+# 👫 + 🏃‍♂️ Parejas y jugadores de un grupo
 
 ```
 [GET] /v1/groups/@id/pairs/players

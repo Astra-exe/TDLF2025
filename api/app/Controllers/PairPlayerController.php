@@ -7,6 +7,7 @@ namespace App\Controllers;
 use App\Models\PairModel;
 use App\Models\PairPlayerPivotModel;
 use App\Models\PlayerModel;
+use App\Validations\PairPlayerValidation;
 use App\Validations\PairValidation;
 
 class PairPlayerController extends BaseController
@@ -61,11 +62,9 @@ class PairPlayerController extends BaseController
 
         // Consulta la información de todas las "parejas" con paginación.
         $pairs = new PairModel;
-        $pairs->select('id')
-            ->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
+        $pairs->select('id');
 
-        // Filtra las "parejas" por identificador de categoría de inscripción,
-        // estatus de eliminación y estatus de actividad.
+        // Establece los filtros permitidos.
         foreach (['registration_category_id', 'is_eliminated', 'is_active'] as $param) {
             if (isset($queryParams[$param])) {
                 $pairs->eq($param, $queryParams[$param]);
@@ -76,11 +75,14 @@ class PairPlayerController extends BaseController
         $pairs->paginate($queryParams['page']);
         $pagination = $pairs->pagination;
 
-        // Consulta los "jugadores de todas las pareja".
+        // Aplica los parámetros de ordenamiento.
+        $pairs->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
+
+        // Consulta los "jugadores" de todas las "parejas".
         $players = array_map(static function (PairModel $pair): array {
-            return array_map(static fn (PairPlayerPivotModel $relationship): array => [
-                'player' => $relationship->player,
-                'relationship' => $relationship,
+            return array_map(static fn (PairPlayerPivotModel $pairPlayerRel): array => [
+                'player' => $pairPlayerRel->player,
+                'relationship' => $pairPlayerRel,
             ], $pair->pairPlayerPivot);
         }, $pairs->findAll());
 
@@ -93,26 +95,23 @@ class PairPlayerController extends BaseController
     public function create(): void
     {
         // Define los campos necesarios de la petición.
-        $requestFields = ['registration_category_id', 'players'];
+        $fields = ['registration_category_id', 'players'];
 
         $data = [];
 
         // Obtiene solo los campos necesarios.
-        foreach ($requestFields as $field) {
+        foreach ($fields as $field) {
             $data[$field] = $this->app()->request()->data->{$field} ?? null;
         }
-
-        // Define los campos necesarios de la "pareja".
-        $pairFields = ['registration_category_id'];
 
         // Define los campos necesarios de los "jugadores".
         $playersFields = ['fullname', 'city', 'weight', 'height', 'age', 'experience'];
 
         // Obtiene las reglas de validación.
-        $rules = [
-            ...PairValidation::getRules($pairFields),
-            ...PairValidation::getPlayersRules($playersFields),
-        ];
+        $rules = array_merge(
+            PairPlayerValidation::getRules($fields),
+            PairPlayerValidation::getPlayersRules($playersFields),
+        );
 
         // Define todas las reglas de validación como obligatorias.
         foreach (array_keys($rules) as $rule) {
@@ -123,7 +122,7 @@ class PairPlayerController extends BaseController
         $this->gump()->validation_rules($rules);
 
         // Establece los filtros de validación.
-        $this->gump()->filter_rules(PairValidation::getPlayersFilters($playersFields));
+        $this->gump()->filter_rules(PairPlayerValidation::getPlayersFilters($playersFields));
 
         // Valida el cuerpo de la petición.
         $data = $this->gump()->run($data);
@@ -135,24 +134,21 @@ class PairPlayerController extends BaseController
                 'The pair with players information is incorrect');
         }
 
-        $pair = new PairModel;
+        $dataPlayers = $data['players'];
 
-        foreach ($pairFields as $field) {
-            $pair->{$field} = $data[$field];
-        }
+        unset($data['players']);
 
         // Registra la información de la "pareja".
+        $pair = new PairModel;
+        $pair->copyFrom($data);
         $pair->insert();
 
         $player = new PlayerModel;
         $pairPlayerPivot = new PairPlayerPivotModel;
 
-        foreach ($data['players'] as $dataPlayer) {
-            foreach ($playersFields as $field) {
-                $player->{$field} = $dataPlayer[$field];
-            }
-
+        foreach ($dataPlayers as $dataPlayer) {
             // Registra la información de los "jugadores".
+            $player->copyFrom($dataPlayer);
             $player->insert();
 
             // Registra la relación del "jugador" con la "pareja".
@@ -163,16 +159,20 @@ class PairPlayerController extends BaseController
             $pairPlayerPivot->reset();
         }
 
-        // Consulta la información de la "pareja" registrada.
-        $pair->find($pair->id);
-        $pair->setCustomData('registration_category', $pair->registrationCategory);
+        $id = $pair->id;
 
+        // Consulta la información de la "pareja" registrada.
+        $pair->reset();
+        $pair->find($id);
+
+        // Consulta la "categoría de inscripción" de la "pareja".
+        $pair->setCustomData('registration_category', $pair->registrationCategory);
         unset($pair->registration_category_id);
 
         // Consulta los "jugadores" registrados de la "pareja".
-        $players = array_map(static fn (PairPlayerPivotModel $relationship): array => [
-            'player' => $relationship->player,
-            'relationship' => $relationship,
+        $players = array_map(static fn (PairPlayerPivotModel $pairPlayerRel): array => [
+            'player' => $pairPlayerRel->player,
+            'relationship' => $pairPlayerRel,
         ], $pair->pairPlayerPivot);
 
         $this->respondCreated(['pair' => $pair, 'players' => $players], 'The pair with players was created successfully');
@@ -203,7 +203,7 @@ class PairPlayerController extends BaseController
 
         // Consulta la información de la "pareja".
         $pair = new PairModel;
-        $pair->select('id')->find($id);
+        $pair->select('id')->eq('id', $id)->find();
 
         // Comprueba si existe la "pareja".
         if (! $pair->isHydrated()) {
@@ -211,9 +211,9 @@ class PairPlayerController extends BaseController
         }
 
         // Consulta los "jugadores" de la "pareja".
-        $players = array_map(static fn (PairPlayerPivotModel $relationship): array => [
-            'player' => $relationship->player,
-            'relationship' => $relationship,
+        $players = array_map(static fn (PairPlayerPivotModel $pairPlayerRel): array => [
+            'player' => $pairPlayerRel->player,
+            'relationship' => $pairPlayerRel,
         ], $pair->pairPlayerPivot);
 
         $this->respond($players, 'Information about the pair players');
