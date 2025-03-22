@@ -29,16 +29,16 @@ export default function Merch() {
     <section className="mt-20">
       <div className="mb-12 flex flex-col xs:flex-row justify-center gap-y-6 gap-x-7">
         <button
-          className={`px-4 xs:px-6 py-3 border cursor-pointer xs:min-w-[150px] hover:bg-accent hover:text-white transition-colors ${
-            indexMerchItem === 0 && "bg-accent text-white"
+          className={`px-4 xs:px-6 py-3 border cursor-pointer xs:min-w-[150px] hover:bg-primary-darker hover:text-white transition-colors ${
+            indexMerchItem === 0 && "bg-primary-darker text-white"
           }`}
           onClick={handleChangeShirtMerch}
         >
           Ver Playera
         </button>
         <button
-          className={`px-6 py-3 border cursor-pointer xs:min-w-[150px] hover:bg-accent hover:text-white transition-colors ${
-            indexMerchItem === 1 && "bg-accent text-white"
+          className={`px-6 py-3 border cursor-pointer xs:min-w-[150px] hover:bg-primary-darker hover:text-white transition-colors ${
+            indexMerchItem === 1 && "bg-primary-darker text-white"
           }`}
           onClick={handleChangeCapMerch}
         >

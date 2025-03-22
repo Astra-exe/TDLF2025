@@ -8,7 +8,7 @@ import AwardFourth from "@/app/components/icons/AwardFourth";
 export default function Awards() {
   return (
     <section className="mt-60" id="premios">
-      <Container className="pt-12 pb-10 px-6 xs:px-8 bg-gradient-to-b from-primary to-accent shadow-awards rounded-2xl max-w-screen-xl mx-auto">
+      <Container className="pt-12 pb-10 px-6 xs:px-8 bg-gradient-to-b from-primary to-primary-darker shadow-awards rounded-2xl max-w-screen-xl mx-auto">
         <hgroup className="text-center">
           <h3 className="font-bold text-4xl sm:text-5xl lg:text-6xl">
             Premios
@@ -22,7 +22,7 @@ export default function Awards() {
           <h4 className="col-span-full text-center text-2xl sm:text-3xl font-semibold">
             Categoria Libre
           </h4>
-          <article className="relative flex items-center justify-center py-5 transition-all duration-500 border rounded-2xl group px-7 before:w-full before:h-full before:rounded-2xl before:backdrop-blur-md before:z-10 before:absolute before:inset-0 group bg-primary/30 border-accent min-h-[150px]">
+          <article className="relative flex items-center justify-center py-5 transition-all duration-500 border rounded-2xl group px-7 before:w-full before:h-full before:rounded-2xl before:backdrop-blur-md before:z-10 before:absolute before:inset-0 group bg-primary/30 border-primato-primary-darker min-h-[150px]">
             <span className="absolute w-full font-bold text-center text-white -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 max-w-[20ch] transition-all duration-500 z-[60] group-hover:translate-y-1/2 xs:text-lg xs:text-nowrap">
               $8,000 para el campeon
             </span>
@@ -30,7 +30,7 @@ export default function Awards() {
               <AwardFirst />
             </div>
           </article>
-          <article className="relative flex items-center justify-center py-12 transition-all duration-500 border rounded-2xl group px-7 before:w-full before:h-full before:rounded-2xl before:backdrop-blur-md before:z-10 before:absolute before:inset-0 group bg-primary/30 border-accent min-h-[150px]">
+          <article className="relative flex items-center justify-center py-12 transition-all duration-500 border rounded-2xl group px-7 before:w-full before:h-full before:rounded-2xl before:backdrop-blur-md before:z-10 before:absolute before:inset-0 group bg-primary/30 border-primato-primary-darker min-h-[150px]">
             <span className="absolute w-full font-bold text-center text-white -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 max-w-[20ch] transition-all duration-500 z-[60] group-hover:translate-y-1/2 xs:text-lg xs:text-nowrap">
               $4,000 para el subcampeon
             </span>
@@ -38,7 +38,7 @@ export default function Awards() {
               <AwardSecond />
             </div>
           </article>
-          <article className="relative flex items-center justify-center py-12 transition-all duration-500 border rounded-2xl group px-7 before:w-full before:h-full before:rounded-2xl before:backdrop-blur-md before:z-10 before:absolute before:inset-0 group bg-primary/30 border-accent min-h-[150px]">
+          <article className="relative flex items-center justify-center py-12 transition-all duration-500 border rounded-2xl group px-7 before:w-full before:h-full before:rounded-2xl before:backdrop-blur-md before:z-10 before:absolute before:inset-0 group bg-primary/30 border-primato-primary-darker min-h-[150px]">
             <span className="absolute w-full font-bold text-center text-white -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 max-w-[20ch] transition-all duration-500 z-[60] group-hover:translate-y-1/2 xs:text-lg xs:text-nowrap">
               $2,000 para el tercer lugar
             </span>
@@ -46,7 +46,7 @@ export default function Awards() {
               <AwardThird />
             </div>
           </article>
-          <article className="relative flex items-center justify-center py-12 transition-all duration-500 border rounded-2xl group px-7 before:w-full before:h-full before:rounded-2xl before:backdrop-blur-md before:z-10 before:absolute before:inset-0 group bg-primary/30 border-accent min-h-[150px]">
+          <article className="relative flex items-center justify-center py-12 transition-all duration-500 border rounded-2xl group px-7 before:w-full before:h-full before:rounded-2xl before:backdrop-blur-md before:z-10 before:absolute before:inset-0 group bg-primary/30 border-primato-primary-darker min-h-[150px]">
             <span className="absolute w-full font-bold text-center text-white -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 max-w-[20ch] transition-all duration-500 z-[60] group-hover:translate-y-1/2 xs:text-lg xs:text-nowrap">
               $1,000 para el cuarto lugar
             </span>
@@ -57,7 +57,7 @@ export default function Awards() {
           <h4 className="mt-8 col-span-full text-center text-2xl sm:text-3xl font-semibold">
             Categoria 50 y más
           </h4>
-          <article className="row-span-2 relative flex items-center justify-center py-12 transition-all duration-500 border rounded-2xl group px-7 before:w-full before:h-full before:rounded-2xl before:backdrop-blur-md before:z-10 before:absolute before:inset-0 group bg-primary/30 border-accent">
+          <article className="row-span-2 relative flex items-center justify-center py-12 transition-all duration-500 border rounded-2xl group px-7 before:w-full before:h-full before:rounded-2xl before:backdrop-blur-md before:z-10 before:absolute before:inset-0 group bg-primary/30 border-primato-primary-darker">
             <span className="absolute w-full text-lg font-bold text-center text-white -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 max-w-[20ch] transition-all duration-500 z-[60] group-hover:translate-y-1/2">
               Raqueta Head para el primer lugar
             </span>
@@ -71,7 +71,7 @@ export default function Awards() {
               />
             </div>
           </article>
-          <article className="relative flex items-center justify-center py-12 transition-all duration-500 border rounded-2xl group px-7 before:w-full before:h-full before:rounded-2xl before:backdrop-blur-md before:z-10 before:absolute before:inset-0 group bg-primary/30 border-accent">
+          <article className="relative flex items-center justify-center py-12 transition-all duration-500 border rounded-2xl group px-7 before:w-full before:h-full before:rounded-2xl before:backdrop-blur-md before:z-10 before:absolute before:inset-0 group bg-primary/30 border-primato-primary-darker">
             <span className="absolute w-full text-lg font-bold text-center text-white -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 max-w-[20ch] transition-all duration-500 z-[60] group-hover:translate-y-1/2">
               Maletero MasterPro para el segundo lugar
             </span>
@@ -85,7 +85,7 @@ export default function Awards() {
               />
             </div>
           </article>
-          <article className="relative flex items-center justify-center py-12 transition-all duration-500 border rounded-2xl group px-7 before:w-full before:h-full before:rounded-2xl before:backdrop-blur-md before:z-10 before:absolute before:inset-0 group bg-primary/30 border-accent">
+          <article className="relative flex items-center justify-center py-12 transition-all duration-500 border rounded-2xl group px-7 before:w-full before:h-full before:rounded-2xl before:backdrop-blur-md before:z-10 before:absolute before:inset-0 group bg-primary/30 border-primato-primary-darker">
             <span className="absolute w-full text-lg font-bold text-center text-white -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 max-w-[20ch] transition-all duration-500 z-[60] group-hover:translate-y-1/2">
               Playeras conmemorativas para el tercer lugar
             </span>
