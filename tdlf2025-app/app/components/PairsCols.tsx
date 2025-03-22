@@ -1,10 +1,7 @@
 "use client";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
-import {
-  UpdatePair,
-  DeletePair,
-} from "@/app/components/dashboard/pairs/buttons";
+import { DeletePair } from "@/app/components/dashboard/pairs/buttons";
 
 export type PairRow = {
   id: string;
@@ -88,7 +85,6 @@ export const columns: ColumnDef<PairRow>[] = [
       const pair = row.original;
       return (
         <div className="flex space-x-2">
-          <UpdatePair id={pair.id} />
           <DeletePair id={pair.id} />
         </div>
       );
