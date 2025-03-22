@@ -32,102 +32,130 @@ Respuesta de la petición:
 ```json
 {
   "data": [
-    [
-      {
-        "player": {
-          "id": "8dd75662-436d-4998-9c6f-35a47437c2e8",
-          "fullname": "Ricardo García Cruz",
-          "city": "Salvatierra",
-          "weight": "80.00",
-          "height": "1.80",
-          "age": 56,
-          "experience": 10,
-          "is_active": 1,
-          "created_at": "2025-03-07 19:35:48",
-          "updated_at": "2025-03-07 19:35:48"
-        },
-        "relationship": {
-          "id": "477a65ef-ed1f-417c-8050-560831768513",
-          "player_id": "8dd75662-436d-4998-9c6f-35a47437c2e8",
-          "pair_id": "979bc756-1333-4d0b-8f09-e60f038d89e6",
-          "created_at": "2025-03-07 19:35:48",
-          "updated_at": "2025-03-07 19:35:48"
+    {
+      "pair": {
+        "id": "4f473639-0ad1-4984-b02a-1861d1c43324",
+        "is_eliminated": 0,
+        "is_active": 1,
+        "created_at": "2025-03-22 13:02:03",
+        "updated_at": "2025-03-22 13:02:03",
+        "registration_category": {
+          "id": "aacace26-65b6-4ac9-8e7c-fcb32061c3fd",
+          "name": "seniors",
+          "description": "50 y más"
         }
       },
-      {
-        "player": {
-          "id": "cb1a34d3-4924-42ad-a168-2fb4e29487f0",
-          "fullname": "Guadalupe Jiménez Carmona",
-          "city": "Salvatierra",
-          "weight": "75.00",
-          "height": "1.70",
-          "age": 54,
-          "experience": 2,
-          "is_active": 1,
-          "created_at": "2025-03-07 19:35:48",
-          "updated_at": "2025-03-07 19:35:48"
+      "players": [
+        {
+          "player": {
+            "id": "9afee6a9-a06f-43fd-b926-d41a2d951ead",
+            "fullname": "Nery Contreras",
+            "city": "Morelia",
+            "weight": "86.00",
+            "height": "1.69",
+            "age": 60,
+            "experience": 20,
+            "is_active": 1,
+            "created_at": "2025-03-22 11:15:23",
+            "updated_at": "2025-03-22 11:15:23"
+          },
+          "relationship": {
+            "id": "66b98335-a110-4da2-895e-1d061b0041d1",
+            "player_id": "9afee6a9-a06f-43fd-b926-d41a2d951ead",
+            "pair_id": "4f473639-0ad1-4984-b02a-1861d1c43324",
+            "created_at": "2025-03-22 13:02:03",
+            "updated_at": "2025-03-22 13:02:03"
+          }
         },
-        "relationship": {
-          "id": "83bef57e-562e-48b3-a505-0de1ecb7bf05",
-          "player_id": "cb1a34d3-4924-42ad-a168-2fb4e29487f0",
-          "pair_id": "979bc756-1333-4d0b-8f09-e60f038d89e6",
-          "created_at": "2025-03-07 19:35:48",
-          "updated_at": "2025-03-07 19:35:48"
+        {
+          "player": {
+            "id": "75d132ab-31b7-400d-932c-647060aba8b1",
+            "fullname": "José Gpe Fierros",
+            "city": "Morelia",
+            "weight": "76.00",
+            "height": "1.76",
+            "age": 60,
+            "experience": 17,
+            "is_active": 1,
+            "created_at": "2025-03-22 11:15:54",
+            "updated_at": "2025-03-22 11:15:54"
+          },
+          "relationship": {
+            "id": "217638ce-a42b-4bda-bcab-9e7fc43adf8b",
+            "player_id": "75d132ab-31b7-400d-932c-647060aba8b1",
+            "pair_id": "4f473639-0ad1-4984-b02a-1861d1c43324",
+            "created_at": "2025-03-22 13:02:03",
+            "updated_at": "2025-03-22 13:02:03"
+          }
         }
-      }
-    ],
-    [
-      {
-        "player": {
-          "id": "b7f22815-7082-41ac-9ba5-0e43022d7d5f",
-          "fullname": "Juan José Ramírez López",
-          "city": "Irapuato",
-          "weight": "70.00",
-          "height": "1.65",
-          "age": 25,
-          "experience": 5,
-          "is_active": 1,
-          "created_at": "2025-03-07 14:44:28",
-          "updated_at": "2025-03-07 14:44:28"
-        },
-        "relationship": {
-          "id": "1decc97f-29a4-4b5f-abcb-4427aeeaf7d0",
-          "player_id": "b7f22815-7082-41ac-9ba5-0e43022d7d5f",
-          "pair_id": "98eaa36b-98e1-4842-80d3-771627af3458",
-          "created_at": "2025-03-07 14:44:28",
-          "updated_at": "2025-03-07 14:44:28"
+      ]
+    },
+    {
+      "pair": {
+        "id": "5a93fab1-5470-4f4e-b36d-beb875f1a17f",
+        "is_eliminated": 0,
+        "is_active": 1,
+        "created_at": "2025-03-22 13:01:43",
+        "updated_at": "2025-03-22 13:01:43",
+        "registration_category": {
+          "id": "aacace26-65b6-4ac9-8e7c-fcb32061c3fd",
+          "name": "seniors",
+          "description": "50 y más"
         }
       },
-      {
-        "player": {
-          "id": "07b80796-fd26-4b1b-9f5d-6330e96ed849",
-          "fullname": "Ricardo García Jiménez",
-          "city": "Salvatierra",
-          "weight": "120.00",
-          "height": "1.82",
-          "age": 26,
-          "experience": 0,
-          "is_active": 1,
-          "created_at": "2025-03-07 14:44:28",
-          "updated_at": "2025-03-07 14:44:28"
+      "players": [
+        {
+          "player": {
+            "id": "2383a4ee-31df-4916-848d-7998b85bf333",
+            "fullname": "Joaquin López",
+            "city": "Morelia",
+            "weight": "78.00",
+            "height": "1.70",
+            "age": 51,
+            "experience": 15,
+            "is_active": 1,
+            "created_at": "2025-03-22 11:14:40",
+            "updated_at": "2025-03-22 11:14:40"
+          },
+          "relationship": {
+            "id": "70b41baa-fd50-4c7a-bf3a-df2858acb169",
+            "player_id": "2383a4ee-31df-4916-848d-7998b85bf333",
+            "pair_id": "5a93fab1-5470-4f4e-b36d-beb875f1a17f",
+            "created_at": "2025-03-22 13:01:43",
+            "updated_at": "2025-03-22 13:01:43"
+          }
         },
-        "relationship": {
-          "id": "64c27726-0281-45fe-9d79-9cdf9f32c2eb",
-          "player_id": "07b80796-fd26-4b1b-9f5d-6330e96ed849",
-          "pair_id": "98eaa36b-98e1-4842-80d3-771627af3458",
-          "created_at": "2025-03-07 14:44:28",
-          "updated_at": "2025-03-07 14:44:28"
+        {
+          "player": {
+            "id": "864c9d65-cb15-474e-864f-b404b2ba702c",
+            "fullname": "Salvador Farías",
+            "city": "Morelia",
+            "weight": "85.00",
+            "height": "1.74",
+            "age": 58,
+            "experience": 20,
+            "is_active": 1,
+            "created_at": "2025-03-22 11:15:02",
+            "updated_at": "2025-03-22 11:15:02"
+          },
+          "relationship": {
+            "id": "a3826553-ff57-49f9-9701-ed850ffc967e",
+            "player_id": "864c9d65-cb15-474e-864f-b404b2ba702c",
+            "pair_id": "5a93fab1-5470-4f4e-b36d-beb875f1a17f",
+            "created_at": "2025-03-22 13:01:43",
+            "updated_at": "2025-03-22 13:01:43"
+          }
         }
-      }
-    ],
+      ]
+    },
     ...
   ],
   "status": 200,
   "pagination": {
     "page": 1,
     "limit": 8,
-    "total": 1,
-    "count": 2,
+    "total": 6,
+    "count": 48,
     "offset": 0
   },
   "description": "Information about all the pairs players with pagination"
