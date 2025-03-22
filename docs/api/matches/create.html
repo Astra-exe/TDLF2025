@@ -328,7 +328,110 @@ img {
 </ul>
 </li>
 </ul></aside>
-    <main class="main"><h1>➕ Crear un partido</h1></main>
+    <main class="main"><h1>➕ Crear un partido</h1>
+<pre><code>[POST] /v1/matches
+</code></pre>
+<p>Cuerpo de la petición:</p>
+<table>
+<tr><th>Propiedades </th><th>Tipo </th><th>Requerido </th><th>Rango </th><th>Descripción </th></tr>
+<tr><td><code>registration_category_id</code> </td><td><code>string</code> </td><td><code>true</code> </td><td><code>exact_len: 36</code> </td><td>Identificador de la categoría de inscripción del partido (<a href="../registration-categories/index.html">ver</a>). </td></tr>
+<tr><td><code>match_category_id</code> </td><td><code>string</code> </td><td><code>true</code> </td><td><code>exact_len: 36</code> </td><td>Identificador de la categoría de la ronda del partido (<a href="../match-categories/index.html">ver</a>). </td></tr>
+<tr><td><code>match_status_id</code> </td><td><code>string</code> </td><td><code>true</code> </td><td><code>exact_len: 36</code> </td><td>Identificador del estatus de juego del partido (<a href="../match-status/index.html">ver</a>). </td></tr>
+<tr><td><code>pairs</code> </td><td><code>array[pairs]</code> </td><td><code>true</code> </td><td><code>array_size_equal: 2</code> </td><td>Una lista con los identificadores de las parejas del partido (<a href="../pairs/index.html">ver</a>). </td></tr>
+</table>
+<p>Ejemplo:</p>
+<pre><code class="language-bash">curl -X POST \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY' \
+  http://localhost:8080/v1/matches \
+  -d '{
+    &quot;registration_category_id&quot;: &quot;5d840f53-ffb0-427c-8554-bfff885d6b6a&quot;,
+    &quot;match_category_id&quot;: &quot;a6e9127a-3f9a-47e6-8564-383267ffd61b&quot;,
+    &quot;match_status_id&quot;: &quot;5a0db153-17c1-47f4-857f-7bf946f11eaa&quot;,
+    &quot;pairs&quot;: [
+      &quot;1d860c33-5d9d-4cbc-a7ce-a04f9be1a295&quot;,
+      &quot;f6521429-112c-44b7-a70f-ba79a207aaaa&quot;
+    ]
+  }'
+</code></pre>
+<p>Respuesta de la petición:</p>
+<pre><code class="language-json">{
+  &quot;data&quot;: {
+    &quot;match&quot;: {
+      &quot;id&quot;: &quot;af5f3bf4-02ae-43cb-ac62-ab9fe416c78c&quot;,
+      &quot;is_active&quot;: 1,
+      &quot;created_at&quot;: &quot;2025-03-22 00:40:15&quot;,
+      &quot;updated_at&quot;: &quot;2025-03-22 00:40:15&quot;,
+      &quot;registration_category&quot;: {
+        &quot;id&quot;: &quot;5d840f53-ffb0-427c-8554-bfff885d6b6a&quot;,
+        &quot;name&quot;: &quot;open&quot;,
+        &quot;description&quot;: &quot;Libre&quot;
+      },
+      &quot;match_category&quot;: {
+        &quot;id&quot;: &quot;a6e9127a-3f9a-47e6-8564-383267ffd61b&quot;,
+        &quot;name&quot;: &quot;final&quot;,
+        &quot;description&quot;: &quot;Final&quot;
+      },
+      &quot;match_status&quot;: {
+        &quot;id&quot;: &quot;5a0db153-17c1-47f4-857f-7bf946f11eaa&quot;,
+        &quot;name&quot;: &quot;playing&quot;,
+        &quot;description&quot;: &quot;En juego&quot;
+      }
+    },
+    &quot;pairs&quot;: [
+      {
+        &quot;pair&quot;: {
+          &quot;id&quot;: &quot;1d860c33-5d9d-4cbc-a7ce-a04f9be1a295&quot;,
+          &quot;is_eliminated&quot;: 0,
+          &quot;is_active&quot;: 1,
+          &quot;created_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+          &quot;updated_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+          &quot;registration_category&quot;: {
+            &quot;id&quot;: &quot;5d840f53-ffb0-427c-8554-bfff885d6b6a&quot;,
+            &quot;name&quot;: &quot;open&quot;,
+            &quot;description&quot;: &quot;Libre&quot;
+          }
+        },
+        &quot;relationship&quot;: {
+          &quot;id&quot;: &quot;a8683b32-f9cc-4814-acbf-df7c97b3d8f9&quot;,
+          &quot;pair_id&quot;: &quot;1d860c33-5d9d-4cbc-a7ce-a04f9be1a295&quot;,
+          &quot;match_id&quot;: &quot;af5f3bf4-02ae-43cb-ac62-ab9fe416c78c&quot;,
+          &quot;score&quot;: 0,
+          &quot;is_winner&quot;: 0,
+          &quot;created_at&quot;: &quot;2025-03-22 00:40:15&quot;,
+          &quot;updated_at&quot;: &quot;2025-03-22 00:40:15&quot;
+        }
+      },
+      {
+        &quot;pair&quot;: {
+          &quot;id&quot;: &quot;f6521429-112c-44b7-a70f-ba79a207aaaa&quot;,
+          &quot;is_eliminated&quot;: 0,
+          &quot;is_active&quot;: 1,
+          &quot;created_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+          &quot;updated_at&quot;: &quot;2025-03-20 21:23:55&quot;,
+          &quot;registration_category&quot;: {
+            &quot;id&quot;: &quot;5d840f53-ffb0-427c-8554-bfff885d6b6a&quot;,
+            &quot;name&quot;: &quot;open&quot;,
+            &quot;description&quot;: &quot;Libre&quot;
+          }
+        },
+        &quot;relationship&quot;: {
+          &quot;id&quot;: &quot;c59b7cff-edbb-42f8-87b8-f64bdbe52fc7&quot;,
+          &quot;pair_id&quot;: &quot;f6521429-112c-44b7-a70f-ba79a207aaaa&quot;,
+          &quot;match_id&quot;: &quot;af5f3bf4-02ae-43cb-ac62-ab9fe416c78c&quot;,
+          &quot;score&quot;: 0,
+          &quot;is_winner&quot;: 0,
+          &quot;created_at&quot;: &quot;2025-03-22 00:40:15&quot;,
+          &quot;updated_at&quot;: &quot;2025-03-22 00:40:15&quot;
+        }
+      }
+    ]
+  },
+  &quot;status&quot;: 201,
+  &quot;description&quot;: &quot;The match was created successfully&quot;
+}
+</code></pre></main>
   </div>
   <div>
     <hr>
