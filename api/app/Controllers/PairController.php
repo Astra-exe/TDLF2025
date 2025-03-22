@@ -130,7 +130,8 @@ class PairController extends BaseController
             ->findAll();
 
         // Comprueba que los "jugadores" existan.
-        if (array_diff($data['players'], array_column($dataPlayers, 'id'))) {
+        if (array_diff($data['players'], array_column($dataPlayers, 'id'))
+            || count($data['players']) !== count($dataPlayers)) {
             $this->respondValidationErrors(
                 ['players' => 'The players were not found'],
                 'The players information is incorrect');
