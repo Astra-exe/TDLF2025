@@ -61,32 +61,37 @@ class PairPlayerController extends BaseController
         }
 
         // Consulta la información de todas las "parejas" con paginación.
-        $pairs = new PairModel;
-        $pairs->select('id');
+        $pairModel = new PairModel;
 
         // Establece los filtros permitidos.
         foreach (['registration_category_id', 'is_eliminated', 'is_active'] as $param) {
             if (isset($queryParams[$param])) {
-                $pairs->eq($param, $queryParams[$param]);
+                $pairModel->eq($param, $queryParams[$param]);
             }
         }
 
         // Obtiene la información sobre la paginación.
-        $pairs->paginate($queryParams['page']);
-        $pagination = $pairs->pagination;
+        $pairModel->paginate($queryParams['page']);
+        $pagination = $pairModel->pagination;
 
         // Aplica los parámetros de ordenamiento.
-        $pairs->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
+        $pairModel->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
 
-        // Consulta los "jugadores" de todas las "parejas".
-        $players = array_map(static function (PairModel $pair): array {
-            return array_map(static fn (PairPlayerPivotModel $pairPlayerRel): array => [
+        // Consulta las "parejas" de búsqueda.
+        $pairs = array_map(static function (PairModel $pair): array {
+            // Consulta la "categoría de inscripción" de la "pareja".
+            $pair->setCustomData('registration_category', $pair->registrationCategory);
+            unset($pair->registration_category_id);
+
+            $players = array_map(static fn (PairPlayerPivotModel $pairPlayerRel): array => [
                 'player' => $pairPlayerRel->player,
                 'relationship' => $pairPlayerRel,
             ], $pair->pairPlayerPivot);
-        }, $pairs->findAll());
 
-        $this->respondPagination($players, $pagination, 'Information about all the pairs players with pagination');
+            return ['pair' => $pair, 'players' => $players];
+        }, $pairModel->findAll());
+
+        $this->respondPagination($pairs, $pagination, 'Information about all the pairs players with pagination');
     }
 
     /**

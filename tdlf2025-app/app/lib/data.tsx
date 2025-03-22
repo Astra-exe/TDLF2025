@@ -4,7 +4,6 @@ import {
   PairPlayersRelationByGroup,
   MatchesByGroup,
 } from "@/app/lib/definitions";
-import { PairRow } from "@/app/components/PairsCols";
 import { auth } from "@/auth";
 
 const URL_API = `${process.env.NEXT_PUBLIC_API_URL}/v1`;
@@ -379,13 +378,14 @@ export async function getApiKey() {
 // -------------- Tables -------------------
 export async function fetchTablePairData(apiKey: string) {
   const dataPairs = await fetchAllPairs(apiKey);
-  const tableDataPromises = dataPairs.map(async (pairData: PairsPlayers[]) => {
-    const [player1Info, player2Info] = pairData;
-    const idPair = player1Info.relationship.pair_id;
-    const pairInfo = await fetchPairById({ idPair, apiKey });
+
+  const tableDataPairs = dataPairs.map((item) => {
+    const { pair, players } = item;
+
+    const [player1Info, player2Info] = players;
 
     return {
-      id: idPair,
+      id: pair.id,
       player1: {
         id: player1Info?.player?.id,
         name: player1Info?.player?.fullname ?? "No reconocido",
@@ -394,12 +394,11 @@ export async function fetchTablePairData(apiKey: string) {
         id: player2Info?.player?.id,
         name: player2Info?.player?.fullname ?? "No reconocido",
       },
-      category:
-        pairInfo?.data?.registration_category?.description ?? "Sin categoria",
+      category: pair?.registration_category?.description ?? "Sin categoria",
     };
   });
-  const tableData: PairRow[] = await Promise.all(tableDataPromises);
-  return tableData;
+
+  return tableDataPairs;
 }
 
 export async function fetchTablePlayerData(apiKey: string) {
