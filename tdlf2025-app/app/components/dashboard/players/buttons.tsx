@@ -19,7 +19,7 @@ import { toast } from "sonner";
 export function UpdatePlayer({ id }: { id: string }) {
   return (
     <Link
-      href={`/dashboard/jugadores/${id}/edit`}
+      href={`/dashboard/jugadores/${id}/editar`}
       className="rounded-md border p-2 hover:bg-dark/50"
     >
       <Edit className="w-4 h-4" />
