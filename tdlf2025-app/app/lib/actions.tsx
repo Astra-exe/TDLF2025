@@ -4,6 +4,7 @@ import { signIn, signOut, auth } from "@/auth";
 import { AuthError } from "next-auth";
 import type { Player, Pair } from "./definitions";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 type Credentials = {
   username: string;
@@ -106,6 +107,39 @@ export async function createPair(pairData: NewPair) {
   }
 }
 
+// Create groups and Matches
+export async function createGroupsMatches() {
+  try {
+    const session = await auth();
+    if (!session?.user) {
+      throw new Error("No autorizado");
+    }
+    // fetch to create it
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/rounds/init`;
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": session.user.apiKey,
+      },
+    });
+    console.log({ response });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData?.description || "Error al crear la pareja");
+    }
+    const data = await response.json();
+    revalidatePath("/dashboard/grupos");
+    return data;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error("Error desconocido al crear los grupos y martidos");
+  }
+}
+
 export async function deletePlayerById(id: string) {
   try {
     const session = await auth();
@@ -161,5 +195,81 @@ export async function deletePairById(id: string) {
     return dataPairRemoved;
   } catch (error) {
     throw error;
+  }
+}
+
+export async function updatePairById(
+  id: string,
+  updatePairData: Partial<NewPair>
+) {
+  try {
+    const session = await auth();
+    // console.log({ session });
+    if (!session?.user) {
+      throw new Error("No autorizado");
+    }
+    console.log(updatePairData);
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/pairs/${id}`;
+    const response = await fetch(url, {
+      method: "PUT",
+      body: JSON.stringify(updatePairData),
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": session.user.apiKey,
+      },
+    });
+    console.log({ response });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData?.description || "Error al actualizar pareja");
+    }
+    const data = await response.json();
+    console.log(data);
+    revalidatePath("/dashboard/parejas");
+    redirect("/dashboard/parejas");
+  } catch (error) {
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error("Error desconocido al actualizar la pareja");
+  }
+}
+
+export async function updatePlayerById(
+  id: string,
+  updatePlayerData: Partial<NewPlayer>
+) {
+  try {
+    const session = await auth();
+    // console.log({ session });
+    if (!session?.user) {
+      throw new Error("No autorizado");
+    }
+    console.log(updatePlayerData);
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/players/${id}`;
+    const response = await fetch(url, {
+      method: "PUT",
+      body: JSON.stringify(updatePlayerData),
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": session.user.apiKey,
+      },
+    });
+    console.log({ response });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        errorData?.description || "Error al actualizar el jugador"
+      );
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error("Error desconocido al actualizar el jugador");
   }
 }
