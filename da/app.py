@@ -29,7 +29,7 @@ def get_apikey():
     }
 
     try:
-        response = requests.post('https://api-nq8l.onrender.com/v1/auth/login', json=payload)
+        response = requests.post('https://api-x90k.onrender.com/v1/auth/login', json=payload)
         response.raise_for_status()
         data = response.json()
         data = data['data']
@@ -63,7 +63,7 @@ def make_profile(player_id):
 
     # Get the player data
     try:
-        response = requests.get(f'https://api-nq8l.onrender.com/v1/players/{player_id}', headers=headers)
+        response = requests.get(f'https://api-x90k.onrender.com/v1/players/{player_id}', headers=headers)
         response.raise_for_status()
         data = response.json()
 
