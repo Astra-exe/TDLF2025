@@ -89,8 +89,8 @@ class UserController extends BaseController
         $user->reset();
         $user->select(...$this->getColumns())->eq('id', $id)->find();
 
+        // Consulta el "rol" del "usuario".
         $user->setCustomData('role', $user->role);
-
         unset($user->role_id);
 
         $this->respondCreated($user, 'The user was created successfully');
@@ -128,8 +128,8 @@ class UserController extends BaseController
             $this->respondNotFound('The user information was not found');
         }
 
+        // Consulta el "rol" del "usuario".
         $user->setCustomData('role', $user->role);
-
         unset($user->role_id);
 
         $this->respond($user, 'Information about the user');
@@ -213,6 +213,10 @@ class UserController extends BaseController
 
         // Consulta la información actualizada del "usuario".
         $user->find($id);
+
+        // Consulta el "rol" del "usuario".
+        $user->setCustomData('role', $user->role);
+        unset($user->role_id);
 
         $this->respondUpdated($user, 'The user was updated successfully');
     }

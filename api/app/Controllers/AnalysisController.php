@@ -15,7 +15,7 @@ class AnalysisController extends BaseController
     private const ENV_VARNAME = 'APP_DATA_MODEL_URL';
 
     /**
-     * Obtiene la url modelo de datos.
+     * Obtiene la url del modelo de datos.
      */
     private function getUrl(): string
     {

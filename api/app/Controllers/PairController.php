@@ -79,8 +79,8 @@ class PairController extends BaseController
 
         // Consulta la "categoría de inscripción" de cada "pareja".
         $pairs = array_map(static function (PairModel $pair): PairModel {
+            // Consulta la "categoría de inscripción" de la "pareja".
             $pair->setCustomData('registration_category', $pair->registrationCategory);
-
             unset($pair->registration_category_id);
 
             return $pair;
@@ -174,8 +174,9 @@ class PairController extends BaseController
 
         // Consulta la información de la "pareja" registrada.
         $pair->find($pair->id);
-        $pair->setCustomData('registration_category', $pair->registrationCategory);
 
+        // Consulta la "categoría de inscripción" de la "pareja".
+        $pair->setCustomData('registration_category', $pair->registrationCategory);
         unset($pair->registration_category_id);
 
         // Consulta los "jugadores" registrados de la "pareja".
@@ -221,7 +222,6 @@ class PairController extends BaseController
 
         // Consulta la categoría de inscripción de la "pareja".
         $pair->setCustomData('registration_category', $pair->registrationCategory);
-
         unset($pair->registration_category_id);
 
         $this->respond($pair, 'Information about the pair');
@@ -265,8 +265,8 @@ class PairController extends BaseController
         // Consulta el "grupo" de la "pareja".
         $group = $relationship->_group;
 
+        // Consulta la "categoría de inscripción" del "grupo".
         $group->setCustomData('registration_category', $group->registrationCategory);
-
         unset($group->registration_category_id);
 
         $this->respond(['group' => $group, 'relationship' => $relationship], 'Information about the pair group');
@@ -329,10 +329,15 @@ class PairController extends BaseController
         if (! empty($data)) {
             $pair->copyFrom($data);
             $pair->update();
+            $pair->reset();
         }
 
         // Consulta la información actualizada de la "pareja".
         $pair->find($id);
+
+        // Consulta la "categoría de inscripción" de la "pareja".
+        $pair->setCustomData('registration_category', $pair->registrationCategory);
+        unset($pair->registration_category_id);
 
         $this->respondUpdated($pair, 'The pair was updated successfully');
     }
@@ -371,7 +376,6 @@ class PairController extends BaseController
 
         // Consulta la categoría de inscripción de la "pareja".
         $pair->setCustomData('registration_category', $pair->registrationCategory);
-
         unset($pair->registration_category_id);
 
         // Elimina la información de la "pareja".

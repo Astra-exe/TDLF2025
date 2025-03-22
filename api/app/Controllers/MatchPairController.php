@@ -58,7 +58,7 @@ class MatchPairController extends BaseController
         if ($this->gump()->errors()) {
             $this->respondValidationErrors(
                 $this->gump()->get_errors_array(),
-                'The matches pairs information is incorrect');
+                'The matches pairs search information is incorrect');
         }
 
         // Consulta la información de todos los "partidos" con paginación.
@@ -89,8 +89,9 @@ class MatchPairController extends BaseController
             // Consulta la información de las "parejas".
             $pairs = array_map(static function (MatchPairPivotModel $matchPairRel): array {
                 $pair = $matchPairRel->pair;
-                $pair->setCustomData('registration_category', $pair->registrationCategory);
 
+                // Consulta la "categoría de inscripción" de la "pareja".
+                $pair->setCustomData('registration_category', $pair->registrationCategory);
                 unset($pair->registration_category_id);
 
                 return ['pair' => $pair, 'relationship' => $matchPairRel];
@@ -137,8 +138,9 @@ class MatchPairController extends BaseController
         // Consulta la información de las "parejas" del "partido".
         $pairs = array_map(static function (MatchPairPivotModel $matchPairRel): array {
             $pair = $matchPairRel->pair;
-            $pair->setCustomData('registration_category', $pair->registrationCategory);
 
+            // Consulta la "categoría de inscripción" de la "pareja".
+            $pair->setCustomData('registration_category', $pair->registrationCategory);
             unset($pair->registration_category_id);
 
             return ['pair' => $pair, 'relationship' => $matchPairRel];
@@ -182,8 +184,9 @@ class MatchPairController extends BaseController
         // Consulta la información de las "parejas" del "partido".
         $pairs = array_map(static function (MatchPairPivotModel $matchPairRel): array {
             $pair = $matchPairRel->pair;
-            $pair->setCustomData('registration_category', $pair->registrationCategory);
 
+            // Consulta la "categoría de inscripción" de la "pareja".
+            $pair->setCustomData('registration_category', $pair->registrationCategory);
             unset($pair->registration_category_id);
 
             // Consulta la información de los "jugadores" de la "pareja".
@@ -266,14 +269,18 @@ class MatchPairController extends BaseController
             $this->respondNotFound('The match pair information was not found');
         }
 
+        // Obtiene el ID de la relación de la "pareja" con el "partido".
+        $id = $matchPairPivot->id;
+
         // Modifica la información de la "pareja" en el "partido".
         if (! empty($data)) {
             $matchPairPivot->copyFrom($data);
             $matchPairPivot->update();
+            $matchPairPivot->reset();
         }
 
         // Consulta la información actualizada de la "pareja" en el "partido".
-        $matchPairPivot->find($matchPairPivot->id);
+        $matchPairPivot->find($id);
 
         // Consulta la información del "partido" de la "pareja".
         $match = $matchPairPivot->match;
@@ -285,8 +292,9 @@ class MatchPairController extends BaseController
 
         // Consulta la información de la "pareja" del "partido".
         $pair = $matchPairPivot->pair;
-        $pair->setCustomData('registration_category', $pair->registrationCategory);
 
+        // Consulta la "categoría de inscripción" de la "pareja".
+        $pair->setCustomData('registration_category', $pair->registrationCategory);
         unset($pair->registration_category_id);
 
         $this->respondUpdated([

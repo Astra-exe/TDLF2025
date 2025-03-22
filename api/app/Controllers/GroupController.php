@@ -46,6 +46,7 @@ class GroupController extends BaseController
         // Obtiene y establece las reglas de validación.
         $this->gump()->validation_rules(GroupValidation::getRules($queryNames));
 
+        // Obtiene y establece los filtros de validación.
         $this->gump()->filter_rules(GroupValidation::getFilters($queryNames));
 
         // Comprueba los query params de la petición.
@@ -78,8 +79,8 @@ class GroupController extends BaseController
 
         // Consulta la "categoría de inscripción" de cada "grupo".
         $groups = array_map(static function (GroupModel $group): GroupModel {
+            // Consulta la "categoría de inscripción" del "grupo".
             $group->setCustomData('registration_category', $group->registrationCategory);
-
             unset($group->registration_category_id);
 
             return $group;
@@ -120,8 +121,8 @@ class GroupController extends BaseController
             $this->respondNotFound('The group information was not found');
         }
 
+        // Consulta la "categoría de inscripción" del "grupo".
         $group->setCustomData('registration_category', $group->registrationCategory);
-
         unset($group->registration_category_id);
 
         $this->respond($group, 'Information about the group');
@@ -184,13 +185,14 @@ class GroupController extends BaseController
         if (! empty($data)) {
             $group->copyFrom($data);
             $group->update();
+            $group->reset();
         }
 
         // Consulta la información actualizada del "grupo".
         $group->find($id);
 
+        // Consulta la "categoría de inscripción" del "grupo".
         $group->setCustomData('registration_category', $group->registrationCategory);
-
         unset($group->registration_category_id);
 
         $this->respond($group, 'The group was updated successfully');

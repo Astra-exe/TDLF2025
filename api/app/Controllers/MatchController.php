@@ -169,8 +169,8 @@ class MatchController extends BaseController
         // Obtiene el "grupo" del "partido".
         $group = $relationship->_group;
 
+        // Consulta la "categoría de inscripción" del "grupo".
         $group->setCustomData('registration_category', $group->registrationCategory);
-
         unset($group->registration_category_id);
 
         $this->respond(['group' => $group, 'relationship' => $relationship], 'Information about the match group');
@@ -233,6 +233,7 @@ class MatchController extends BaseController
         if (! empty($data)) {
             $match->copyFrom($data);
             $match->update();
+            $match->reset();
         }
 
         // Consulta la información actualizada del "partido".

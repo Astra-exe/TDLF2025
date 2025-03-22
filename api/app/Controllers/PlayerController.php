@@ -197,8 +197,9 @@ class PlayerController extends BaseController
 
         // Consulta la "pareja" del "jugador".
         $pair = $relationship->pair;
-        $pair->setCustomData('registration_category', $pair->registrationCategory);
 
+        // Consulta la "categoría de inscripción" de la "pareja".
+        $pair->setCustomData('registration_category', $pair->registrationCategory);
         unset($pair->registration_category_id);
 
         $this->respond(['pair' => $pair, 'relationship' => $relationship], 'Information about the player pair');
@@ -245,8 +246,8 @@ class PlayerController extends BaseController
         // Consulta el "grupo" de la "pareja".
         $group = $groupPairRel->_group;
 
+        // Consulta la "categoría de inscripción" del "grupo".
         $group->setCustomData('registration_category', $group->registrationCategory);
-
         unset($group->registration_category_id);
 
         $this->respond([
@@ -313,6 +314,7 @@ class PlayerController extends BaseController
         if (! empty($data)) {
             $player->copyFrom($data);
             $player->update();
+            $player->reset();
         }
 
         // Consulta la información actualizada del "jugador".

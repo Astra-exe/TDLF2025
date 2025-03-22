@@ -49,6 +49,7 @@ class GroupMatchController extends BaseController
         // Obtiene y establece las reglas de validación.
         $this->gump()->validation_rules(GroupValidation::getRules($queryNames));
 
+        // Obtiene y establece los filtros de validación.
         $this->gump()->filter_rules(GroupValidation::getFilters($queryNames));
 
         // Comprueba los query params de la petición.
@@ -81,8 +82,8 @@ class GroupMatchController extends BaseController
 
         // Consulta la "categoría de inscripción" de cada "grupo".
         $groups = array_map(static function (GroupModel $group): array {
+            // Consulta la "categoría de inscripción" del "grupo".
             $group->setCustomData('registration_category', $group->registrationCategory);
-
             unset($group->registration_category_id);
 
             // Consulta la información de los "partidos" del "grupo".
@@ -195,8 +196,9 @@ class GroupMatchController extends BaseController
             // Consulta la información de las "parejas" del "partido".
             $match->setCustomData('pairs', array_map(static function (MatchPairPivotModel $matchPairRel): array {
                 $pair = $matchPairRel->pair;
-                $pair->setCustomData('registration_category', $pair->registrationCategory);
 
+                // Consulta la "categoría de inscripción" de la "pareja".
+                $pair->setCustomData('registration_category', $pair->registrationCategory);
                 unset($pair->registration_category_id);
 
                 // Consulta la información de los "jugadores" de la "pareja".

@@ -166,8 +166,9 @@ class PairPlayerController extends BaseController
 
         // Consulta la información de la "pareja" registrada.
         $pair->find($pair->id);
-        $pair->setCustomData('registration_category', $pair->registrationCategory);
 
+        // Consulta la "categoría de inscripción" de la "pareja".
+        $pair->setCustomData('registration_category', $pair->registrationCategory);
         unset($pair->registration_category_id);
 
         // Consulta los "jugadores" registrados de la "pareja".
