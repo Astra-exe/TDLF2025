@@ -29,7 +29,7 @@ class MatchValidation extends BaseValidation
             'page' => ['integer', 'min_numeric' => 1],
             'orderBy' => ['contains' => ['created_at', 'updated_at']],
             'sortBy' => ['contains' => ['asc', 'desc']],
-            'pairs' => array_merge(['valid_array_size_equal' => self::getNumPairs()], ...array_values(PairValidation::getRules(['id']))),
+            'pairs' => ['valid_array_size_equal' => self::getNumPairs(), 'guidv4'],
         ];
     }
 
@@ -40,6 +40,14 @@ class MatchValidation extends BaseValidation
             'page' => 'whole_number',
             'sortBy' => 'upper_case',
         ];
+    }
+
+    /**
+     * Obtiene el número de "contrincantes" en un "partido".
+     */
+    public static function getNumPairs(): int
+    {
+        return self::NUM_PAIRS;
     }
 
     /**
@@ -68,13 +76,5 @@ class MatchValidation extends BaseValidation
         }
 
         return self::$matchStatusIds;
-    }
-
-    /**
-     * Obtiene el número de "contrincantes" en un "partido".
-     */
-    public static function getNumPairs(): int
-    {
-        return self::NUM_PAIRS;
     }
 }

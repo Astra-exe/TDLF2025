@@ -94,24 +94,17 @@ class PairController extends BaseController
     public function create(): void
     {
         // Define los campos necesarios de la petición.
-        $requestFields = ['registration_category_id', 'players'];
+        $fields = ['registration_category_id', 'players'];
 
         $data = [];
 
         // Obtiene solo los campos necesarios.
-        foreach ($requestFields as $field) {
+        foreach ($fields as $field) {
             $data[$field] = $this->app()->request()->data->{$field} ?? null;
         }
 
-        // Define los campos necesarios de la "pareja".
-        $pairFields = ['registration_category_id'];
-
         // Obtiene las reglas de validación de la "pareja".
-        $rules = PairValidation::getRules($pairFields);
-
-        // Obtiene las reglas de validación de los IDs de los "jugadores".
-        $rules['players'] = array_merge(
-            ...array_values(PairValidation::getPlayersRules(['id'])));
+        $rules = PairValidation::getRules($fields);
 
         // Define todas las reglas de validación como obligatorias.
         foreach (array_keys($rules) as $rule) {
@@ -131,35 +124,33 @@ class PairController extends BaseController
                 'The pair information is incorrect');
         }
 
-        $player = new PlayerModel;
+        // Comprueba la información de los "jugadores".
+        $dataPlayers = (new PlayerModel)->select('id')
+            ->in($data['players'])
+            ->findAll();
 
-        // Comprueba que los "jugadores" existan
-        // y no se encuentren dentro de una "pareja".
-        foreach ($data['players'] as $id) {
-            $player->select('id')->eq('id', $id)->find();
+        // Comprueba que los "jugadores" existan.
+        if (array_diff($data['players'], array_column($dataPlayers, 'id'))) {
+            $this->respondValidationErrors(
+                ['players' => 'The players were not found'],
+                'The players information is incorrect');
+        }
 
-            if (! $player->isHydrated()) {
-                $this->respondValidationErrors(
-                    ['players' => 'The players were not found'],
-                    'The pair players information is incorrect');
-            }
+        unset($data['players']);
 
+        // Comprueba que los "jugadores" no se encuentren
+        // dentro de una "pareja".
+        foreach ($dataPlayers as $player) {
             if ($player->pairPlayerPivot->isHydrated()) {
                 $this->respondResourceExists(
                     ['players' => 'The players are already in a pair'],
-                    'The pair players information is incorrect');
+                    'The players information is incorrect');
             }
-
-            $player->reset();
-        }
-
-        $pair = new PairModel;
-
-        foreach ($pairFields as $field) {
-            $pair->{$field} = $data[$field];
         }
 
         // Registra la información de la "pareja".
+        $pair = new PairModel;
+        $pair->copyFrom($data);
         $pair->insert();
 
         $pairPlayerPivot = new PairPlayerPivotModel;

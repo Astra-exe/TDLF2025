@@ -7,6 +7,7 @@ namespace App\Controllers;
 use App\Models\PairModel;
 use App\Models\PairPlayerPivotModel;
 use App\Models\PlayerModel;
+use App\Validations\PairPlayerValidation;
 use App\Validations\PairValidation;
 
 class PairPlayerController extends BaseController
@@ -94,25 +95,22 @@ class PairPlayerController extends BaseController
     public function create(): void
     {
         // Define los campos necesarios de la petición.
-        $requestFields = ['registration_category_id', 'players'];
+        $fields = ['registration_category_id', 'players'];
 
         $data = [];
 
         // Obtiene solo los campos necesarios.
-        foreach ($requestFields as $field) {
+        foreach ($fields as $field) {
             $data[$field] = $this->app()->request()->data->{$field} ?? null;
         }
-
-        // Define los campos necesarios de la "pareja".
-        $pairFields = ['registration_category_id'];
 
         // Define los campos necesarios de los "jugadores".
         $playersFields = ['fullname', 'city', 'weight', 'height', 'age', 'experience'];
 
         // Obtiene las reglas de validación.
         $rules = array_merge(
-            PairValidation::getRules($pairFields),
-            PairValidation::getPlayersRules($playersFields),
+            PairPlayerValidation::getRules($fields),
+            PairPlayerValidation::getPlayersRules($playersFields),
         );
 
         // Define todas las reglas de validación como obligatorias.
@@ -124,7 +122,7 @@ class PairPlayerController extends BaseController
         $this->gump()->validation_rules($rules);
 
         // Establece los filtros de validación.
-        $this->gump()->filter_rules(PairValidation::getPlayersFilters($playersFields));
+        $this->gump()->filter_rules(PairPlayerValidation::getPlayersFilters($playersFields));
 
         // Valida el cuerpo de la petición.
         $data = $this->gump()->run($data);
@@ -136,24 +134,21 @@ class PairPlayerController extends BaseController
                 'The pair with players information is incorrect');
         }
 
-        $pair = new PairModel;
+        $dataPlayers = $data['players'];
 
-        foreach ($pairFields as $field) {
-            $pair->{$field} = $data[$field];
-        }
+        unset($data['players']);
 
         // Registra la información de la "pareja".
+        $pair = new PairModel;
+        $pair->copyFrom($data);
         $pair->insert();
 
         $player = new PlayerModel;
         $pairPlayerPivot = new PairPlayerPivotModel;
 
-        foreach ($data['players'] as $dataPlayer) {
-            foreach ($playersFields as $field) {
-                $player->{$field} = $dataPlayer[$field];
-            }
-
+        foreach ($dataPlayers as $dataPlayer) {
             // Registra la información de los "jugadores".
+            $player->copyFrom($dataPlayer);
             $player->insert();
 
             // Registra la relación del "jugador" con la "pareja".
