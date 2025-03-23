@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Helpers\Database;
 use App\Models\GroupModel;
 use App\Models\PairModel;
 use App\Models\PairPlayerPivotModel;
@@ -234,20 +235,18 @@ class GroupController extends BaseController
         $group->reset();
 
         // Consulta el ranking de las "parejas" del "grupo".
-        $ranking = $group->select('pairs.*', 'SUM(CASE WHEN matches_pairs.is_winner = 1 THEN 1 ELSE 0 END) AS total_winners', 'SUM(matches_pairs.score) AS total_score')
+        $ranking = (new PairModel)->select('pairs.*', 'SUM(CASE WHEN matches_pairs.is_winner = 1 THEN 1 ELSE 0 END) AS total_winners', 'SUM(matches_pairs.score) AS total_score')
+            ->from('groups')
             ->join('groups_matches', 'groups.id = groups_matches.group_id', 'INNER') // Partidos del grupo.
             ->join('matches_pairs', 'groups_matches.match_id = matches_pairs.match_id', 'INNER') // Parejas contrincantes del partido.
             ->join('pairs', 'matches_pairs.pair_id = pairs.id', 'INNER') // Parejas del partido.
-            ->eq('id', $id)
+            ->where(sprintf('groups.id = %s', Database::getConnection()->quote($id)))
             ->groupBy('pairs.id')
             ->orderBy('total_winners DESC', 'total_score DESC')
             ->findAll();
 
         // Obtiene la información de las "parejas".
-        $pairs = array_map(static function (GroupModel $item) {
-            $pair = new PairModel;
-            $pair->copyFrom($item->toArray());
-
+        $pairs = array_map(static function (PairModel $pair) {
             // Consulta la "categoría de inscripción" de la "pareja".
             $pair->setCustomData('registration_category', $pair->registrationCategory);
 
