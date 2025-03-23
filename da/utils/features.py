@@ -72,7 +72,7 @@ def players_location(df):
     # Create map
     mapa = folium.Map(
         location=[20.6736, -101.325],
-        zoom_start=7,
+        zoom_start=5,
         tiles="CartoDB dark_matter",
         attr='© CARTO'
     )
