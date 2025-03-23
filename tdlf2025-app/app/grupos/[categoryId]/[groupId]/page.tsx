@@ -18,6 +18,66 @@ import {
   TableRow,
 } from "@/app/components/ui/table";
 
+type StatsByPair = {
+  id: string;
+  player1: string;
+  player2: string;
+  wins: string;
+  totalPoints: string;
+};
+
+interface Player {
+  id: string;
+  fullname: string;
+  city: string;
+  weight: string;
+  height: string;
+  age: number;
+  experience: number;
+  is_active: number;
+  created_at: string;
+  updated_at: string;
+}
+
+interface Relationship {
+  id: string;
+  player_id: string;
+  pair_id: string;
+  created_at: string;
+  updated_at: string;
+}
+
+interface PlayerWithRelationship {
+  player: Player;
+  relationship: Relationship;
+}
+
+interface RegistrationCategory {
+  id: string;
+  name: string;
+  description: string;
+}
+
+interface Pair {
+  id: string;
+  is_eliminated: number;
+  is_active: number;
+  created_at: string;
+  updated_at: string;
+  registration_category: RegistrationCategory;
+  players: PlayerWithRelationship[];
+}
+
+interface Rating {
+  total_winners: string;
+  total_score: string;
+}
+
+interface PairWithRating {
+  pair: Pair;
+  rating: Rating;
+}
+
 export default async function GroupPageByCategory(props: {
   params: Promise<{ categoryId: string; groupId: string }>;
 }) {
@@ -34,16 +94,25 @@ export default async function GroupPageByCategory(props: {
 
   const { categoryData, groupData, matchesData } = groupsByCategory;
 
-  const rankingData = await fetchRankingByGroup({ apiKey, idGroup: groupId });
+  const { data: rankingData } = await fetchRankingByGroup({
+    apiKey,
+    idGroup: groupId,
+  });
 
-  console.log(rankingData);
+  const statsByPair = rankingData.map((item: PairWithRating) => {
+    const player1 = item.pair.players[0].player.fullname;
+    const player2 = item.pair.players[1].player.fullname;
+    const wins = parseInt(item.rating.total_winners);
+    const totalPoints = parseInt(item.rating.total_score);
 
-  // statsByPair = {
-  //   player1:
-  //   player2:
-  //   wins:
-  //   totalPoints:
-  // }
+    return {
+      id: item.pair.id,
+      player1,
+      player2,
+      wins,
+      totalPoints,
+    };
+  });
 
   return (
     <div>
@@ -72,8 +141,8 @@ export default async function GroupPageByCategory(props: {
               })}
             </div>
           </section>
-          {/*
-          <section className="mt-20">
+
+          <section className="mt-40">
             <h2 className="text-3xl text-center font-bold mb-4">
               Tabla de Matches
             </h2>
@@ -94,13 +163,13 @@ export default async function GroupPageByCategory(props: {
               </TableHeader>
 
               <TableBody>
-                {statsByDuo.map((statDuo: any) => (
-                  <TableRow>
+                {statsByPair.map((statDuo: StatsByPair) => (
+                  <TableRow key={statDuo.id}>
                     <TableCell>
                       {statDuo.player1} / {statDuo.player2}
                     </TableCell>
                     <TableCell>{statDuo.wins}</TableCell>
-                    <TableCell>{statDuo.total_points}</TableCell>
+                    <TableCell>{statDuo.totalPoints}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -112,7 +181,7 @@ export default async function GroupPageByCategory(props: {
                 </TableRow>
               </TableFooter>
             </Table>
-          </section> */}
+          </section>
         </div>
       </main>
       <Footer />

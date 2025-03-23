@@ -69,8 +69,6 @@ export default async function MatchesByCategoryPage(props: {
     }))
   );
 
-  console.log(transformedDataMatches[0]);
-
   return (
     <div className="w-full pt-8 pb-12">
       <div className="w-[80%] mx-auto">
