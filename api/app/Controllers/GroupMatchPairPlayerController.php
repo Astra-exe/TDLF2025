@@ -12,7 +12,7 @@ use App\Validations\GroupValidation;
 
 class GroupMatchPairPlayerController extends BaseController
 {
-    private CONST LIMIT = 4;
+    private const LIMIT = 4;
 
     /**
      * Muestra la información de todos los "partidos",
