@@ -1,8 +1,22 @@
 import { notFound } from "next/navigation";
-import { getApiKey, fetchMatchesPairsPlayersByGroup } from "@/app/lib/data";
+import {
+  getApiKey,
+  fetchMatchesPairsPlayersByGroup,
+  fetchRankingByGroup,
+} from "@/app/lib/data";
 import Footer from "@/app/components/landing/sections/Footer";
 import Match from "@/app/components/Match";
 import { MatchByGroup } from "@/app/lib/definitions";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/app/components/ui/table";
 
 export default async function GroupPageByCategory(props: {
   params: Promise<{ categoryId: string; groupId: string }>;
@@ -19,6 +33,17 @@ export default async function GroupPageByCategory(props: {
   }
 
   const { categoryData, groupData, matchesData } = groupsByCategory;
+
+  const rankingData = await fetchRankingByGroup({ apiKey, idGroup: groupId });
+
+  console.log(rankingData);
+
+  // statsByPair = {
+  //   player1:
+  //   player2:
+  //   wins:
+  //   totalPoints:
+  // }
 
   return (
     <div>
@@ -47,6 +72,47 @@ export default async function GroupPageByCategory(props: {
               })}
             </div>
           </section>
+          {/*
+          <section className="mt-20">
+            <h2 className="text-3xl text-center font-bold mb-4">
+              Tabla de Matches
+            </h2>
+            <Table className="overflow-x-auto">
+              <TableCaption>Lista de matches</TableCaption>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="text-center xs:text-left text-sm xs:text-base">
+                    Pareja
+                  </TableHead>
+                  <TableHead className="text-center xs:text-left text-sm xs:text-base">
+                    Victorias
+                  </TableHead>
+                  <TableHead className="text-center xs:text-left text-sm xs:text-base">
+                    Puntos Totales
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+
+              <TableBody>
+                {statsByDuo.map((statDuo: any) => (
+                  <TableRow>
+                    <TableCell>
+                      {statDuo.player1} / {statDuo.player2}
+                    </TableCell>
+                    <TableCell>{statDuo.wins}</TableCell>
+                    <TableCell>{statDuo.total_points}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+
+              <TableFooter>
+                <TableRow>
+                  <TableCell colSpan={2}>Total Parejas</TableCell>
+                  <TableCell>4</TableCell>
+                </TableRow>
+              </TableFooter>
+            </Table>
+          </section> */}
         </div>
       </main>
       <Footer />
