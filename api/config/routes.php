@@ -111,6 +111,7 @@ return (static function () use ($app): void {
 
         // Acciones de las rondas del torneo.
         $router->post($base_route('/v1/rounds/init'), \App\Controllers\RoundController::class.'->init');
+        $router->post($base_route('/v1/rounds/purge/groups'), \App\Controllers\RoundController::class.'->purgeGroups');
 
         // Modelo de datos.
         $router->get($base_route('/v1/analysis/profiles/@id'), App\Controllers\AnalysisController::class.'->profile');

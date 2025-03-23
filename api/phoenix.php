@@ -21,7 +21,7 @@ return (static function (): array {
     $directories = ['first' => __DIR__.'/migrations/first_dir'];
 
     // Agrega el directorio de las migraciones de desarrollo.
-    if (\App\Helpers\Env::get('APP_ENVIRONMENT') == 'development') {
+    if (\App\Helpers\Env::get('APP_ENVIRONMENT') === 'development') {
         $directories['second'] = __DIR__.'/migrations/second_dir';
     }
 
