@@ -1,4 +1,4 @@
-# 🎾 + 👫 Parejas de los partidos
+# 🎾 + 👫 Partidos y parejas
 
 Parejas de los partidos.
 

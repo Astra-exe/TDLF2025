@@ -13,7 +13,7 @@ use flight\ActiveRecord;
  */
 abstract class BaseModel extends ActiveRecord
 {
-    protected const LIMIT = 24;
+    protected const LIMIT = 16;
 
     /**
      * Método abstracto para obtener el nombre de la tabla.

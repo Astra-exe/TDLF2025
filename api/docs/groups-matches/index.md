@@ -1,4 +1,4 @@
-# 👥 + 🎾 Partidos de los grupos
+# 👥 + 🎾 Grupos y partidos
 
 Partidos asignados a los grupos.
 

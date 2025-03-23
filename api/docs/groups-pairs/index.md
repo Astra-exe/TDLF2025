@@ -1,4 +1,4 @@
-# 👥 + 👫 Parejas de los grupos
+# 👥 + 👫 Grupos y parejas
 
 Grupos de parejas asignados.
 
