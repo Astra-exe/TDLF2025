@@ -201,7 +201,7 @@ class GroupController extends BaseController
     }
 
     /**
-     * Ranking de "parejas" y "jugadores" del "grupo".
+     * Ranking de las "parejas" y "jugadores" del "grupo".
      */
     public function ranking(string $id): void
     {
@@ -232,8 +232,6 @@ class GroupController extends BaseController
             $this->respondNotFound('The group information was not found');
         }
 
-        $group->reset();
-
         // Consulta el ranking de las "parejas" del "grupo".
         $ranking = (new PairModel)->select('pairs.*', 'SUM(CASE WHEN matches_pairs.is_winner = 1 THEN 1 ELSE 0 END) AS total_winners', 'SUM(matches_pairs.score) AS total_score')
             ->from('groups')
@@ -246,7 +244,7 @@ class GroupController extends BaseController
             ->findAll();
 
         // Obtiene la información de las "parejas".
-        $pairs = array_map(static function (PairModel $pair) {
+        $pairs = array_map(static function (PairModel $pair): array {
             // Consulta la "categoría de inscripción" de la "pareja".
             $pair->setCustomData('registration_category', $pair->registrationCategory);
 
