@@ -1,26 +1,4 @@
-# 👀 Información de un usuario
-
-```
-[GET] /v1/users/@id
-```
-
-Parámetros de la ruta:
-
-| Parámetros | Tipo | Requerido | Descripción |
-| ---------- | ---- | --------- | ----------- |
-| `id` | `string` | `true` | Identificador del usuario. |
-
-Ejemplo:
-
-```bash
-curl -X GET \
-  -H 'Content-Type: application/json' \
-  -H 'Accept: application/json' \
-  -H 'X-API-KEY: API_KEY' \
-  http://localhost:8080/v1/users/@id
-```
-
-Respuesta de la petición:
+# ➕ Crear un usuario
 
 ```json
 {

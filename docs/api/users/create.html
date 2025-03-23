@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>📘</text></svg>">
-  <title>✏️ Editar un usuario</title>
+  <title>➕ Crear un usuario</title>
   <style>body {
   font-family: sans-serif;
   font-size: 16px;
@@ -321,7 +321,7 @@ img {
 <a href="https://astra-exe.github.io/TDLF2025/api/users/index.html"><b>🧑 Usuarios</b>/</a>
 <ul>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/users/create.html">➕ Crear un usuario/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/users/create.html"><b>➕ Crear un usuario</b>/</a>
 </li>
 <li>
 <a href="https://astra-exe.github.io/TDLF2025/api/users/delete.html">❌ Eliminar un usuario/</a>
@@ -330,12 +330,31 @@ img {
 <a href="https://astra-exe.github.io/TDLF2025/api/users/show.html">👀 Información de un usuario/</a>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/users/update.html"><b>✏️ Editar un usuario</b>/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/users/update.html">✏️ Editar un usuario/</a>
 </li>
 </ul>
 </li>
 </ul></aside>
-    <main class="main"><h1>✏️ Editar un usuario</h1></main>
+    <main class="main"><h1>➕ Crear un usuario</h1>
+<pre><code class="language-json">{
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;8a168aa8-02ae-4ccd-96a6-c9b5780a223e&quot;,
+    &quot;email&quot;: &quot;ricardog08@riseup.net&quot;,
+    &quot;username&quot;: &quot;ricardog08&quot;,
+    &quot;fullname&quot;: &quot;Ricardo García Jiménez&quot;,
+    &quot;is_active&quot;: 1,
+    &quot;created_at&quot;: &quot;2025-03-21 00:42:11&quot;,
+    &quot;updated_at&quot;: &quot;2025-03-21 00:42:11&quot;,
+    &quot;role&quot;: {
+      &quot;id&quot;: &quot;3d2e95aa-0616-11f0-a401-142b9a82bd2f&quot;,
+      &quot;name&quot;: &quot;judge&quot;,
+      &quot;description&quot;: &quot;Juez&quot;
+    }
+  },
+  &quot;status&quot;: 200,
+  &quot;description&quot;: &quot;Information about the user&quot;
+}
+</code></pre></main>
   </div>
   <div>
     <hr>
