@@ -78,8 +78,9 @@ class GroupMatchController extends BaseController
         // Aplica los parámetros de ordenamiento.
         $groupModel->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
 
-        // Consulta la "categoría de inscripción" de cada "grupo".
+        // Consulta los "grupos" de la búsqueda.
         $groups = array_map(static function (GroupModel $group): array {
+            // Consulta la "categoría de inscripción" de cada "grupo".
             $group->setCustomData('registration_category', $group->registrationCategory);
             unset($group->registration_category_id);
 
