@@ -74,6 +74,7 @@ return (static function () use ($app): void {
         $router->get($base_route('/v1/groups'), \App\Controllers\GroupController::class.'->index');
         $router->get($base_route('/v1/groups/@id'), \App\Controllers\GroupController::class.'->show');
         $router->put($base_route('/v1/groups/@id'), \App\Controllers\GroupController::class.'->update');
+        $router->get($base_route('/v1/groups/@id/ranking'), \App\Controllers\GroupController::class.'->ranking');
 
         // Partidos y parejas.
         $router->get($base_route('/v1/matches/pairs'), \App\Controllers\MatchPairController::class.'->index');
