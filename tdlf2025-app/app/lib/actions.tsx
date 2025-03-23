@@ -273,3 +273,84 @@ export async function updatePlayerById(
     throw new Error("Error desconocido al actualizar el jugador");
   }
 }
+
+export async function deleteMatchById({
+  id,
+  idCategory,
+}: {
+  id: string;
+  idCategory: string;
+}) {
+  try {
+    const session = await auth();
+    if (!session?.user) {
+      throw new Error("No autorizado");
+    }
+
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/matches/${id}`;
+    const response = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": session.user.apiKey,
+      },
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.log(errorData);
+      throw new Error(errorData?.description || "Error al eliminar el partido");
+    }
+    const dataPairRemoved = await response.json();
+    revalidatePath(`/dashboard/partidos/${idCategory}`);
+    return dataPairRemoved;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function updateMatchScorePair({
+  idPair,
+  matchId,
+  idCategory,
+  updateMatchData,
+}: {
+  idPair: string;
+  matchId: string;
+  idCategory: string;
+  updateMatchData: {
+    score: number;
+    is_winner: boolean;
+  };
+}) {
+  try {
+    const session = await auth();
+    // console.log({ session });
+    if (!session?.user) {
+      throw new Error("No autorizado");
+    }
+    console.log(updateMatchData);
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/matches/${matchId}/pairs/${idPair}`;
+    const response = await fetch(url, {
+      method: "PUT",
+      body: JSON.stringify(updateMatchData),
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": session.user.apiKey,
+      },
+    });
+    console.log({ response });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        errorData?.description || "Error al actualizar el partido"
+      );
+    }
+    revalidatePath(`/dashboard/partidos/${idCategory}`);
+  } catch (error) {
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error("Error desconocido al actualizar el partido");
+  }
+}
