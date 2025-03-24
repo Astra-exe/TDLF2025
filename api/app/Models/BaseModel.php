@@ -58,7 +58,7 @@ abstract class BaseModel extends ActiveRecord
         $total = ceil($copy->_count / $limit);
 
         // Calcula la posición del registro donde inicia la paginación.
-        $offset = ($page - 1) * self::LIMIT;
+        $offset = ($page - 1) * $limit;
 
         // Establece la paginación.
         $this->limit($limit)->offset($offset);
