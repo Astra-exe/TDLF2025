@@ -43,25 +43,32 @@ return (static function () use ($app): void {
 
         // Jugadores.
         $router->get($base_route('/v1/players'), \App\Controllers\PlayerController::class.'->index');
-        $router->post($base_route('/v1/players'), \App\Controllers\PlayerController::class.'->create')->addMiddleware(\App\Middlewares\WritePermissionMiddleware::class);
+        $router->post($base_route('/v1/players'), \App\Controllers\PlayerController::class.'->create')
+            ->addMiddleware(\App\Middlewares\WritePermissionMiddleware::class);
         $router->get($base_route('/v1/players/@id'), \App\Controllers\PlayerController::class.'->show');
         $router->get($base_route('/v1/players/@id/pairs'), \App\Controllers\PlayerController::class.'->pair');
         $router->get($base_route('/v1/players/@id/groups'), \App\Controllers\PlayerController::class.'->group');
-        $router->put($base_route('/v1/players/@id'), \App\Controllers\PlayerController::class.'->update')->addMiddleware(\App\Middlewares\WritePermissionMiddleware::class);
-        $router->delete($base_route('/v1/players/@id'), \App\Controllers\PlayerController::class.'->delete')->addMiddleware(\App\Middlewares\WritePermissionMiddleware::class);
+        $router->put($base_route('/v1/players/@id'), \App\Controllers\PlayerController::class.'->update')
+            ->addMiddleware(\App\Middlewares\WritePermissionMiddleware::class);
+        $router->delete($base_route('/v1/players/@id'), \App\Controllers\PlayerController::class.'->delete')
+            ->addMiddleware(\App\Middlewares\WritePermissionMiddleware::class);
 
         // Parejas y jugadores.
         $router->get($base_route('/v1/pairs/players'), \App\Controllers\PairPlayerController::class.'->index');
         $router->get($base_route('/v1/pairs/@id/players'), \App\Controllers\PairPlayerController::class.'->show');
-        $router->post($base_route('/v1/pairs/players'), \App\Controllers\PairPlayerController::class.'->create')->addMiddleware(\App\Middlewares\WritePermissionMiddleware::class);
+        $router->post($base_route('/v1/pairs/players'), \App\Controllers\PairPlayerController::class.'->create')
+            ->addMiddleware(\App\Middlewares\WritePermissionMiddleware::class);
 
         // Parejas.
         $router->get($base_route('/v1/pairs'), \App\Controllers\PairController::class.'->index');
-        $router->post($base_route('/v1/pairs'), \App\Controllers\PairController::class.'->create')->addMiddleware(\App\Middlewares\WritePermissionMiddleware::class);
+        $router->post($base_route('/v1/pairs'), \App\Controllers\PairController::class.'->create')
+            ->addMiddleware(\App\Middlewares\WritePermissionMiddleware::class);
         $router->get($base_route('/v1/pairs/@id'), \App\Controllers\PairController::class.'->show');
         $router->get($base_route('/v1/pairs/@id/groups'), \App\Controllers\PairController::class.'->group');
-        $router->put($base_route('/v1/pairs/@id'), \App\Controllers\PairController::class.'->update')->addMiddleware(\App\Middlewares\WritePermissionMiddleware::class);
-        $router->delete($base_route('/v1/pairs/@id'), \App\Controllers\PairController::class.'->delete')->addMiddleware(\App\Middlewares\WritePermissionMiddleware::class);
+        $router->put($base_route('/v1/pairs/@id'), \App\Controllers\PairController::class.'->update')
+            ->addMiddleware(\App\Middlewares\WritePermissionMiddleware::class);
+        $router->delete($base_route('/v1/pairs/@id'), \App\Controllers\PairController::class.'->delete')
+            ->addMiddleware(\App\Middlewares\WritePermissionMiddleware::class);
 
         // Grupos, partidos, parejas y jugadores.
         $router->get($base_route('/v1/groups/matches/pairs/players'), \App\Controllers\GroupMatchPairPlayerController::class.'->index');
@@ -79,7 +86,8 @@ return (static function () use ($app): void {
         // Grupos.
         $router->get($base_route('/v1/groups'), \App\Controllers\GroupController::class.'->index');
         $router->get($base_route('/v1/groups/@id'), \App\Controllers\GroupController::class.'->show');
-        $router->put($base_route('/v1/groups/@id'), \App\Controllers\GroupController::class.'->update')->addMiddleware(\App\Middlewares\WritePermissionMiddleware::class);
+        $router->put($base_route('/v1/groups/@id'), \App\Controllers\GroupController::class.'->update')
+            ->addMiddleware(\App\Middlewares\WritePermissionMiddleware::class);
         $router->get($base_route('/v1/groups/@id/ranking'), \App\Controllers\GroupController::class.'->ranking');
 
         // Partidos, parejas y jugadores.
@@ -89,15 +97,19 @@ return (static function () use ($app): void {
         // Partidos y parejas.
         $router->get($base_route('/v1/matches/pairs'), \App\Controllers\MatchPairController::class.'->index');
         $router->get($base_route('/v1/matches/@id/pairs'), \App\Controllers\MatchPairController::class.'->show');
-        $router->put($base_route('/v1/matches/@matchId/pairs/@pairId'), \App\Controllers\MatchPairController::class.'->update')->addMiddleware(\App\Middlewares\WritePermissionMiddleware::class);
+        $router->put($base_route('/v1/matches/@matchId/pairs/@pairId'), \App\Controllers\MatchPairController::class.'->update')
+            ->addMiddleware(\App\Middlewares\WritePermissionMiddleware::class);
 
         // Partidos.
         $router->get($base_route('/v1/matches'), \App\Controllers\MatchController::class.'->index');
-        $router->post($base_route('/v1/matches'), \App\Controllers\MatchController::class.'->create')->addMiddleware(\App\Middlewares\WritePermissionMiddleware::class);
+        $router->post($base_route('/v1/matches'), \App\Controllers\MatchController::class.'->create')
+            ->addMiddleware(\App\Middlewares\WritePermissionMiddleware::class);
         $router->get($base_route('/v1/matches/@id'), \App\Controllers\MatchController::class.'->show');
         $router->get($base_route('/v1/matches/@id/groups'), \App\Controllers\MatchController::class.'->group');
-        $router->put($base_route('/v1/matches/@id'), \App\Controllers\MatchController::class.'->update')->addMiddleware(\App\Middlewares\WritePermissionMiddleware::class);
-        $router->delete($base_route('/v1/matches/@id'), \App\Controllers\MatchController::class.'->delete')->addMiddleware(\App\Middlewares\WritePermissionMiddleware::class);
+        $router->put($base_route('/v1/matches/@id'), \App\Controllers\MatchController::class.'->update')
+            ->addMiddleware(\App\Middlewares\WritePermissionMiddleware::class);
+        $router->delete($base_route('/v1/matches/@id'), \App\Controllers\MatchController::class.'->delete')
+            ->addMiddleware(\App\Middlewares\WritePermissionMiddleware::class);
 
         // Categorías de los partidos.
         $router->get($base_route('/v1/categories/matches'), \App\Controllers\MatchCategoryController::class.'->index');
