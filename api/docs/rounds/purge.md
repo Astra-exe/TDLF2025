@@ -1,4 +1,4 @@
-# Descalificar grupos si todas sus parejas están descalificadas
+# ❌ + 👥 Descalificar grupos si todas sus parejas están descalificadas
 
 ```
 [POST] /v1/rounds/purge

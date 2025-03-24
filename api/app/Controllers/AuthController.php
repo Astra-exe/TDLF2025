@@ -98,10 +98,6 @@ class AuthController extends BaseController
      */
     public function me(): void
     {
-        // Consulta el "rol" del "usuario".
-        $this->userAuth()->setCustomData('role', $this->userAuth()->role);
-        unset($this->userAuth()->role_id);
-
         $this->respond($this->userAuth(), 'Information about the authenticated user');
     }
 
