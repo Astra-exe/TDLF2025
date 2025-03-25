@@ -13,7 +13,7 @@ use flight\ActiveRecord;
  */
 abstract class BaseModel extends ActiveRecord
 {
-    protected const LIMIT = 8;
+    protected const LIMIT = 16;
 
     /**
      * Método abstracto para obtener el nombre de la tabla.
@@ -46,25 +46,27 @@ abstract class BaseModel extends ActiveRecord
     /**
      * Establece la paginación de los resultados.
      */
-    public function paginate(int $page): self
+    public function paginate(int $page, ?int $limit = null): self
     {
+        $limit ??= self::LIMIT;
+
         // Obtiene el número total de registros.
         $copy = clone $this;
         $copy = $copy->select('COUNT(*) AS _count')->find();
 
         // Calcula el número total de páginas.
-        $total = ceil($copy->_count / self::LIMIT);
+        $total = ceil($copy->_count / $limit);
 
         // Calcula la posición del registro donde inicia la paginación.
-        $offset = ($page - 1) * self::LIMIT;
+        $offset = ($page - 1) * $limit;
 
         // Establece la paginación.
-        $this->limit(self::LIMIT)->offset($offset);
+        $this->limit($limit)->offset($offset);
 
         // Información de la paginación.
         $this->setCustomData('pagination', [
             'page' => $page,
-            'limit' => self::LIMIT,
+            'limit' => $limit,
             'total' => $total,
             'count' => $copy->_count,
             'offset' => $offset,

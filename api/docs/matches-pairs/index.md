@@ -1,4 +1,4 @@
-# 🎾 + 👫 Parejas de los partidos
+# 🎾 + 👫 Partidos y parejas
 
 Parejas de los partidos.
 
@@ -25,7 +25,7 @@ curl -X GET \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'X-API-KEY: API_KEY' \
-  http://localhost:8080/v1/matches/pairs?page=2&orderBy=created_at&sortBy=desc&registration_category_id=cba89529-0ba9-49e4-85ad-83e63c8e9d7e&match_category_id=dc19c9bf-4339-4ed2-a603-5b2dd1058a6&match_status_id=29d4b630-468f-4dcc-b775-5bad0b796a89&is_active=true
+  http://localhost:8080/v1/matches/pairs?page=2&orderBy=created_at&sortBy=desc&registration_category_id=76d95a95-0fa3-4d58-a8ce-031a1db25b3c&match_category_id=6c7f2686-7b40-47ff-b5b5-cbd52c6cea89&match_status_id=29d4b630-468f-4dcc-b775-5bad0b796a89&is_active=true
 ```
 
 Respuesta de la petición:

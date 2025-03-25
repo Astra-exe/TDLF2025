@@ -45,11 +45,25 @@ class Auth
     }
 
     /**
+     * Obtiene el entorno de ejecución de la aplicación.
+     */
+    private static function getEnvironment(): string
+    {
+        return Env::get('APP_ENVIRONMENT');
+    }
+
+    /**
      * Obtiene la fecha de expiración de la API Key.
      */
     public static function getExpiration(): string
     {
-        return Date::strtodatetime(self::EXPIRATION);
+        $expiration = self::EXPIRATION;
+
+        if (self::getEnvironment() === 'development') {
+            $expiration = '+1 day';
+        }
+
+        return Date::strtodatetime($expiration);
     }
 
     /**

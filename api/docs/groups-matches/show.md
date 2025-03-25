@@ -1,4 +1,4 @@
-# 🎾 Partidos de un grupo
+# 👀 Partidos de un grupo
 
 ```
 [GET] /v1/groups/@id/matches

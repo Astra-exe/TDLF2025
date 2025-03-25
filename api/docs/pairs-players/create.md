@@ -1,4 +1,4 @@
-# ➕ 🏃‍♂️ Crear una pareja con jugadores
+# ➕ Crear una pareja con jugadores
 
 ```
 [POST] /v1/pairs/players

@@ -67,6 +67,10 @@ class AuthMiddleware extends BaseMiddleware
             $this->respondForbidden('The authenticated user is not active');
         }
 
+        // Consulta el "rol" del "usuario" autenticado.
+        $userAuth->setCustomData('role', $userAuth->role);
+        unset($userAuth->role_id);
+
         /**
          * Se pasa la variable "$this->app()->get('userAuth')"
          * a todos los Middlewares y Controladores

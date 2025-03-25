@@ -1,4 +1,4 @@
-# 👫 + 🏃‍♂️ Jugadores de las parejas
+# 👫 + 🏃‍♂️ Parejas y jugadores
 
 Parejas de jugadores.
 

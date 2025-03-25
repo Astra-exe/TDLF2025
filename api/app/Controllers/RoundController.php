@@ -192,4 +192,36 @@ class RoundController extends BaseController
 
         $this->respondNoContent('The round init action was executed successfully');
     }
+
+    /**
+     * Descalifica los "grupos" donde todas sus "parejas" están descalificadas.
+     */
+    public function purgeGroups(): void
+    {
+        // Consulta el número de "parejas" eliminadas en cada "grupo".
+        $rating = (new GroupModel)->select('groups.id, groups.registration_category_id, SUM(CASE WHEN pairs.is_eliminated = 1 THEN 1 ELSE 0 END) AS total_eliminated')
+            ->join('groups_pairs', 'groups.id = groups_pairs.group_id', 'INNER')
+            ->join('pairs', 'groups_pairs.pair_id = pairs.id', 'INNER')
+            ->eq('is_active', 1)
+            ->eq('is_eliminated', 0)
+            ->groupBy('groups.id')
+            ->findAll();
+
+        $rules = $this->getRules();
+
+        foreach ($rating as $group) {
+            $settings = $rules[$group->registrationCategory->name];
+
+            // Comprueba si el "grupo" está descalificado.
+            if ($group->total_eliminated >= $settings['max_pairs']) {
+                unset($group->registration_category_id, $group->total_eliminated);
+
+                // Actualiza el estatus de eliminación del "grupo".
+                $group->is_eliminated = 1;
+                $group->update();
+            }
+        }
+
+        $this->respondNoContent('The purge groups action was executed successfully');
+    }
 }

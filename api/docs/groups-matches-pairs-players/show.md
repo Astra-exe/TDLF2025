@@ -1,4 +1,4 @@
-# 🎾 + 👫 + 🏃‍♂️ Partidos, parejas y jugadores de un grupo
+# 👀 Partidos, parejas y jugadores de un grupo
 
 ```
 [GET] /v1/groups/@id/matches/pairs/players

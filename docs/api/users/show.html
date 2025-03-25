@@ -248,12 +248,17 @@ img {
 </ul>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/groups-matches/index.html">👥 + 🎾 Partidos de los grupos/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups-matches/index.html">👥 + 🎾 Grupos y partidos/</a>
 <ul>
 </ul>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/groups-pairs/index.html">👥 + 👫 Parejas de los grupos/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups-matches-pairs-players/index.html">👥 + 🎾 + 👫 + 🏃‍♂️ Grupos, partidos, parejas y jugadores/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/groups-pairs/index.html">👥 + 👫 Grupos y parejas/</a>
 <ul>
 </ul>
 </li>
@@ -273,7 +278,12 @@ img {
 </ul>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/matches-pairs/index.html">🎾 + 👫 Parejas de los partidos/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/matches-pairs/index.html">🎾 + 👫 Partidos y parejas/</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="https://astra-exe.github.io/TDLF2025/api/matches-pairs-players/index.html">🎾 + 👫 + 🏃‍♂️ Partidos, parejas y jugadores/</a>
 <ul>
 </ul>
 </li>
@@ -283,7 +293,7 @@ img {
 </ul>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/pairs-players/index.html">👫 + 🏃‍♂️ Jugadores de las parejas/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/pairs-players/index.html">👫 + 🏃‍♂️ Parejas y jugadores/</a>
 <ul>
 </ul>
 </li>
@@ -311,6 +321,9 @@ img {
 <a href="https://astra-exe.github.io/TDLF2025/api/users/index.html"><b>🧑 Usuarios</b>/</a>
 <ul>
 <li>
+<a href="https://astra-exe.github.io/TDLF2025/api/users/create.html">➕ Crear un usuario/</a>
+</li>
+<li>
 <a href="https://astra-exe.github.io/TDLF2025/api/users/delete.html">❌ Eliminar un usuario/</a>
 </li>
 <li>
@@ -322,7 +335,41 @@ img {
 </ul>
 </li>
 </ul></aside>
-    <main class="main"><h1>👀 Información de un usuario</h1></main>
+    <main class="main"><h1>👀 Información de un usuario</h1>
+<pre><code>[GET] /v1/users/@id
+</code></pre>
+<p>Parámetros de la ruta:</p>
+<table>
+<tr><th>Parámetros </th><th>Tipo </th><th>Requerido </th><th>Descripción </th></tr>
+<tr><td><code>id</code> </td><td><code>string</code> </td><td><code>true</code> </td><td>Identificador del usuario. </td></tr>
+</table>
+<p>Ejemplo:</p>
+<pre><code class="language-bash">curl -X GET \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY' \
+  http://localhost:8080/v1/users/@id
+</code></pre>
+<p>Respuesta de la petición:</p>
+<pre><code class="language-json">{
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;8a168aa8-02ae-4ccd-96a6-c9b5780a223e&quot;,
+    &quot;email&quot;: &quot;ricardog08@riseup.net&quot;,
+    &quot;username&quot;: &quot;ricardog08&quot;,
+    &quot;fullname&quot;: &quot;Ricardo García Jiménez&quot;,
+    &quot;is_active&quot;: 1,
+    &quot;created_at&quot;: &quot;2025-03-21 00:42:11&quot;,
+    &quot;updated_at&quot;: &quot;2025-03-21 00:42:11&quot;,
+    &quot;role&quot;: {
+      &quot;id&quot;: &quot;3d2e95aa-0616-11f0-a401-142b9a82bd2f&quot;,
+      &quot;name&quot;: &quot;judge&quot;,
+      &quot;description&quot;: &quot;Juez&quot;
+    }
+  },
+  &quot;status&quot;: 200,
+  &quot;description&quot;: &quot;Information about the user&quot;
+}
+</code></pre></main>
   </div>
   <div>
     <hr>

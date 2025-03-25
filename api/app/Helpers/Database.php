@@ -28,7 +28,7 @@ class Database
             $options['port'],
             $options['database']);
 
-        if ($options['driver'] == 'mysql') {
+        if ($options['driver'] === 'mysql') {
             $dsn = sprintf('%s;charset=%s', $dsn, $options['charset']);
         }
 
