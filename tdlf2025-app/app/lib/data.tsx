@@ -340,6 +340,46 @@ export async function fetchCardsData(apiKey: string) {
   };
 }
 
+export async function fetchStatsCardsData(apiKey: string) {
+  const { data: categoriesData } = await fetchCategories(apiKey);
+  const [category1, category2] = categoriesData;
+  const playersPromise = fetchPlayers({ apiKey, page: 1 });
+  const pairsPromise = fetchPairs({ apiKey, page: 1 });
+  const matchesPromise = fetchMatches(apiKey);
+
+  const pairsSeniorPromise = fetchPairs({
+    apiKey,
+    page: 1,
+    registration_category_id: category1.id,
+  });
+  const pairsOpenPromise = fetchPairs({
+    apiKey,
+    page: 1,
+    registration_category_id: category2.id,
+  });
+
+  const data = await Promise.all([
+    playersPromise,
+    pairsPromise,
+    matchesPromise,
+    pairsOpenPromise,
+    pairsSeniorPromise,
+  ]);
+  const numberOfPlayers = data[0].pagination.count;
+  const numberOfPairs = data[1].pagination.count;
+  const numberOfMatches = data[2].pagination.count;
+  const numberOfPairsOpen = data[3].pagination.count;
+  const numberOfPairsSenior = data[4].pagination.count;
+
+  return {
+    numberOfPlayers,
+    numberOfPairs,
+    numberOfMatches,
+    numberOfPairsOpen,
+    numberOfPairsSenior,
+  };
+}
+
 export async function login(username: string, password: string) {
   const url = `${URL_API}/auth/login`;
   try {
@@ -632,6 +672,30 @@ export async function fetchGroupsPairsPlayersByCategory({
 }
 
 // -------------- Matches -------------------
+export async function fetchMatches(apiKey: string) {
+  const url = `${URL_API}/matches`;
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": apiKey,
+      },
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.log(errorData);
+      throw new Error(
+        errorData?.description || "Error al obtener los partidos"
+      );
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 export async function fetchMatchPairsById({
   idMatch,
   apiKey,
@@ -847,6 +911,31 @@ export async function fetchRankingByGroup({
       throw new Error(
         errorData?.description ||
           "Error al obtener Ranking de las parejas y jugadores de un grupo"
+      );
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+// DATA ANALYSIS
+export async function fetchHeatMap(apiKey: string) {
+  const url = `${URL_API}/analysis/heatmap`;
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": apiKey,
+      },
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.log(errorData);
+      throw new Error(
+        errorData?.description || "Error al obtener los partidos"
       );
     }
     const data = await response.json();
