@@ -36,21 +36,20 @@ export default async function StatsPage() {
                 <CardsStats />
               </Suspense>
             </section>
-            <section className="mt-20 text-center font-bold mb-10">
-              <h2 className="mb-5 text-2xl md:text-3xl">
+            <section className="mt-20 text-center mb-10">
+              <h2 className="mb-5 text-2xl md:text-3xl font-bold">
                 Mapa de calor de origen de los participantes
               </h2>
               <div className="flex-col justify-center">
-                <p className="text-medium text-base mb-5 max-w-3xl mx-auto">
-                  Este mapa interactivo destaca la distribución geográfica de
-                  los jugadores o parejas que participaron en el Tornero de las
-                  Fresas 2025. Cada marcador de calor representa el origen de
-                  los competidores, creando una visualización dinámica de la
-                  participación global. Las zonas de calor se hacen más grandes
-                  y faciles de vizualizar a medida de que el numero de
-                  participantes de esa zona geografica fue mayor.
+                <p className="text-sm sm:text-base mb-5 max-w-3xl mx-auto">
+                  Este mapa destaca la distribución geográfica de los jugadores
+                  o parejas que participaron en el Torneo de las Fresas 2025.
+                  Cada marca de calor representa el origen de los competidores,
+                  donde las zonas de calor se hacen más grandes y faciles de
+                  vizualizar a medida de que el numero de participantes de esa
+                  zona geografica fue mayor.
                 </p>
-                <div className="w-[80%] max-w-3xl mx-auto">
+                <div className="md:w-[80%] max-w-3xl mx-auto [&>div>div>div>iframe]:h-[400px] md:[&>iframe]:h-full">
                   <HeaderMap content={mapFormatedContent} />
                 </div>
               </div>

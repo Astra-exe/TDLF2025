@@ -63,8 +63,10 @@ export function Card({
         {/* {Icon ? <Icon className="h-5 w-5 text-gray-700" /> : null} */}
         <h4 className="ml-2 xs:text-lg font-medium">{title}</h4>
       </div>
-      <p className={`truncate rounded-xl px-4 py-8 text-center text-3xl`}>
-        <span className="inline-block p-5 min-w-[90px] font-bold bg-white text-dark rounded-full">
+      <p
+        className={`truncate rounded-xl px-4 py-8 text-center text-2xl xs:text-3xl`}
+      >
+        <span className="inline-block p-5 min-w-[70px] sm:min-w-[90px] font-bold bg-white text-dark rounded-full">
           {value}
         </span>
       </p>
