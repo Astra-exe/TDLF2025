@@ -324,7 +324,7 @@ def plotly_plot_sinergy_compare(diccionario):
     fig.update_xaxes(dtick=1)  # Establecer dtick en 1 para mostrar todas las etiquetas
 
     plotly_json = fig.to_json()
-    print(plotly_json)
+    #print(plotly_json)
     plotly_json = json.loads(plotly_json)
     return extract_plotly_compare(plotly_json)
 
@@ -358,6 +358,6 @@ def plotly_plot_points_compare(diccionario):
     fig.update_xaxes(dtick=1)  # Establecer dtick en 1 para mostrar todas las etiquetas
 
     plotly_json = fig.to_json()
-    print(plotly_json)
+    #print(plotly_json)
     plotly_json = json.loads(plotly_json)
     return extract_plotly_compare(plotly_json)
