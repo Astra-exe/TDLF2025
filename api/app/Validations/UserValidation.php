@@ -22,6 +22,11 @@ class UserValidation extends BaseValidation
             'password' => ['regex' => '/^\S+$/', 'between_len' => [8, 64]],
             'is_active' => ['boolean'],
             'password_confirm' => ['equalsfield' => 'password'],
+            'page' => ['integer', 'min_numeric' => 1],
+            'search' => ['max_len' => 128],
+            'filterBy' => ['contains' => ['fullname', 'email', 'username']],
+            'orderBy' => ['contains' => ['fullname', 'email', 'username', 'created_at', 'updated_at']],
+            'sortBy' => ['contains' => ['asc', 'desc']],
         ];
     }
 
@@ -29,8 +34,11 @@ class UserValidation extends BaseValidation
     {
         return [
             'fullname' => 'trim',
-            'email' => ['lower_case'],
-            'is_active' => ['boolean'],
+            'email' => 'lower_case',
+            'is_active' => 'boolean|whole_number',
+            'page' => 'whole_number',
+            'search' => 'trim',
+            'sortBy' => 'upper_case',
         ];
     }
 

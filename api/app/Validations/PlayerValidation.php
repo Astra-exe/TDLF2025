@@ -21,7 +21,7 @@ class PlayerValidation extends BaseValidation
             'experience' => ['integer', 'min_numeric' => 0, 'max_numeric' => 50],
             'is_active' => ['boolean'],
             'page' => ['integer', 'min_numeric' => 1],
-            'search' => ['max_len' => 255],
+            'search' => ['max_len' => 128],
             'filterBy' => ['contains' => ['fullname']],
             'orderBy' => ['contains' => ['fullname', 'weight', 'height', 'age', 'experience', 'created_at', 'updated_at']],
             'sortBy' => ['contains' => ['asc', 'desc']],

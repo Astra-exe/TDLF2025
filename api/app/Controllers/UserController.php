@@ -20,7 +20,71 @@ class UserController extends BaseController
     /**
      * Muestra la información de todos los "usuarios".
      */
-    public function index(): void {}
+    public function index(): void
+    {
+        // Define los query params de la petición.
+        $queryFields = [
+            'page' => 1,
+            'search' => '',
+            'filterBy' => 'fullname',
+            'orderBy' => 'created_at',
+            'sortBy' => 'desc',
+            'role_id' => null,
+            'is_active' => null,
+        ];
+
+        $queryParams = [];
+
+        // Obtiene solo los query params necesarios.
+        foreach ($queryFields as $param => $default) {
+            $queryParams[$param] = $this->app()->request()->query->{$param} ?? $default;
+
+            if (is_string($queryParams[$param]) && empty($queryParams[$param])) {
+                $queryParams[$param] = $default;
+            }
+
+            if (is_null($queryParams[$param])) {
+                unset($queryParams[$param]);
+            }
+        }
+
+        $queryNames = array_keys($queryFields);
+
+        // Obtiene y establece las reglas de validación.
+        $this->gump()->validation_rules(UserValidation::getRules($queryNames));
+
+        // Obtiene y establece los filtros de validación.
+        $this->gump()->filter_rules(UserValidation::getFilters($queryNames));
+
+        // Comprueba los query params de la petición.
+        $queryParams = $this->gump()->run($queryParams);
+
+        // Comprueba si existen errores de validación.
+        if ($this->gump()->errors()) {
+            $this->respondValidationErrors(
+                $this->gump()->get_errors_array(),
+                'The users search information is incorrect');
+        }
+
+        // Consulta la información de todos los "usuarios" con paginación.
+        $users = new UserModel;
+        $users->select(...$this->getColumns())
+            ->like($queryParams['filterBy'], sprintf('%%%s%%', $queryParams['search']));
+
+        // Filtra los "usuarios" por estatus de actividad.
+        if (isset($queryParams['is_active'])) {
+            $users->eq('is_active', $queryParams['is_active']);
+        }
+
+        // Obtiene la información sobre la paginación.
+        $users->paginate($queryParams['page']);
+        $pagination = $users->pagination;
+
+        // Aplica los parámetros de ordenamiento.
+        $users->orderBy(sprintf('%s %s', $queryParams['orderBy'], $queryParams['sortBy']));
+
+        $this->respondPagination($users->findAll(), $pagination, 'Information about all the users with pagination');
+    }
 
     /**
      * Registra la información de un "usuario".
