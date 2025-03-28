@@ -231,17 +231,17 @@ def sinergy_compare():
 def points_compare():
     try:
         df_s = pd.read_csv("data_matches_seniors.csv")
-        points_seniors = df_s['points_scored'].sum()
+        points_seniors = df_s['points_scored'].mean()
 
         df_o = pd.read_csv("data_matches_open.csv")
-        points_open = df_o['points_scored'].sum()
+        points_open = df_o['points_scored'].mean()
 
         points_groups = {
         'points_open': int(points_open),
         'points_seniors': int(points_seniors)
         }
         plot_json = plotly_plot_points_compare(points_groups)
-        prepare =  jsonify({"data": plot_json["data"], "x-axis":"Categoría", "y-axis":"Puntos", "title":"Comparativa de puntos entre categorias"})
+        prepare =  jsonify({"data": plot_json["data"], "x-axis":"Categoría", "y-axis":"Puntos promedio", "title":"Promedio de puntos hechos por categoria"})
         return prepare,200
         
     except FileNotFoundError:
