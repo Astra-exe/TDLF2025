@@ -1,7 +1,10 @@
 from utils.features import (
     playerp,
     players_location,
-    clear_cache
+    plotly_plot_parity,
+    extract_group,
+    plotly_plot_points,
+    plotly_plot_sinergy
 )
 
 from flask import Flask, request, jsonify, render_template
@@ -12,6 +15,7 @@ import pandas as pd
 
 import os
 from dotenv import load_dotenv
+import json
 
 load_dotenv()
 
@@ -21,6 +25,8 @@ CORS(app)
 
 app.config["API_USER"] = os.getenv("API_NICKNAME")
 app.config["API_PASSWORD"] = os.getenv("API_PASSWORD")
+app.config["CATHEGORY_SENIORS_ID"] = os.getenv("CATHEGORY_SENIORS_ID")
+app.config["CATHEGORY_OPEN_ID"] = os.getenv("CATHEGORY_OPEN_ID")
 
 def get_apikey():
     payload = {
@@ -101,15 +107,95 @@ def make_map():
         print(str(e))
         return jsonify({'error': str(e)}), 400
 
-@app.route('/clear_cache', methods=['DELETE'])
-def clear():
-    #clear the cache
-    try:
-        clear = clear_cache()
-        return jsonify({"message": clear}), 200
-    except Exception as e:
-        print(str(e))
-        return jsonify({'error': str(e)}), 400
+@app.route('/parity/<cathegory_id>', methods=['GET'])
+def group_parity(cathegory_id):
+    if cathegory_id == app.config["CATHEGORY_SENIORS_ID"]:
+        try:
+            with open("parity_seniors.json", "r") as file:
+                data = json.load(file)
+                data = pd.DataFrame(data)
+            plot_json = plotly_plot_parity(data)
+            prepare =  jsonify({"data": plot_json["data"], "x-axis":"Grupos", "y-axis":"Indice de paridad", "title":"¿Qué tan parejos estuvieron los grupos de la categoria 50 y más?"})
+            return prepare,200
+        except FileNotFoundError:
+            return jsonify({"error": "Archivo no encontrado"}), 404
+
+    elif cathegory_id == app.config["CATHEGORY_OPEN_ID"]:
+        try:
+            with open("parity_open.json", "r") as file:
+                data = json.load(file)
+                data = pd.DataFrame(data)
+                #print(data)
+            plot_json = plotly_plot_parity(data)
+            #print(plot_json)
+            prepare =  jsonify({"data": plot_json["data"], "x-axis":"Grupos", "y-axis":"Indice de paridad", "title":"¿Qué tan parejos estuvieron los grupos de la categoria Libre?"})
+            return prepare,200
+        except FileNotFoundError:
+            return jsonify({"error": "Archivo no encontrado"}), 404
+
+    return jsonify({"error": "Categoría no válida"}), 400
+
+@app.route('/points/<cathegory_id>/<group>', methods=['GET'])
+def points(cathegory_id, group):
+
+    if cathegory_id == app.config["CATHEGORY_SENIORS_ID"]:
+        if group not in ['A', 'B', 'C', 'D']:
+            return jsonify({"error": "Grupo no válido"}), 400
+        try:
+            df = pd.read_csv("data_matches_seniors.csv")
+            df_group = extract_group(df, group)
+            #print(df_group)
+            plot_json = plotly_plot_points(df_group)
+            prepare =  jsonify({"data": plot_json["data"], "x-axis":"Jugadores", "y-axis":"Puntos", "title":"Puntos hechos vs puntos recibidos del grupo " + group})
+            return prepare,200
+        
+        except FileNotFoundError:
+            return jsonify({"error": "Archivo no encontrado"}), 404
+    
+    elif cathegory_id == app.config["CATHEGORY_OPEN_ID"]:
+        if group not in ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']:
+            return jsonify({"error": "Grupo no válido"}), 400
+        try:
+            df = pd.read_csv("data_matches_open.csv")
+            df_group = extract_group(df, group)
+            #print(df_group)
+            plot_json = plotly_plot_points(df_group)
+            prepare =  jsonify({"data": plot_json["data"], "x-axis":"Jugadores", "y-axis":"Puntos", "title":"Puntos hechos vs puntos recibidos del grupo " + group})
+            return prepare,200
+        
+        except FileNotFoundError:
+            return jsonify({"error": "Archivo no encontrado"}), 404
+
+    return jsonify({"error": "Categoría no válida"}), 400
+
+@app.route('/sinergy/<cathegory_id>', methods=['GET'])
+def sinergy(cathegory_id):
+    if cathegory_id == app.config["CATHEGORY_SENIORS_ID"]:
+        try:
+            df_s = pd.read_csv("data_matches_seniors.csv")
+            df_s = df_s[['team', 'points_scored', 'points_received']].copy()
+            df_s['sinergy'] = (((df_s['points_scored'] - df_s['points_received']+3) / 30) * 100).round(2)
+            df_s["sinergy"] = df_s['sinergy'].apply(lambda x: x+0.1 if x == 0 else x)
+            df_s['team'] = df_s['team'].apply(lambda x: '-'.join(x.strip('[]').split(', ')))
+            plot_json = plotly_plot_sinergy(df_s)
+            prepare =  jsonify({"data": plot_json["data"], "x-axis":"Parejas", "y-axis":"Sinergia", "title":"Sinergia de los equipos de la categoria 50 y más"})
+            return prepare,200
+        except FileNotFoundError:
+            return jsonify({"error": "Archivo no encontrado"}), 404
+    elif cathegory_id == app.config["CATHEGORY_OPEN_ID"]:
+        try:
+            df_o = pd.read_csv("data_matches_open.csv")
+            df_o = df_o[['team', 'points_scored', 'points_received']].copy()
+            df_o['sinergy'] = (((df_o['points_scored'] - df_o['points_received']+3) / 30) * 100).round(2)
+            df_o["sinergy"] = df_o['sinergy'].apply(lambda x: x+0.1 if x == 0 else x)
+            df_o['team'] = df_o['team'].apply(lambda x: '-'.join(x.strip('[]').split(', ')))
+            plot_json = plotly_plot_sinergy(df_o)
+            prepare =  jsonify({"data": plot_json["data"], "x-axis":"Parejas", "y-axis":"Sinergia", "title":"Sinergia de los equipos de la categoria Libre"})
+            return prepare,200
+        except FileNotFoundError:
+            return jsonify({"error": "Archivo no encontrado"}), 404
+    return jsonify({"error": "Categoría no válida"}), 400
+
 
 if __name__ == "__main__":
     app.run(port=3000, debug = True)

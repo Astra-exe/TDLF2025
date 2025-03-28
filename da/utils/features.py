@@ -1,10 +1,14 @@
 # Description: This file contains the functions to extract features from the data.
 
 # Required Libraries
+import base64
 import pandas as pd
+import numpy as np
 
 import folium
 from folium.plugins import HeatMap
+import plotly.graph_objects as go
+import plotly.io as pio
 import time
 import requests
 
@@ -86,11 +90,188 @@ def players_location(df):
     HeatMap(heat_data, radius=25, blur=15).add_to(mapa)
     return mapa._repr_html_()
 
-#Function to clear cache
-def clear_cache():
-    cache_path = "coords_cache.json"
-    if Path(cache_path).exists():
-        Path(cache_path).unlink()
-        return "Cache borrado con éxito"
-    return "No se encontró caché para borrar"
+def decode_bdata(bdata, dtype):
+    decoded_bytes = base64.b64decode(bdata)
+    return np.frombuffer(decoded_bytes, dtype=dtype)
+
+#Function to extract the necessary data from the plotly json format
+def extract_plotly_data(json):
+    # Extract the relevant data from the plotly JSON
+    data = json["data"][0]
+    marker_color = data["marker"]["color"]
+    text = [item[1] for item in data["text"]]
+    x = data["x"]
+    y = text  # Assuming y is the same as text for the bar chart
+
+    # Create a new format for the data
+    new_format = {
+        "data": [{
+            "marker": {"color": marker_color, "cornerradius": 10},
+            "text": text,
+            "textposition": "auto",
+            "x": x,
+            "y": y,
+            "type": "bar"
+        }]
+    }
+    return new_format
+
+def extract_plotly_data_points(plotly_json):
+    extracted_data = []
+    for data in plotly_json["data"]:
+        marker_color = data["marker"]["color"]
+        text = decode_bdata(data["text"]["bdata"], data["text"]["dtype"]).tolist()
+        y = decode_bdata(data["y"]["bdata"], data["y"]["dtype"]).tolist()
+        x = data["x"]
+
+        extracted_data.append({
+            "marker": {"color": marker_color, "cornerradius": 10},
+            "text": text,
+            "textposition": "auto",
+            "x": x,
+            "y": y,
+            "type": "bar"
+        })
+    return {"data": extracted_data}
+
+#function to return the parity plot in json format
+def plotly_plot_parity(df):
+    # Crear la figura
+    fig = go.Figure()
+
+    # Agregar los datos al gráfico de barras
+    fig.add_trace(go.Bar(x=df['group'],
+                    y=df['parity_index'],
+                    marker_color='#E61357',  # Color de las barras
+                    text=df.values,  # Texto que se mostrará encima de cada barra
+                    textposition='auto',  # Posición del texto
+                    ))
+
+    fig.update_layout(title='¿Qué tan parejos estuvieron los grupos?',
+                xaxis_title='Grupo',
+                yaxis_title='Indice de paridad',
+                plot_bgcolor='#241111',  # Fondo negro
+                paper_bgcolor='#000000',  # Fondo del área del gráfico negro
+                font=dict(color='white'),  # Color del texto
+                width=1080,
+                height=720,
+                )
+    # Ajustar el espaciado entre las etiquetas de los ticks del eje x
+    fig.update_xaxes(dtick=1)  # Establecer dtick en 1 para mostrar todas las etiquetas
+    plotly_json = fig.to_json(fig)
+    plotly_json = json.loads(plotly_json)
+    return extract_plotly_data(plotly_json)
+
+#function to extract the df for analize the vs points of the players
+def extract_group(df,letter):
+    x_group = df[df['group'] == letter].copy()
+    x_group.drop(['group', 'team_id', 'points_diff'], axis=1, inplace=True)
+    x_group['team'] = x_group['team'].apply(lambda x: '-'.join(x.strip('[]').split(', ')))
+    x_group.reset_index(drop=True, inplace=True)
+    return x_group
+
+#Function to return the points scored vs points received plot by the players in a json format
+def plotly_plot_points(df):
+    fig = go.Figure()
+
+    # Agregar los datos de los puntos hechos al gráfico de barras
+    fig.add_trace(go.Bar(
+        x=df['team'],
+        y=df['points_scored'],
+        name='Puntos hechos',
+        marker_color='#3C9145',
+        text=df['points_scored'],
+        textposition='auto',
+    ))
+
+    # Agregar los datos de los puntos recibidos al gráfico de barras
+    fig.add_trace(go.Bar(
+        x=df['team'],
+        y=df['points_received'],
+        name='Puntos recibidos',
+        marker_color='#E61357',
+        text=df['points_received'],
+        textposition='auto',
+    ))
+
+    fig.update_layout(
+        title='Puntos totales por equipo',
+        xaxis_title='Equipo',
+        yaxis_title='Puntos',
+        plot_bgcolor='#000000',
+        paper_bgcolor='#000000',
+        font=dict(color='white'),
+        width=1280,
+        height=720,
+    )
+
+    # Ajustar el espaciado entre las etiquetas de los ticks del eje x
+    fig.update_xaxes(dtick=1)
+
+    plotly_json = fig.to_json()
+    plotly_json = json.loads(plotly_json)
+    return extract_plotly_data_points(plotly_json)
+
+#function to return the sinergy plot in json format
+# Función para extraer los datos necesarios del formato JSON de Plotly
+def extract_plotly_sinergy(plotly_json):
+    extracted_data = []
+    for data in plotly_json["data"]:
+        marker_color = data["marker"]["color"]
+        text = data["text"]  # El texto ya está en formato de lista
+        y = decode_bdata(data["y"]["bdata"], data["y"]["dtype"]).tolist()  # Decodificar y convertir a lista
+        x = data["x"]
+
+        extracted_data.append({
+            "marker": {"color": marker_color, "cornerradius": 10},
+            "text": text,
+            "textposition": "auto",
+            "x": x,
+            "y": y,
+            "type": "bar"
+        })
+    return {"data": extracted_data}
+def plotly_plot_sinergy(df):
+    # Crear una figura de Plotly
+    fig = go.Figure()
+
+    # Agregar barras para la sinergia positiva
+    fig.add_trace(go.Bar(
+        x=df['team'],
+        y=df['sinergy'].apply(lambda x: max(x, 0)),  # Tomar solo los valores positivos
+        name='Sinergia Positiva',
+        marker_color='#AA12E6',  # Color para las barras positivas
+        text=df['sinergy'].apply(lambda x: f'{x}%'),  # Texto que se mostrará encima de cada barra
+        textposition='auto',  # Posición del texto
+        textfont=dict(color='white')
+    ))
+
+    # Agregar barras para la sinergia negativa
+    fig.add_trace(go.Bar(
+        x=df['team'],
+        y=df['sinergy'].apply(lambda x: min(x, 0)),  # Tomar solo los valores negativos
+        name='Sinergia Negativa',
+        marker_color='#E64912',  # Color para las barras negativas
+        text=df['sinergy'].apply(lambda x: f'{x}%'),  # Texto que se mostrará encima de cada barra
+        textposition='auto',  # Posición del texto
+        textfont=dict(color='white')
+    ))
+
+    # Personalizar el diseño del gráfico
+    fig.update_layout(
+        title='Sinergia de Equipos',
+        xaxis=dict(title='Equipo'),
+        yaxis=dict(title='Sinergia'),
+        xaxis_tickangle=-90,
+        plot_bgcolor='#000000',  # Fondo negro
+        paper_bgcolor='#000000',  # Fondo del área del gráfico negro
+        font=dict(color='white'),  # Color del texto
+        width=1280,
+        height=720
+    )
+
+    fig.update_xaxes(dtick=1)
+    plotly_json = fig.to_json()
+    plotly_json = json.loads(plotly_json)
+    return extract_plotly_sinergy(plotly_json)
 
