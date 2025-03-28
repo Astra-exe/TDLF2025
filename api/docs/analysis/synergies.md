@@ -1,6 +1,6 @@
-# Sinergia de una categoría de inscripción.
+# Sinergia de una categoría de inscripción
 
-Obtiene una gráfica comparativa que describe el desempeño de juego por pareja.
+Obtiene una gráfica comparativa que describe el desempeño de juego de las parejas.
 
 ```
 [GET] /v1/analysis/synergies/@id

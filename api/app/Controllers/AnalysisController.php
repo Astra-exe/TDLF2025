@@ -88,7 +88,7 @@ class AnalysisController extends BaseController
     }
 
     /**
-     * Obtiene el gráfico de "paridad" de una "categoría de inscripción".
+     * Obtiene la gráfica de "paridad" de una "categoría de inscripción".
      */
     public function parity(string $id): void
     {
@@ -128,7 +128,7 @@ class AnalysisController extends BaseController
     }
 
     /**
-     * Obtiene el gráfico de "sinergia" de una "categoría de inscripción".
+     * Obtiene la gráfica de "sinergia" de una "categoría de inscripción".
      */
     public function synergy(string $id): void
     {
@@ -165,5 +165,43 @@ class AnalysisController extends BaseController
         }
 
         $this->respond($response->body ?? null, 'Information about the registration category synergy');
+    }
+
+    /**
+     * Obtiene la gráfica de comparación de las "sinergias"
+     * de las "categorías de inscripción".
+     */
+    public function compareSynergies(): void
+    {
+        // Construye la url de la petición.
+        $url = sprintf('%s/sinergy_compare', $this->getUrl());
+
+        try {
+            // Realiza la petición.
+            $response = Request::get($url)->expectsJson()->send();
+        } catch (ConnectionErrorException $e) {
+            $this->respondServiceUnavailable($e->getMessage());
+        }
+
+        $this->respond($response->body ?? null, 'Information about the synergies comparison');
+    }
+
+    /**
+     * Obtiene la gráfica de comparación de los puntos realizados
+     * en las "categorías de inscripción".
+     */
+    public function comparePoints(): void
+    {
+        // Construye la url de la petición.
+        $url = sprintf('%s/points_compare', $this->getUrl());
+
+        try {
+            // Realiza la petición.
+            $response = Request::get($url)->expectsJson()->send();
+        } catch (ConnectionErrorException $e) {
+            $this->respondServiceUnavailable($e->getMessage());
+        }
+
+        $this->respond($response->body ?? null, 'Information about the points comparison');
     }
 }

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>📘</text></svg>">
-  <title>🔥 Mapa de calor</title>
+  <title>Comparación de puntos</title>
   <style>body {
   font-family: sans-serif;
   font-size: 16px;
@@ -236,13 +236,13 @@ img {
 <a href="https://astra-exe.github.io/TDLF2025/api/analysis/index.html"><b>📊 Análisis de datos</b>/</a>
 <ul>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/analysis/comparePoints.html">Comparación de puntos/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/analysis/comparePoints.html"><b>Comparación de puntos</b>/</a>
 </li>
 <li>
 <a href="https://astra-exe.github.io/TDLF2025/api/analysis/compareSynergies.html">Comparación de sinergias/</a>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/analysis/heatmap.html"><b>🔥 Mapa de calor</b>/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/analysis/heatmap.html">🔥 Mapa de calor/</a>
 </li>
 <li>
 <a href="https://astra-exe.github.io/TDLF2025/api/analysis/parities.html">Paridad de una categoría de inscripción/</a>
@@ -341,19 +341,50 @@ img {
 </ul>
 </li>
 </ul></aside>
-    <main class="main"><h1>🔥 Mapa de calor</h1>
-<p>Obtiene una gráfica que describe la mayor concentración de origen de los jugadores.</p>
-<pre><code>[GET] /v1/analysis/heatmap
+    <main class="main"><h1>Comparación de puntos</h1>
+<p>Obtiene una gráfica comparativa de los puntos realizados en las categorías de inscripción.</p>
+<pre><code>[GET] /v1/analysis/comparisons/points
 </code></pre>
 <p>Ejemplo:</p>
 <pre><code class="language-bash">curl -X GET \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'X-API-KEY: API_KEY' \
-  http://localhost:8080/v1/analysis/heatmap
+  http://localhost:8080/v1/analysis/comparisons/points
 </code></pre>
 <p>Respuesta de la petición:</p>
-<pre><code class="language-json"></code></pre></main>
+<pre><code class="language-json">{
+  &quot;data&quot;: {
+    &quot;data&quot;: [
+      {
+        &quot;marker&quot;: {
+          &quot;color&quot;: &quot;#E61357&quot;,
+          &quot;cornerradius&quot;: 10
+        },
+        &quot;text&quot;: [
+          &quot;77.0&quot;,
+          &quot;77.25&quot;
+        ],
+        &quot;textposition&quot;: &quot;auto&quot;,
+        &quot;type&quot;: &quot;bar&quot;,
+        &quot;x&quot;: [
+          &quot;Libre&quot;,
+          &quot;50 y más&quot;
+        ],
+        &quot;y&quot;: [
+          77,
+          77.25
+        ]
+      }
+    ],
+    &quot;title&quot;: &quot;Promedio de puntos hechos por categoria&quot;,
+    &quot;x-axis&quot;: &quot;Categoría&quot;,
+    &quot;y-axis&quot;: &quot;Puntos promedio&quot;
+  },
+  &quot;status&quot;: 200,
+  &quot;description&quot;: &quot;Information about the points comparison&quot;
+}
+</code></pre></main>
   </div>
   <div>
     <hr>
