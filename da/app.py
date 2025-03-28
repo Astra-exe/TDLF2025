@@ -231,14 +231,16 @@ def sinergy_compare():
 def points_compare():
     try:
         df_s = pd.read_csv("data_matches_seniors.csv")
-        points_seniors = df_s['points_scored'].mean()
+        points_seniors = df_s['points_scored'].sum()
+        points_seniors = points_seniors/4
 
         df_o = pd.read_csv("data_matches_open.csv")
-        points_open = df_o['points_scored'].mean()
+        points_open = df_o['points_scored'].sum()
+        points_open = points_open/8
 
         points_groups = {
-        'points_open': int(points_open),
-        'points_seniors': int(points_seniors)
+        'points_open': float(points_open),
+        'points_seniors': float(points_seniors)
         }
         plot_json = plotly_plot_points_compare(points_groups)
         prepare =  jsonify({"data": plot_json["data"], "x-axis":"Categoría", "y-axis":"Puntos promedio", "title":"Promedio de puntos hechos por categoria"})
