@@ -4,7 +4,9 @@ from utils.features import (
     plotly_plot_parity,
     extract_group,
     plotly_plot_points,
-    plotly_plot_sinergy
+    plotly_plot_sinergy,
+    plotly_plot_sinergy_compare,
+    plotly_plot_points_compare
 )
 
 from flask import Flask, request, jsonify, render_template
@@ -196,6 +198,54 @@ def sinergy(cathegory_id):
             return jsonify({"error": "Archivo no encontrado"}), 404
     return jsonify({"error": "Categoría no válida"}), 400
 
+@app.route('/sinergy_compare', methods=['GET'])
+def sinergy_compare():
+    try:
+        df_s = pd.read_csv("data_matches_seniors.csv")
+        df_s = df_s[['team', 'points_scored', 'points_received']].copy()
+        df_s['sinergy'] = (((df_s['points_scored'] - df_s['points_received']+3) / 30) * 100).round(2)
+        df_s["sinergy"] = df_s['sinergy'].apply(lambda x: x+0.1 if x == 0 else x)
+        sinergy_senior = df_s['sinergy'].mean()
+
+        df_o = pd.read_csv("data_matches_open.csv")
+        df_o = df_o[['team', 'points_scored', 'points_received']].copy()
+        df_o['sinergy'] = (((df_o['points_scored'] - df_o['points_received']+3) / 30) * 100).round(2)
+        df_o["sinergy"] = df_o['sinergy'].apply(lambda x: x+0.1 if x == 0 else x)
+        sinergy_open = df_o['sinergy'].mean()
+
+        sinergy_group = {
+            'sinergy_open': float(sinergy_open),
+            'sinergy_senior': float(sinergy_senior)
+        }
+        sinergy_group["sinergy_open"] = round(sinergy_group["sinergy_open"], 4)
+        sinergy_group["sinergy_senior"] = round(sinergy_group["sinergy_senior"], 4)
+
+        plot_json = plotly_plot_sinergy_compare(sinergy_group)
+        prepare =  jsonify({"data": plot_json["data"], "x-axis":"Categoría", "y-axis":"Sinergia", "title":"Comparativa de sinergia entre categorias"})
+        return prepare,200
+    
+    except FileNotFoundError:
+        return jsonify({"error": "Archivo no encontrado"}), 404
+    
+@app.route('/points_compare', methods=['GET'])
+def points_compare():
+    try:
+        df_s = pd.read_csv("data_matches_seniors.csv")
+        points_seniors = df_s['points_scored'].sum()
+
+        df_o = pd.read_csv("data_matches_open.csv")
+        points_open = df_o['points_scored'].sum()
+
+        points_groups = {
+        'points_open': int(points_open),
+        'points_seniors': int(points_seniors)
+        }
+        plot_json = plotly_plot_points_compare(points_groups)
+        prepare =  jsonify({"data": plot_json["data"], "x-axis":"Categoría", "y-axis":"Puntos", "title":"Comparativa de puntos entre categorias"})
+        return prepare,200
+        
+    except FileNotFoundError:
+        return jsonify({"error": "Archivo no encontrado"}), 404
 
 if __name__ == "__main__":
     app.run(port=3000, debug = True)

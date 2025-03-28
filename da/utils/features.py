@@ -275,3 +275,89 @@ def plotly_plot_sinergy(df):
     plotly_json = json.loads(plotly_json)
     return extract_plotly_sinergy(plotly_json)
 
+#function to compare the sinergy between the two categories
+def extract_plotly_compare(plotly_json):
+    extracted_data = []
+    for data in plotly_json["data"]:
+        marker_color = data["marker"]["color"]
+        text = data["text"]  # El texto ya está en formato de lista
+        y = data["y"]  # Los valores de y ya están en formato de lista
+        x = data["x"]
+
+        extracted_data.append({
+            "marker": {"color": marker_color, "cornerradius": 10},
+            "text": text,
+            "textposition": "auto",
+            "x": x,
+            "y": y,
+            "type": "bar"
+        })
+    return {"data": extracted_data}
+
+def plotly_plot_sinergy_compare(diccionario):
+    # Crear la figura
+    fig = go.Figure()
+
+    # Agregar los datos al gráfico de barras
+    fig.add_trace(go.Bar(
+        x=['Libre', '50 y más'],
+        y=[diccionario['sinergy_open'], diccionario['sinergy_senior']],
+        marker_color='#E61357',  # Color de las barras
+        text=[diccionario['sinergy_open'], diccionario['sinergy_senior']],  # Texto que se mostrará encima de cada barra
+        textposition='auto',  # Posición del texto
+    ))
+
+    # Personalizar el gráfico
+    fig.update_layout(
+        title='Sinergia en ambas categorías',
+        xaxis_title='Categorías',
+        yaxis_title='Sinergia',
+        bargap=0.4,  # Ajustar el espacio entre las barras
+        plot_bgcolor='#241111',  # Fondo negro
+        paper_bgcolor='#000000',  # Fondo del área del gráfico negro
+        font=dict(color='white'),  # Color del texto
+        width=1080,
+        height=720,
+    )
+
+    # Ajustar el espaciado entre las etiquetas de los ticks del eje x
+    fig.update_xaxes(dtick=1)  # Establecer dtick en 1 para mostrar todas las etiquetas
+
+    plotly_json = fig.to_json()
+    print(plotly_json)
+    plotly_json = json.loads(plotly_json)
+    return extract_plotly_compare(plotly_json)
+
+def plotly_plot_points_compare(diccionario):
+    # Crear la figura
+    fig = go.Figure()
+
+    # Agregar los datos al gráfico de barras
+    fig.add_trace(go.Bar(
+        x=['Libre', '50 y más'],
+        y=[diccionario['points_open'], diccionario['points_seniors']],
+        marker_color='#E61357',  # Color de las barras
+        text=[diccionario['points_open'], diccionario['points_seniors']],  # Texto que se mostrará encima de cada barra
+        textposition='auto',  # Posición del texto
+    ))
+
+    # Personalizar el gráfico
+    fig.update_layout(
+        title='Puntos en ambas categorías',
+        xaxis_title='Categorías',
+        yaxis_title='Sinergia',
+        bargap=0.4,  # Ajustar el espacio entre las barras
+        plot_bgcolor='#241111',  # Fondo negro
+        paper_bgcolor='#000000',  # Fondo del área del gráfico negro
+        font=dict(color='white'),  # Color del texto
+        width=1080,
+        height=720,
+    )
+
+    # Ajustar el espaciado entre las etiquetas de los ticks del eje x
+    fig.update_xaxes(dtick=1)  # Establecer dtick en 1 para mostrar todas las etiquetas
+
+    plotly_json = fig.to_json()
+    print(plotly_json)
+    plotly_json = json.loads(plotly_json)
+    return extract_plotly_compare(plotly_json)
