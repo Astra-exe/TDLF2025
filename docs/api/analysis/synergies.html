@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>📘</text></svg>">
-  <title>🔥 Mapa de calor</title>
+  <title>Sinergia de una categoría de inscripción.</title>
   <style>body {
   font-family: sans-serif;
   font-size: 16px;
@@ -236,7 +236,7 @@ img {
 <a href="https://astra-exe.github.io/TDLF2025/api/analysis/index.html"><b>📊 Análisis de datos</b>/</a>
 <ul>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/analysis/heatmap.html"><b>🔥 Mapa de calor</b>/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/analysis/heatmap.html">🔥 Mapa de calor/</a>
 </li>
 <li>
 <a href="https://astra-exe.github.io/TDLF2025/api/analysis/parities.html">Paridad de una categoría de inscripción/</a>
@@ -245,7 +245,7 @@ img {
 <a href="https://astra-exe.github.io/TDLF2025/api/analysis/profiles.html">✨ Perfil de un jugador/</a>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/analysis/synergies.html">Sinergia de una categoría de inscripción./</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/analysis/synergies.html"><b>Sinergia de una categoría de inscripción.</b>/</a>
 </li>
 </ul>
 </li>
@@ -335,16 +335,21 @@ img {
 </ul>
 </li>
 </ul></aside>
-    <main class="main"><h1>🔥 Mapa de calor</h1>
-<p>Obtiene una gráfica que describe la mayor concentración de origen de los jugadores.</p>
-<pre><code>[GET] /v1/analysis/heatmap
+    <main class="main"><h1>Sinergia de una categoría de inscripción.</h1>
+<p>Obtiene una gráfica comparativa que describe el desempeño de juego por pareja.</p>
+<pre><code>[GET] /v1/analysis/synergies/@id
 </code></pre>
+<p>Parámetros de la ruta:</p>
+<table>
+<tr><th>Parámetros </th><th>Tipo </th><th>Requerido </th><th>Descripción </th></tr>
+<tr><td><code>id</code> </td><td><code>string</code> </td><td><code>true</code> </td><td>Identificador de la categoría de inscripción. </td></tr>
+</table>
 <p>Ejemplo:</p>
 <pre><code class="language-bash">curl -X GET \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'X-API-KEY: API_KEY' \
-  http://localhost:8080/v1/analysis/heatmap
+  http://localhost:8080/v1/analysis/synergies/@id
 </code></pre>
 <p>Respuesta de la petición:</p>
 <pre><code class="language-json"></code></pre></main>

@@ -1,5 +1,7 @@
 # ✨ Perfil de un jugador
 
+Obtiene recomendaciones y tips para un jugador.
+
 ```
 [GET] /v1/analysis/profiles/@id
 ```

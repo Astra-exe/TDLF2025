@@ -1,5 +1,7 @@
 # 🔥 Mapa de calor
 
+Obtiene una gráfica que describe la mayor concentración de origen de los jugadores.
+
 ```
 [GET] /v1/analysis/heatmap
 ```

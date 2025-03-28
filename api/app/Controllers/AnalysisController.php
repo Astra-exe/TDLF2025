@@ -126,4 +126,44 @@ class AnalysisController extends BaseController
 
         $this->respond($response->body ?? null, 'Information about the registration category parity');
     }
+
+    /**
+     * Obtiene el gráfico de "sinergia" de una "categoría de inscripción".
+     */
+    public function synergy(string $id): void
+    {
+        // Obtiene las reglas de validación
+        // y las establece como obligatorias.
+        $rules = RegistrationCategoryValidation::getRules(['id']);
+        array_unshift($rules['id'], 'required');
+
+        // Establece las reglas de validación.
+        $this->gump()->validation_rules($rules);
+
+        // Comprueba los parámetros de la petición.
+        $this->gump()->run(['id' => $id]);
+
+        // Comprueba si existen errores de validación.
+        if ($this->gump()->errors()) {
+            $this->respondValidationErrors(
+                $this->gump()->get_errors_array(),
+                'The registration category identifier is incorrect');
+        }
+
+        // Consulta la información de la "categoría de inscripción".
+        $registrationCategory = new RegistrationCategoryModel;
+        $registrationCategory->select('id')->eq('id', $id)->find();
+
+        // Construye la url de la petición.
+        $url = sprintf('%s/sinergy/%s', $this->getUrl(), $registrationCategory->id);
+
+        try {
+            // Realiza la petición.
+            $response = Request::get($url)->expectsJson()->send();
+        } catch (ConnectionErrorException $e) {
+            $this->respondServiceUnavailable($e->getMessage());
+        }
+
+        $this->respond($response->body ?? null, 'Information about the registration category synergy');
+    }
 }

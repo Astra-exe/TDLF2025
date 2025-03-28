@@ -133,5 +133,6 @@ return (static function () use ($app): void {
         $router->get($base_route('/v1/analysis/profiles/@id'), App\Controllers\AnalysisController::class.'->profile');
         $router->get($base_route('/v1/analysis/heatmap'), App\Controllers\AnalysisController::class.'->heatmap');
         $router->get($base_route('/v1/analysis/parities/@id'), App\Controllers\AnalysisController::class.'->parity');
+        $router->get($base_route('/v1/analysis/synergies/@id'), App\Controllers\AnalysisController::class.'->synergy');
     }, [\App\Middlewares\AuthMiddleware::class, \App\Middlewares\CheckRoleMiddleware::class]);
 })();
