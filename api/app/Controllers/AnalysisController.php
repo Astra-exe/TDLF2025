@@ -251,8 +251,6 @@ class AnalysisController extends BaseController
             $this->respondServiceUnavailable($e->getMessage());
         }
 
-        exit(var_dump($response));
-
         $this->respond($response->body ?? null, 'Information about the group points');
     }
 }
