@@ -136,5 +136,6 @@ return (static function () use ($app): void {
         $router->get($base_route('/v1/analysis/synergies/@id'), App\Controllers\AnalysisController::class.'->synergy');
         $router->get($base_route('/v1/analysis/comparisons/synergies'), App\Controllers\AnalysisController::class.'->compareSynergies');
         $router->get($base_route('/v1/analysis/comparisons/points'), App\Controllers\AnalysisController::class.'->comparePoints');
+        $router->get($base_route('/v1/analysis/groups/@id/points'), App\Controllers\AnalysisController::class.'->groupPoints');
     }, [\App\Middlewares\AuthMiddleware::class, \App\Middlewares\CheckRoleMiddleware::class]);
 })();

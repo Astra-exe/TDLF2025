@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use App\Helpers\Env;
+use App\Models\GroupModel;
 use App\Models\PlayerModel;
 use App\Models\RegistrationCategoryModel;
+use App\Validations\GroupValidation;
 use App\Validations\PlayerValidation;
 use App\Validations\RegistrationCategoryValidation;
 use Httpful\Exception\ConnectionErrorException;
@@ -203,5 +205,54 @@ class AnalysisController extends BaseController
         }
 
         $this->respond($response->body ?? null, 'Information about the points comparison');
+    }
+
+    /**
+     * Obtiene la gráfica de comparación de los puntos realizados por "grupo".
+     */
+    public function groupPoints(string $id): void
+    {
+        // Obtiene las reglas de validación
+        // y las establece como obligatorias.
+        $rules = GroupValidation::getRules(['id']);
+        array_unshift($rules['id'], 'required');
+
+        // Establece las reglas de validación.
+        $this->gump()->validation_rules($rules);
+
+        // Comprueba los parámetros de la petición.
+        $this->gump()->run(['id' => $id]);
+
+        // Comprueba si existen errores de validación.
+        if ($this->gump()->errors()) {
+            $this->respondValidationErrors(
+                $this->gump()->get_errors_array(),
+                'The group identifier is incorrect');
+        }
+
+        // Consulta la información del "grupo".
+        $group = new GroupModel;
+        $group->select('id', 'registration_category_id', 'description')
+            ->eq('id', $id)
+            ->find();
+
+        // Comprueba si existe el "grupo".
+        if (! $group->isHydrated()) {
+            $this->respondNotFound('The group information was not found');
+        }
+
+        // Construye la url de la petición.
+        $url = sprintf('%s/points/%s/%s', $this->getUrl(), $group->registration_category_id, $group->description);
+
+        try {
+            // Realiza la petición.
+            $response = Request::get($url)->expectsJson()->send();
+        } catch (ConnectionErrorException $e) {
+            $this->respondServiceUnavailable($e->getMessage());
+        }
+
+        exit(var_dump($response));
+
+        $this->respond($response->body ?? null, 'Information about the group points');
     }
 }
