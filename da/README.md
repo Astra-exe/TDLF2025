@@ -1,6 +1,6 @@
 # Documentación de la API de Análisis de Datos
 
-API construida con Flask que provee varios endpoints para generar perfiles de jugadores, mapas, gráficos de paridad, puntos y sinergia, y comparativas entre categorías. La aplicación consume datos de archivos locales (CSV y JSON) y utiliza funciones importadas desde `utils.features` para procesar y graficar los datos.
+API construida con Flask que provee varios endpoints para generar perfiles de jugadores, mapas, gráficos de paridad, puntos y sinergia, y comparativas entre categorías. La aplicación consume datos de la API en php del torneo y los procesa de forma local. Utiliza funciones importadas desde `utils.features` para procesar y graficar los datos.
 
 ---
 
