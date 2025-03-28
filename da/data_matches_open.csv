@@ -1,0 +1,33 @@
+group,team_id,team,points_scored,points_received,points_diff
+A,5242ad66-9a87-4135-bb39-c80570496f4a,"[Jorge Rios, JR PAREJA DOS]",14,30,16
+A,74e48e68-ee6b-4282-aaad-00c87315c036,"[Ulises Medrano, Paul Solorio]",14,27,13
+A,78062676-c1f6-4d63-bb8d-3249f2f493d1,"[José Manuel Vargas, Ernesto Oñate]",23,18,5
+A,5083a5a9-e528-4995-a0f4-8ef47e26c2f0,"[Gerardo Martínez, Jesús Arguellas]",30,6,24
+B,127eb4d3-a4a4-4607-bba5-1b9d7bdea6e0,"[Juan Pablo Bullet, JP Bullet Dos]",8,30,22
+B,ff951871-2e1e-45a6-9c64-0a896c6c0d72,"[Francisco Solis, Diego Solis]",19,21,2
+B,5d342171-949f-4626-beff-983d607b60b8,"[Edgar Labra, Rodrigo Sánchez]",26,18,8
+B,8f730018-9774-4486-83c5-ff5fc9d25dbb,"[Alonso Calderon, Lennin Bustos]",30,14,16
+C,ac31ffff-3630-417c-bf43-e441c40e5f65,"[Yonatan Ángeles, Daniel Sánchez Dos]",14,30,16
+C,13e15284-a05a-4206-9b34-c7d0fab83a3e,"[Adrián Arreola, Marcos Rojo]",23,22,1
+C,e76602b1-23c1-42ef-b7f8-1ee47579db2b,"[Fabián Padilla, Victor Ayala]",25,24,1
+C,e445a628-d0ef-48b4-9e22-36a70612640c,"[Carlos Castro, Owen Alexander]",30,16,14
+D,33944f7b-425a-4339-86e8-6d1a0c27f233,"[Fernando Córtez, Avimael Tapia]",13,9,4
+D,49d0158d-452b-41cf-9eb2-5a4ad9ba02c8,"[Daniel Adame, Alonso Zuñiga]",13,20,7
+D,6a13b8ef-7f9a-4408-82f3-a39916da503a,"[Santiago Martinez, Fernando Soto]",18,22,4
+D,c39e32ab-16db-4809-90ad-889c54dc0d40,"[Julio Méndez, Miguel Baez]",23,16,7
+E,8c253cb0-efea-4e75-b862-5b68d57d0f6b,"[Raúl Rodriguez, César Rodríguez]",13,28,15
+E,29f8fd13-f901-4328-8e05-932c9cb7c86f,"[Alejandro Padrón, Victor Cardiel]",19,26,7
+E,bc71e457-62dd-4f20-89bc-dc979f32b801,"[Ricky Rodriguez, Victor Cordero]",23,21,2
+E,34473e63-96fb-4a57-a370-39a20081e9f1,"[Enrique Ybarra Lara, Gerardo Cruz Parente]",30,10,20
+F,40b49da6-72a1-459a-a9a8-e3bde5cb251a,"[Antonio Daniel Quintana, Diego Alejandro Quintana]",3,30,27
+F,8a72404b-4de4-425c-9b5f-6570626e4483,"[Giovanny Venegas, Miguel Cervantes]",21,21,0
+F,85c4dfae-4077-4236-a95a-e5408bd27e65,"[Daniel Aguilar, Daniel Sánchez]",26,14,12
+F,7d461a1c-81f2-4c9d-b684-31a8efa57c01,"[Marco López, Mikjail Juárez]",27,12,15
+G,3c147482-a03d-44bb-b32f-6793da190121,"[Gustavo Ventura, Luis Zavala Orozco]",15,22,7
+G,cc57ef3c-ba26-4de8-8263-237ef1b381f3,"[Nestor de la Rosa, Sebastián Velázquez]",16,15,1
+G,8e399920-d104-4b91-932f-638985df1a89,"[Carlos García, Armando Ordónez]",20,17,3
+G,26102990-8f66-4159-a6ef-a7ae11b9c049,"[David Martínez, Iván Zavala]",21,18,3
+H,ab7394cf-a02f-498b-b70f-132a57162466,"[Manuel Méndez, Eduardo Gutierrez]",0,20,20
+H,5eb7b64e-e689-41f4-93fb-4b8b7b8a1bc2,"[Lalo Morales, Juan Mireles]",12,15,3
+H,7b28dec2-cda8-4bbd-b10a-7c775ea3a61a,"[Iván Zuñiga, Alejandro Flores]",17,20,3
+H,9bc13149-5e99-4bef-b9a0-3fb5b5730245,"[Edgar García, Hugo Eduardo Arizmendi]",30,4,26
