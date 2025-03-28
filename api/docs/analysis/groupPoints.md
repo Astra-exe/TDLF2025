@@ -1,4 +1,4 @@
-# Puntos de un grupo
+# 👥 + 🎾 Puntos de un grupo
 
 Obtiene una gráfica que compara los puntos realizados en un grupo.
 

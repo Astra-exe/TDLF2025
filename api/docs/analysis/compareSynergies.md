@@ -1,4 +1,4 @@
-# Comparación de sinergias
+# 🏷️ / 📋 + 👫 Comparación de sinergias
 
 Obtiene una gráfica comparativa de las sinergias de las categorías de inscripción.
 

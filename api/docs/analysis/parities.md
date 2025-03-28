@@ -1,4 +1,4 @@
-# Paridad de una categoría de inscripción
+# 🏷️ / 📋 + ⚖️ Paridad de una categoría de inscripción
 
 Obtiene una gráfica comparativa que describe el emparejamiento de los partidos en una categoría de inscripción.
 
@@ -25,4 +25,53 @@ curl -X GET \
 Respuesta de la petición:
 
 ```json
+{
+  "data": {
+    "data": [
+      {
+        "marker": {
+          "color": "#E61357",
+          "cornerradius": 10
+        },
+        "text": [
+          7.85,
+          8.79,
+          8.12,
+          1.73,
+          8.04,
+          11.09,
+          2.52,
+          11.8
+        ],
+        "textposition": "auto",
+        "type": "bar",
+        "x": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "H"
+        ],
+        "y": [
+          7.85,
+          8.79,
+          8.12,
+          1.73,
+          8.04,
+          11.09,
+          2.52,
+          11.8
+        ]
+      }
+    ],
+    "title": "¿Qué tan parejos estuvieron los grupos de la categoria Libre?",
+    "x-axis": "Grupos",
+    "y-axis": "Indice de paridad"
+  },
+  "status": 200,
+  "description": "Information about the registration category parity"
+}
 ```

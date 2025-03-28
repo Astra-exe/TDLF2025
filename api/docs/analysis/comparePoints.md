@@ -1,4 +1,4 @@
-# Comparación de puntos
+# 🏷️ / 📋 + 🎾 Comparación de puntos
 
 Obtiene una gráfica comparativa de los puntos realizados en las categorías de inscripción.
 

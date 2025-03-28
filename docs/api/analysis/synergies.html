@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>📘</text></svg>">
-  <title>Sinergia de una categoría de inscripción</title>
+  <title>🏷️ / 📋 + 👫 + 🏃‍♂️ Sinergia de una categoría de inscripción</title>
   <style>body {
   font-family: sans-serif;
   font-size: 16px;
@@ -236,25 +236,25 @@ img {
 <a href="https://astra-exe.github.io/TDLF2025/api/analysis/index.html"><b>📊 Análisis de datos</b>/</a>
 <ul>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/analysis/comparePoints.html">Comparación de puntos/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/analysis/comparePoints.html">🏷️ / 📋 + 🎾 Comparación de puntos/</a>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/analysis/compareSynergies.html">Comparación de sinergias/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/analysis/compareSynergies.html">🏷️ / 📋 + 👫 Comparación de sinergias/</a>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/analysis/groupPoints.html">Puntos de un grupo/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/analysis/groupPoints.html">👥 + 🎾 Puntos de un grupo/</a>
 </li>
 <li>
 <a href="https://astra-exe.github.io/TDLF2025/api/analysis/heatmap.html">🔥 Mapa de calor/</a>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/analysis/parities.html">Paridad de una categoría de inscripción/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/analysis/parities.html">🏷️ / 📋 + ⚖️ Paridad de una categoría de inscripción/</a>
 </li>
 <li>
 <a href="https://astra-exe.github.io/TDLF2025/api/analysis/profiles.html">✨ Perfil de un jugador/</a>
 </li>
 <li>
-<a href="https://astra-exe.github.io/TDLF2025/api/analysis/synergies.html"><b>Sinergia de una categoría de inscripción</b>/</a>
+<a href="https://astra-exe.github.io/TDLF2025/api/analysis/synergies.html"><b>🏷️ / 📋 + 👫 + 🏃‍♂️ Sinergia de una categoría de inscripción</b>/</a>
 </li>
 </ul>
 </li>
@@ -344,7 +344,7 @@ img {
 </ul>
 </li>
 </ul></aside>
-    <main class="main"><h1>Sinergia de una categoría de inscripción</h1>
+    <main class="main"><h1>🏷️ / 📋 + 👫 + 🏃‍♂️ Sinergia de una categoría de inscripción</h1>
 <p>Obtiene una gráfica comparativa que describe el desempeño de las parejas.</p>
 <pre><code>[GET] /v1/analysis/synergies/@id
 </code></pre>
@@ -361,7 +361,238 @@ img {
   http://localhost:8080/v1/analysis/synergies/@id
 </code></pre>
 <p>Respuesta de la petición:</p>
-<pre><code class="language-json"></code></pre></main>
+<pre><code class="language-json">{
+  &quot;data&quot;: {
+    &quot;data&quot;: [
+      {
+        &quot;marker&quot;: {
+          &quot;color&quot;: &quot;#AA12E6&quot;,
+          &quot;cornerradius&quot;: 10
+        },
+        &quot;text&quot;: [
+          &quot;-43.33%&quot;,
+          &quot;-33.33%&quot;,
+          &quot;26.67%&quot;,
+          &quot;90.0%&quot;,
+          &quot;-63.33%&quot;,
+          &quot;3.33%&quot;,
+          &quot;36.67%&quot;,
+          &quot;63.33%&quot;,
+          &quot;-43.33%&quot;,
+          &quot;13.33%&quot;,
+          &quot;13.33%&quot;,
+          &quot;56.67%&quot;,
+          &quot;23.33%&quot;,
+          &quot;-13.33%&quot;,
+          &quot;-3.33%&quot;,
+          &quot;33.33%&quot;,
+          &quot;-40.0%&quot;,
+          &quot;-13.33%&quot;,
+          &quot;16.67%&quot;,
+          &quot;76.67%&quot;,
+          &quot;-80.0%&quot;,
+          &quot;10.0%&quot;,
+          &quot;50.0%&quot;,
+          &quot;60.0%&quot;,
+          &quot;-13.33%&quot;,
+          &quot;13.33%&quot;,
+          &quot;20.0%&quot;,
+          &quot;20.0%&quot;,
+          &quot;-56.67%&quot;,
+          &quot;0.1%&quot;,
+          &quot;0.1%&quot;,
+          &quot;96.67%&quot;
+        ],
+        &quot;textposition&quot;: &quot;auto&quot;,
+        &quot;type&quot;: &quot;bar&quot;,
+        &quot;x&quot;: [
+          &quot;Jorge Rios-JR PAREJA DOS&quot;,
+          &quot;Ulises Medrano-Paul Solorio&quot;,
+          &quot;José Manuel Vargas-Ernesto Oñate&quot;,
+          &quot;Gerardo Martínez-Jesús Arguellas&quot;,
+          &quot;Juan Pablo Bullet-JP Bullet Dos&quot;,
+          &quot;Francisco Solis-Diego Solis&quot;,
+          &quot;Edgar Labra-Rodrigo Sánchez&quot;,
+          &quot;Alonso Calderon-Lennin Bustos&quot;,
+          &quot;Yonatan Ángeles-Daniel Sánchez Dos&quot;,
+          &quot;Adrián Arreola-Marcos Rojo&quot;,
+          &quot;Fabián Padilla-Victor Ayala&quot;,
+          &quot;Carlos Castro-Owen Alexander&quot;,
+          &quot;Fernando Córtez-Avimael Tapia&quot;,
+          &quot;Daniel Adame-Alonso Zuñiga&quot;,
+          &quot;Santiago Martinez-Fernando Soto&quot;,
+          &quot;Julio Méndez-Miguel Baez&quot;,
+          &quot;Raúl Rodriguez-César Rodríguez&quot;,
+          &quot;Alejandro Padrón-Victor Cardiel&quot;,
+          &quot;Ricky Rodriguez-Victor Cordero&quot;,
+          &quot;Enrique Ybarra Lara-Gerardo Cruz Parente&quot;,
+          &quot;Antonio Daniel Quintana-Diego Alejandro Quintana&quot;,
+          &quot;Giovanny Venegas-Miguel Cervantes&quot;,
+          &quot;Daniel Aguilar-Daniel Sánchez&quot;,
+          &quot;Marco López-Mikjail Juárez&quot;,
+          &quot;Gustavo Ventura-Luis Zavala Orozco&quot;,
+          &quot;Nestor de la Rosa-Sebastián Velázquez&quot;,
+          &quot;Carlos García-Armando Ordónez&quot;,
+          &quot;David Martínez-Iván Zavala&quot;,
+          &quot;Manuel Méndez-Eduardo Gutierrez&quot;,
+          &quot;Lalo Morales-Juan Mireles&quot;,
+          &quot;Iván Zuñiga-Alejandro Flores&quot;,
+          &quot;Edgar García-Hugo Eduardo Arizmendi&quot;
+        ],
+        &quot;y&quot;: [
+          0,
+          0,
+          26.67,
+          90,
+          0,
+          3.33,
+          36.67,
+          63.33,
+          0,
+          13.33,
+          13.33,
+          56.67,
+          23.33,
+          0,
+          0,
+          33.33,
+          0,
+          0,
+          16.67,
+          76.67,
+          0,
+          10,
+          50,
+          60,
+          0,
+          13.33,
+          20,
+          20,
+          0,
+          0.1,
+          0.1,
+          96.67
+        ]
+      },
+      {
+        &quot;marker&quot;: {
+          &quot;color&quot;: &quot;#E64912&quot;,
+          &quot;cornerradius&quot;: 10
+        },
+        &quot;text&quot;: [
+          &quot;-43.33%&quot;,
+          &quot;-33.33%&quot;,
+          &quot;26.67%&quot;,
+          &quot;90.0%&quot;,
+          &quot;-63.33%&quot;,
+          &quot;3.33%&quot;,
+          &quot;36.67%&quot;,
+          &quot;63.33%&quot;,
+          &quot;-43.33%&quot;,
+          &quot;13.33%&quot;,
+          &quot;13.33%&quot;,
+          &quot;56.67%&quot;,
+          &quot;23.33%&quot;,
+          &quot;-13.33%&quot;,
+          &quot;-3.33%&quot;,
+          &quot;33.33%&quot;,
+          &quot;-40.0%&quot;,
+          &quot;-13.33%&quot;,
+          &quot;16.67%&quot;,
+          &quot;76.67%&quot;,
+          &quot;-80.0%&quot;,
+          &quot;10.0%&quot;,
+          &quot;50.0%&quot;,
+          &quot;60.0%&quot;,
+          &quot;-13.33%&quot;,
+          &quot;13.33%&quot;,
+          &quot;20.0%&quot;,
+          &quot;20.0%&quot;,
+          &quot;-56.67%&quot;,
+          &quot;0.1%&quot;,
+          &quot;0.1%&quot;,
+          &quot;96.67%&quot;
+        ],
+        &quot;textposition&quot;: &quot;auto&quot;,
+        &quot;type&quot;: &quot;bar&quot;,
+        &quot;x&quot;: [
+          &quot;Jorge Rios-JR PAREJA DOS&quot;,
+          &quot;Ulises Medrano-Paul Solorio&quot;,
+          &quot;José Manuel Vargas-Ernesto Oñate&quot;,
+          &quot;Gerardo Martínez-Jesús Arguellas&quot;,
+          &quot;Juan Pablo Bullet-JP Bullet Dos&quot;,
+          &quot;Francisco Solis-Diego Solis&quot;,
+          &quot;Edgar Labra-Rodrigo Sánchez&quot;,
+          &quot;Alonso Calderon-Lennin Bustos&quot;,
+          &quot;Yonatan Ángeles-Daniel Sánchez Dos&quot;,
+          &quot;Adrián Arreola-Marcos Rojo&quot;,
+          &quot;Fabián Padilla-Victor Ayala&quot;,
+          &quot;Carlos Castro-Owen Alexander&quot;,
+          &quot;Fernando Córtez-Avimael Tapia&quot;,
+          &quot;Daniel Adame-Alonso Zuñiga&quot;,
+          &quot;Santiago Martinez-Fernando Soto&quot;,
+          &quot;Julio Méndez-Miguel Baez&quot;,
+          &quot;Raúl Rodriguez-César Rodríguez&quot;,
+          &quot;Alejandro Padrón-Victor Cardiel&quot;,
+          &quot;Ricky Rodriguez-Victor Cordero&quot;,
+          &quot;Enrique Ybarra Lara-Gerardo Cruz Parente&quot;,
+          &quot;Antonio Daniel Quintana-Diego Alejandro Quintana&quot;,
+          &quot;Giovanny Venegas-Miguel Cervantes&quot;,
+          &quot;Daniel Aguilar-Daniel Sánchez&quot;,
+          &quot;Marco López-Mikjail Juárez&quot;,
+          &quot;Gustavo Ventura-Luis Zavala Orozco&quot;,
+          &quot;Nestor de la Rosa-Sebastián Velázquez&quot;,
+          &quot;Carlos García-Armando Ordónez&quot;,
+          &quot;David Martínez-Iván Zavala&quot;,
+          &quot;Manuel Méndez-Eduardo Gutierrez&quot;,
+          &quot;Lalo Morales-Juan Mireles&quot;,
+          &quot;Iván Zuñiga-Alejandro Flores&quot;,
+          &quot;Edgar García-Hugo Eduardo Arizmendi&quot;
+        ],
+        &quot;y&quot;: [
+          -43.33,
+          -33.33,
+          0,
+          0,
+          -63.33,
+          0,
+          0,
+          0,
+          -43.33,
+          0,
+          0,
+          0,
+          0,
+          -13.33,
+          -3.33,
+          0,
+          -40,
+          -13.33,
+          0,
+          0,
+          -80,
+          0,
+          0,
+          0,
+          -13.33,
+          0,
+          0,
+          0,
+          -56.67,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    &quot;title&quot;: &quot;Sinergia de los equipos de la categoria Libre&quot;,
+    &quot;x-axis&quot;: &quot;Parejas&quot;,
+    &quot;y-axis&quot;: &quot;Sinergia&quot;
+  },
+  &quot;status&quot;: 200,
+  &quot;description&quot;: &quot;Information about the registration category synergy&quot;
+}
+</code></pre></main>
   </div>
   <div>
     <hr>
