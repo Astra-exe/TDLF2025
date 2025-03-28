@@ -288,5 +288,45 @@ class UserController extends BaseController
     /**
      * Elimina la información de un "usuario".
      */
-    public function delete(string $id): void {}
+    public function delete(string $id): void
+    {
+        // Obtiene las reglas de validación
+        // y las establece como obligatorias.
+        $rules = UserValidation::getRules(['id']);
+        array_unshift($rules['id'], 'required');
+
+        // Establece las reglas de validación.
+        $this->gump()->validation_rules($rules);
+
+        // Comprueba los parámetros de la petición.
+        $this->gump()->run(['id' => $id]);
+
+        // Comprueba si existen errores de validación.
+        if ($this->gump()->errors()) {
+            $this->respondValidationErrors(
+                $this->gump()->get_errors_array(),
+                'The user identifier is incorrect');
+        }
+
+        // Consulta la información del "usuario".
+        $user = new UserModel;
+        $user->select(...$this->getColumns())
+            ->ne('id', $this->userAuth()->id)
+            ->eq('id', $id)
+            ->find();
+
+        // Comprueba si existe el "usuario".
+        if (! $user->isHydrated()) {
+            $this->respondNotFound('The user information was not found');
+        }
+
+        // Consulta el "rol" del "usuario".
+        $user->setCustomData('role', $user->role);
+        unset($user->role_id);
+
+        // Elimina la información del "jugador".
+        $user->delete();
+
+        $this->respondDeleted($user, 'The user was deleted successfully');
+    }
 }

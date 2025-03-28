@@ -336,6 +336,30 @@ img {
 </li>
 </ul></aside>
     <main class="main"><h1>➕ Crear un usuario</h1>
+<pre><code>[POST] /v1/users
+</code></pre>
+<p>Cuerpo de la petición:</p>
+<table>
+<tr><th>Campo </th><th>Tipo </th><th>Requerido </th><th>Rango </th><th>Descripción </th></tr>
+<tr><td><code>fullname</code> </td><td><code>string</code> </td><td><code>true</code> </td><td><code>between_len: [1, 128]</code> </td><td>Nombre completo del usuario. </td></tr>
+<tr><td><code>email</code> </td><td><code>string</code> </td><td><code>true</code> </td><td><code>between_len: [1, 128]</code> </td><td>Email del usuario. </td></tr>
+<tr><td><code>username</code> </td><td><code>string</code> </td><td><code>true</code> </td><td><code>between_len: [1, 64]</code> </td><td>Apodo del usuario. </td></tr>
+<tr><td><code>role_id</code> </td><td><code>string</code> </td><td><code>true</code> </td><td><code>exact_len: 36</code> </td><td>Identificador del rol del usuario (<a href="../roles/index.html">ver</a>). </td></tr>
+</table>
+<p>Ejemplo:</p>
+<pre><code class="language-bash">curl -X POST \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'X-API-KEY: API_KEY' \
+  http://localhost:8080/v1/users \
+  -d '{
+    &quot;fullname&quot;: &quot;Ricardo García Jiménez&quot;,
+    &quot;email&quot;: &quot;ricardog08@riseup.net&quot;,
+    &quot;username&quot;: &quot;ricardog08&quot;,
+    &quot;role_id&quot;: &quot;3d2e95aa-0616-11f0-a401-142b9a82bd2f&quot;
+  }'
+</code></pre>
+<p>Respuesta de la petición:</p>
 <pre><code class="language-json">{
   &quot;data&quot;: {
     &quot;id&quot;: &quot;8a168aa8-02ae-4ccd-96a6-c9b5780a223e&quot;,
