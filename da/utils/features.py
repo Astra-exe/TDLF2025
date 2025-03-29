@@ -119,12 +119,14 @@ def extract_plotly_data(json):
 def extract_plotly_data_points(plotly_json):
     extracted_data = []
     for data in plotly_json["data"]:
+        trace_name = data.get("name", "")  # Obtener el nombre de la traza si está presente
         marker_color = data["marker"]["color"]
         text = decode_bdata(data["text"]["bdata"], data["text"]["dtype"]).tolist()
         y = decode_bdata(data["y"]["bdata"], data["y"]["dtype"]).tolist()
         x = data["x"]
 
         extracted_data.append({
+            "name": trace_name,
             "marker": {"color": marker_color, "cornerradius": 10},
             "text": text,
             "textposition": "auto",
@@ -222,11 +224,13 @@ def extract_plotly_sinergy(plotly_json):
     extracted_data = []
     for data in plotly_json["data"]:
         marker_color = data["marker"]["color"]
+        trace_name = data.get("name", "")  # Obtener el nombre de la traza si está presente
         text = data["text"]  # El texto ya está en formato de lista
         y = decode_bdata(data["y"]["bdata"], data["y"]["dtype"]).tolist()  # Decodificar y convertir a lista
         x = data["x"]
 
         extracted_data.append({
+            "name": trace_name,
             "marker": {"color": marker_color, "cornerradius": 10},
             "text": text,
             "textposition": "auto",
