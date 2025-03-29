@@ -247,7 +247,7 @@ def plotly_plot_sinergy(df):
     fig.add_trace(go.Bar(
         x=df['team'],
         y=df['sinergy'].apply(lambda x: max(x, 0)),  # Tomar solo los valores positivos
-        name='Sinergia Positiva',
+        name='Positiva',
         marker_color='#AA12E6',  # Color para las barras positivas
         text=df['sinergy'].apply(lambda x: f'{x}%'),  # Texto que se mostrará encima de cada barra
         textposition='auto',  # Posición del texto
@@ -258,7 +258,7 @@ def plotly_plot_sinergy(df):
     fig.add_trace(go.Bar(
         x=df['team'],
         y=df['sinergy'].apply(lambda x: min(x, 0)),  # Tomar solo los valores negativos
-        name='Sinergia Negativa',
+        name='Negativa',
         marker_color='#E64912',  # Color para las barras negativas
         text=df['sinergy'].apply(lambda x: f'{x}%'),  # Texto que se mostrará encima de cada barra
         textposition='auto',  # Posición del texto
