@@ -166,7 +166,11 @@ def plotly_plot_parity(df):
 def extract_group(df,letter):
     x_group = df[df['group'] == letter].copy()
     x_group.drop(['group', 'team_id', 'points_diff'], axis=1, inplace=True)
-    x_group['team'] = x_group['team'].apply(lambda x: '-'.join(x.strip('[]').split(', ')))
+    x_group['team'] = x_group['team'].apply(
+    lambda x: '/'.join(
+        name.strip().split()[0] 
+        for name in x.strip('[]').split(', ')
+        ))
     x_group.reset_index(drop=True, inplace=True)
     return x_group
 
