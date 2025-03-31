@@ -65,6 +65,9 @@ importers:
       next-themes:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      plotly.js-dist-min:
+        specifier: ^3.0.1
+        version: 3.0.1
       react:
         specifier: ^19.0.0
         version: 19.0.0
@@ -96,6 +99,9 @@ importers:
       '@types/node':
         specifier: ^20
         version: 20.17.21
+      '@types/plotly.js':
+        specifier: ^2.35.3
+        version: 2.35.3
       '@types/react':
         specifier: ^19
         version: 19.0.10
@@ -1058,6 +1064,9 @@ packages:
 
   '@types/node@20.17.21':
     resolution: {integrity: sha512-yw1WZ94lZpdZbpnaF+WRvlN/Sx2EZWe/YZVdK4mC4u02/ql6Ozen8qbRJhOtltOxCg97/kpijhGs5X6STwkvbg==}
+
+  '@types/plotly.js@2.35.3':
+    resolution: {integrity: sha512-DOiBLbERXx5UP9CjYsXGoC3B9SAFR5Yo3iCmHQ5kBQy8k/q8HT9n0k7jhIsW/u+chJ7ZxUxdpd5T8vWhSQsqEw==}
 
   '@types/react-dom@19.0.4':
     resolution: {integrity: sha512-4fSQ8vWFkg+TGhePfUzVmat3eC14TXYSsiiDSLI0dVLsrm9gZFABjPy/Qu6TKgl1tq1Bu1yDsuQgY3A3DOjCcg==}
@@ -2037,6 +2046,9 @@ packages:
   picomatch@4.0.2:
     resolution: {integrity: sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg==}
     engines: {node: '>=12'}
+
+  plotly.js-dist-min@3.0.1:
+    resolution: {integrity: sha512-RReOqr6TfoHaTbVAoHR1UbTCOSRDsQ7Hbthd+3XAxOwaKmxCE3oejMhLG7urQSqWC65DAcSKV23kZd8e+7mG7w==}
 
   possible-typed-array-names@1.1.0:
     resolution: {integrity: sha512-/+5VFTchJDoVj3bhoqi6UeymcD00DAwb1nJwamzPvHEszJ4FpF6SNNbUbOS8yI56qHzdV8eK0qEfOSiodkTdxg==}
@@ -3281,6 +3293,8 @@ snapshots:
     dependencies:
       undici-types: 6.19.8
 
+  '@types/plotly.js@2.35.3': {}
+
   '@types/react-dom@19.0.4(@types/react@19.0.10)':
     dependencies:
       '@types/react': 19.0.10
@@ -4445,6 +4459,8 @@ snapshots:
   picomatch@2.3.1: {}
 
   picomatch@4.0.2: {}
+
+  plotly.js-dist-min@3.0.1: {}
 
   possible-typed-array-names@1.1.0: {}
 

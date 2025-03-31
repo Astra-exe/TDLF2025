@@ -944,3 +944,161 @@ export async function fetchHeatMap(apiKey: string) {
     throw error;
   }
 }
+
+export async function fetchParitiesByCategory({
+  apiKey,
+  idCategory,
+}: {
+  apiKey: string;
+  idCategory: string;
+}) {
+  const url = `${URL_API}/analysis/parities/${idCategory}`;
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": apiKey,
+      },
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        errorData?.description ||
+          "Error al obtener la paridad de una categoría de inscripción"
+      );
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function fetchSynergyByCategory({
+  apiKey,
+  idCategory,
+}: {
+  apiKey: string;
+  idCategory: string;
+}) {
+  const url = `${URL_API}/analysis/synergies/${idCategory}`;
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": apiKey,
+      },
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        errorData?.description ||
+          "Error al obtener la sinergia que describe el desempeño de las parejas."
+      );
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function fetchPointsByGroup({
+  apiKey,
+  idGroup,
+}: {
+  apiKey: string;
+  idGroup: string;
+}) {
+  const url = `${URL_API}/analysis/groups/${idGroup}/points`;
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": apiKey,
+      },
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        errorData?.description ||
+          "Error al obtener los puntos realizados en un grupo."
+      );
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function fetchPointsChartByCategory({
+  apiKey,
+  idCategory,
+}: {
+  apiKey: string;
+  idCategory: string;
+}) {
+  const { data: groups } = await fetchGroupsByCategory({ apiKey, idCategory });
+  const pointsGroupsPromises = groups.map(async (group: Group) => {
+    const { data: pointsDataChart } = await fetchPointsByGroup({
+      apiKey,
+      idGroup: group.id,
+    });
+    return pointsDataChart;
+  });
+
+  const pointsGroups = await Promise.all(pointsGroupsPromises);
+  return pointsGroups;
+}
+
+export async function fetchPointsComparative(apiKey: string) {
+  const url = `${URL_API}/analysis/comparisons/points`;
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": apiKey,
+      },
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        errorData?.description ||
+          "Error al obtener los puntos realizados en las categorías de inscripción."
+      );
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function fetchSynergiesComparative(apiKey: string) {
+  const url = `${URL_API}/analysis/comparisons/synergies`;
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": apiKey,
+      },
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        errorData?.description ||
+          "Error al obtener los puntos realizados en las categorías de inscripción."
+      );
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}

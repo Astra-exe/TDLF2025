@@ -1,15 +1,30 @@
 import { Suspense } from "react";
 import { CardsSkeleton } from "@/app/components/ui/skeletons";
 import CardsStats from "@/app/components/CardsStats";
-import { fetchHeatMap, getApiKey } from "@/app/lib/data";
+import {
+  fetchCategories,
+  fetchHeatMap,
+  fetchPointsComparative,
+  fetchSynergiesComparative,
+  getApiKey,
+} from "@/app/lib/data";
 import HeaderMap from "@/app/components/HeaderMap";
 import Footer from "@/app/components/landing/sections/Footer";
+import Link from "next/link";
+import { Category } from "../lib/definitions";
+import BarChart from "../components/BarChart";
 
 export default async function StatsPage() {
   const apiKey = await getApiKey();
   const { data: dataMapContent } = await fetchHeatMap(apiKey);
 
   const mapFormatedContent = dataMapContent.map.replaceAll(/[+']/g, "");
+  const { data: categories } = await fetchCategories(apiKey);
+
+  const { data: dataPointsComparative } = await fetchPointsComparative(apiKey);
+  const { data: dataSynergiesComparative } = await fetchSynergiesComparative(
+    apiKey
+  );
 
   return (
     <div>
@@ -53,6 +68,96 @@ export default async function StatsPage() {
                   <HeaderMap content={mapFormatedContent} />
                 </div>
               </div>
+            </section>
+
+            <section className="grid gap-y-6">
+              <Suspense fallback={<p>Cargando...</p>}>
+                <BarChart
+                  dataChart={dataPointsComparative.data}
+                  titleChart={dataPointsComparative.title}
+                  xAxisTitle={dataPointsComparative["x-axis"]}
+                  yAxisTitle={dataPointsComparative["y-axis"]}
+                >
+                  <div className="mb-5 text-sm sm:text-base">
+                    <p className="font-medium">
+                      Total puntos todos los grupos ÷ Número de grupos
+                    </p>
+                    <p>Que muestra:</p>
+                    <ul className="mt-2 mb-1 list-disc list-inside">
+                      <li>Promedios altos: Categorías ofensivas/dominantes</li>
+                      <li>
+                        Promedios bajos: Categorías defensivas/equilibradas
+                      </li>
+                      <li>
+                        Promedios similares: Mismo ritmo de juego en todas las
+                        categorías
+                      </li>
+                    </ul>
+                    <p>Cuando son muy similares:</p>
+                    <ul className="mt-2 mb-1 list-disc list-inside">
+                      <li>El torneo mantiene equilibrio entre categorías</li>
+                      <li>La edad/tipo no afecta la productividad</li>
+                      <li>
+                        Experiencia de juego consistente en todos los grupos
+                      </li>
+                    </ul>
+                    <span className="mt-2 inline-block italic font-medium py-1.5 px-2 text-xs bg-primary text-white">
+                      Pasa el mouse o da click en las barras para ver más
+                      detalles de cada registro
+                    </span>
+                  </div>
+                </BarChart>
+              </Suspense>
+              <Suspense fallback={<p>Cargando...</p>}>
+                <BarChart
+                  dataChart={dataSynergiesComparative.data}
+                  titleChart={dataSynergiesComparative.title}
+                  xAxisTitle={dataSynergiesComparative["x-axis"]}
+                  yAxisTitle={dataSynergiesComparative["y-axis"]}
+                >
+                  <div className="mb-5 text-sm sm:text-base">
+                    <p className="font-medium">
+                      Muestra el promedio de sinergia entre ambas categorías:
+                    </p>
+                    <ul className="mt-2 mb-1 list-disc list-inside">
+                      <li>Libre: Sin restricción de edad.</li>
+                      <li>50 y más: Jugadores de 50 años o más.</li>
+                    </ul>
+                    <p>Interpretación:</p>
+                    <ul className="mt-2 mb-1 list-disc list-inside">
+                      <li>
+                        Mayor sinergia en Libre: Posible mejor coordinación en
+                        equipos jóvenes/mixtos.
+                      </li>
+                      <li>
+                        Mayor sinergia en 50 y más: La experiencia compensa la
+                        física.
+                      </li>
+                      <li>
+                        Valores similares: Mismo nivel de trabajo en equipo.
+                      </li>
+                    </ul>
+                    <span className="mt-2 inline-block italic font-medium py-1.5 px-2 text-xs bg-primary text-white">
+                      Pasa el mouse o da click en las barras para ver más
+                      detalles de cada registro
+                    </span>
+                  </div>
+                </BarChart>
+              </Suspense>
+            </section>
+
+            <section className="mt-20 flex justify-center items-center gap-4 md:gap-8">
+              {categories.map((category: Category) => {
+                return (
+                  <Link
+                    key={category.id}
+                    href={`/estadisticas/${category.id}`}
+                    className="flex flex-col items-center gap-y-1.5 px-4 py-2 border bg-primary text-white font-bold hover:opacity-80 transition-colors"
+                  >
+                    Ver Estadisticas Categoria {category.description}
+                  </Link>
+                );
+              })}
             </section>
           </div>
         </div>
