@@ -374,7 +374,7 @@ def plotly_plot_points_compare(diccionario):
 #Function to get the analysis
 def get_analysys():
     analysis = """
-    ##Análisis de sentimientos de la gran final del Torneo de las fresas
+    ## Análisis de sentimientos de la gran final del Torneo de las fresas
 
     **1. Resultados del Análisis de Sentimientos:**
 
