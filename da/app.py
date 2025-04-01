@@ -6,7 +6,8 @@ from utils.features import (
     plotly_plot_points,
     plotly_plot_sinergy,
     plotly_plot_sinergy_compare,
-    plotly_plot_points_compare
+    plotly_plot_points_compare,
+    get_analysys
 )
 
 from flask import Flask, request, jsonify, render_template
@@ -178,7 +179,10 @@ def sinergy(cathegory_id):
             df_s = df_s[['team', 'points_scored', 'points_received']].copy()
             df_s['sinergy'] = (((df_s['points_scored'] - df_s['points_received']+3) / 30) * 100).round(2)
             df_s["sinergy"] = df_s['sinergy'].apply(lambda x: x+0.1 if x == 0 else x)
-            df_s['team'] = df_s['team'].apply(lambda x: '-'.join(x.strip('[]').split(', ')))
+            df_s['team'] = df_s['team'].apply(lambda x: '/'.join(
+            name.strip().split()[0] 
+            for name in x.strip('[]').split(', ')
+            ))
             plot_json = plotly_plot_sinergy(df_s)
             prepare =  jsonify({"data": plot_json["data"], "x-axis":"Parejas", "y-axis":"Sinergia", "title":"Sinergia de los equipos de la categoria 50 y más"})
             return prepare,200
@@ -190,7 +194,10 @@ def sinergy(cathegory_id):
             df_o = df_o[['team', 'points_scored', 'points_received']].copy()
             df_o['sinergy'] = (((df_o['points_scored'] - df_o['points_received']+3) / 30) * 100).round(2)
             df_o["sinergy"] = df_o['sinergy'].apply(lambda x: x+0.1 if x == 0 else x)
-            df_o['team'] = df_o['team'].apply(lambda x: '-'.join(x.strip('[]').split(', ')))
+            df_o['team'] = df_o['team'].apply(lambda x: '/'.join(
+            name.strip().split()[0] 
+            for name in x.strip('[]').split(', ')
+            ))
             plot_json = plotly_plot_sinergy(df_o)
             prepare =  jsonify({"data": plot_json["data"], "x-axis":"Parejas", "y-axis":"Sinergia", "title":"Sinergia de los equipos de la categoria Libre"})
             return prepare,200
@@ -248,6 +255,15 @@ def points_compare():
         
     except FileNotFoundError:
         return jsonify({"error": "Archivo no encontrado"}), 404
+
+@app.route('/feelings', methods=['GET'])
+def feelings():
+    try:
+        feelings = get_analysys()
+        return jsonify({"analysis": feelings}), 200
+    except Exception as e:
+        print(str(e))
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
     app.run(port=3000, debug = True)

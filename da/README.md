@@ -20,6 +20,7 @@ API construida con Flask que provee varios endpoints para generar perfiles de ju
     - [GET `/sinergy/<cathegory_id>`](#get-sinergycathegory_id)
     - [GET `/sinergy_compare`](#get-sinergy_compare)
     - [GET `/points_compare`](#get-points_compare)
+    - [GET `/feelings`](#get-feelings)
   - [Manejo de Errores](#manejo-de-errores)
   - [Ejecución](#ejecución)
   - [Notas Adicionales](#notas-adicionales)
@@ -155,6 +156,24 @@ curl -X GET http://localhost:3000/sinergy_compare
 - **Descripción:** Genera una comparativa de puntos entre categorías.
 - **Método:** `GET`
 - **Salida:** Respuesta JSON con datos del gráfico.
+
+### GET `/feelings`
+- **Descripción:** Obtiene un análisis en formato markdown.
+- **Método:** `GET`
+- **Salida:** Respuesta JSON con el análisis textual en formato markdown.
+
+**Ejemplo de uso:**
+```sh
+curl -X GET http://localhost:3000/feelings
+```
+
+**Ejemplo de respuesta:**
+```json
+{
+  "analysis": "# Análisis de Sentimientos\n\nEste es un ejemplo de texto en markdown con insights sobre los datos.\n\n- Punto 1: Observación relevante.\n- Punto 2: Otra observación importante."
+}
+```
+
 
 **Ejemplo de uso:**
 ```sh
