@@ -6,7 +6,8 @@ from utils.features import (
     plotly_plot_points,
     plotly_plot_sinergy,
     plotly_plot_sinergy_compare,
-    plotly_plot_points_compare
+    plotly_plot_points_compare,
+    get_analysys
 )
 
 from flask import Flask, request, jsonify, render_template
@@ -254,6 +255,15 @@ def points_compare():
         
     except FileNotFoundError:
         return jsonify({"error": "Archivo no encontrado"}), 404
+
+@app.route('/feelings', methods=['GET'])
+def feelings():
+    try:
+        feelings = get_analysys()
+        return jsonify({"analysis": feelings}), 200
+    except Exception as e:
+        print(str(e))
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
     app.run(port=3000, debug = True)
