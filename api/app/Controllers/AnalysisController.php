@@ -253,4 +253,22 @@ class AnalysisController extends BaseController
 
         $this->respond($response->body ?? null, 'Information about the group points');
     }
+
+    /**
+     * Obtiene el análisis del partido final del torneo.
+     */
+    public function feelings(): void
+    {
+        // Construye la url de la petición.
+        $url = sprintf('%s/feelings', $this->getUrl());
+
+        try {
+            // Realiza la petición.
+            $response = Request::get($url)->expectsJson()->send();
+        } catch (ConnectionErrorException $e) {
+            $this->respondServiceUnavailable($e->getMessage());
+        }
+
+        $this->respond($response->body ?? null, 'Information about the feelings of the final');
+    }
 }
