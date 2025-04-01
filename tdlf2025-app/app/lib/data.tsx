@@ -1102,3 +1102,26 @@ export async function fetchSynergiesComparative(apiKey: string) {
     throw error;
   }
 }
+
+export async function fetchEmotions(apiKey: string) {
+  const url = `${URL_API}/analysis/feelings`;
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": apiKey,
+      },
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        errorData?.description || "Error al obtener las emociones"
+      );
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}

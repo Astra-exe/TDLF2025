@@ -1,18 +1,21 @@
 import Image from "next/image";
 import Container from "../Container";
+import Link from "next/link";
 
 export default function Footer() {
   return (
     <footer className="py-10">
       <Container className="flex flex-col gap-y-5 md:flex-row md:justify-between items-center">
         <div className="flex gap-x-3.5 items-center">
-          <Image
-            src={"/logo.png"}
-            width={684}
-            height={684}
-            alt="Logo TDLF-2025"
-            className="max-w-[80px]"
-          />
+          <Link href={"/"}>
+            <Image
+              src={"/logo.png"}
+              width={684}
+              height={684}
+              alt="Logo TDLF-2025"
+              className="max-w-[80px]"
+            />
+          </Link>
           <div>
             <h4 className="text-base sm:text-lg font-bold">TDLF-2025</h4>
             <span className="text-sm xs:text-base">23 de Marzo 2025</span>
