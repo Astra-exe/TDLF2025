@@ -101,11 +101,11 @@ O Instala Docker para correr los servicios de php y python:
 
 > [!NOTE]
 > Asegurate que los servicios esten corriendo en su puerto especificado y si hay problemas cambia el servicio de puerto.
+> Puedes crear un usuario con algún password para poder ingresarlo desde la base de datos o desde algún seeder en el backend
+> Considera preprocesar en los diferentes Jupiter Notebooks del directorio `/da/notebooks`
 
 1. Inicia la aplicacion de NextJs en local, por defecto esta en el puerto 3000. Visita `http://localhost:3000/` para ver la landing del evento:
 2. Visita la ruta `http://localhost:3000/login` para loguearte.
-   > [!NOTE]
-   > Puedes crear un usuario con algún password para poder ingresarlo desde la base de datos o desde algún seeder en el backend
 3. En el home dashboard podras ver algunos datos generales del torneo, como el numero de participantes, parejas, grupos, categorias, etc del torneo.
 4. Visita la ruta `http://localhost:3000/dashboard/inscripcion` para crear nuevos juadores del torneo.
 5. Puedes consultar el perfil de cada uno de los jugadores con algunos consejos para la competencia dando clic en sus nombres.
@@ -116,8 +116,6 @@ O Instala Docker para correr los servicios de php y python:
 10. Una vez creados los partidos y grupos, puedes ver la tabla de parejas en `http://localhost:3000/parejas`
 11. De igual forma puedes ver los partidos de cada grupo `http://localhost:3000/grupos/idCategory/idGroup` y la tabla de clasificación. Esta tabla cambia conforme se den los partidos.
 12. Cuando el torneo o los datos de los partidos esten capturados se podran ver las estadisticas generales del evento en `http://localhost:3000/estadisticas`
-    > [!NOTE]
-    > Considera preprocesar en los diferentes Jupiter Notebooks del directorio `/da/notebooks`
 13. Podras visitar estadisticas especificas de cada categoria como puntos hechos vs puntos recibidos, la sinergia de las parejas y la paridad de grupos desde `http://localhost:3000/estadisticas/idCategory`
 14. De igual forma visita `http://localhost:3000/emociones` para ver el analisis general de sentimientos realizado con machine learning.
 
