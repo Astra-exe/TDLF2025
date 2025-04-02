@@ -41,6 +41,8 @@ export default function BarChart({
         });
         const config = {
           responsive: true,
+          scrollZoom: true,
+          displayModeBar: false,
           transition: { duration: 500, easing: "cubic-in-out" },
         };
 
@@ -53,7 +55,7 @@ export default function BarChart({
   }, [dataChart, titleChart, xAxisTitle, yAxisTitle]);
 
   return (
-    <article className="rounded-2xl bg-[#09090b] p-3 xs:p-6">
+    <article className="rounded-2xl bg-[#09090b] p-4 xs:p-6 border border-gray-600">
       <h3 className="text-center xs:text-start font-bold text-2xl sm:text-3xl mb-4">
         {titleChart}
       </h3>

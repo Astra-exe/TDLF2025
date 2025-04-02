@@ -29,7 +29,7 @@ export default async function StatsPage() {
   return (
     <div>
       <main className="mb-10 grid-pattern-background w-full relative overflow-hidden bg-gradient-to-b from-primary/30">
-        <div className="relative z-10 w-[90%] mx-auto flex h-full flex-col py-14 px-8 justify-center">
+        <div className="relative z-10 w-[95%] xs:w-[90%] mx-auto flex h-full flex-col py-14 px-8 justify-center">
           <div className="relative mb-12 grid gap-y-3 text-center md:text-left">
             <h1 className="font-nosifer font-bold text-2xl sm:text-3xl">
               Torneo De Las Fresas
@@ -70,7 +70,7 @@ export default async function StatsPage() {
               </div>
             </section>
 
-            <section className="grid gap-y-6">
+            <section className="grid gap-y-10">
               <Suspense fallback={<p>Cargando...</p>}>
                 <BarChart
                   dataChart={dataPointsComparative.data}
@@ -146,13 +146,13 @@ export default async function StatsPage() {
               </Suspense>
             </section>
 
-            <section className="mt-20 flex justify-center items-center gap-4 md:gap-8">
+            <section className="mt-20 flex flex-col xs:flex-row justify-center items-center gap-4 md:gap-8">
               {categories.map((category: Category) => {
                 return (
                   <Link
                     key={category.id}
                     href={`/estadisticas/${category.id}`}
-                    className="flex flex-col items-center gap-y-1.5 px-4 py-2 border bg-primary text-white font-bold hover:opacity-80 transition-colors"
+                    className="inline-block w-full sm:w-auto text-center text-sm xs:text-base gap-y-1.5 px-4 py-2 border bg-primary text-white font-bold hover:opacity-80 transition-colors"
                   >
                     Ver Estadisticas Categoria {category.description}
                   </Link>

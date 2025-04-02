@@ -76,7 +76,7 @@ export default async function StatsCategoryPage(props: {
             </span>
           </div>
           <div>
-            <h2 className="text-4xl xs:text-5xl leading-14 md:leading-16 tracking-wider text-center mb-10">
+            <h2 className="text-3xl xs:text-4xl md:text-5xl leading-12 md:leading-16 tracking-wider text-center mb-10">
               <strong>
                 Estadisticas Categoria{" "}
                 <span className="relative px-2 z-10 before:content-[''] before:absolute before:w-[calc(100%_+_0.25em)] before:h-full before:bg-gradient-to-r before:from-primary before:to-[#810B31] before:-rotate-2 before:-left-[0.125em] before:top-0 before:-z-10">

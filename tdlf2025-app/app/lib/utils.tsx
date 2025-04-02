@@ -46,6 +46,10 @@ export function getPlotlyLayoutChart({
       title: { text: `${xAxisTitle}` },
       showgrid: true,
       gridcolor: "rgba(255, 255, 255, 0.1)",
+      tickfont: {
+        size: window.innerWidth < 768 ? 10 : 12, // Adjust this value for smaller text
+        color: "white",
+      },
     },
     yaxis: {
       title: { text: `${yAxisTitle}` },
@@ -69,6 +73,13 @@ export function getPlotlyLayoutChart({
     ],
     plot_bgcolor: "rgba(36, 17, 17, 0.8)",
     paper_bgcolor: "#09090b",
+    margin: {
+      l: window.innerWidth < 768 ? 30 : 50, // Smaller margin for mobile
+      r: window.innerWidth < 768 ? 10 : 50,
+      // t: window.innerWidth < 768 ? 30 : 50,
+      b: window.innerWidth < 768 ? 50 : 70,
+    },
+    height: window.innerWidth < 768 ? window.innerHeight * 0.6 : 450,
   };
 
   return layout;
