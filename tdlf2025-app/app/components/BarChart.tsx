@@ -42,7 +42,7 @@ export default function BarChart({
         const config = {
           responsive: true,
           scrollZoom: true,
-          displayModeBar: false,
+          // displayModeBar: false,
           transition: { duration: 500, easing: "cubic-in-out" },
         };
 
