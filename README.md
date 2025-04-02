@@ -34,7 +34,7 @@
 
 ## Sobre el Proyecto
 
-El Torneo de las Fresas 2025 es una plataforma diseñada para facilitar la gestión del evento deportivo, asegurando que todo funcione sin problemas desde el registro y gestion de participantes, la creacion de grupos y partidos, hasta la finalización del torneo. Utiliza algoritmos avanzados para analizar datos y proporcionar estadísticas de rendimiento una vez concluido el evento.
+El Torneo de las Fresas 2025 es una plataforma diseñada para facilitar la gestión del evento deportivo, asegurando que todo funcione sin problemas desde el registro y gestión de participantes, la creación de grupos y partidos, hasta la finalización del torneo. Utiliza algoritmos avanzados para analizar datos y proporcionar estadísticas de rendimiento una vez concluido el evento.
 
 ## Construido con
 
@@ -73,13 +73,13 @@ Asegúrate de tener PHP, Node.js y Python instalados en tu dispositivo local.
 ### Instalación
 
 1. Clona el repositorio `git clone https://github.com/Astra-exe/TDLF2025.git`
-2. Muevete al directorio `cd TDLF2025`
-3. Muevete al directorio `cd da`
+2. Muévete al directorio `cd TDLF2025`
+3. Muévete al directorio `cd da`
 4. Instala los paquetes de Python `pip install -r requirements.txt`
-5. Muevete al directorio `cd api`
+5. Muévete al directorio `cd api`
 6. Instala php, sus paquetes necesarios y la base de datos ya con migraciones para la aplicación `composer install`
-7. Muevete al directorio `tdlf2025-app`
-8. Para la aplicacion de NextJs, instala los paquetes de Node.js `pnpm install` o `npm install`
+7. Muévete al directorio `tdlf2025-app`
+8. Para la aplicación de NextJs, instala los paquetes de Node.js `pnpm install` o `npm install`
 9. Ejecuta la aplicación `pnpm run dev` o `npm run dev`
 
 O Instala Docker para correr los servicios de php y python:
@@ -90,7 +90,7 @@ O Instala Docker para correr los servicios de php y python:
 2. Corre el contenedor de python con `docker run -d -p 8000:80 --name tdlf-data tdlf-python`
 3. Construye el contenedor de php en el directorio `api` con el comando `docker build -t TDLF2025/api -f Dockerfile.dev ./`
 4. Corre el contenedor de php con `docker run --name TDLF2025-api --env-file .env -p 8080:80 TDLF2025/api`
-5. Para la aplicacion de NextJs, instala los paquetes de Node.js `pnpm install` o `npm install`
+5. Para la aplicación de NextJs, instala los paquetes de Node.js `pnpm install` o `npm install`
 6. Ejecuta la aplicación `pnpm run dev` o `npm run dev`
 
 <p align="right">(<a href="#readme-top">volver arriba</a>)</p>
@@ -100,8 +100,8 @@ O Instala Docker para correr los servicios de php y python:
 ### Pasos
 
 > [!NOTE]
-> Asegurate que los servicios esten corriendo en su puerto especificado y si hay problemas cambia el servicio de puerto.
-> Puedes crear un usuario con algún password para poder ingresarlo desde la base de datos o desde algún seeder en el backend
+> Asegúrate que los servicios estén corriendo en su puerto especificado y si hay problemas cambia el puerto del servicio.
+> Puedes crear un usuario con algún password para poder ingresarlo desde la base de datos o desde algún seeder en el backend.
 > Considera preprocesar en los diferentes Jupiter Notebooks del directorio `/da/notebooks`
 
 1. Inicia la aplicacion de NextJs en local, por defecto esta en el puerto 3000. Visita `http://localhost:3000/` para ver la landing del evento:
@@ -110,9 +110,9 @@ O Instala Docker para correr los servicios de php y python:
    ![landing3](https://github.com/user-attachments/assets/3ec10eeb-49a0-4453-bb1d-fa88a126b102)
 2. Visita la ruta `http://localhost:3000/login` para loguearte.
    ![login](https://github.com/user-attachments/assets/49773e39-8f79-4291-9050-14f442597398)
-3. En el home dashboard podras ver algunos datos generales del torneo, como el numero de participantes, parejas, grupos, categorias, etc del torneo.
+3. En el home dashboard podrás ver algunos datos generales del torneo, como el numero de participantes, parejas, grupos, categorías, etc del torneo.
    ![dashboard](https://github.com/user-attachments/assets/0bf9d90b-7601-4693-822a-758d554313f8)
-4. Visita la ruta `http://localhost:3000/dashboard/inscripcion` para crear nuevos juadores del torneo.
+4. Visita la ruta `http://localhost:3000/dashboard/inscripcion` para crear nuevos jugadores del torneo.
    ![inscripcion](https://github.com/user-attachments/assets/b62a4a15-ea14-4cb5-9b55-f34d2458e1f5)
    ![players](https://github.com/user-attachments/assets/8b334341-5df8-4ec8-895f-f46bcb816c2e)
 5. Puedes consultar el perfil de cada uno de los jugadores con algunos consejos para la competencia dando clic en sus nombres.
@@ -120,12 +120,12 @@ O Instala Docker para correr los servicios de php y python:
 6. Visita la ruta `http://localhost:3000/dashboard/parejas` para visualizar las parejas creadas o crear alguna nueva de los jugadores previamente inscritos.
    ![pairs](https://github.com/user-attachments/assets/84f5f89f-a6e3-4ed7-b607-795a2faca1da)
    ![create-pairs](https://github.com/user-attachments/assets/650ba25b-62ad-42dd-8d4a-d045ef8625fd)
-7. Una vez lista la tabla de parejas visita la ruta `http://localhost:3000/dashboard/grupos` para crear de manera aleatoria los grupos a los que perteneceran cada pareja y los partidos a llevarse a cabo en cada categoria.
+7. Una vez lista la tabla de parejas visita la ruta `http://localhost:3000/dashboard/grupos` para crear de manera aleatoria los grupos a los que pertenecerán cada pareja y los partidos a llevarse a cabo en cada categoría.
    ![groups](https://github.com/user-attachments/assets/30e3d80b-25f9-4cbe-a9f8-5f434313ad35)
-8. Dentro de esa misma ruta `http://localhost:3000/dashboard/grupos` podras acceder a los grupos de cada categoria para verlos.
+8. Dentro de esa misma ruta `http://localhost:3000/dashboard/grupos` podrás acceder a los grupos de cada categoría para verlos.
    ![group-sebior](https://github.com/user-attachments/assets/03d2e2e1-c5f7-4bc1-8604-cc888828c3a2)
    ![group-open](https://github.com/user-attachments/assets/e3413416-af57-439c-8f19-ab193f29e96d)
-9. Visita `http://localhost:3000/dashboard/partidos` podras ver la tabla de partidos de cada categoria y modificar el score o las parejas del partido.
+9. Visita `http://localhost:3000/dashboard/partidos` podrás ver la tabla de partidos de cada categoría y modificar el score o las parejas del partido.
    ![matches](https://github.com/user-attachments/assets/71e87f5e-bc27-4bc3-90a5-15f761fccf69)
    ![match-update](https://github.com/user-attachments/assets/e84bf55f-c362-4405-b30d-77aed38422cb)
    ![match-delete](https://github.com/user-attachments/assets/daa064d8-e41f-4112-baec-5d185b7a6e03)
@@ -133,11 +133,11 @@ O Instala Docker para correr los servicios de php y python:
 11. De igual forma puedes ver los partidos de cada grupo `http://localhost:3000/grupos/idCategory/idGroup` y la tabla de clasificación. Esta tabla cambia conforme se den los partidos.
     ![matches-group](https://github.com/user-attachments/assets/be0da39a-5078-4c56-a09e-9502882d0c26)
     ![matches-classify](https://github.com/user-attachments/assets/51652a42-8de4-48b0-83ea-d2f69a8b12e2)
-12. Cuando el torneo o los datos de los partidos esten capturados se podran ver las estadisticas generales del evento en `http://localhost:3000/estadisticas`
+12. Cuando el torneo o los datos de los partidos estén capturados se podrán ver las estadísticas generales del evento en `http://localhost:3000/estadisticas`
     ![map](https://github.com/user-attachments/assets/ec56856e-0705-4802-b546-67b58ad9d69c)
-13. Podras visitar estadisticas especificas de cada categoria como puntos hechos vs puntos recibidos, la sinergia de las parejas y la paridad de grupos desde `http://localhost:3000/estadisticas/idCategory`
+13. Podrás visitar estadísticas especificas de cada categoría como puntos hechos vs puntos recibidos, la sinergia de las parejas y la paridad de grupos desde `http://localhost:3000/estadisticas/idCategory`
     ![stats](https://github.com/user-attachments/assets/69d323e2-207a-4e67-b009-fd2f54a35bd0)
-14. De igual forma visita `http://localhost:3000/emociones` para ver el analisis general de sentimientos realizado con machine learning.
+14. De igual forma visita `http://localhost:3000/emociones` para ver el análisis general de sentimientos realizado con machine learning.
     ![emotions](https://github.com/user-attachments/assets/45916a8f-acdf-4b56-b6fa-b854bcca8ec5)
 
 ### Pruebas
@@ -151,7 +151,7 @@ O Instala Docker para correr los servicios de php y python:
 
 - Asegúrate de que tus datos de entrada estén correctamente formateados.
 - El sistema puede requerir ajustes dependiendo de los datos específicos que utilices.
-- Para las estadisticas post-torneo cabe recalcar que fueron procesadas fuera del servicio de python en un Jupyter Notebook en la nube para evitar sobrecargar el servidor usado.
+- Para las estadísticas post-torneo cabe recalcar que fueron procesadas fuera del servicio de python en un Jupyter Notebook en la nube para evitar sobrecargar el servidor usado.
 - Por el momento el sistema solo abarca hasta la fase de grupos, sin contar la fase de eliminación directa
 
 <p align="right">(<a href="#readme-top">volver arriba</a>)</p>
@@ -172,7 +172,7 @@ El Torneo de las Fresas 2025 contó con una afluencia constante de espectadores 
 
 Muchos de estos visitantes se acercaron a las áreas donde se mostraba la clasificación de los grupos, aprovechando la funcionalidad del sistema para seguir el progreso de sus favoritos en tiempo real. Esta característica no solo facilitó la experiencia de los espectadores, sino que también permitió una mayor interacción y compromiso con el evento, asegurando que todos estuvieran informados sobre el desarrollo de los partidos.
 
-### Adversidades y obstaculos
+### Adversidades y obstáculos
 
 <!-- problemas y soluciones -->
 
@@ -186,7 +186,7 @@ El desarrollo del sistema para el Torneo de las Fresas 2025 presentó varios des
 
 ### Criticas y areas de mejora
 
-<!-- comentarios recibidos y autocritica -->
+<!-- comentarios recibidos y autocrítica -->
 
 <div align="center">
   <h3 align="center">¡Gracias por visitar! 🏆</h3>
