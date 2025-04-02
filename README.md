@@ -187,6 +187,16 @@ El desarrollo del sistema para el Torneo de las Fresas 2025 presentó varios des
 ### Criticas y areas de mejora
 
 <!-- comentarios recibidos y autocrítica -->
+El Torneo de las Fresas 2025 fue un éxito rotundo, pero siempre hay espacio para la mejora y la innovación. A continuación, se presentan algunas áreas clave que podrían optimizarse para futuras ediciones del evento.
+
+#### Horizontes de Mejora: Innovaciones Futuras en la Ciencia de Datos
+- Modelos de Machine Learning Avanzados: Implementar algoritmos más sofisticados para predicciones precisas y detalladas sobre el rendimiento de jugadores y equipos.
+
+- Estadísticas Completas y Detalladas: Ampliar el alcance de las estadísticas recopiladas para proporcionar una visión más completa del evento.
+
+- Generación Dinámica de Perfiles de Usuario: Crear perfiles personalizados que se adapten a las preferencias y comportamientos individuales, mejorando la experiencia del usuario.
+
+- Procesamiento de Datos Eficiente: Optimizar los procesos de recopilación y análisis de datos para obtener resultados en tiempo real y mejorar la capacidad de respuesta del sistema.
 
 <div align="center">
   <h3 align="center">¡Gracias por visitar! 🏆</h3>
