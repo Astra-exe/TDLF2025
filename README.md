@@ -161,8 +161,12 @@ O Instala Docker para correr los servicios de php y python:
 <!-- intro del evento -->
 
 El Torneo de las Fresas 2025, celebrado en la vibrante ciudad de Irapuato, Guanajuato, México, el 23 de marzo de 2025, se consolidó como el evento de frontenis más grande y destacado del Bajío. Este torneo no solo atrajo a participantes y espectadores de toda la región central de México, sino que también se convirtió en un referente de organización y eficiencia gracias al sistema desarrollado específicamente para la ocasión.
+| ![Image](https://github.com/user-attachments/assets/fb89eb0e-370d-4d93-986f-541ae7c84fbd) | ![Image](https://github.com/user-attachments/assets/966abcd8-ee90-440d-bdf9-75254ee506f1) |
+|------------------------|-----------------------|
 
 Con todas las amenidades necesarias para los jugadores, el evento se desarrolló sin contratiempos, permitiendo una experiencia fluida y agradable para todos los asistentes. El sistema implementado fue el pilar fundamental del torneo, facilitando la organización y asegurando que cada detalle se manejara con precisión y rapidez. Este evento no solo celebró el deporte, sino que también demostró cómo la tecnología puede transformar y mejorar la gestión de eventos deportivos.
+![Image](https://github.com/user-attachments/assets/fb0c91e6-ec14-4d88-9780-f44fa7eb7800)
+![Image](https://github.com/user-attachments/assets/aa3c2dc3-d585-46a3-9865-128cd3bd08c7)
 
 ### Alcance
 
@@ -170,7 +174,16 @@ Con todas las amenidades necesarias para los jugadores, el evento se desarrolló
 
 El Torneo de las Fresas 2025 contó con una afluencia constante de espectadores a lo largo del día, sin registrar un "pico máximo" específico. **Se estima que más de 500 personas visitaron el evento** para apoyar a familiares y amigos, creando un ambiente vibrante y lleno de energía.
 
-Muchos de estos visitantes se acercaron a las áreas donde se mostraba la clasificación de los grupos, aprovechando la funcionalidad del sistema para seguir el progreso de sus favoritos en tiempo real. Esta característica no solo facilitó la experiencia de los espectadores, sino que también permitió una mayor interacción y compromiso con el evento, asegurando que todos estuvieran informados sobre el desarrollo de los partidos.
+| ![Image](https://github.com/user-attachments/assets/0f501602-9fda-400d-ba1a-66a8cd8f0d4d) | ![Image](https://github.com/user-attachments/assets/47faef67-63e9-442e-8a95-865f91c4018e) |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| ![Image](https://github.com/user-attachments/assets/54c9f28b-19ae-4b1e-a9c0-fcc09c7d865e) | ![Image](https://github.com/user-attachments/assets/5d724b30-2097-4e67-a8f3-fdce5e04d08e) |
+
+Muchos de estos visitantes se acercaron a las áreas donde se mostraba la clasificación de los grupos o visitando la pagina donde tambien podian verlo, aprovechando la funcionalidad del sistema para seguir el progreso de sus favoritos en tiempo real. Esta característica no solo facilitó la experiencia de los espectadores, sino que también permitió una mayor interacción y compromiso con el evento, asegurando que todos estuvieran informados sobre el desarrollo de los partidos.
+
+| ![Image](https://github.com/user-attachments/assets/69ae9416-98d3-40e2-8a15-963db99d87bd) | ![Image](https://github.com/user-attachments/assets/c5816b99-da0f-47a2-a037-edb001732e96) |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+
+![Image](https://github.com/user-attachments/assets/860766e1-4ad3-427a-a705-27cb2ca450ba)
 
 ### Adversidades y obstáculos
 
@@ -184,12 +197,22 @@ El desarrollo del sistema para el Torneo de las Fresas 2025 presentó varios des
 
 2. La poca compatibilidad de los servicios de deploy con versiones superiores a Python 3.10+, lo que complicaba el funcionamiento correcto de las librerías debido a problemas de compatibilidad. Afortunadamente, Render permitió el despliegue en versiones recientes de Python. Sin embargo, antes de descubrir esta opción, ya se había realizado un downgrade de las librerías y versiones de Python y Flask para asegurar la compatibilidad. Esta medida preventiva garantizó que el sistema funcionara sin problemas en cualquier entorno de despliegue, proporcionando una solución robusta y adaptable.
 
+3. La tecnología de Server Components y su inestabilidad en ciertos modos, lo que puede resultar en errores y bugs inesperados. Sin experiencia previa, puede ser complicado identificar y solucionar estos problemas, ya que a menudo requieren workarounds específicos que no siempre están bien documentados. Pero gracias a la gran comunidad de NextJs y a los multiples blogs se pudieron resolver multiples errores de NextJs.
+
+4. El dificil mantenimeinto de la estructura que implica un proyecto un poco mas grande. Sin embargo se separó claramente los componentes de servidor y cliente, y se utilizo patrones de diseño como Suspense y Error Boundaries para mejorar la experiencia del usuario.
+
+5. Los problemas con el caché pueden causar que se muestren datos obsoletos en NextJs. Pero se configuró adecuadamente el caché, utilizando opciones como revalidate en getStaticProps o getServerSideProps, y asegurandose de que se están utilizando las últimas versiones de los paquetes relacionados con el caché.
+
+6. NextAuth.js facilita la autenticación, pero personalizar las sesiones para incluir información adicional del usuario puede ser complicado. Esto es crucial para aplicaciones que requieren control de acceso basado en roles o experiencias de usuario personalizadas. Pero se desarrolló una lógica de autorización buena que verifique los permisos del usuario en cada solicitud. Esto se logró mediante middleware o funciones de autorización integradas en las rutas protegidas.
+
 ### Criticas y areas de mejora
 
 <!-- comentarios recibidos y autocrítica -->
+
 El Torneo de las Fresas 2025 fue un éxito rotundo, pero siempre hay espacio para la mejora y la innovación. A continuación, se presentan algunas áreas clave que podrían optimizarse para futuras ediciones del evento.
 
 #### Horizontes de Mejora: Innovaciones Futuras en la Ciencia de Datos
+
 - Modelos de Machine Learning Avanzados: Implementar algoritmos más sofisticados para predicciones precisas y detalladas sobre el rendimiento de jugadores y equipos.
 
 - Estadísticas Completas y Detalladas: Ampliar el alcance de las estadísticas recopiladas para proporcionar una visión más completa del evento.
@@ -197,6 +220,10 @@ El Torneo de las Fresas 2025 fue un éxito rotundo, pero siempre hay espacio par
 - Generación Dinámica de Perfiles de Usuario: Crear perfiles personalizados que se adapten a las preferencias y comportamientos individuales, mejorando la experiencia del usuario.
 
 - Procesamiento de Datos Eficiente: Optimizar los procesos de recopilación y análisis de datos para obtener resultados en tiempo real y mejorar la capacidad de respuesta del sistema.
+
+- El uso de la URL como funte de la verdad y el estado: La URL como fuente de verdad es beneficioso para la navegación y el SEO, puede volverse complicado cuando se trata de aplicaciones complejas, pero una combinación adecuada de estado interno (mediante Context API o Zustand) y parámetros de URL, permite mantener una experiencia de usuario fluida mientras se aprovechan las ventajas del SEO y la navegación basada en URL.
+
+- El uso de custom hooks para mejorar la legibilidad del codigo: Si bien se usaron algunos custom hooks, se puede mejorara y agregar algunos otros que permitan la asbtraccion de logica y evitar repetir codigo en multiples instancias.
 
 <div align="center">
   <h3 align="center">¡Gracias por visitar! 🏆</h3>
