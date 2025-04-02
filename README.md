@@ -34,7 +34,7 @@
 
 ## Sobre el Proyecto
 
-El Torneo de las Fresas 2025 es una plataforma diseñada para facilitar la gestión del evento deportivo, asegurando que todo funcione sin problemas desde el registro y gestions de participantes, la creacion de grupos y partidos, hasta la finalización del torneo. Utiliza algoritmos avanzados para analizar datos y proporcionar estadísticas de rendimiento una vez concluido el evento.
+El Torneo de las Fresas 2025 es una plataforma diseñada para facilitar la gestión del evento deportivo, asegurando que todo funcione sin problemas desde el registro y gestion de participantes, la creacion de grupos y partidos, hasta la finalización del torneo. Utiliza algoritmos avanzados para analizar datos y proporcionar estadísticas de rendimiento una vez concluido el evento.
 
 ## Construido con
 
@@ -175,9 +175,11 @@ Muchos de estos visitantes se acercaron a las áreas donde se mostraba la clasif
 ### Adversidades y obstaculos
 
 <!-- problemas y soluciones -->
+
 El desarrollo del sistema para el Torneo de las Fresas 2025 presentó varios desafíos técnicos que requirieron soluciones innovadoras. A continuación, se detallan algunos de los principales obstáculos y cómo se superaron.
 
 #### Retos y Soluciones en la implementación de la Ciencia de Datos
+
 1. La falta de disponibilidad de una GPU en la nube para realizar grandes procesamientos de datos o utilizar modelos pesados de machine learning. Para mitigar este problema, se optó por procesar los datos localmente. Utilizando el entorno local, se realizaron los cálculos intensivos y luego se enviaron los datos ya procesados a través de la API Flask. Esta estrategia no solo evitó sobrecargar la API, sino que también eliminó errores de timeout y problemas de memoria en producción, asegurando un rendimiento eficiente y estable.
 
 2. La poca compatibilidad de los servicios de deploy con versiones superiores a Python 3.10+, lo que complicaba el funcionamiento correcto de las librerías debido a problemas de compatibilidad. Afortunadamente, Render permitió el despliegue en versiones recientes de Python. Sin embargo, antes de descubrir esta opción, ya se había realizado un downgrade de las librerías y versiones de Python y Flask para asegurar la compatibilidad. Esta medida preventiva garantizó que el sistema funcionara sin problemas en cualquier entorno de despliegue, proporcionando una solución robusta y adaptable.
