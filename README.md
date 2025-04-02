@@ -188,7 +188,7 @@ El desarrollo del sistema para el Torneo de las Fresas 2025 presentó varios des
 
 1. El reto de realizar consultas SQL estándar (ANSI) compatibles tanto con MySQL/MariaDB y PostgreSQL. Durante la etapa de desarrollo se optó por utilizar MariaDB el cual es un sistema gestor de bases de datos más flexible al momento de declarar consultas SQL. Por otro lado, PostgreSQL adopta características más restrictivas en la declaración de las consultas con un tipado altamente fuerte. La integración de soluciones de mapeo relacional de objetos (ORM) permiten abstraer las consultas SQL, facilitando su ejecución y asegurando la compatibilidad entre los diferentes gestores de bases de datos implementados en un proyecto.
 
-2. Encontrar un equilibrio entre la carga del servidor web y el servidor de la base de datos, implica decidir cómo distribuir los recursos entre ambos componentes. Reducir el número de peticiones HTTP realizadas por el cliente hacia un servicio se logra ejecutando un mayor número de consultas o formulando consultas más elaboradas, incrementando la carga sobre el sistema gestor de base de datos. Opuesto a ello, minimizar el número de consultas SQL ejecutadas obliga al cliente a realizar más peticiones HTTP, aumentando así la demanda de recursos del servicio de hosting o cloud. Diseñar y brindar los recursos necesarios en una API es punto clave para encontrar el balance.
+2. Encontrar un equilibrio entre la carga del servidor web y el servidor de la base de datos, implica decidir cómo distribuir los recursos entre ambos componentes. Reducir el número de peticiones HTTP realizadas por el cliente hacia un servicio se logra ejecutando un mayor número de consultas o formulando consultas más elaboradas, incrementando la carga sobre el sistema gestor de base de datos. Opuesto a ello, minimizar el número de consultas SQL ejecutadas obliga al cliente a realizar más peticiones HTTP, aumentando así la demanda de recursos del servicio de hosting o cloud. Diseñar y brindar los recursos necesarios en una API es punto clave para encontrar el balance: provee la información que realmente se necesita, limita y pagina grandes volúmenes de datos y evita el acceso a recursos innecesarios.
 
 ### Criticas y areas de mejora
 
@@ -196,6 +196,7 @@ El desarrollo del sistema para el Torneo de las Fresas 2025 presentó varios des
 El Torneo de las Fresas 2025 fue un éxito rotundo, pero siempre hay espacio para la mejora y la innovación. A continuación, se presentan algunas áreas clave que podrían optimizarse para futuras ediciones del evento.
 
 #### Horizontes de Mejora: Innovaciones Futuras en la Ciencia de Datos
+
 - Modelos de Machine Learning Avanzados: Implementar algoritmos más sofisticados para predicciones precisas y detalladas sobre el rendimiento de jugadores y equipos.
 
 - Estadísticas Completas y Detalladas: Ampliar el alcance de las estadísticas recopiladas para proporcionar una visión más completa del evento.
@@ -203,6 +204,12 @@ El Torneo de las Fresas 2025 fue un éxito rotundo, pero siempre hay espacio par
 - Generación Dinámica de Perfiles de Usuario: Crear perfiles personalizados que se adapten a las preferencias y comportamientos individuales, mejorando la experiencia del usuario.
 
 - Procesamiento de Datos Eficiente: Optimizar los procesos de recopilación y análisis de datos para obtener resultados en tiempo real y mejorar la capacidad de respuesta del sistema.
+
+#### No todo es perfecto en el lado oscuro
+
+* SEO: en el desarrollo backend, se ha estandarizado el uso de identificadores únicos (IDs) para acceder a recursos debido a su simplicidad y eficiencia. Sin embargo, ¿qué ocurre si el cliente que consume tu API prefiere utilizar URLs amigables en lugar de IDs?. Mapear tus endpoints a URLs amigables o soportar ambos formatos es una solución viable a considerar durante el diseño de tu aplicación.
+
+* Frameworks: herramientas más robustas como Laravel o CodeIgniter aceleran el desarrollo de aplicaciones web al ofrecer soluciones ya conocidas sin reinventar la rueda.
 
 <div align="center">
   <h3 align="center">¡Gracias por visitar! 🏆</h3>
