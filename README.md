@@ -184,6 +184,12 @@ El desarrollo del sistema para el Torneo de las Fresas 2025 presentó varios des
 
 2. La poca compatibilidad de los servicios de deploy con versiones superiores a Python 3.10+, lo que complicaba el funcionamiento correcto de las librerías debido a problemas de compatibilidad. Afortunadamente, Render permitió el despliegue en versiones recientes de Python. Sin embargo, antes de descubrir esta opción, ya se había realizado un downgrade de las librerías y versiones de Python y Flask para asegurar la compatibilidad. Esta medida preventiva garantizó que el sistema funcionara sin problemas en cualquier entorno de despliegue, proporcionando una solución robusta y adaptable.
 
+#### Desafíos del backend
+
+1. El reto de realizar consultas SQL estándar (ANSI) compatibles tanto con MySQL/MariaDB y PostgreSQL. Durante la etapa de desarrollo se optó por utilizar MariaDB el cual es un sistema gestor de bases de datos más flexible al momento de declarar consultas SQL. Por otro lado, PostgreSQL adopta características más restrictivas en la declaración de las consultas con un tipado altamente fuerte. La integración de soluciones de mapeo relacional de objetos (ORM) permiten abstraer las consultas SQL, facilitando su ejecución y asegurando la compatibilidad entre los diferentes gestores de bases de datos implementados en un proyecto.
+
+2. Encontrar un equilibrio entre la carga del servidor web y el servidor de la base de datos, implica decidir cómo distribuir los recursos entre ambos componentes. Reducir el número de peticiones HTTP realizadas por el cliente hacia un servicio se logra ejecutando un mayor número de consultas o formulando consultas más elaboradas, incrementando la carga sobre el sistema gestor de base de datos. Opuesto a ello, minimizar el número de consultas SQL ejecutadas obliga al cliente a realizar más peticiones HTTP, aumentando así la demanda de recursos del servicio de hosting o cloud. Diseñar y brindar los recursos necesarios en una API es punto clave para encontrar el balance.
+
 ### Criticas y areas de mejora
 
 <!-- comentarios recibidos y autocrítica -->
