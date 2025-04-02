@@ -197,13 +197,21 @@ El desarrollo del sistema para el Torneo de las Fresas 2025 presentó varios des
 
 2. La poca compatibilidad de los servicios de deploy con versiones superiores a Python 3.10+, lo que complicaba el funcionamiento correcto de las librerías debido a problemas de compatibilidad. Afortunadamente, Render permitió el despliegue en versiones recientes de Python. Sin embargo, antes de descubrir esta opción, ya se había realizado un downgrade de las librerías y versiones de Python y Flask para asegurar la compatibilidad. Esta medida preventiva garantizó que el sistema funcionara sin problemas en cualquier entorno de despliegue, proporcionando una solución robusta y adaptable.
 
-3. La tecnología de Server Components y su inestabilidad en ciertos modos, lo que puede resultar en errores y bugs inesperados. Sin experiencia previa, puede ser complicado identificar y solucionar estos problemas, ya que a menudo requieren workarounds específicos que no siempre están bien documentados. Pero gracias a la gran comunidad de NextJs y a los multiples blogs se pudieron resolver multiples errores de NextJs.
+#### Retos y Soluciones en la implementación del la aplicacion con NextJs:
 
-4. El dificil mantenimeinto de la estructura que implica un proyecto un poco mas grande. Sin embargo se separó claramente los componentes de servidor y cliente, y se utilizo patrones de diseño como Suspense y Error Boundaries para mejorar la experiencia del usuario.
+1. La tecnología de Server Components y su inestabilidad en ciertas implementaciones, lo que puede resultar en errores y bugs inesperados. Sin experiencia previa, puede ser complicado identificar y solucionar estos problemas, ya que a menudo requieren workarounds específicos que no siempre están bien documentados. Pero gracias a la gran comunidad de NextJs y a los multiples blogs se pudieron resolver multiples errores de NextJs.
 
-5. Los problemas con el caché pueden causar que se muestren datos obsoletos en NextJs. Pero se configuró adecuadamente el caché, utilizando opciones como revalidate en getStaticProps o getServerSideProps, y asegurandose de que se están utilizando las últimas versiones de los paquetes relacionados con el caché.
+2. El dificil mantenimeinto de la estructura que implica un proyecto un poco mas grande. Sin embargo se separó claramente los componentes de servidor y cliente, y se utilizo patrones de diseño como Suspense y Error Boundaries para mejorar la experiencia del usuario.
 
-6. NextAuth.js facilita la autenticación, pero personalizar las sesiones para incluir información adicional del usuario puede ser complicado. Esto es crucial para aplicaciones que requieren control de acceso basado en roles o experiencias de usuario personalizadas. Pero se desarrolló una lógica de autorización buena que verifique los permisos del usuario en cada solicitud. Esto se logró mediante middleware o funciones de autorización integradas en las rutas protegidas.
+3. Los problemas con el caché pueden causar que se muestren datos obsoletos en NextJs. Pero se configuró adecuadamente el caché, utilizando opciones como revalidate en getStaticProps o getServerSideProps, y asegurandose de que se están utilizando las últimas versiones de los paquetes relacionados con el caché.
+
+4. NextAuth.js facilita la autenticación, pero personalizar las sesiones para incluir información adicional del usuario puede ser complicado. Esto es crucial para aplicaciones que requieren control de acceso basado en roles o experiencias de usuario personalizadas. Pero se desarrolló una lógica de autorización buena que verifique los permisos del usuario en cada solicitud. Esto se logró mediante middleware o funciones de autorización integradas en las rutas protegidas.
+
+#### Desafíos del backend
+
+1. El reto de realizar consultas SQL estándar (ANSI) compatibles tanto con MySQL/MariaDB y PostgreSQL. Durante la etapa de desarrollo se optó por utilizar MariaDB el cual es un sistema gestor de bases de datos más flexible al momento de declarar consultas SQL. Por otro lado, PostgreSQL adopta características más restrictivas en la declaración de las consultas con un tipado altamente fuerte. La integración de soluciones de mapeo relacional de objetos (ORM) permiten abstraer las consultas SQL, facilitando su ejecución y asegurando la compatibilidad entre los diferentes gestores de bases de datos implementados en un proyecto.
+
+2. Encontrar un equilibrio entre la carga del servidor web y el servidor de la base de datos, implica decidir cómo distribuir los recursos entre ambos componentes. Reducir el número de peticiones HTTP realizadas por el cliente hacia un servicio se logra ejecutando un mayor número de consultas o formulando consultas más elaboradas, incrementando la carga sobre el sistema gestor de base de datos. Opuesto a ello, minimizar el número de consultas SQL ejecutadas obliga al cliente a realizar más peticiones HTTP, aumentando así la demanda de recursos del servicio de hosting o cloud. Diseñar y brindar los recursos necesarios en una API es punto clave para encontrar el balance: provee la información que realmente se necesita, limita y pagina grandes volúmenes de datos y evita el acceso a recursos innecesarios.
 
 ### Criticas y areas de mejora
 
@@ -221,9 +229,19 @@ El Torneo de las Fresas 2025 fue un éxito rotundo, pero siempre hay espacio par
 
 - Procesamiento de Datos Eficiente: Optimizar los procesos de recopilación y análisis de datos para obtener resultados en tiempo real y mejorar la capacidad de respuesta del sistema.
 
+#### Optimizando la Experiencia del Usuario: Mejorando la legibilidad del Código, uso del testing y equilibrando estado y URL en Next.js
+
 - El uso de la URL como funte de la verdad y el estado: La URL como fuente de verdad es beneficioso para la navegación y el SEO, puede volverse complicado cuando se trata de aplicaciones complejas, pero una combinación adecuada de estado interno (mediante Context API o Zustand) y parámetros de URL, permite mantener una experiencia de usuario fluida mientras se aprovechan las ventajas del SEO y la navegación basada en URL.
 
 - El uso de custom hooks para mejorar la legibilidad del codigo: Si bien se usaron algunos custom hooks, se puede mejorara y agregar algunos otros que permitan la asbtraccion de logica y evitar repetir codigo en multiples instancias.
+
+- Testing: La mejor via de comprobacion y mejora es sin duda el testing y podrian agregarse para asegurar el correcto funcionamiento antes del despliege desde tests unitarios hasta tests de integración.
+
+#### No todo es perfecto en el lado oscuro
+
+- SEO: en el desarrollo backend, se ha estandarizado el uso de identificadores únicos (IDs) para acceder a recursos debido a su simplicidad y eficiencia. Sin embargo, ¿qué ocurre si el cliente que consume tu API prefiere utilizar URLs amigables en lugar de IDs?. Mapear tus endpoints a URLs amigables o soportar ambos formatos es una solución viable a considerar durante el diseño de tu aplicación.
+
+- Frameworks: herramientas más robustas como Laravel o CodeIgniter aceleran el desarrollo de aplicaciones web al ofrecer soluciones ya conocidas sin reinventar la rueda.
 
 <div align="center">
   <h3 align="center">¡Gracias por visitar! 🏆</h3>
