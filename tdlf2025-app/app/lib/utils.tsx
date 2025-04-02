@@ -48,7 +48,7 @@ export function getPlotlyLayoutChart({
       showgrid: true,
       gridcolor: "rgba(255, 255, 255, 0.1)",
       tickfont: {
-        size: isMobile ? 10 : 12, // Adjust this value for smaller text
+        size: isMobile ? 9 : 12, // Adjust this value for smaller text
         color: "white",
       },
     },
