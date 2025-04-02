@@ -138,6 +138,9 @@ O Instala Docker para correr los servicios de php y python:
 ## Evento
 
 <!-- intro del evento -->
+El Torneo de las Fresas 2025, celebrado en la vibrante ciudad de Irapuato, Guanajuato, México, el 23 de marzo de 2025, se consolidó como el evento de frontenis más grande y destacado del Bajío. Este torneo no solo atrajo a participantes y espectadores de toda la región central de México, sino que también se convirtió en un referente de organización y eficiencia gracias al sistema desarrollado específicamente para la ocasión.
+
+Con todas las amenidades necesarias para los jugadores, el evento se desarrolló sin contratiempos, permitiendo una experiencia fluida y agradable para todos los asistentes. El sistema implementado fue el pilar fundamental del torneo, facilitando la organización y asegurando que cada detalle se manejara con precisión y rapidez. Este evento no solo celebró el deporte, sino que también demostró cómo la tecnología puede transformar y mejorar la gestión de eventos deportivos.
 
 ### Alcance
 
