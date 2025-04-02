@@ -145,6 +145,9 @@ Con todas las amenidades necesarias para los jugadores, el evento se desarrolló
 ### Alcance
 
 <!-- Aforo -->
+El Torneo de las Fresas 2025 contó con una afluencia constante de espectadores a lo largo del día, sin registrar un "pico máximo" específico. **Se estima que más de 500 personas visitaron el evento** para apoyar a familiares y amigos, creando un ambiente vibrante y lleno de energía.
+
+Muchos de estos visitantes se acercaron a las áreas donde se mostraba la clasificación de los grupos, aprovechando la funcionalidad del sistema para seguir el progreso de sus favoritos en tiempo real. Esta característica no solo facilitó la experiencia de los espectadores, sino que también permitió una mayor interacción y compromiso con el evento, asegurando que todos estuvieran informados sobre el desarrollo de los partidos.
 
 ### Adversidades y obstaculos
 
