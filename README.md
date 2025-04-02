@@ -77,7 +77,7 @@ Asegúrate de tener PHP, Node.js y Python instalados en tu dispositivo local.
 3. Muevete al directorio `cd da`
 4. Instala los paquetes de Python `pip install -r requirements.txt`
 5. Muevete al directorio `cd api`
-6. Instala php, sus paquetes necesarios y la base de datos ya con migraciones para la aplicación `composer`
+6. Instala php, sus paquetes necesarios y la base de datos ya con migraciones para la aplicación `composer install`
 7. Muevete al directorio `tdlf2025-app`
 8. Para la aplicacion de NextJs, instala los paquetes de Node.js `pnpm install` o `npm install`
 9. Ejecuta la aplicación `pnpm run dev` o `npm run dev`
@@ -105,19 +105,40 @@ O Instala Docker para correr los servicios de php y python:
 > Considera preprocesar en los diferentes Jupiter Notebooks del directorio `/da/notebooks`
 
 1. Inicia la aplicacion de NextJs en local, por defecto esta en el puerto 3000. Visita `http://localhost:3000/` para ver la landing del evento:
+   ![landing](https://github.com/user-attachments/assets/26b761f7-ac60-4267-aa8c-e5f29aba6a0b)
+   ![landing2](https://github.com/user-attachments/assets/1d943616-9243-4870-a06d-fbd3e822ef9f)
+   ![landing3](https://github.com/user-attachments/assets/3ec10eeb-49a0-4453-bb1d-fa88a126b102)
 2. Visita la ruta `http://localhost:3000/login` para loguearte.
+   ![login](https://github.com/user-attachments/assets/49773e39-8f79-4291-9050-14f442597398)
 3. En el home dashboard podras ver algunos datos generales del torneo, como el numero de participantes, parejas, grupos, categorias, etc del torneo.
+   ![dashboard](https://github.com/user-attachments/assets/0bf9d90b-7601-4693-822a-758d554313f8)
 4. Visita la ruta `http://localhost:3000/dashboard/inscripcion` para crear nuevos juadores del torneo.
+   ![inscripcion](https://github.com/user-attachments/assets/b62a4a15-ea14-4cb5-9b55-f34d2458e1f5)
+   ![players](https://github.com/user-attachments/assets/8b334341-5df8-4ec8-895f-f46bcb816c2e)
 5. Puedes consultar el perfil de cada uno de los jugadores con algunos consejos para la competencia dando clic en sus nombres.
+   ![profile](https://github.com/user-attachments/assets/7d138c37-c2f0-4e9c-80c2-b6c8481baea9)
 6. Visita la ruta `http://localhost:3000/dashboard/parejas` para visualizar las parejas creadas o crear alguna nueva de los jugadores previamente inscritos.
+   ![pairs](https://github.com/user-attachments/assets/84f5f89f-a6e3-4ed7-b607-795a2faca1da)
+   ![create-pairs](https://github.com/user-attachments/assets/650ba25b-62ad-42dd-8d4a-d045ef8625fd)
 7. Una vez lista la tabla de parejas visita la ruta `http://localhost:3000/dashboard/grupos` para crear de manera aleatoria los grupos a los que perteneceran cada pareja y los partidos a llevarse a cabo en cada categoria.
+   ![groups](https://github.com/user-attachments/assets/30e3d80b-25f9-4cbe-a9f8-5f434313ad35)
 8. Dentro de esa misma ruta `http://localhost:3000/dashboard/grupos` podras acceder a los grupos de cada categoria para verlos.
+   ![group-sebior](https://github.com/user-attachments/assets/03d2e2e1-c5f7-4bc1-8604-cc888828c3a2)
+   ![group-open](https://github.com/user-attachments/assets/e3413416-af57-439c-8f19-ab193f29e96d)
 9. Visita `http://localhost:3000/dashboard/partidos` podras ver la tabla de partidos de cada categoria y modificar el score o las parejas del partido.
+   ![matches](https://github.com/user-attachments/assets/71e87f5e-bc27-4bc3-90a5-15f761fccf69)
+   ![match-update](https://github.com/user-attachments/assets/e84bf55f-c362-4405-b30d-77aed38422cb)
+   ![match-delete](https://github.com/user-attachments/assets/daa064d8-e41f-4112-baec-5d185b7a6e03)
 10. Una vez creados los partidos y grupos, puedes ver la tabla de parejas en `http://localhost:3000/parejas`
 11. De igual forma puedes ver los partidos de cada grupo `http://localhost:3000/grupos/idCategory/idGroup` y la tabla de clasificación. Esta tabla cambia conforme se den los partidos.
+    ![matches-group](https://github.com/user-attachments/assets/be0da39a-5078-4c56-a09e-9502882d0c26)
+    ![matches-classify](https://github.com/user-attachments/assets/51652a42-8de4-48b0-83ea-d2f69a8b12e2)
 12. Cuando el torneo o los datos de los partidos esten capturados se podran ver las estadisticas generales del evento en `http://localhost:3000/estadisticas`
+    ![map](https://github.com/user-attachments/assets/ec56856e-0705-4802-b546-67b58ad9d69c)
 13. Podras visitar estadisticas especificas de cada categoria como puntos hechos vs puntos recibidos, la sinergia de las parejas y la paridad de grupos desde `http://localhost:3000/estadisticas/idCategory`
+    ![stats](https://github.com/user-attachments/assets/69d323e2-207a-4e67-b009-fd2f54a35bd0)
 14. De igual forma visita `http://localhost:3000/emociones` para ver el analisis general de sentimientos realizado con machine learning.
+    ![emotions](https://github.com/user-attachments/assets/45916a8f-acdf-4b56-b6fa-b854bcca8ec5)
 
 ### Pruebas
 
@@ -138,6 +159,7 @@ O Instala Docker para correr los servicios de php y python:
 ## Evento
 
 <!-- intro del evento -->
+
 El Torneo de las Fresas 2025, celebrado en la vibrante ciudad de Irapuato, Guanajuato, México, el 23 de marzo de 2025, se consolidó como el evento de frontenis más grande y destacado del Bajío. Este torneo no solo atrajo a participantes y espectadores de toda la región central de México, sino que también se convirtió en un referente de organización y eficiencia gracias al sistema desarrollado específicamente para la ocasión.
 
 Con todas las amenidades necesarias para los jugadores, el evento se desarrolló sin contratiempos, permitiendo una experiencia fluida y agradable para todos los asistentes. El sistema implementado fue el pilar fundamental del torneo, facilitando la organización y asegurando que cada detalle se manejara con precisión y rapidez. Este evento no solo celebró el deporte, sino que también demostró cómo la tecnología puede transformar y mejorar la gestión de eventos deportivos.
@@ -145,6 +167,7 @@ Con todas las amenidades necesarias para los jugadores, el evento se desarrolló
 ### Alcance
 
 <!-- Aforo -->
+
 El Torneo de las Fresas 2025 contó con una afluencia constante de espectadores a lo largo del día, sin registrar un "pico máximo" específico. **Se estima que más de 500 personas visitaron el evento** para apoyar a familiares y amigos, creando un ambiente vibrante y lleno de energía.
 
 Muchos de estos visitantes se acercaron a las áreas donde se mostraba la clasificación de los grupos, aprovechando la funcionalidad del sistema para seguir el progreso de sus favoritos en tiempo real. Esta característica no solo facilitó la experiencia de los espectadores, sino que también permitió una mayor interacción y compromiso con el evento, asegurando que todos estuvieran informados sobre el desarrollo de los partidos.
