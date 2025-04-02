@@ -123,6 +123,15 @@ export default async function StatsCategoryPage(props: {
                             Pasa el mouse o da click en las barras para ver más
                             detalles de cada registro
                           </span>
+
+                          <ul className="mt-6 text-xs sm:text-sm grid gap-y-1.5">
+                            <li className="relative before:content-[''] before:absolute before:left-0 before:w-[12px] before:aspect-square before:rounded-md before:bg-[#3c9145] pl-[20px]">
+                              Puntos hechos
+                            </li>
+                            <li className="relative before:content-[''] before:absolute before:left-0 before:w-[12px] before:aspect-square before:rounded-md before:bg-primary pl-[20px]">
+                              Puntos recibidos
+                            </li>
+                          </ul>
                         </div>
                       </BarChart>
                     </Suspense>
@@ -203,6 +212,15 @@ export default async function StatsCategoryPage(props: {
                       Pasa el mouse o da click en las barras para ver más
                       detalles de cada registro
                     </span>
+
+                    <ul className="mt-6 text-xs xs:text-sm grid gap-y-1.5">
+                      <li className="relative before:content-[''] before:absolute before:left-0 before:top-[20%] before:w-[12px] before:aspect-square before:rounded-md before:bg-[#aa12e6] pl-[20px]">
+                        Sinergia positiva
+                      </li>
+                      <li className="relative before:content-[''] before:absolute before:left-0 before:top-[20%] before:w-[12px] before:aspect-square before:rounded-md before:bg-[#e64912] pl-[20px]">
+                        Sinergia negativa
+                      </li>
+                    </ul>
                   </div>
                 </BarChart>
               </Suspense>

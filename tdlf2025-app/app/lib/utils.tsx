@@ -62,6 +62,7 @@ export function getPlotlyLayoutChart({
         source: "/logo.png", // URL to a subtle pattern
         xref: "paper",
         yref: "paper",
+
         x: 1.05,
         y: 1.1,
         sizex: 0.2,
@@ -81,7 +82,7 @@ export function getPlotlyLayoutChart({
       b: isMobile ? 50 : 70,
     },
     height: isMobile ? window.innerHeight * 0.6 : 450,
-    showlegend: !isMobile,
+    showlegend: false,
   };
 
   return layout;
